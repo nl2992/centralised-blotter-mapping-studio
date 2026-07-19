@@ -769,7 +769,7 @@
         </div>
         <div class="field wide">
           <label>Worksheet</label>
-          <select id="sheetSelect">
+          <select id="sheetSelect" disabled>
             <option value="">Load workbook first</option>
           </select>
         </div>
@@ -780,7 +780,7 @@
             <option value="aggregate_addons">Aggregate add-ons</option>
           </select>
         </div>
-        <div class="field tight">
+        <div class="field tight" id="addonWindowField" style="display:none">
           <label>Add-on window</label>
           <input id="addonWindowDays" type="number" min="0" max="30" step="1" value="7" />
         </div>
@@ -792,7 +792,7 @@
             <option value="legacy_row_order">Legacy row-order ID</option>
           </select>
         </div>
-        <button id="btnProcess" class="btn">Process selected sheet</button>
+        <button id="btnProcess" class="btn" disabled>Process selected sheet</button>
         <button id="btnRebuildAll" class="btn ghost">Rebuild Mapping</button>
       </div>
       <div class="split" style="margin-top:12px">
@@ -1132,6 +1132,59 @@
     }
     function assetConfig(key = state.assetKey) {
       return ORIGINAL_ASSET_CONFIGS[normalizeAssetKey(key)] || ORIGINAL_ASSET_CONFIGS.structured_fi;
+    }
+    function availableRunModes(assetKey = state.assetKey) {
+      const modes = [{ value: "trade_by_trade", label: "Trade by trade" }];
+      if (assetConfig(assetKey).supportsAggregation) modes.push({ value: "aggregate_addons", label: "Aggregate add-ons" });
+      return modes;
+    }
+    function coerceRunModeForAsset(assetKey = state.assetKey) {
+      const modes = availableRunModes(assetKey).map(m => m.value);
+      if (!modes.includes(state.runMode)) state.runMode = "trade_by_trade";
+      return state.runMode;
+    }
+    function refreshSelectOptions() {
+      state.assetKey = normalizeAssetKey(state.assetKey);
+      coerceRunModeForAsset(state.assetKey);
+
+      const assetSelect = qs("assetSelect");
+      if (assetSelect) {
+        assetSelect.innerHTML = Object.entries(ORIGINAL_ASSET_CONFIGS).map(([key, cfg]) =>
+          `<option value="${escapeHtml(key)}" ${key === state.assetKey ? "selected" : ""}>${escapeHtml(cfg.label)}</option>`
+        ).join("");
+        assetSelect.value = state.assetKey;
+      }
+
+      const runModeSelect = qs("runModeSelect");
+      if (runModeSelect) {
+        const modes = availableRunModes(state.assetKey);
+        runModeSelect.innerHTML = modes.map(m =>
+          `<option value="${escapeHtml(m.value)}" ${m.value === state.runMode ? "selected" : ""}>${escapeHtml(m.label)}</option>`
+        ).join("");
+        runModeSelect.value = state.runMode;
+      }
+
+      const tradeIdModeSelect = qs("tradeIdModeSelect");
+      if (tradeIdModeSelect) tradeIdModeSelect.value = state.tradeIdMode;
+
+      const addonWindowField = qs("addonWindowField");
+      const addonWindowDays = qs("addonWindowDays");
+      const showAddonWindow = assetConfig().supportsAggregation && state.runMode === "aggregate_addons";
+      if (addonWindowField) addonWindowField.style.display = showAddonWindow ? "" : "none";
+      if (addonWindowDays) {
+        addonWindowDays.value = String(state.addonWindowDays);
+        addonWindowDays.disabled = !showAddonWindow;
+      }
+
+      const sheetSelect = qs("sheetSelect");
+      if (sheetSelect) {
+        sheetSelect.disabled = !(state.workbookSheets && state.workbookSheets.length);
+        if (state.sheetName && Array.from(sheetSelect.options).some(o => o.value === state.sheetName)) {
+          sheetSelect.value = state.sheetName;
+        }
+      }
+      const btnProcess = qs("btnProcess");
+      if (btnProcess) btnProcess.disabled = !(state.workbook && state.sheetName);
     }
     const HARD_FIELDS = [
       "*Trade Date",
@@ -2551,6 +2604,7 @@
         select.innerHTML = `<option value="">Load workbook first</option>`;
         select.value = "";
         state.sheetName = "";
+        refreshSelectOptions();
         return;
       }
       select.innerHTML = sheets.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join("");
@@ -2559,6 +2613,7 @@
         preferredSheetForAsset(state.assetKey);
       select.value = chosen || sheets[0];
       state.sheetName = select.value;
+      refreshSelectOptions();
     }
     function autoSelectPreferredSheet() {
       populateSheetSelect(preferredSheetForAsset(state.assetKey));
@@ -2715,13 +2770,9 @@
       state.assetKey = normalizeAssetKey(qs("assetSelect").value || state.assetKey);
       state.sheetName = sheetName;
       state.runMode = qs("runModeSelect").value || "trade_by_trade";
+      coerceRunModeForAsset(state.assetKey);
       state.tradeIdMode = qs("tradeIdModeSelect").value || "business_key";
       state.addonWindowDays = Math.max(0, Math.min(30, Number(qs("addonWindowDays").value || 7)));
-      if (!assetConfig().supportsAggregation && state.runMode !== "trade_by_trade") {
-        state.runMode = "trade_by_trade";
-        qs("runModeSelect").value = "trade_by_trade";
-        setStatus(`${assetConfig().label} does not support add-on aggregation, so this sheet will run trade by trade.`, "warn");
-      }
       setReady("loading");
       state.sheetStatuses = [];
       state.canonicalRows = [];
@@ -2732,8 +2783,8 @@
       state.exportExcludedRows = {};
       const rawRows = getRowsForActualSheet(state.workbook, sheetName, sheetName);
       const { detection, result } = parseRowsForSelectedAsset(rawRows, sheetName);
-      const parsedRows = applySelectedRunMode(result.rows);
-      state.sourceRows = parsedRows;
+      state.sourceRows = result.rows || [];
+      const parsedRows = applySelectedRunMode(state.sourceRows);
       state.canonicalRows = parsedRows;
       const status = state.sheetStatuses[state.sheetStatuses.length - 1];
       if (status && norm(status.actual || status.sheet) === norm(sheetName)) {
@@ -5085,6 +5136,7 @@
       qs("btnClearLog").onclick = () => { clearLogs(); renderDebugLog(); };
     }
     function updateTopPills() {
+      refreshSelectOptions();
       refreshGatePill();
       updateSavedSettingsPill();
       setPill("workbookPill", state.workbookName ? `Workbook: ${state.workbookName}` : "Workbook: none", state.workbookName ? "green" : "amber");
@@ -5104,6 +5156,7 @@
       }
     }
     function processCurrentSheet() {
+      if (state.sourceRows.length) state.canonicalRows = applySelectedRunMode(state.sourceRows);
       rebuildRefs();
       rebuildMapping();
       syncGoldenRecordsFromCurrentRun();
@@ -5135,10 +5188,7 @@
         assetSelect.dataset.recoveredPage199Bound = "true";
         assetSelect.addEventListener("change", async e => {
           state.assetKey = normalizeAssetKey(e.target.value);
-          if (!assetConfig().supportsAggregation && state.runMode !== "trade_by_trade") {
-            state.runMode = "trade_by_trade";
-            if (qs("runModeSelect")) qs("runModeSelect").value = "trade_by_trade";
-          }
+          state.runMode = "trade_by_trade";
           autoSelectPreferredSheet();
           saveLocal();
           updateTopPills();
@@ -5161,14 +5211,10 @@
         runModeSelect.dataset.recoveredPage199Bound = "true";
         runModeSelect.addEventListener("change", async e => {
           state.runMode = e.target.value;
-          if (!assetConfig().supportsAggregation && state.runMode !== "trade_by_trade") {
-            state.runMode = "trade_by_trade";
-            runModeSelect.value = "trade_by_trade";
-            setStatus(`${assetConfig().label} does not support add-on aggregation.`, "warn");
-          }
+          coerceRunModeForAsset();
           saveLocal();
           updateTopPills();
-          if (state.sourceRows.length && state.workbook) await processSelectedSheet();
+          if (state.sourceRows.length) processCurrentSheet();
           else renderAll();
         });
       }
@@ -5191,7 +5237,7 @@
           addonWindowDays.value = String(v);
           saveLocal();
           updateTopPills();
-          if (state.sourceRows.length && state.runMode === "aggregate_addons" && state.workbook) await processSelectedSheet();
+          if (state.sourceRows.length && state.runMode === "aggregate_addons") processCurrentSheet();
           else renderAll();
         });
       }

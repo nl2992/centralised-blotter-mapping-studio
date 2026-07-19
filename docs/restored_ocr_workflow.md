@@ -19,6 +19,8 @@ The OCR-original flow is now treated as the product behavior source of truth.
 |---|---|---|
 | Workbook processing | Parsed the whole workbook and all recognized sheets at once. | Load workbook only, then process one selected worksheet. |
 | Top workflow controls | Removed/obscured Asset, Worksheet, run mode, Trade ID mode, and Process selected sheet. | Restored Asset, Worksheet, Run mode, Add-on window, Trade ID mode, and Process selected sheet. |
+| Control availability | Static controls stayed clickable even when no workbook was loaded, and unsupported run modes stayed visible. | Worksheet and Process are disabled until a workbook/sheet exists; run modes are generated from the selected asset; the add-on window appears only for Structured FI aggregate mode. |
+| Remapping flow | Run-mode changes often reread the selected worksheet. | Selected-sheet parse stores source rows once; run mode, Trade ID mode, and add-on window changes remap/re-aggregate the current rows without rereading the workbook. |
 | Tab layout | Replaced the original tab set with Template Mapping, Reconciliation, Diagnostics, Canonical Rows, Field Matrix, References, Governance, Settings, Debug Log. | Restored Overview, Mapping Studio, Processed Sheet, Exceptions, Golden Record, Default Rules, Saved Settings, Activity Log. |
 | Processed sheet | Output review moved into other mapping/debug views. | Restored a Processed Sheet grid with inline PLUTO output editing and row selection for export. |
 | Export selection | Export gate acted over all mapped rows. | Export first respects selected rows from Processed Sheet, then applies the final gate. |
