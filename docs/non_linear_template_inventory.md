@@ -66,14 +66,14 @@ Screenshot-confirmed source family: first block in supplied image. This is the e
 | Column | Current mapper use | Notes |
 |---|---|---|
 | `ISIN Front` | Native trade ID candidate; ISIN Code candidate | Source ID preferred over synthetic ID. |
-| `SALETEAM` | Sales Team (Coverage) source; coverage lookup key | Example row shows `HK`. |
+| `SALETEAM` | Internal routing/reference input only | OCR Linear Zero output leaves `Sales Team (Coverage)` blank unless a rule/reference fills it; starred `*Salesperson (Coverage)` still uses the default/coverage rule. |
 | `First Trade Date` | `*Trade Date` | Output formatted `dd/mm/yyyy`. |
 | `FINAL CUSTOMER` | Sales Client | Example row shows `HSBC PB HK`. |
-| `Book` | Book; legal lookup key | Example row shows `HK`. |
+| `Book` | Internal PB/Treats routing key | OCR Linear Zero output leaves `Book` blank by default. |
 | `Currency` | `*Primary CCY`; `CCY PC` fallback | Example row shows `USD`. |
-| `Structure` | Security / structureName | Example row shows Range Accrual with Conversion. |
-| `Underlying` | Ticker / underlying | Example row shows `XAUUSD`. |
-| `Product` | Product classification helper | Example row shows Range Accrual with Conversion. |
+| `Structure` | Product-tier classification helper | OCR Linear Zero output leaves `Security` blank by default. |
+| `Underlying` | Internal signal only | OCR Linear Zero output leaves `Ticker` blank by default. |
+| `Product` | Product-tier classification helper | Product text is now the main additive Structured FI behavior: Linear Zero Callable Notes, Range Accrual with Conversion, and CLN can change tiers. |
 | `Tenor (m)` | Informational / possible maturity helper | Example row shows `24`. |
 | `Tenor (y)` | Informational / possible maturity helper | Example row shows `2.0`. |
 | `Non Call x year` | Informational / callable feature | OCR split across two visual lines. |
@@ -88,8 +88,8 @@ Screenshot-confirmed source family: first block in supplied image. This is the e
 | `Size (Org Curr)` | `*$ Volume` fallback via size x FX | Example row shows `1.00` or similar; alignment uncertain. |
 | `FX rate` | `*$ Volume` fallback FX | Example row shows `1.000`. |
 | `Volume ('MM) USD` | `*$ Volume` candidate | Example row shows `1.0`; mapper scales MM to USD. |
-| `Trader` | Trader | Example row appears to show `HCIB`; alignment uncertain. |
-| `BBG Tix 1` | Alternate ticker candidate | Not currently the first Structured FI ticker source. |
+| `Trader` | Internal/source trace only | OCR Linear Zero output leaves `Trader` blank by default. |
+| `BBG Tix 1` | Internal/source trace only | OCR Linear Zero output leaves `Ticker` blank by default. |
 | `BBG Tix 2` | Alternate ticker candidate | May be blank in the visible row. |
 | `BBG Tix 3` | Alternate ticker candidate | May be blank in the visible row. |
 | `Issuer` | Issuer | Example row appears to include `HSBC`. |
@@ -97,7 +97,7 @@ Screenshot-confirmed source family: first block in supplied image. This is the e
 | `Summit ID` | Native trade ID fallback | Example row appears to show `4190`; alignment uncertain. |
 | `SVCS No.` | Native trade ID fallback | May be blank in the visible row. |
 | `Remarks` | Comment / source action helper | Example row shows `New`. |
-| `Product Type` | Asset subtype classification | Example row shows `FX`. |
+| `Product Type` | Diagnostic subtype evidence for Structured FI | Example row shows `FX`; it may affect the app's diagnostic bucket, but it should not by itself change the Linear Zero output plumbing. |
 
 ### Example Row Snapshot
 
@@ -122,8 +122,8 @@ Screenshot-confirmed source family: first block in supplied image. This is the e
 ### Implementation Notes
 
 - Structured FI should remain a source-backed expansion of Linear Zero, not a separate output template.
-- The current parser classifies Structured FI into Rate, Credit, FX, or Unknown using `Product Type` first and then Product/Underlying/Structure heuristics.
-- After the current Structured FI layout is recognized, `Product`/`Structure` text applies product-specific taxonomy: `Linear Zero Callable Notes` keeps the OCR Linear Zero rates tiers; `Range Accrual with Conversion` keeps the rates family but uses `Range Accrual with Conversion` for tier 3; any substring containing `CLN` maps to Structured Credit tiers and takes priority when CLN and Range Accrual wording both appear.
+- Current-layout Structured FI rows now use the same optional-field plumbing as the OCR Linear Zero file: Comment, Book, Security, Trader, Ticker, and Sales Team stay blank by default; Site Code / BTB Trade Site / Risk Book keep the OCR constants unless reference/rules override them.
+- After the current Structured FI layout is recognized, `Product`/`Structure` text applies product-specific taxonomy only: `Linear Zero Callable Notes` keeps the OCR Linear Zero rates tiers; `Range Accrual with Conversion` keeps the rates family but uses `Range Accrual with Conversion` for tier 3; any substring containing `CLN` maps to Structured Credit tiers and takes priority when CLN and Range Accrual wording both appear.
 - Fields like Range 1, Range 2, Coupon, Coupon raw, BBG Tix 2, and BBG Tix 3 are source evidence but do not yet have direct target-template destinations unless rules are added.
 
 ## Collar Blotter

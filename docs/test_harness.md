@@ -55,10 +55,10 @@ The older `run_tests.js` and `run_template_detection.js` harnesses are retained 
 4. **TRS FX convention** (TC07-type row): `*$ PC = 9984` under the default
    `trsFxConvention = multiply` (`78000 x 0.128`), and `*$ PC = 609375` under
    `trsFxConvention = divide` (`78000 / 0.128`).
-5. **Economics comment tokens**: Structured FI rows (TC01-type) carry
-   `coupon=`, `coupon_raw=`, `first_reoffer=` (etc.) tokens in `Comment` when
-   the corresponding source columns are present; Collar rows (TC03-type)
-   carry `strike_pct=`, `strike_level=`, `num_options=`, `client_price=`,
+5. **Structured FI Linear Zero plumbing**: Structured FI / Linear Zero rows keep
+   output `Comment` blank by default, and product-specific economics stay out of
+   Comment unless an explicit rule maps them. Collar rows (TC03-type) still carry
+   `strike_pct=`, `strike_level=`, `num_options=`, `client_price=`,
    `total_gnbv_bps=` (etc.) tokens.
 
 All checks read directly from `window.__BOARD_SNAPSHOT()` — the same

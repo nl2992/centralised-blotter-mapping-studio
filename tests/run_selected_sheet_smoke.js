@@ -182,6 +182,19 @@ function assertNoMarkets(results, id, snapshot) {
   });
 }
 
+function assertStructuredFiOriginalPlumbing(results, prefix, row) {
+  assertValue(results, `${prefix}:site-code`, row, "siteCode", "HKH");
+  assertValue(results, `${prefix}:secondary-ccy`, row, "secondaryCcy", "USD");
+  assertValue(results, `${prefix}:sales-team-output-blank`, row, "salesTeamOutput", "");
+  assertValue(results, `${prefix}:book-blank`, row, "book", "");
+  assertValue(results, `${prefix}:trader-blank`, row, "trader", "");
+  assertValue(results, `${prefix}:security-blank`, row, "security", "");
+  assertValue(results, `${prefix}:ticker-blank`, row, "ticker", "");
+  assertValue(results, `${prefix}:btb-trade-site`, row, "btbTradeSite", "LOH");
+  assertValue(results, `${prefix}:risk-book`, row, "riskBook", "IRSMTN");
+  assertValue(results, `${prefix}:comment-blank`, row, "comment", "");
+}
+
 async function runCase(browser, appUrl, cfg, results) {
   const { context, page, errors } = await newPage(browser, appUrl);
   try {
@@ -238,6 +251,7 @@ async function main() {
           assertValue(r, "TC01:tier3", row, "tier3", "Credit Linked Notes");
           assertValue(r, "TC01:treats", row, "treats", "NOSGSGH");
           assertValue(r, "TC01:pc-default", row, "pc", "0");
+          assertStructuredFiOriginalPlumbing(r, "TC01:linear-zero-plumbing", row);
           assertNumericTradeId(r, "TC01:trade-id", row);
         }
       },
@@ -248,27 +262,28 @@ async function main() {
         sheet: "Structured FI Product Taxonomy",
         rows: 3,
         checks(snapshot, r) {
-          const linearZero = snapshot.find(row => String(row.comment || "").includes("XSLCALLABLE01"));
-          const rangeAccrual = snapshot.find(row => String(row.comment || "").includes("XSRANGEACCR01"));
-          const clnRange = snapshot.find(row => String(row.comment || "").includes("XSCLNRANGE01"));
+          const [linearZero, rangeAccrual, clnRange] = snapshot;
           assertValue(r, "TC01B:linear-layout", linearZero, "sourceLayout", "structured_fi_current");
           assertValue(r, "TC01B:linear-tier1", linearZero, "tier1", "Structured Rates");
           assertValue(r, "TC01B:linear-tier2", linearZero, "tier2", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC01B:linear-tier3", linearZero, "tier3", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC01B:linear-pc-default", linearZero, "pc", "0");
           assertValue(r, "TC01B:addon-sell", linearZero, "buySell", "Sell");
+          assertStructuredFiOriginalPlumbing(r, "TC01B:linear-plumbing", linearZero);
           assertNumericTradeId(r, "TC01B:linear-trade-id", linearZero);
           assertValue(r, "TC01B:range-tier1", rangeAccrual, "tier1", "Structured Rates");
           assertValue(r, "TC01B:range-tier2", rangeAccrual, "tier2", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC01B:range-tier3", rangeAccrual, "tier3", "Range Accrual with Conversion");
           assertValue(r, "TC01B:range-pc-default", rangeAccrual, "pc", "0");
           assertValue(r, "TC01B:unwind-buy", rangeAccrual, "buySell", "Buy");
+          assertStructuredFiOriginalPlumbing(r, "TC01B:range-plumbing", rangeAccrual);
           assertNumericTradeId(r, "TC01B:range-trade-id", rangeAccrual);
           assertValue(r, "TC01B:cln-wins-tier1", clnRange, "tier1", "Structured Credit");
           assertValue(r, "TC01B:cln-wins-tier2", clnRange, "tier2", "Structured Credit");
           assertValue(r, "TC01B:cln-wins-tier3", clnRange, "tier3", "Credit Linked Notes");
           assertValue(r, "TC01B:cln-pc-default", clnRange, "pc", "0");
           assertValue(r, "TC01B:new-sell", clnRange, "buySell", "Sell");
+          assertStructuredFiOriginalPlumbing(r, "TC01B:cln-plumbing", clnRange);
           assertNumericTradeId(r, "TC01B:cln-trade-id", clnRange);
         }
       },
@@ -287,6 +302,7 @@ async function main() {
           assertValue(r, "TC02:tier2", row, "tier2", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC02:tier3", row, "tier3", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC02:pc-default", row, "pc", "0");
+          assertStructuredFiOriginalPlumbing(r, "TC02:linear-zero-plumbing", row);
           assertNumericTradeId(r, "TC02:trade-id", row);
         }
       },
@@ -306,6 +322,7 @@ async function main() {
           assertValue(r, "TC02B:tier3", row, "tier3", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC02B:price", row, "price", "99.1");
           assertValue(r, "TC02B:pc-default", row, "pc", "0");
+          assertStructuredFiOriginalPlumbing(r, "TC02B:linear-zero-plumbing", row);
           assertNumericTradeId(r, "TC02B:trade-id", row);
         }
       },

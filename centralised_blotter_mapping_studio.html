@@ -1312,6 +1312,11 @@
       { name: "Nomura Private Bank", test: /nomura\s+(private\s+bank|pb)/i, treats: "NOSGSGH" },
       { name: "HASE", test: /\bhase\b|hang\s+seng/i, treats: "HASEHKP" }
     ];
+    const STRUCTURED_FI_LINEAR_ZERO_OUTPUT = {
+      siteCode: "HKH",
+      btbTradeSite: "LOH",
+      riskBook: "IRSMTN"
+    };
     // Inherited from the original Linear Zero "PB routing from Book" logic (routePbByBook):
     // resolved booking site -> Treats Acronym, Sales Client, Sales Client Country, Sales Client Type.
     const PB_ROUTING_BY_SITE = {
@@ -1445,16 +1450,21 @@
         "*$ VA/GNBV": ["Total NNBV", "GNBV in $", "NNBV"],
         "*Trade ID": ["ISIN Front", "ISIN", "SVCS No.", "Summit ID"],
         "ISIN Code": ["ISIN Front", "ISIN"],
-        "Issuer": ["Issuer"],
-        "Trader": ["Trader"],
+        "Secondary CCY": { t: "policy" },
+        "Site Code": { t: "policy" },
+        "Issuer": ["Issuer", "Issuer (raw)"],
+        "Trader": { t: "blank" },
         "Price": ["First Reoffer", "Reoffer"],
-        "Ticker": ["Underlying"],
-        "Security": ["Structure"],
+        "Ticker": { t: "blank" },
+        "Security": { t: "blank" },
         "Maturity Date": ["Maturity"],
-        "Book": ["Book", "Booking"],
-        "Sales Team (Coverage)": ["SALETEAM"],
+        "Book": { t: "blank" },
+        "Sales Team (Coverage)": { t: "blank" },
         "Sales Client": ["FINAL CUSTOMER"],
-        "Buy/Sell": ["New/Tap/Sell"]
+        "Buy/Sell": ["New/Tap/Sell"],
+        "BTB Trade Site": { t: "policy" },
+        "Risk Book": { t: "policy" },
+        "Comment": { t: "blank" }
       },
       illiquidRepack: {
         "*Trade Date": ["Trade Date"],
@@ -2138,6 +2148,9 @@
     }
     function isLegacyLinearZeroRow(row) {
       return cleanText(row && row.sourceLayout) === "linear_zero_existing";
+    }
+    function isStructuredFiFamilyRow(row) {
+      return /^Structured FI\b/i.test(cleanText(row && row.assetClass));
     }
 
     function parseStructuredFi(rows, sheetName) {
@@ -3191,42 +3204,43 @@
         const defaultLegalEntity = cleanText(currentSettings().defaultLegalEntity) || "HBAP";
         setField(out, prov, "*Legal Entity", defaultLegalEntity, "POLICY_DERIVED", "Default legal entity (Linear Zero HBAP)");
       }
-      setOptionalField(out, prov, "Site Code", legal.site_code, "LOOKUP_BACKED", "Legal lookup");
+      const structuredFiFamily = isStructuredFiFamilyRow(row);
+      setOptionalField(out, prov, "Site Code", structuredFiFamily ? STRUCTURED_FI_LINEAR_ZERO_OUTPUT.siteCode : legal.site_code, structuredFiFamily ? "POLICY_DERIVED" : "LOOKUP_BACKED", structuredFiFamily ? "OCR Linear Zero fixed Site Code" : "Legal lookup");
       const lookupTreats = coverage.treats_acronym || legal.treats_acronym;
       setRequiredText("*Treats Acronym", lookupTreats || builtInTreats.value, lookupTreats ? "LOOKUP_BACKED" : "POLICY_DERIVED", lookupTreats ? "Coverage/legal lookup" : `Built-in client Treats mapping${builtInTreats.source ? ": " + builtInTreats.source : ""}`, "treats", !currentSettings().allowTreatsPlaceholder);
       setField(out, prov, PRIMARY_AMOUNT_FIELD, row.volumeUsd != null ? row.volumeUsd : "", row.volumeUsd != null ? "SOURCE_BACKED" : "UNRESOLVED", row.volumeSource || "No USD volume candidate");
       setField(out, prov, "*$ PC", pc.value != null ? pc.value : "", pc.value != null ? (pc.source === "PC_LOOKUP" ? "LOOKUP_BACKED" : "POLICY_DERIVED") : "UNRESOLVED", pc.source || "No PC candidate");
       setField(out, prov, "*$ VA/GNBV", va.value != null ? va.value : "", va.value != null ? "SOURCE_BACKED" : "UNRESOLVED", va.source || "No VA/GNBV candidate");
-      setOptionalField(out, prov, "Sales Team (Coverage)", coverage.sales_team_coverage || row.saleTeam, coverage.sales_team_coverage ? "LOOKUP_BACKED" : "SOURCE_BACKED");
+      setOptionalField(out, prov, "Sales Team (Coverage)", structuredFiFamily ? "" : (coverage.sales_team_coverage || row.saleTeam), coverage.sales_team_coverage ? "LOOKUP_BACKED" : "SOURCE_BACKED");
       setOptionalField(out, prov, "Sales Person Country", coverage.sales_person_country || coverage.country || row.salesPersonCountry, (coverage.sales_person_country || coverage.country) ? "LOOKUP_BACKED" : "SOURCE_BACKED");
       setField(out, prov, "*Trade ID", outputTradeId, outputTradeId !== "" ? (/^\d+$/.test(cleanText(row.tradeId)) && row.tradeIdSource === "SOURCE_ID" ? "SOURCE_BACKED" : "POLICY_DERIVED") : "UNRESOLVED", outputTradeId !== "" ? "Numeric template trade ID; native reference preserved in source fields/comment where alphanumeric." : "Missing trade ID seed");
       setRequiredText("*Revenue CCY", "USD", "POLICY_DERIVED", "Defaults to USD -- the $ template fields are USD-denominated. Use a source rule -> primaryCcy to copy Primary CCY instead.");
-      setOptionalField(out, prov, "Secondary CCY", row.secondaryCcy, "SOURCE_BACKED");
+      setOptionalField(out, prov, "Secondary CCY", structuredFiFamily ? row.primaryCcy : row.secondaryCcy, structuredFiFamily ? "POLICY_DERIVED" : "SOURCE_BACKED", structuredFiFamily ? "OCR Linear Zero copy of Primary CCY" : "");
       setOptionalField(out, prov, "ISIN Code", row.isinCode, "SOURCE_BACKED");
       setOptionalField(out, prov, "Maturity Date", formatDateOutput(row.maturityDate), "SOURCE_BACKED");
       setOptionalField(out, prov, "Sales Client", row.client || (pbRouting && pbRouting.salesClient), (cleanText(row.client) ? "SOURCE_BACKED" : (pbRouting ? "POLICY_DERIVED" : "SOURCE_BACKED")));
       setOptionalField(out, prov, "Sales Client Sector", coverage.sales_client_sector, "LOOKUP_BACKED");
       setOptionalField(out, prov, "Sales Client Country", coverage.sales_client_country || (pbRouting && pbRouting.salesClientCountry), (coverage.sales_client_country ? "LOOKUP_BACKED" : "POLICY_DERIVED"));
       setOptionalField(out, prov, "Sales Client Type", coverage.sales_client_type || (pbRouting && pbRouting.salesClientType), (coverage.sales_client_type ? "LOOKUP_BACKED" : "POLICY_DERIVED"));
-      setOptionalField(out, prov, "Book", row.book, "SOURCE_BACKED");
-      setOptionalField(out, prov, "Trader", row.trader, "SOURCE_BACKED");
+      setOptionalField(out, prov, "Book", structuredFiFamily ? "" : row.book, "SOURCE_BACKED", structuredFiFamily ? "OCR Linear Zero leaves output Book blank; source book still drives PB routing." : "");
+      setOptionalField(out, prov, "Trader", structuredFiFamily ? "" : row.trader, "SOURCE_BACKED", structuredFiFamily ? "OCR Linear Zero leaves Trader blank." : "");
       setOptionalField(out, prov, "Platform", legal.platform, "LOOKUP_BACKED");
       setOptionalField(out, prov, "FX Platform Description", legal.fx_platform_description, "LOOKUP_BACKED");
       setOptionalField(out, prov, "PC CODE", findPcOverride(row).pc_code || legal.pc_code, "LOOKUP_BACKED");
       setOptionalField(out, prov, "CCY PC", findPcOverride(row).ccy_pc || legal.ccy_pc || row.primaryCcy, legal.ccy_pc ? "LOOKUP_BACKED" : "POLICY_DERIVED");
       setOptionalField(out, prov, "$ TV", currentSettings().copyVolumeToTV ? row.volumeUsd : "", currentSettings().copyVolumeToTV ? "POLICY_DERIVED" : "BLANK");
       setOptionalField(out, prov, "Commission Code", findPcOverride(row).commission_code, "LOOKUP_BACKED");
-      setOptionalField(out, prov, "Security", classification.override.security || row.security, classification.override.security ? "LOOKUP_BACKED" : "SOURCE_BACKED");
+      setOptionalField(out, prov, "Security", structuredFiFamily ? "" : (classification.override.security || row.security), classification.override.security ? "LOOKUP_BACKED" : "SOURCE_BACKED", structuredFiFamily ? "OCR Linear Zero leaves Security blank; product text only drives tiers." : "");
       setOptionalField(out, prov, "Issuer", row.issuer || row.issuerRaw, "SOURCE_BACKED");
-      setOptionalField(out, prov, "Ticker", classification.override.ticker || row.ticker, classification.override.ticker ? "LOOKUP_BACKED" : "SOURCE_BACKED");
+      setOptionalField(out, prov, "Ticker", structuredFiFamily ? "" : (classification.override.ticker || row.ticker), classification.override.ticker ? "LOOKUP_BACKED" : "SOURCE_BACKED", structuredFiFamily ? "OCR Linear Zero leaves Ticker blank." : "");
       setOptionalField(out, prov, "Buy/Sell", classification.override.buy_sell || row.buySell, classification.override.buy_sell ? "LOOKUP_BACKED" : "SOURCE_BACKED");
       setOptionalField(out, prov, "Price", row.price, "SOURCE_BACKED");
-      setOptionalField(out, prov, "BTB Trade Site", legal.btb_trade_site, "LOOKUP_BACKED");
+      setOptionalField(out, prov, "BTB Trade Site", structuredFiFamily ? STRUCTURED_FI_LINEAR_ZERO_OUTPUT.btbTradeSite : legal.btb_trade_site, structuredFiFamily ? "POLICY_DERIVED" : "LOOKUP_BACKED", structuredFiFamily ? "OCR Linear Zero fixed BTB Trade Site" : "Legal lookup");
       setOptionalField(out, prov, "Flow Value", legal.flow_value, "LOOKUP_BACKED");
       setOptionalField(out, prov, "Liquidity Reserve", legal.liquidity_reserve, "LOOKUP_BACKED");
       setOptionalField(out, prov, "CVA", legal.cva || row.cvaUsd, legal.cva ? "LOOKUP_BACKED" : "SOURCE_BACKED");
       setOptionalField(out, prov, "FVA", legal.fva, "LOOKUP_BACKED");
-      setOptionalField(out, prov, "Risk Book", legal.risk_book, "LOOKUP_BACKED");
+      setOptionalField(out, prov, "Risk Book", structuredFiFamily ? STRUCTURED_FI_LINEAR_ZERO_OUTPUT.riskBook : legal.risk_book, structuredFiFamily ? "POLICY_DERIVED" : "LOOKUP_BACKED", structuredFiFamily ? "OCR Linear Zero fixed Risk Book" : "Legal lookup");
       setOptionalField(out, prov, "TFX Flag", legal.tfx_flag, "LOOKUP_BACKED");
       const comment = [
         `source_sheet=${row.sourceSheet}`,
@@ -3239,7 +3253,7 @@
         `pc_source=${pc.source || ""}`,
         row.comments || ""
       ].filter(Boolean).join(" | ");
-      setOptionalField(out, prov, "Comment", comment, "POLICY_DERIVED");
+      setOptionalField(out, prov, "Comment", structuredFiFamily ? "" : comment, "POLICY_DERIVED", structuredFiFamily ? "OCR Linear Zero leaves Comment blank." : "");
 
       // ---- Rule layer (Global, then asset-class scoped rules win) ----
       applyMappingRules(row, out, prov);
@@ -5539,7 +5553,7 @@
         { item: "Template detection", value: "6 header-signature templates with a confidence threshold, name-based-first then signature-fallback routing, and a Linear-Zero-vs-Structured-FI discriminator. See docs/template_detection.md." },
         { item: "Built-in product taxonomy", value: "Linear Zero Callable Notes -> Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN; CLN -> Structured Credit / Structured Credit / Credit Linked Notes; Range Accrual with Conversion -> Structured Rates / Interest Rate Linked Note -PPN / Range Accrual with Conversion; Repack/Illiquid -> Structured Credit / Structured Credit / Structured Credit Notes; Private Credit -> Private Credit Primary / Private Placement / Private Placement." },
         { item: "Built-in Treats fallback", value: "Nomura Private Bank -> NOSGSGH; HASE / Hang Seng -> HASEHKP, unless coverage/legal references override." },
-        { item: "Structured FI input layouts", value: "Current Structured FI columns and existing Linear Zero aliases are both accepted; source layout is written into Comment." },
+        { item: "Structured FI input layouts", value: "Current Structured FI columns and existing Linear Zero aliases are both accepted; source layout is kept in diagnostics while output Comment follows the OCR Linear Zero blank default." },
         { item: "Expected row-level sheets", value: EXPECTED_SHEETS.join(", ") },
         { item: "Optional zero-linear aliases", value: STRUCTURED_FI_OPTIONAL_SHEETS.join(", ") },
         { item: "Control sheets", value: CONTROL_SHEETS.join(", ") },
@@ -5736,9 +5750,18 @@
         tier3: outputFieldValue(m.out, "*Tier 3 Product Type"),
         tradeDate: outputFieldValue(m.out, "*Trade Date"),
         primaryCcy: outputFieldValue(m.out, "*Primary CCY"),
+        secondaryCcy: outputFieldValue(m.out, "Secondary CCY"),
         volume: outputFieldValue(m.out, PLUTO_VOLUME_FIELD),
         va: outputFieldValue(m.out, "*$ VA/GNBV"),
         pc: outputFieldValue(m.out, "*$ PC"),
+        siteCode: outputFieldValue(m.out, "Site Code"),
+        salesTeamOutput: outputFieldValue(m.out, "Sales Team (Coverage)"),
+        book: outputFieldValue(m.out, "Book"),
+        trader: outputFieldValue(m.out, "Trader"),
+        security: outputFieldValue(m.out, "Security"),
+        ticker: outputFieldValue(m.out, "Ticker"),
+        btbTradeSite: outputFieldValue(m.out, "BTB Trade Site"),
+        riskBook: outputFieldValue(m.out, "Risk Book"),
         buySell: outputFieldValue(m.out, "Buy/Sell"),
         price: outputFieldValue(m.out, "Price"),
         treats: outputFieldValue(m.out, "*Treats Acronym"),

@@ -16,7 +16,7 @@ Function: `outputTradeIdNumber(row)`.
 
 All hash paths use the same deterministic FNV-1a numeric helper with offset `+1,000,000,000`. Identical seed input yields the same output ID.
 
-Alphanumeric native references remain traceable in `ISIN Code` and/or `Comment` (`native_trade_ref=...`), and the original internal key is preserved so manual overrides and the row editor are unaffected.
+Alphanumeric native references remain traceable in `ISIN Code` for Structured FI / Linear Zero. Other asset families may also retain native-reference context in `Comment`; the original internal key is preserved so manual overrides and the row editor are unaffected.
 
 ## Layer 2 — Internal `row.tradeId` (native-ref-else-synthetic, 7 variants)
 

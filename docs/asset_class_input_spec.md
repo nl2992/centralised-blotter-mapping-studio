@@ -44,9 +44,13 @@ missing source just leaves the field `BLANK`, no effect on `quality`.
 native trade-ID column populated or a heuristic score >= 4 across trade date /
 currency / client / structure-or-product / volume-or-size / VA.
 
-Sub-class is decided by `Product Type` (`/rate/i`, `/credit/i`, `/fx/i`), falling
-back to a regex over `Underlying`+`Structure` text; anything unmatched is
-`Structured FI - Unknown`.
+Structured FI output should stay as close as possible to the OCR Linear Zero
+mapper. Current-layout WSG columns are accepted as aliases, but optional PLUTO
+fields use the Linear Zero plumbing unless a user rule/reference overrides them.
+The additive PLUTO-output behavior is product-tier taxonomy only:
+`Product`/`Structure` text can identify Linear Zero Callable Notes, Range
+Accrual with Conversion, or CLN. `Product Type` may still appear in diagnostic
+asset buckets, but it should not change the Linear Zero output plumbing.
 
 | Source column aliases (accepted, in priority order) | Required? | Feeds |
 |---|---|---|
@@ -55,16 +59,16 @@ back to a regex over `Underlying`+`Structure` text; anything unmatched is
 | `Currency`, `Primary CCY`, `CCY` | REQUIRED (hard fail, no placeholder) | `*Primary CCY` |
 | `Volume ('MM) USD`, `Volume (MM) USD`, `Notional USD Mio`, `Notional USD MM`, `Notional USD`, `Primary Amount` (MM heuristic: `abs<100000` => `x1,000,000`) else `Size (Org Curr)` x `FX rate`/`FX Rate`/`FX Rate Used` | REQUIRED (hard fail) | `*$ Volume` |
 | `Total NNBV` else `GNBV in $`/`GNBV USD`/`GNBV (USD)` else `NNBV`/`GNBV` (x `Size` x `FX` if only unit NNBV) | REQUIRED (hard fail; `*$ PC` defaults to `0` unless a PC reference/rule/source is supplied) | `*$ VA/GNBV` |
-| `Product Type` (else `Underlying`+`Structure` regex fallback), plus `Product`/`Structure` product signals | Optional -- classification only, never blocks a row. Current Structured FI rows branch on `Product` signals for `Linear Zero Callable Notes`, `Range Accrual with Conversion`, and `ifexists(CLN)` substring detection; legacy zero-linear layout stays locked to the original OCR tier defaults. | `*Tier 1/2/3 Product Type` (via `classify()`/`BUILT_IN_PRODUCT_TAXONOMY`) |
+| `Product`/`Structure` product signals; `Product Type` as diagnostic subtype evidence | Optional -- classification only, never blocks a row. Current Structured FI rows branch on product signals for `Linear Zero Callable Notes`, `Range Accrual with Conversion`, and `ifexists(CLN)` substring detection; legacy zero-linear layout stays locked to the original OCR tier defaults. | `*Tier 1/2/3 Product Type` (via `classify()`/`BUILT_IN_PRODUCT_TAXONOMY`) |
 | `FINAL CUSTOMER`, `Client`, `Sales Client` | Optional field-wise (`Sales Client`), but drives `*Treats Acronym` built-in client match (`BUILT_IN_TREATS_BY_CLIENT`) and `getPbRouting()` | `Sales Client`, `*Treats Acronym` |
-| `Book`, `Booking` | Optional (`Book`), also feeds legal-entity lookup and PB-site routing | `Book`, `*Legal Entity` (lookup key), `*Treats Acronym` (routing fallback) |
-| `SALETEAM` | Optional (`Sales Team (Coverage)`), also the coverage-lookup key for `*Salesperson (Coverage)` | `Sales Team (Coverage)`, `*Salesperson (Coverage)` (lookup key) |
+| `Book`, `Booking` | Internal PB/Treats routing key; output `Book` stays blank by default | `*Treats Acronym` (routing fallback), Sales Client Country/Type |
+| `SALETEAM` | Internal/source evidence only for Structured FI; output `Sales Team (Coverage)` stays blank by default | Manual/reference rules only unless explicitly wired |
 | `Maturity`, `Maturity Date`, `Settlement` | Optional | `Maturity Date` |
-| `Trader`, `Issuer`, `Issuer (raw)` | Optional | `Trader`, `Issuer` |
-| `Structure`/`Security`, `Underlying`/`Ticker`/`BBG Tix 1`, `Product`/`Security` | Optional | `Security`, `Ticker`, `Tier 3` fallback text |
+| `Trader`, `Issuer`, `Issuer (raw)` | Optional; output `Trader` stays blank by default, `Issuer` may be source-backed | `Issuer` |
+| `Structure`/`Security`, `Underlying`/`Ticker`/`BBG Tix 1`, `Product`/`Security` | Optional; output `Security` and `Ticker` stay blank by default | Product-tier taxonomy only |
 | `First Reoffer`, `Reoffer` | Optional | `Price`; OCR price-point normalization (`0.985`, `98.5`, `98.50%` -> `98.5`) |
 | `New/Tap/Sell` | Optional (2024-sheet only; blank on 2025/2026 per current fixtures) | `Buy/Sell` |
-| `Remarks`/`Notes`/`Comment`, `Coupon`, `Coupon (raw)`, `Range 1/2`, `Avg NNBV (bps) p.a.`, `Non Call x year` | Optional, economics tokens only | `Comment` |
+| `Remarks`/`Notes`/`Comment`, `Coupon`, `Coupon (raw)`, `Range 1/2`, `Avg NNBV (bps) p.a.`, `Non Call x year` | Optional source evidence only | Not mapped by default; Structured FI output `Comment` stays blank |
 
 `*Salesperson (Coverage)`, `*Legal Entity`: never source-derived here -- resolved
 by coverage/legal reference-CSV lookup (empty by default), else the constant

@@ -40,7 +40,7 @@ Expand the mapper beyond the original Linear Zero / Structured FI flow so Struct
 | Private Credit taxonomy | `*Tier 1 Product Type = Private Credit Primary`; `*Tier 2 Product Type = Private Placement`; `*Tier 3 Product Type = Private Placement`. |
 | Nomura Private Bank Treats | `*Treats Acronym = NOSGSGH` when the client/source text identifies Nomura Private Bank or Nomura PB and no reference CSV value overrides it. |
 | HASE Treats | `*Treats Acronym = HASEHKP` when the client/source text identifies HASE or Hang Seng and no reference CSV value overrides it. |
-| Numeric Trade ID | The output template `*Trade ID` should be a number. Alphanumeric native references such as ISIN, OTC ISIN, PIMS, or synthetic string IDs stay traceable in `ISIN Code` and/or `Comment`. |
+| Numeric Trade ID | The output template `*Trade ID` should be a number. For Structured FI / Linear Zero, alphanumeric native references stay traceable in `ISIN Code`, matching the original output shape; other asset families may also retain native context in `Comment`. |
 | Current Structured FI layout | Add a current-layout Structured FI branch/alias set for columns such as `ISIN Front`, `SALETEAM`, `First Trade Date`, `FINAL CUSTOMER`, `Volume ('MM) USD`, `Total NNBV`, `First Reoffer`, `Product Type`. |
 | Preserve zero-linears | Keep older Linear Zero aliases such as `Linear Zero Traded`, `Linear Zero`, `Structured FI`, `Structured FI / Linear Zero`, `Date`, `Client`, `Security`, `Notional USD Mio`, and related headers. |
 | Preserve Linear Zero tier defaults | `*Tier 1 Product Type = Structured Rates`; `*Tier 2 Product Type = Interest Rate Linked Note -PPN`; `*Tier 3 Product Type = Interest Rate Linked Note -PPN`. |
@@ -52,8 +52,8 @@ Expand the mapper beyond the original Linear Zero / Structured FI flow so Struct
 |---|---|---|
 | D1: Preserve firm/template connections | Done | No firm URLs/endpoints removed. Existing local fallback remains. |
 | D2: Preserve existing Linear Zero / Structured FI behavior | Done | The parser still accepts existing Structured FI sheets and now also scans optional Linear Zero sheet aliases without double-parsing already matched sheets. |
-| D3: Add current Structured FI layout condition | Done | Rows are tagged internally as `structured_fi_current` or `linear_zero_existing`; this appears in `Comment` for audit. |
-| D4: Add Structured FI product-specific taxonomy | Done | Current-layout Structured FI rows branch on `Product`: Linear Zero Callable Notes gets the OCR Linear Zero tiers; Range Accrual with Conversion differentiates tier 3; `ifexists(CLN)` gets Structured Credit tiers and wins over Range Accrual wording when both appear. Product reference CSV still wins. |
+| D3: Add current Structured FI layout condition | Done | Rows are tagged internally as `structured_fi_current` or `linear_zero_existing` for diagnostics, but Structured FI output Comment stays blank by default to match Linear Zero. |
+| D4: Add Structured FI product-specific taxonomy | Done | Current-layout Structured FI rows keep OCR Linear Zero output plumbing. Only the requested product-tier taxonomy is additive: Linear Zero Callable Notes gets the OCR tiers; Range Accrual with Conversion differentiates tier 3; `ifexists(CLN)` gets Structured Credit tiers and wins over Range Accrual wording when both appear. Product reference CSV still wins for tiers. |
 | D5: Add Repackaged + Illiquid Credit taxonomy | Done | Built-in policy taxonomy applies when source text indicates Repack/Repackaged/Illiquid Credit. |
 | D6: Add Private Credit taxonomy | Done | Structured Credit rows matching Private Credit or Private Placement are scoped as `Private Credit` and get the requested tier values. |
 | D7: Add Nomura/HASE Treats fallback | Done | Coverage/legal reference values still win; built-in Treats is used only when references do not resolve. |
@@ -93,7 +93,7 @@ The output field `*Trade ID` is now numeric by construction:
 
 - If the native source reference is already all digits and safe as a JavaScript integer, it is used directly as a number.
 - If the native source reference is alphanumeric, the app creates a deterministic numeric ID from the native reference plus source sheet/row/asset/date/client/book/currency/amount context.
-- The alphanumeric native reference remains available in `ISIN Code` where appropriate and in `Comment` as `native_trade_ref=...`.
+- The alphanumeric native reference remains available in `ISIN Code` where appropriate. Structured FI / Linear Zero keeps output `Comment` blank by default; other asset families may carry native-reference context in `Comment`.
 - The internal row key remains the original source/native/synthetic string so existing manual overrides and row editor behavior are not broken.
 
 This keeps the export contract numeric while preserving operational traceability.
@@ -124,8 +124,8 @@ Product tiers resolve in this order:
 |---|---|
 | Illiquid/Repack `Status` to Buy/Sell | Implemented default: `New`, `Addon`/`Add-on`, and `Fee` map to `Sell`; `Unwind` maps to `Buy`; unrelated statuses stay blank and remain in Comment. |
 | TRS FX convention | Current PC logic multiplies HKD commission by FX rate; confirm if the source rate is inverse. |
-| Legal/Salesperson reference gaps | `*Legal Entity`, `Site Code`, `Salesperson`, platform, PC code, CVA/FVA, Risk Book, and TFX still require reference CSVs or firm rules for full clean-pass output. |
-| Product-specific economics destination | Coupon, Range, Strike, Initial Fixing, No. of options, and Option Premium are source evidence but not target-template columns unless placed into Comment or future fields. |
+| Legal/Salesperson reference gaps | Structured FI keeps OCR constants for `*Legal Entity`, `Site Code`, `BTB Trade Site`, and `Risk Book`; other platform, PC code, CVA/FVA, TFX, and non-Structured-FI legal fields still require reference CSVs or firm rules for full clean-pass output. |
+| Product-specific economics destination | Coupon, Range, Strike, Initial Fixing, No. of options, and Option Premium are source evidence but not target-template columns unless mapped by explicit rules or future fields. Structured FI no longer pushes these into Comment by default. |
 
 ## Verification Requirements
 

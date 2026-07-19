@@ -31,7 +31,7 @@ const BASELINE = {
         va: "10742",
         treats: "NOSGSGH"
       },
-      commentContains: ["source_layout=structured_fi_current", "native_trade_ref=XS3307267255", "coupon=", "first_reoffer="]
+      commentContains: []
     },
     {
       id: "TC02",
@@ -51,7 +51,7 @@ const BASELINE = {
         salesClientCountry: "HK", // inherited from PB book routing (HK -> HK / FBL)
         salesClientType: "FBL"
       },
-      commentContains: ["source_layout=linear_zero_existing", "native_trade_ref=XS0000000001"]
+      commentContains: []
     },
     {
       id: "TC03",
@@ -171,9 +171,8 @@ const TRS_DIVIDE = {
   ]
 };
 
-// ---- Comment economics tokens present on Structured FI / Collar rows (checked against BASELINE snapshot) ----
+// ---- Comment economics tokens present on non-Structured-FI rows (checked against BASELINE snapshot) ----
 const ECONOMICS_TOKEN_CHECKS = [
-  { id: "TC01-economics", index: 0, tokensAnyOf: ["coupon=", "first_reoffer="] },
   { id: "TC03-economics", index: 2, tokensAnyOf: ["strike_pct=", "num_options=", "strike_level=", "initial_fixing=", "option_premium=", "client_price=", "total_gnbv_bps="] }
 ];
 

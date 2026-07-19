@@ -28,12 +28,12 @@ PLUTO means the output template. Every output field beginning with `*` has to be
 
 | ID | Expected asset class | Tier 1 | Tier 2 | Tier 3 | Treats | Trade ID behavior | Key expected outputs |
 |---|---|---|---|---|---|---|---|
-| TC01 | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Business-key numeric smoke ID `2484390147`; native ref in Comment and ISIN Code | Trade Date `23/02/2026`; Primary CCY `USD`; `*$ Volume` `1000000`; VA/GNBV `10742`; PC defaults to `0`. |
+| TC01 | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Business-key numeric smoke ID `2484390147`; native ref remains in ISIN Code | Trade Date `23/02/2026`; Primary CCY `USD`; `*$ Volume` `1000000`; VA/GNBV `10742`; PC defaults to `0`; Comment blank, matching Linear Zero output plumbing. |
 | TC01B-A | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HASEHKP` | Numeric deterministic ID | Current-layout `Product = Linear Zero Callable Notes` uses the original zero-linear tier taxonomy; `Addon` maps to `Sell`. |
 | TC01B-B | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Range Accrual with Conversion | `HASEHKP` | Numeric deterministic ID | Current-layout `Product = Range Accrual with Conversion` differentiates tier 3 while remaining in the Structured FI rates family; `Unwind` maps to `Buy`. |
 | TC01B-C | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Numeric deterministic ID | Current-layout `Product` containing `CLN`, for example `YieldEnhancedCLNRangeAccrual`, wins over `Structure = Range Accrual with Conversion`; `New` maps to `Sell`. |
-| TC02 | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HRCHHKH` | Business-key numeric smoke ID `2984344667`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; Primary CCY `USD`; `*$ Volume` `2000000`; VA/GNBV `2500`; PC defaults to `0`; `source_layout=linear_zero_existing`. |
-| TC02B | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HRCHHKH` | Numeric deterministic ID; native ref in Comment and ISIN Code | Same legacy zero-linear economics as TC02; confirms CLN/free-text product wording does not override the original OCR Linear Zero tier logic. |
+| TC02 | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HRCHHKH` | Business-key numeric smoke ID `2984344667`; native ref remains in ISIN Code | Trade Date `18/07/2026`; Primary CCY `USD`; `*$ Volume` `2000000`; VA/GNBV `2500`; PC defaults to `0`; output Comment blank. |
+| TC02B | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HRCHHKH` | Numeric deterministic ID; native ref remains in ISIN Code | Same legacy zero-linear economics as TC02; confirms CLN/free-text product wording does not override the original OCR Linear Zero tier logic. |
 | TC03 | Collar | Equity Derivatives | Equity Derivatives | Collar / Options | `HASEHKP` | Business-key numeric smoke ID `4416263868`; native ref remains traceable | Trade Date `31/10/2023`; `*$ Volume` `4613500`; VA/GNBV `23493`; PC `46135`; Buy/Sell `Sell` from `New`. |
 | TC04 | Illiquid Credit | Structured Credit | Structured Credit | Structured Credit Notes | `HASEHKP` | Business-key numeric smoke ID `4286094171`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; `*$ Volume` `3000000`; VA/GNBV `45000`; PC defaults to `0`; Status retained in Comment; Buy/Sell `Sell` under default `illiquidStatusToBuySell=new_fee_to_sell` setting (Status "New"). |
 | TC05 | Structured Credit | Structured Credit | Structured Credit | Credit Linked Notes | Placeholder unless reference/rule supplied | Business-key numeric smoke ID `1739969105` | Primary CCY `USD`; `*$ Volume` `5000000`; VA/GNBV `100000`; Trade Date blank by source limitation. |
@@ -75,7 +75,7 @@ Expected assertions:
 | `*Treats Acronym` | `NOSGSGH` |
 | `*Trade ID` | Numeric, current selected-sheet smoke value `2484390147` in `business_key` mode |
 | `Price` | `98.5` from `First Reoffer = 98.50%` |
-| `Comment` | Contains `source_layout=structured_fi_current` and `native_trade_ref=XS3307267255`; now also contains economics key=value tokens sourced from the row's `Coupon`, `Coupon (raw)`, and `First Reoffer` columns when present (e.g. `coupon=6.00% p.a`, `first_reoffer=98.50%`) |
+| `Comment` | Blank, matching the OCR Linear Zero output behavior. Source layout remains available in the automation snapshot, not in the PLUTO output row. |
 
 ## TC01B Structured FI Current Layout / Product Branching
 
@@ -87,7 +87,7 @@ This generated smoke fixture keeps the current consolidated Structured FI column
 | B | `Product = Range Accrual with Conversion`; `Structure = Range Accrual with Conversion` | `Structured Rates / Interest Rate Linked Note -PPN / Range Accrual with Conversion` | Follows the rates family and differentiates tier 3. |
 | C | `Product = YieldEnhancedCLNRangeAccrual`; `Structure = Range Accrual with Conversion` | `Structured Credit / Structured Credit / Credit Linked Notes` | `ifexists(CLN)` priority avoids being misclassified as Range Accrual. |
 
-Each row includes current-layout columns `ISIN Front`, `SALETEAM`, `First Trade Date`, `FINAL CUSTOMER`, `Book`, `Currency`, `Maturity`, `Total NNBV`, `First Reoffer`, `Volume ('MM) USD`, `Trader`, `Issuer`, and `Product Type`, and each row asserts numeric `*Trade ID`.
+Each row includes current-layout columns `ISIN Front`, `SALETEAM`, `First Trade Date`, `FINAL CUSTOMER`, `Book`, `Currency`, `Maturity`, `Total NNBV`, `First Reoffer`, `Volume ('MM) USD`, `Trader`, `Issuer`, and `Product Type`, and each row asserts numeric `*Trade ID`. These rows intentionally keep the OCR Linear Zero optional-field behavior: output Comment, Book, Security, Trader, and Ticker stay blank unless a user rule/manual override fills them.
 
 ## TC02 Existing Linear Zero Layout
 
@@ -122,7 +122,7 @@ Expected assertions:
 | `*$ VA/GNBV` | `2500` |
 | `*Trade ID` | Numeric, current selected-sheet smoke value `2984344667` in `business_key` mode |
 | `Price` | `99.1` from `Reoffer = 99.1`; decimal regression uses `0.991` and must also output `99.1` |
-| `Comment` | Contains `source_layout=linear_zero_existing` and `native_trade_ref=XS0000000001` |
+| `Comment` | Blank, matching the OCR Linear Zero output behavior. |
 
 Regression assertion for `Linear Zero Traded`:
 
@@ -135,7 +135,7 @@ If the same legacy source structure contains product/security text like `CLN Cre
 | `*Tier 2 Product Type` | `Interest Rate Linked Note -PPN` |
 | `*Tier 3 Product Type` | `Interest Rate Linked Note -PPN` |
 | `Price` | `99.1` from decimal `Reoffer = 0.991` |
-| `Comment` | Contains `source_layout=linear_zero_existing`; no `Markets` tier fallback should appear |
+| `Comment` | Blank; no `Markets` tier fallback should appear |
 
 ## TC03 Collar Blotter
 

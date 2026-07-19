@@ -80,10 +80,12 @@ For sheets with the original zero-linear column structure, including `Linear Zer
 - Source layout is tagged as `linear_zero_existing`.
 - Asset class is locked to `Structured FI - Rate`.
 - Product tiers are locked to `Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN`.
+- Output Comment, Book, Security, Trader, and Ticker stay blank by default, matching the OCR Linear Zero file. Current-layout Structured FI rows now follow the same optional-field plumbing.
+- Site Code, BTB Trade Site, and Risk Book keep the OCR constants `HKH`, `LOH`, and `IRSMTN`; deliberate Mapping Studio rules or manual overrides can still change them after the built-in layer.
 - The newer CLN/Repack/Private Credit taxonomy is not applied to that legacy layout, even if those words appear in free-text product/security fields.
 - There is no generic `Markets` tier fallback for this path.
 
-Current Structured FI rows with the newer aggregate WSG/Structured FI columns, such as `ISIN Front`, `SALETEAM`, `First Trade Date`, `FINAL CUSTOMER`, and `Volume ('MM) USD`, still use the multi-asset taxonomy where the supplied Linear Zero Callable Notes, Range Accrual with Conversion, CLN, Repack, and Private Credit mappings apply.
+Current Structured FI rows with the newer aggregate WSG/Structured FI columns, such as `ISIN Front`, `SALETEAM`, `First Trade Date`, `FINAL CUSTOMER`, and `Volume ('MM) USD`, still use the same Linear Zero output plumbing. The additive behavior is product taxonomy only: Linear Zero Callable Notes, Range Accrual with Conversion, and CLN can alter the product tiers, while the rest of the row stays on the old Structured FI/Linear Zero mapping.
 
 ## Processed Sheet Regression Contract
 
