@@ -59,12 +59,16 @@ function aoaSheet(rows) {
   return XLSX.utils.aoa_to_sheet(rows);
 }
 
-function buildLinearZeroTradedFixture(filePath) {
+function buildReofferRegressionFixture(filePath) {
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, aoaSheet([
     ["ISIN", "Date", "Client", "Book", "Primary CCY", "Security", "Product", "Notional USD Mio", "NNBV", "Maturity Date", "Reoffer", "Issuer", "Trader", "Ticker", "Comment"],
-    ["XSLEGACYCLN01", "18/07/2026", "Legacy Zero Client", "HK", "USD", "Legacy Zero Note", "CLN Credit Linked Note", 2, 2500, "18/07/2028", 99.1, "HSBC", "Legacy Trader", "SOFR", "legacy linear zero traded should ignore CLN taxonomy"]
+    ["XSLEGACYCLN01", "18/07/2026", "Legacy Zero Client", "HK", "USD", "Legacy Zero Note", "CLN Credit Linked Note", 2, 2500, "18/07/2028", 0.991, "HSBC", "Legacy Trader", "SOFR", "legacy linear zero traded should ignore CLN taxonomy and normalize decimal reoffer"]
   ]), "Linear Zero Traded");
+  XLSX.utils.book_append_sheet(wb, aoaSheet([
+    ["Product Type", "Deal Name", "Trade Date", "FINAL CUSTOMER", "Booking", "Ccy", "Volume ('MM) USD", "GNBV (USD)", "NNBV", "ISIN", "SVCS No.", "Maturity", "Reoffer", "Status", "Remarks"],
+    ["Illiquid Credit", "Repackaged Decimal Reoffer Note", "18/07/2026", "HASE", "HK", "USD", 3, 45000, 40000, "XSDECIMALREO1", "SVCSDECIMAL1", "18/07/2029", 0.975, "New", "decimal reoffer smoke"]
+  ]), "Illiquid Credit+Repack");
   XLSX.writeFile(wb, filePath);
 }
 
@@ -192,8 +196,8 @@ async function runCase(browser, appUrl, cfg, results) {
 
 async function main() {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "cbms-selected-"));
-  const linearZeroTradedFixture = path.join(tmpDir, "linear_zero_traded_regression.xlsx");
-  buildLinearZeroTradedFixture(linearZeroTradedFixture);
+  const reofferRegressionFixture = path.join(tmpDir, "reoffer_regression.xlsx");
+  buildReofferRegressionFixture(reofferRegressionFixture);
 
   const port = await findFreePort();
   const server = await startHttpServer(port);
@@ -242,7 +246,7 @@ async function main() {
       },
       {
         id: "TC02B Linear Zero Traded",
-        fixture: linearZeroTradedFixture,
+        fixture: reofferRegressionFixture,
         asset: "structured_fi",
         sheet: "Linear Zero Traded",
         rows: 1,
@@ -254,6 +258,7 @@ async function main() {
           assertValue(r, "TC02B:tier1", row, "tier1", "Structured Rates");
           assertValue(r, "TC02B:tier2", row, "tier2", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC02B:tier3", row, "tier3", "Interest Rate Linked Note -PPN");
+          assertValue(r, "TC02B:price", row, "price", "99.1");
           assertNumericTradeId(r, "TC02B:trade-id", row);
         }
       },
@@ -286,7 +291,23 @@ async function main() {
           assertValue(r, "TC04:tier1", row, "tier1", "Structured Credit");
           assertValue(r, "TC04:tier3", row, "tier3", "Structured Credit Notes");
           assertValue(r, "TC04:treats", row, "treats", "HASEHKP");
+          assertValue(r, "TC04:price", row, "price", "97.5");
           assertNumericTradeId(r, "TC04:trade-id", row);
+        }
+      },
+      {
+        id: "TC04B Illiquid Decimal Reoffer",
+        fixture: reofferRegressionFixture,
+        asset: "illiquid_repack",
+        sheet: "Illiquid Credit+Repack",
+        rows: 1,
+        checks(snapshot, r) {
+          const row = snapshot[0];
+          assertValue(r, "TC04B:quality", row, "quality", "CLEAN_PASS");
+          assertValue(r, "TC04B:asset", row, "assetClass", "Illiquid Credit");
+          assertValue(r, "TC04B:tier1", row, "tier1", "Structured Credit");
+          assertValue(r, "TC04B:price", row, "price", "97.5");
+          assertNumericTradeId(r, "TC04B:trade-id", row);
         }
       },
       {

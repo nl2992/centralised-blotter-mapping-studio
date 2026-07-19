@@ -62,7 +62,7 @@ back to a regex over `Underlying`+`Structure` text; anything unmatched is
 | `Maturity`, `Maturity Date`, `Settlement` | Optional | `Maturity Date` |
 | `Trader`, `Issuer`, `Issuer (raw)` | Optional | `Trader`, `Issuer` |
 | `Structure`/`Security`, `Underlying`/`Ticker`/`BBG Tix 1`, `Product`/`Security` | Optional | `Security`, `Ticker`, `Tier 3` fallback text |
-| `First Reoffer`, `Reoffer` | Optional | `Price` |
+| `First Reoffer`, `Reoffer` | Optional | `Price`; OCR price-point normalization (`0.985`, `98.5`, `98.50%` -> `98.5`) |
 | `New/Tap/Sell` | Optional (2024-sheet only; blank on 2025/2026 per current fixtures) | `Buy/Sell` |
 | `Remarks`/`Notes`/`Comment`, `Coupon`, `Coupon (raw)`, `Range 1/2`, `Avg NNBV (bps) p.a.`, `Non Call x year` | Optional, economics tokens only | `Comment` |
 
@@ -100,7 +100,7 @@ A row is skipped only if BOTH `Product Type` and `Deal Name` are blank.
 | `FINAL CUSTOMER` | Optional field-wise, drives Treats built-in match | `Sales Client`, `*Treats Acronym` |
 | `Booking` | Optional, drives legal lookup + PB routing | `Book`, `*Legal Entity` key, `*Treats Acronym` routing |
 | `Status` | Optional -- feeds Buy/Sell only when `illiquidStatusToBuySell = "new_fee_to_sell"` (default) and text matches `/\b(new|fee)\b/i` | `Buy/Sell`, `Comment` |
-| `Trader`, `Issuer`, `BBG Tix 1`, `Reoffer`, `Maturity`, `Remarks` | Optional | `Trader`, `Issuer`, `Ticker`, `Price`, `Maturity Date`, `Comment` |
+| `Trader`, `Issuer`, `BBG Tix 1`, `Reoffer`, `Maturity`, `Remarks` | Optional | `Trader`, `Issuer`, `Ticker`, `Price` with OCR price-point normalization (`0.975`, `97.5`, `97.50%` -> `97.5`), `Maturity Date`, `Comment` |
 
 Note: **no `SALETEAM` column is ever read for this family** -- `saleTeam` is
 hardcoded `""` in the parser (~line 1845). This means the coverage-CSV lookup path

@@ -36,6 +36,7 @@ Minimum one-row-per-family test cases are documented in `docs/non_linear_test_ca
 - `*$ Volume` is the PLUTO output amount field.
 - `*Trade ID` must export as a numeric value. Alphanumeric native references remain traceable through `ISIN Code` and/or `Comment`.
 - PLUTO is the output template. Every PLUTO/output field beginning with `*` has to be populated, including `*$ Volume`.
+- Reoffer-based `Price` fields use the OCR-original price-point normalization: `98.50%`, `98.5`, and `0.985` all output as `98.5`. This applies to Structured FI / Linear Zero reoffer fields and Illiquid/Repack `Reoffer`; TRS `Net Price`/`Gross Price` remains a direct numeric source price.
 
 ## New Built-In Policy Mappings
 
@@ -77,7 +78,7 @@ Screenshot-confirmed source family: first block in supplied image. This is the e
 | `Maturity` | Maturity Date | Example row shows `3/9/2028`; verify workbook date interpretation. |
 | `Avg NNBV (bps) p.a.` | Informational / economics | Not currently a primary output field. |
 | `Total NNBV` | `*$ VA/GNBV` candidate | Example row shows `10,742`. |
-| `First Reoffer` | Price | Example row shows `98.50%`. |
+| `First Reoffer` | Price | Example row shows `98.50%`; normalized to price points (`0.985` -> `98.5`, `98.50%` -> `98.5`). |
 | `Range 1` | Product-specific economics | Example row appears to show `4190`; alignment uncertain. |
 | `Range 2` | Product-specific economics | May be blank in the visible row. |
 | `Coupon` | Product-specific economics | Example row shows `6.00% p.a`. |
@@ -216,7 +217,7 @@ Current working coverage is from the runnable mapper and recovered OCR registry;
 | `Trader` | Trader | Blank if source is blank. |
 | `Issuer` | Issuer / issuerRaw | Also supports legal lookup matching. |
 | `BBG Tix 1` | Ticker | Blank if source is blank. |
-| `Reoffer` | Price | Normalized as numeric price. |
+| `Reoffer` | Price | OCR price-point normalization (`0.975`, `97.5`, and `97.50%` all output as `97.5`). |
 | `Status` | Comment/status audit | Not mapped to Buy/Sell by default. |
 | `Remarks` | Comment | Appends with status/deal name. |
 

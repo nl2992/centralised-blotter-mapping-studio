@@ -1694,6 +1694,13 @@
       const n = Number(s);
       return Number.isFinite(n) ? n : null;
     }
+    function normalizePricePoints(v) {
+      const n = num(v);
+      if (n == null) return null;
+      // OCR-original helper: decimal quote 0.985 means 98.5 price points; 98.5 or 98.5% stays 98.5.
+      if (n > 0 && n <= 1.5) return Number((n * 100).toFixed(4));
+      return Number(n.toFixed(4));
+    }
     function isoFromParts(y, m, d) {
       const yy = Number(y);
       const mm = Number(m);
@@ -2169,7 +2176,7 @@
             ticker: cleanText(underlying) === "-" ? "" : cleanText(underlying),
             productName: cleanText(rowValue(r, ["Product", "Security"])),
             structureName: structure,
-            price: num(rowValue(r, ["First Reoffer", "Reoffer"])),
+            price: normalizePricePoints(rowValue(r, ["First Reoffer", "Reoffer"])),
             volumeUsd,
             volumeSource: volumeRaw != null ? "VOLUME_USD_DIRECT" : (size != null ? "SIZE_X_FX" : "UNRESOLVED"),
             vaCandidate: va,
@@ -2246,7 +2253,7 @@
             ticker: cleanText(rowValue(r, ["BBG Tix 1"])),
             productName: productType,
             structureName: dealName,
-            price: num(rowValue(r, ["Reoffer"])),
+            price: normalizePricePoints(rowValue(r, ["Reoffer"])),
             volumeUsd,
             volumeSource: volumeDirect != null ? "VOLUME_USD_DIRECT" : (size != null ? "SIZE_X_FX" : "UNRESOLVED"),
             vaCandidate: num(rowValue(r, ["GNBV (USD)", "NNBV"])),
@@ -5686,6 +5693,7 @@
         va: outputFieldValue(m.out, "*$ VA/GNBV"),
         pc: outputFieldValue(m.out, "*$ PC"),
         buySell: outputFieldValue(m.out, "Buy/Sell"),
+        price: outputFieldValue(m.out, "Price"),
         treats: outputFieldValue(m.out, "*Treats Acronym"),
         revenueCcy: outputFieldValue(m.out, "*Revenue CCY"),
         comment: outputFieldValue(m.out, "Comment"),

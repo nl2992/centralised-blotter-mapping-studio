@@ -70,6 +70,7 @@ Expected assertions:
 | `*Tier 3 Product Type` | `Credit Linked Notes` |
 | `*Treats Acronym` | `NOSGSGH` |
 | `*Trade ID` | Numeric, current selected-sheet smoke value `2484390147` in `business_key` mode |
+| `Price` | `98.5` from `First Reoffer = 98.50%` |
 | `Comment` | Contains `source_layout=structured_fi_current` and `native_trade_ref=XS3307267255`; now also contains economics key=value tokens sourced from the row's `Coupon`, `Coupon (raw)`, and `First Reoffer` columns when present (e.g. `coupon=6.00% p.a`, `first_reoffer=98.50%`) |
 
 ## TC02 Existing Linear Zero Layout
@@ -104,6 +105,7 @@ Expected assertions:
 | `*$ Volume` | `2000000` |
 | `*$ VA/GNBV` | `2500` |
 | `*Trade ID` | Numeric, current selected-sheet smoke value `2984344667` in `business_key` mode |
+| `Price` | `99.1` from `Reoffer = 99.1`; decimal regression uses `0.991` and must also output `99.1` |
 | `Comment` | Contains `source_layout=linear_zero_existing` and `native_trade_ref=XS0000000001` |
 
 Regression assertion for `Linear Zero Traded`:
@@ -116,6 +118,7 @@ If the same legacy source structure contains product/security text like `CLN Cre
 | `*Tier 1 Product Type` | `Structured Rates` |
 | `*Tier 2 Product Type` | `Interest Rate Linked Note -PPN` |
 | `*Tier 3 Product Type` | `Interest Rate Linked Note -PPN` |
+| `Price` | `99.1` from decimal `Reoffer = 0.991` |
 | `Comment` | Contains `source_layout=linear_zero_existing`; no `Markets` tier fallback should appear |
 
 ## TC03 Collar Blotter
@@ -190,6 +193,7 @@ Expected assertions:
 | `*Trade ID` | Numeric, current selected-sheet smoke value `4286094171` in `business_key` mode |
 | `*$ Volume` | `3000000` |
 | `*$ VA/GNBV` | `45000` |
+| `Price` | `97.5`; decimal regression uses `Reoffer = 0.975` and must also output `97.5` |
 | `Buy/Sell` | **`Sell`** under the default `illiquidStatusToBuySell = new_fee_to_sell` setting, because source `Status` is `New` (regex `/\b(new|fee)\b/i`). Set the `illiquidStatusToBuySell` select to `off` to restore the previous blank behavior. |
 
 ## TC05 Structured Credit CLN

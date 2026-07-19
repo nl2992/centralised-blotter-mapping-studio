@@ -96,6 +96,16 @@ OCR pages around the Processed Sheet showed a richer editor than the simplified 
 
 The selected-sheet smoke test now exercises these controls on the two-row `Structured Credit 2025` case so this does not quietly regress again.
 
+## Reoffer Price Contract
+
+The OCR-original helper `normalizePricePoints` treated reoffer values as price points:
+
+- `98.50%` -> `98.5`
+- `98.5` -> `98.5`
+- `0.985` -> `98.5`
+
+That behavior is restored for Structured FI / Linear Zero `First Reoffer` / `Reoffer` and Illiquid/Repack `Reoffer`. TRS `Net Price` / `Gross Price` stays a direct numeric source price because the OCR mapping described that as source-backed rather than reoffer-normalized.
+
 ## Trade ID Modes
 
 | Mode | Numeric output behavior |

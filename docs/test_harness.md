@@ -23,6 +23,8 @@ That command runs `tests/run_selected_sheet_smoke.js`. It loads a workbook, sele
 
 The same harness also opens the Processed Sheet tab for a two-row case and checks that OCR-restored export optionality is present: filter processed rows, keep first N filtered, keep last N filtered, invert filtered, and click-to-edit a processed cell.
 
+It also checks OCR reoffer price-point normalization: decimal reoffer inputs such as `0.991` / `0.975` must export as `99.1` / `97.5`, matching percentage or point inputs.
+
 To test the built single-file artifact instead of source, run:
 
 ```bash
