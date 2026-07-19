@@ -21,6 +21,8 @@ That command runs `tests/run_selected_sheet_smoke.js`. It loads a workbook, sele
 - `*Tier 3 Product Type = Interest Rate Linked Note -PPN`
 - no `Markets` tier value
 
+The same harness also opens the Processed Sheet tab for a two-row case and checks that OCR-restored export optionality is present: filter processed rows, keep first N filtered, keep last N filtered, invert filtered, and click-to-edit a processed cell.
+
 To test the built single-file artifact instead of source, run:
 
 ```bash

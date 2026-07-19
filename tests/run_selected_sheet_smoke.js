@@ -184,6 +184,7 @@ async function runCase(browser, appUrl, cfg, results) {
     });
     assertNoMarkets(results, `${cfg.id}:no-markets`, snapshot);
     cfg.checks(snapshot, results);
+    if (cfg.postCheck) await cfg.postCheck(page, results);
   } finally {
     await context.close();
   }
@@ -306,6 +307,53 @@ async function main() {
           assertValue(r, "TC06:tier2", pc, "tier2", "Private Placement");
           assertValue(r, "TC06:tier3", pc, "tier3", "Private Placement");
           assertNumericTradeId(r, "TC06:trade-id", pc);
+        },
+        async postCheck(page, r) {
+          await page.click('[data-tab="processedSheet"]');
+          await page.waitForFunction(() => document.getElementById("processedSheet").classList.contains("active"), null, { timeout: 5000 });
+          const hasControls = await page.evaluate(() => {
+            return [
+              "processedSheetSearch",
+              "processedQuickSelectCount",
+              "btnKeepTopFiltered",
+              "btnKeepBottomFiltered",
+              "btnInvertFiltered",
+              "btnSelectAllFiltered",
+              "btnClearFiltered"
+            ].every(id => !!document.getElementById(id));
+          });
+          r.push({ id: "TC05-06:processed-controls-present", pass: hasControls, detail: hasControls ? "controls present" : "missing processed-sheet controls" });
+
+          await page.fill("#processedSheetSearch", "private");
+          await page.waitForFunction(() => document.querySelectorAll(".processed-select-row").length === 1, null, { timeout: 5000 });
+          const filteredOne = await page.evaluate(() => document.querySelectorAll(".processed-select-row").length);
+          r.push({ id: "TC05-06:filter-private", pass: filteredOne === 1, detail: `visible rows=${filteredOne}` });
+
+          await page.fill("#processedSheetSearch", "");
+          await page.waitForFunction(() => document.querySelectorAll(".processed-select-row").length === 2, null, { timeout: 5000 });
+          await page.fill("#processedQuickSelectCount", "1");
+          await page.dispatchEvent("#processedQuickSelectCount", "change");
+
+          await page.click("#btnKeepTopFiltered");
+          await page.waitForTimeout(50);
+          const topState = await page.evaluate(() => Array.from(document.querySelectorAll(".processed-select-row")).map(cb => cb.checked));
+          r.push({ id: "TC05-06:keep-first-n", pass: topState.length === 2 && topState[0] === true && topState[1] === false, detail: `checked=${JSON.stringify(topState)}` });
+
+          await page.click("#btnKeepBottomFiltered");
+          await page.waitForTimeout(50);
+          const bottomState = await page.evaluate(() => Array.from(document.querySelectorAll(".processed-select-row")).map(cb => cb.checked));
+          r.push({ id: "TC05-06:keep-last-n", pass: bottomState.length === 2 && bottomState[0] === false && bottomState[1] === true, detail: `checked=${JSON.stringify(bottomState)}` });
+
+          await page.click("#btnInvertFiltered");
+          await page.waitForTimeout(50);
+          const invertedState = await page.evaluate(() => Array.from(document.querySelectorAll(".processed-select-row")).map(cb => cb.checked));
+          r.push({ id: "TC05-06:invert-filtered", pass: invertedState.length === 2 && invertedState[0] === true && invertedState[1] === false, detail: `checked=${JSON.stringify(invertedState)}` });
+
+          await page.click(".processed-cell");
+          await page.waitForSelector("#processedCellEditor", { timeout: 5000 });
+          const editorOpen = await page.evaluate(() => !!document.getElementById("processedCellEditor"));
+          r.push({ id: "TC05-06:click-to-edit-opens", pass: editorOpen, detail: editorOpen ? "editor opened" : "editor missing" });
+          await page.keyboard.press("Escape");
         }
       },
       {

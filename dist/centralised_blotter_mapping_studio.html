@@ -538,9 +538,28 @@ License: MIT
       padding: 5px 7px;
       font-size: 11.5px;
       font-family: Consolas, Monaco, monospace;
+      text-align: left;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      cursor: pointer;
     }
+    .processed-cell:hover { border-color: var(--blue); }
+    .processed-cell.selected { border-color: var(--red); box-shadow: 0 0 0 2px rgba(200,16,46,.14); }
     .processed-cell.MANUAL_OVERRIDE { border-color: var(--purple); background: var(--soft-purple); }
     .processed-cell.UNRESOLVED, .processed-cell.PLACEHOLDER { border-color: var(--amber); background: var(--soft-amber); }
+    .processed-edit-input {
+      min-width: 180px;
+      width: 100%;
+      padding: 5px 7px;
+      font-size: 11.5px;
+      font-family: Consolas, Monaco, monospace;
+    }
+    .processed-row-excluded { opacity: .56; background: var(--surface-2); }
+    .processed-row-excluded .processed-cell { filter: grayscale(.2); }
+    .selection-panel { display: grid; grid-template-columns: 1fr; gap: 6px; }
+    .processed-search { min-width: 240px; }
     .json-pre {
       margin: 0;
       padding: 12px;
@@ -1593,6 +1612,10 @@ License: MIT
       goldenRecords: [],
       selectedGoldenKey: "",
       fileHistory: [],
+      processedSearch: "",
+      processedSelectedRowId: "",
+      processedSelectedField: "*Trade Date",
+      processedInlineEdit: { rowId: "", field: "", draft: "" },
       processedQuickSelectCount: 5,
       formulaErrorLoggedFields: new Set(),
       dataQuality: { warnings: [], duplicateIds: 0 }
@@ -1891,6 +1914,10 @@ License: MIT
           tradeIdMode: state.tradeIdMode,
           addonWindowDays: state.addonWindowDays,
           exportExcludedRows: state.exportExcludedRows,
+          processedSearch: state.processedSearch,
+          processedQuickSelectCount: state.processedQuickSelectCount,
+          processedSelectedRowId: state.processedSelectedRowId,
+          processedSelectedField: state.processedSelectedField,
           goldenRecords: state.goldenRecords,
           selectedGoldenKey: state.selectedGoldenKey,
           fileHistory: state.fileHistory
@@ -1914,6 +1941,10 @@ License: MIT
           state.tradeIdMode = ["business_key", "native_ref_preferred", "legacy_row_order"].includes(process.tradeIdMode) ? process.tradeIdMode : (state.tradeIdMode || "business_key");
           state.addonWindowDays = Math.max(0, Math.min(30, Number(process.addonWindowDays || state.addonWindowDays || 7)));
           state.exportExcludedRows = (process.exportExcludedRows && typeof process.exportExcludedRows === "object") ? process.exportExcludedRows : (state.exportExcludedRows || {});
+          state.processedSearch = cleanText(process.processedSearch || state.processedSearch);
+          state.processedQuickSelectCount = Math.max(1, Number(process.processedQuickSelectCount || state.processedQuickSelectCount || 5));
+          state.processedSelectedRowId = cleanText(process.processedSelectedRowId || state.processedSelectedRowId);
+          state.processedSelectedField = cleanText(process.processedSelectedField || state.processedSelectedField || "*Trade Date");
           state.goldenRecords = Array.isArray(process.goldenRecords) ? process.goldenRecords : (state.goldenRecords || []);
           state.selectedGoldenKey = cleanText(process.selectedGoldenKey || state.selectedGoldenKey);
           state.fileHistory = Array.isArray(process.fileHistory) ? process.fileHistory : (state.fileHistory || []);
@@ -3340,6 +3371,63 @@ License: MIT
     function selectedMappedRows() {
       return state.mappedRows.filter(m => isRowSelected(m.row));
     }
+    function mappedRowUid(mapped) {
+      return mapped ? rowUid(mapped.row) : "";
+    }
+    function getFilteredProcessedRows() {
+      const term = norm(state.processedSearch || "");
+      if (!term) return state.mappedRows;
+      const headers = state.templateHeaders.length ? state.templateHeaders : TEMPLATE_FALLBACK_HEADERS;
+      return state.mappedRows.filter(m => {
+        const hay = [
+          m.quality,
+          m.row.assetClass,
+          m.row.sourceSheet,
+          m.row.sourceRowNumber,
+          m.row.sourceLayout,
+          m.row.tradeId,
+          ...headers.map(h => outputFieldValue(m.out, h))
+        ].map(v => norm(v)).join(" ");
+        return hay.includes(term);
+      });
+    }
+    function countFilteredSelected(rows = getFilteredProcessedRows()) {
+      return rows.filter(m => isRowSelected(m.row)).length;
+    }
+    function setMappedRowsSelected(rows, selected) {
+      rows.forEach(m => {
+        const uid = mappedRowUid(m);
+        if (!uid) return;
+        if (selected) delete state.exportExcludedRows[uid];
+        else state.exportExcludedRows[uid] = true;
+      });
+    }
+    function invertMappedRowsSelection(rows) {
+      rows.forEach(m => {
+        const uid = mappedRowUid(m);
+        if (!uid) return;
+        if (isRowSelected(m.row)) state.exportExcludedRows[uid] = true;
+        else delete state.exportExcludedRows[uid];
+      });
+    }
+    function keepOnlyMappedRows(scopeRows, rowsToKeep) {
+      const keep = new Set(rowsToKeep.map(mappedRowUid));
+      scopeRows.forEach(m => {
+        const uid = mappedRowUid(m);
+        if (!uid) return;
+        if (keep.has(uid)) delete state.exportExcludedRows[uid];
+        else state.exportExcludedRows[uid] = true;
+      });
+    }
+    function pruneExportSelection() {
+      const live = new Set(state.mappedRows.map(mappedRowUid));
+      Object.keys(state.exportExcludedRows || {}).forEach(uid => {
+        if (!live.has(uid)) delete state.exportExcludedRows[uid];
+      });
+      if (state.processedSelectedRowId && !live.has(state.processedSelectedRowId)) {
+        state.processedSelectedRowId = "";
+      }
+    }
     function exportRowsForGate() {
       const mode = currentSettings().finalExportGate;
       return selectedMappedRows().filter(m => {
@@ -3649,6 +3737,107 @@ License: MIT
         clearManualOverride(state.mappingEditorTradeId, b.dataset.field);
       }));
     }
+    function findMappedByRowId(rowId) {
+      return state.mappedRows.find(m => mappedRowUid(m) === rowId) || null;
+    }
+    function processedManualOverrideValue(mapped, field) {
+      if (!mapped) return undefined;
+      const overrides = state.manualOverrides[mapped.row.tradeId] || {};
+      return Object.prototype.hasOwnProperty.call(overrides, field) ? overrides[field] : undefined;
+    }
+    function processedManualOverrideExists(mapped, field) {
+      return processedManualOverrideValue(mapped, field) !== undefined;
+    }
+    function countCurrentSheetManualOverrides() {
+      return state.mappedRows.reduce((sum, m) => sum + Object.keys(state.manualOverrides[m.row.tradeId] || {}).length, 0);
+    }
+    function setProcessedManualOverride(rowId, field, value) {
+      const mapped = findMappedByRowId(rowId);
+      if (!mapped) return;
+      const key = templateFieldName(field);
+      if (!state.manualOverrides[mapped.row.tradeId]) state.manualOverrides[mapped.row.tradeId] = {};
+      state.manualOverrides[mapped.row.tradeId][key] = value == null ? "" : String(value);
+      saveLocal();
+      rebuildMapping();
+      syncGoldenRecordsFromCurrentRun();
+      updateTopPills();
+    }
+    function clearProcessedManualOverride(rowId, field) {
+      const mapped = findMappedByRowId(rowId);
+      if (!mapped) return false;
+      const key = templateFieldName(field);
+      if (!state.manualOverrides[mapped.row.tradeId] || !Object.prototype.hasOwnProperty.call(state.manualOverrides[mapped.row.tradeId], key)) return false;
+      delete state.manualOverrides[mapped.row.tradeId][key];
+      if (!Object.keys(state.manualOverrides[mapped.row.tradeId]).length) delete state.manualOverrides[mapped.row.tradeId];
+      saveLocal();
+      rebuildMapping();
+      syncGoldenRecordsFromCurrentRun();
+      updateTopPills();
+      return true;
+    }
+    function clearCurrentSheetManualOverrides() {
+      state.mappedRows.forEach(m => { delete state.manualOverrides[m.row.tradeId]; });
+      saveLocal();
+      rebuildMapping();
+      syncGoldenRecordsFromCurrentRun();
+      updateTopPills();
+    }
+    function renderProcessedValue(value) {
+      const text = cleanText(value);
+      return text || "(blank)";
+    }
+    function markProcessedSelectedCell(rowId, field) {
+      state.processedSelectedRowId = rowId || "";
+      state.processedSelectedField = templateFieldName(field || state.processedSelectedField || "*Trade Date");
+      saveLocal();
+    }
+    function getProcessedMoveTarget(rowId, field, move) {
+      const headers = state.templateHeaders.length ? state.templateHeaders : TEMPLATE_FALLBACK_HEADERS;
+      const rows = getFilteredProcessedRows();
+      const rowIdx = rows.findIndex(m => mappedRowUid(m) === rowId);
+      const colIdx = headers.map(templateFieldName).indexOf(templateFieldName(field));
+      if (rowIdx < 0 || colIdx < 0) return null;
+      if (move === "down" && rowIdx + 1 < rows.length) return { rowId: mappedRowUid(rows[rowIdx + 1]), field: headers[colIdx] };
+      if (move === "right" && colIdx + 1 < headers.length) return { rowId, field: headers[colIdx + 1] };
+      if (move === "left" && colIdx - 1 >= 0) return { rowId, field: headers[colIdx - 1] };
+      return null;
+    }
+    function beginProcessedCellEdit(rowId, field) {
+      const mapped = findMappedByRowId(rowId);
+      if (!mapped) return;
+      const key = templateFieldName(field);
+      const manual = processedManualOverrideValue(mapped, key);
+      const currentValue = manual !== undefined ? manual : outputFieldValue(mapped.out, key);
+      markProcessedSelectedCell(rowId, key);
+      state.processedInlineEdit = { rowId, field: key, draft: String(currentValue ?? "") };
+      renderProcessedSheet();
+      setTimeout(() => {
+        const input = qs("processedCellEditor");
+        if (input) {
+          input.focus();
+          input.select();
+        }
+      }, 0);
+    }
+    function finishProcessedCellEdit(commit, move) {
+      const edit = state.processedInlineEdit || {};
+      if (!edit.rowId || !edit.field) return;
+      const target = commit ? getProcessedMoveTarget(edit.rowId, edit.field, move) : null;
+      if (commit) {
+        setProcessedManualOverride(edit.rowId, edit.field, edit.draft);
+        setStatus(`Applied manual in-cell edit to <b>${escapeHtml(edit.field)}</b>.`, "good");
+        log(`Manual processed-sheet edit applied: row=${edit.rowId}, field=${edit.field}`, "success");
+      }
+      state.processedInlineEdit = { rowId: "", field: "", draft: "" };
+      if (target) {
+        state.processedSelectedRowId = target.rowId;
+        state.processedSelectedField = templateFieldName(target.field);
+        renderProcessedSheet();
+        setTimeout(() => beginProcessedCellEdit(target.rowId, target.field), 40);
+      } else {
+        renderProcessedSheet();
+      }
+    }
     function renderMapping() {
       const cols = [
         { label: "Quality", value: "quality", html: v => qualityBadge(v) },
@@ -3699,12 +3888,32 @@ License: MIT
     }
     function renderProcessedSheet() {
       const headers = state.templateHeaders.length ? state.templateHeaders : TEMPLATE_FALLBACK_HEADERS;
-      const rows = state.mappedRows.slice(0, 1000);
+      pruneExportSelection();
+      if (!headers.map(templateFieldName).includes(templateFieldName(state.processedSelectedField))) {
+        state.processedSelectedField = headers[0] || "*Trade Date";
+      }
+      const filteredRows = getFilteredProcessedRows();
+      if (filteredRows.length && (!state.processedSelectedRowId || !filteredRows.find(m => mappedRowUid(m) === state.processedSelectedRowId))) {
+        state.processedSelectedRowId = mappedRowUid(filteredRows[0]);
+      }
+      const rows = filteredRows.slice(0, 1000);
       const selectedCount = selectedMappedRows().length;
+      const filteredSelectedCount = countFilteredSelected(filteredRows);
+      const exportableCount = exportRowsForGate().length;
+      const selectedMapped = findMappedByRowId(state.processedSelectedRowId);
+      const selectedField = templateFieldName(state.processedSelectedField || headers[0] || "");
+      const selectedValue = selectedMapped ? outputFieldValue(selectedMapped.out, selectedField) : "";
+      const selectedProv = selectedMapped && selectedMapped.prov ? (selectedMapped.prov[selectedField] || {}) : {};
+      const selectedManual = selectedMapped ? processedManualOverrideExists(selectedMapped, selectedField) : false;
+      const allFilteredSelected = filteredRows.length > 0 && filteredRows.every(m => isRowSelected(m.row));
+      const someFilteredSelected = filteredRows.some(m => isRowSelected(m.row));
+      const filteredBadge = allFilteredSelected ? badge("All filtered selected", "green") :
+        (someFilteredSelected ? badge("Partial filtered selection", "amber") : badge(filteredRows.length ? "No filtered rows selected" : "No filtered rows", filteredRows.length ? "red" : "blue"));
       const headerHtml = [
-        "<th>Select</th>",
+        `<th><input id="processedSelectAllFiltered" type="checkbox" ${allFilteredSelected ? "checked" : ""} ${filteredRows.length ? "" : "disabled"} title="Select all filtered rows" /></th>`,
         "<th>Quality</th>",
-        "<th>Source</th>"
+        "<th>Source</th>",
+        "<th>Trade ID</th>"
       ].concat(headers.map(h => `<th>${escapeHtml(h)}</th>`)).join("");
       const bodyHtml = rows.map(m => {
         const uid = rowUid(m.row);
@@ -3715,62 +3924,197 @@ License: MIT
           const value = outputFieldValue(m.out, h);
           const prov = m.prov[field] || {};
           const cls = prov.className || "BLANK";
-          return `<td class="processed-cell-wrap"><input class="processed-cell ${escapeHtml(cls)}" data-tradeid="${escapeHtml(m.row.tradeId)}" data-field="${escapeHtml(field)}" value="${escapeHtml(value)}" title="${escapeHtml(prov.note || cls)}" /></td>`;
+          const selected = uid === state.processedSelectedRowId && field === selectedField;
+          const editing = selected && state.processedInlineEdit && state.processedInlineEdit.rowId === uid && state.processedInlineEdit.field === field;
+          const manual = processedManualOverrideExists(m, field);
+          const classes = ["processed-cell", cls, selected ? "selected" : "", manual ? "MANUAL_OVERRIDE" : ""].filter(Boolean).join(" ");
+          if (editing) {
+            return `<td class="processed-cell-wrap"><input id="processedCellEditor" class="processed-edit-input" data-rowid="${escapeHtml(uid)}" data-field="${escapeHtml(field)}" value="${escapeHtml(state.processedInlineEdit.draft)}" /></td>`;
+          }
+          return `<td class="processed-cell-wrap"><button type="button" class="${escapeHtml(classes)}" data-rowid="${escapeHtml(uid)}" data-field="${escapeHtml(field)}" title="${escapeHtml(prov.note || cls)}">${escapeHtml(renderProcessedValue(value))}</button></td>`;
         }).join("");
-        return `<tr data-rowid="${escapeHtml(uid)}">
+        return `<tr data-rowid="${escapeHtml(uid)}" class="${checked ? "" : "processed-row-excluded"}">
           <td><input type="checkbox" class="processed-select-row" data-rowid="${escapeHtml(uid)}" ${checked} /></td>
           <td>${qualityBadge(m.quality)}</td>
           <td class="mono">${escapeHtml(source)}</td>
+          <td class="mono">${escapeHtml(outputFieldValue(m.out, "*Trade ID"))}</td>
           ${cells}
         </tr>`;
       }).join("");
       qs("processedSheet").innerHTML = `
         <section class="card section">
           <div class="toolbar">
-            <div class="section-title">Processed Sheet</div>
+            <div class="section-title">Processed Sheet Editor</div>
             <div class="action-row">
-              <button id="btnProcessedSelectAll" class="btn ghost">Select All</button>
-              <button id="btnProcessedClearSelection" class="btn ghost">Clear Selection</button>
-              <button id="btnProcessedExportCsv" class="btn secondary">Export CSV</button>
-              <button id="btnProcessedExportXlsx" class="btn secondary">Export XLSX</button>
+              <button id="btnClearSelectedCellEdit" class="btn secondary" ${selectedManual ? "" : "disabled"}>Clear Selected Cell Edit</button>
+              <button id="btnClearAllManualEdits" class="btn ghost" ${countCurrentSheetManualOverrides() ? "" : "disabled"}>Clear All Manual Edits</button>
             </div>
           </div>
-          <div class="footer-mini" style="margin-bottom:8px">${fmt(selectedCount)} of ${fmt(state.mappedRows.length)} processed row${state.mappedRows.length === 1 ? "" : "s"} selected for export.</div>
-          <div class="table-wrap"><table class="processed-table"><thead><tr>${headerHtml}</tr></thead><tbody>${bodyHtml || `<tr><td colspan="${headers.length + 3}" class="empty">No processed rows yet. Load a workbook and process one selected sheet.</td></tr>`}</tbody></table></div>
+          <div class="grid grid-2">
+            <div class="good-note">
+              <b>Current worksheet:</b> <span class="inline-code">${escapeHtml(state.sheetName || "none")}</span><br />
+              <b>Current asset:</b> <span class="inline-code">${escapeHtml(assetConfig().label)}</span><br />
+              <b>Processed rows:</b> <span class="inline-code">${fmt(state.mappedRows.length)}</span><br />
+              <b>Filtered rows:</b> <span class="inline-code">${fmt(filteredRows.length)}</span><br />
+              <b>Selected for export:</b> <span class="inline-code">${fmt(selectedCount)}/${fmt(state.mappedRows.length)}</span><br />
+              <b>Manual cell edits:</b> <span class="inline-code">${fmt(countCurrentSheetManualOverrides())}</span>
+            </div>
+            <div class="note selection-panel">
+              <div><b>Selected cell</b> ${selectedManual ? badge("Manual override active", "amber") : badge("No manual override", "blue")}</div>
+              <div>Trade <span class="inline-code">${escapeHtml(selectedMapped ? outputFieldValue(selectedMapped.out, "*Trade ID") : "")}</span> · Field <span class="inline-code">${escapeHtml(selectedField || "")}</span></div>
+              <div>Current value <span class="inline-code">${escapeHtml(renderProcessedValue(selectedValue))}</span></div>
+              <div>${escapeHtml(selectedProv.note || selectedProv.className || "No cell selected yet.")}</div>
+            </div>
+          </div>
+        </section>
+        <section class="card section">
+          <div class="toolbar">
+            <div class="section-title">Row Selection for Export</div>
+            <div class="action-row">
+              <button id="btnProcessedExportCsv" class="btn secondary" ${exportableCount ? "" : "disabled"}>Export CSV (${fmt(exportableCount)})</button>
+              <button id="btnProcessedExportXlsx" class="btn secondary" ${exportableCount ? "" : "disabled"}>Export XLSX (${fmt(exportableCount)})</button>
+            </div>
+          </div>
+          <div class="controls">
+            <div class="field wide processed-search">
+              <label>Filter processed sheet</label>
+              <input id="processedSheetSearch" type="text" value="${escapeHtml(state.processedSearch)}" placeholder="Search output rows" />
+            </div>
+            <div class="field tight">
+              <label>Quick select N</label>
+              <input id="processedQuickSelectCount" type="number" min="1" step="1" value="${escapeHtml(state.processedQuickSelectCount)}" />
+            </div>
+            <button id="btnSelectAllFiltered" class="btn secondary" ${filteredRows.length ? "" : "disabled"}>Select Filtered</button>
+            <button id="btnClearFiltered" class="btn secondary" ${filteredRows.length ? "" : "disabled"}>Clear Filtered</button>
+            <button id="btnKeepTopFiltered" class="btn secondary" ${filteredRows.length ? "" : "disabled"}>Keep First N Filtered</button>
+            <button id="btnKeepBottomFiltered" class="btn secondary" ${filteredRows.length ? "" : "disabled"}>Keep Last N Filtered</button>
+            <button id="btnInvertFiltered" class="btn secondary" ${filteredRows.length ? "" : "disabled"}>Invert Filtered</button>
+            <button id="btnSelectAllRows" class="btn ghost" ${state.mappedRows.length ? "" : "disabled"}>Reset Row Selection</button>
+          </div>
+          <div class="footer-mini" style="margin-top:8px">${filteredBadge} Export buttons use selected rows that pass the current export gate. ${badge("Selected row", "green")} ${badge("Excluded row", "amber")} ${badge("Manual cell", "purple")} ${badge("Selected cell", "red")}</div>
+        </section>
+        <section class="card section">
+          <div class="toolbar">
+            <div class="section-title">Processed Output Sheet</div>
+            <div class="footer-mini">${fmt(filteredRows.length)} filtered row${filteredRows.length === 1 ? "" : "s"} · showing ${fmt(rows.length)} · ${fmt(filteredSelectedCount)} filtered selected</div>
+          </div>
+          <div class="table-wrap"><table class="processed-table"><thead><tr>${headerHtml}</tr></thead><tbody>${bodyHtml || `<tr><td colspan="${headers.length + 4}" class="empty">${state.mappedRows.length ? "No processed rows match the current filter." : "No processed output yet. Load a workbook and process one selected sheet."}</td></tr>`}</tbody></table></div>
         </section>`;
-      qs("btnProcessedSelectAll").onclick = () => {
-        state.exportExcludedRows = {};
+      const rerenderSelection = (msg, tone) => {
         saveLocal();
         renderProcessedSheet();
         updateTopPills();
+        refreshGatePill();
+        if (msg) setStatus(msg, tone || "blue");
       };
-      qs("btnProcessedClearSelection").onclick = () => {
+      qs("btnSelectAllRows").onclick = () => {
         state.exportExcludedRows = {};
-        state.mappedRows.forEach(m => { state.exportExcludedRows[rowUid(m.row)] = true; });
-        saveLocal();
-        renderProcessedSheet();
-        updateTopPills();
+        rerenderSelection("Reset export selection so all current sheet rows are selected.", "good");
+      };
+      qs("btnSelectAllFiltered").onclick = () => {
+        setMappedRowsSelected(filteredRows, true);
+        rerenderSelection(`Selected all <b>${fmt(filteredRows.length)}</b> filtered row(s) for export.`, "good");
+      };
+      qs("btnClearFiltered").onclick = () => {
+        setMappedRowsSelected(filteredRows, false);
+        rerenderSelection(`Cleared all <b>${fmt(filteredRows.length)}</b> filtered row(s) from export selection.`, "warn");
+      };
+      qs("btnKeepTopFiltered").onclick = () => {
+        const n = Math.max(1, Number(state.processedQuickSelectCount || 5));
+        keepOnlyMappedRows(filteredRows, filteredRows.slice(0, n));
+        rerenderSelection(`Kept only the first <b>${fmt(Math.min(n, filteredRows.length))}</b> filtered row(s) selected for export.`, "good");
+      };
+      qs("btnKeepBottomFiltered").onclick = () => {
+        const n = Math.max(1, Number(state.processedQuickSelectCount || 5));
+        keepOnlyMappedRows(filteredRows, filteredRows.slice(Math.max(0, filteredRows.length - n)));
+        rerenderSelection(`Kept only the last <b>${fmt(Math.min(n, filteredRows.length))}</b> filtered row(s) selected for export.`, "good");
+      };
+      qs("btnInvertFiltered").onclick = () => {
+        invertMappedRowsSelection(filteredRows);
+        rerenderSelection("Inverted export selection for the current filtered rows.", "blue");
       };
       qs("btnProcessedExportCsv").onclick = exportCsv;
       qs("btnProcessedExportXlsx").onclick = exportXlsx;
+      qs("processedSheetSearch").oninput = e => {
+        state.processedSearch = e.target.value;
+        renderProcessedSheet();
+        setTimeout(() => {
+          const search = qs("processedSheetSearch");
+          if (search) {
+            search.focus();
+            search.setSelectionRange(search.value.length, search.value.length);
+          }
+        }, 0);
+      };
+      qs("processedQuickSelectCount").onchange = e => {
+        state.processedQuickSelectCount = Math.max(1, Number(e.target.value || 5));
+        saveLocal();
+        renderProcessedSheet();
+      };
+      const allFilteredCheckbox = qs("processedSelectAllFiltered");
+      if (allFilteredCheckbox) {
+        allFilteredCheckbox.indeterminate = !allFilteredSelected && someFilteredSelected;
+        allFilteredCheckbox.onclick = e => e.stopPropagation();
+        allFilteredCheckbox.onchange = () => {
+          setMappedRowsSelected(filteredRows, allFilteredCheckbox.checked);
+          rerenderSelection(`${allFilteredCheckbox.checked ? "Selected" : "Cleared"} all filtered rows for export.`, allFilteredCheckbox.checked ? "good" : "warn");
+        };
+      }
+      qs("btnClearSelectedCellEdit").onclick = () => {
+        if (!state.processedSelectedRowId || !state.processedSelectedField) {
+          setStatus("Select a processed cell first.", "warn");
+          return;
+        }
+        if (!clearProcessedManualOverride(state.processedSelectedRowId, state.processedSelectedField)) {
+          setStatus("The selected cell does not currently have a manual override.", "warn");
+          return;
+        }
+        setStatus(`Cleared manual edit for <b>${escapeHtml(state.processedSelectedField)}</b>.`, "blue");
+        renderProcessedSheet();
+      };
+      qs("btnClearAllManualEdits").onclick = () => {
+        clearCurrentSheetManualOverrides();
+        setStatus("Cleared all manual processed-sheet edits for the current worksheet.", "blue");
+        renderProcessedSheet();
+      };
       qsa(".processed-select-row").forEach(cb => cb.addEventListener("change", () => {
         if (cb.checked) delete state.exportExcludedRows[cb.dataset.rowid];
         else state.exportExcludedRows[cb.dataset.rowid] = true;
         saveLocal();
         updateTopPills();
         refreshGatePill();
+        renderProcessedSheet();
       }));
-      qsa(".processed-cell").forEach(input => input.addEventListener("change", () => {
-        const tradeId = input.dataset.tradeid;
-        const field = templateFieldName(input.dataset.field);
-        if (!state.manualOverrides[tradeId]) state.manualOverrides[tradeId] = {};
-        state.manualOverrides[tradeId][field] = input.value;
-        saveLocal();
-        rebuildMapping();
-        syncGoldenRecordsFromCurrentRun();
-        renderAll();
-        showToast(`Edited ${field}`);
+      qsa(".processed-cell").forEach(cell => cell.addEventListener("click", () => {
+        beginProcessedCellEdit(cell.dataset.rowid || "", cell.dataset.field || "");
       }));
+      const editor = qs("processedCellEditor");
+      if (editor) {
+        let finished = false;
+        const finish = (commit, move) => {
+          if (finished) return;
+          finished = true;
+          finishProcessedCellEdit(commit, move || null);
+        };
+        editor.addEventListener("input", () => {
+          state.processedInlineEdit.draft = editor.value;
+        });
+        editor.addEventListener("blur", () => finish(true, null));
+        editor.addEventListener("keydown", e => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            state.processedInlineEdit.draft = editor.value;
+            finish(true, "down");
+          } else if (e.key === "Tab") {
+            e.preventDefault();
+            state.processedInlineEdit.draft = editor.value;
+            finish(true, e.shiftKey ? "left" : "right");
+          } else if (e.key === "Escape") {
+            e.preventDefault();
+            finish(false, null);
+          }
+        });
+      }
     }
     function syncGoldenRecordsFromCurrentRun() {
       const existing = new Map((state.goldenRecords || []).map(r => [String(r.tradeId), r]));
@@ -4495,6 +4839,10 @@ License: MIT
           tradeIdMode: state.tradeIdMode,
           addonWindowDays: state.addonWindowDays,
           exportExcludedRows: clonePlain(state.exportExcludedRows),
+          processedSearch: state.processedSearch,
+          processedQuickSelectCount: state.processedQuickSelectCount,
+          processedSelectedRowId: state.processedSelectedRowId,
+          processedSelectedField: state.processedSelectedField,
           goldenRecords: clonePlain(state.goldenRecords),
           selectedGoldenKey: state.selectedGoldenKey,
           fileHistory: clonePlain(state.fileHistory)
@@ -4876,6 +5224,10 @@ License: MIT
         state.tradeIdMode = ["business_key", "native_ref_preferred", "legacy_row_order"].includes(process.tradeIdMode) ? process.tradeIdMode : state.tradeIdMode;
         state.addonWindowDays = Math.max(0, Math.min(30, Number(process.addonWindowDays || state.addonWindowDays || 7)));
         state.exportExcludedRows = (process.exportExcludedRows && typeof process.exportExcludedRows === "object") ? process.exportExcludedRows : {};
+        state.processedSearch = cleanText(process.processedSearch || state.processedSearch);
+        state.processedQuickSelectCount = Math.max(1, Number(process.processedQuickSelectCount || state.processedQuickSelectCount || 5));
+        state.processedSelectedRowId = cleanText(process.processedSelectedRowId || state.processedSelectedRowId);
+        state.processedSelectedField = cleanText(process.processedSelectedField || state.processedSelectedField || "*Trade Date");
         state.goldenRecords = Array.isArray(process.goldenRecords) ? process.goldenRecords : state.goldenRecords;
         state.selectedGoldenKey = cleanText(process.selectedGoldenKey || state.selectedGoldenKey);
         state.fileHistory = Array.isArray(process.fileHistory) ? process.fileHistory : state.fileHistory;

@@ -23,7 +23,7 @@ The OCR-original flow is now treated as the product behavior source of truth.
 | Remapping flow | Run-mode changes often reread the selected worksheet. | Selected-sheet parse stores source rows once; run mode, Trade ID mode, and add-on window changes remap/re-aggregate the current rows without rereading the workbook. |
 | Tab layout | Replaced the original tab set with Template Mapping, Reconciliation, Diagnostics, Canonical Rows, Field Matrix, References, Governance, Settings, Debug Log. | Restored Overview, Mapping Studio, Processed Sheet, Exceptions, Golden Record, Default Rules, Saved Settings, Activity Log. |
 | Processed sheet | Output review moved into other mapping/debug views. | Restored a Processed Sheet grid with inline PLUTO output editing and row selection for export. |
-| Export selection | Export gate acted over all mapped rows. | Export first respects selected rows from Processed Sheet, then applies the final gate. |
+| Export selection | Export gate acted over all mapped rows, and the Processed Sheet lost filtered/top-N/bottom-N selection tools. | Export first respects selected rows from Processed Sheet, then applies the final gate. Filtered selection, keep first/last N, invert filtered, and reset selection are restored. |
 | Golden record | Label existed, but no usable Golden Record tab. | Restored Golden Record storage keyed by numeric `*Trade ID`, with source and PLUTO output panes. |
 | Activity log | Debug log existed as a secondary tab. | Restored Activity Log as the visible operational log. |
 
@@ -82,6 +82,19 @@ For sheets with the original zero-linear column structure, including `Linear Zer
 - There is no generic `Markets` tier fallback for this path.
 
 Current Structured FI rows with the newer aggregate WSG/Structured FI columns, such as `ISIN Front`, `SALETEAM`, `First Trade Date`, `FINAL CUSTOMER`, and `Volume ('MM) USD`, still use the multi-asset taxonomy where the supplied CLN/Repack/Private Credit mappings apply.
+
+## Processed Sheet Regression Contract
+
+OCR pages around the Processed Sheet showed a richer editor than the simplified centralised rebuild. The restored behavior now includes:
+
+- Search/filter across the current processed output sheet.
+- Select filtered rows, clear filtered rows, invert filtered rows, and reset all row selection.
+- Keep first N filtered rows and keep last N filtered rows for export selection.
+- Export CSV/XLSX buttons that use selected rows first, then the active final export gate.
+- Click-to-edit processed cells instead of always-on rigid inputs.
+- Selected-cell status, clear selected-cell manual edit, and clear all manual edits for the current sheet.
+
+The selected-sheet smoke test now exercises these controls on the two-row `Structured Credit 2025` case so this does not quietly regress again.
 
 ## Trade ID Modes
 
