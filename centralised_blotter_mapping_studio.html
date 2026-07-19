@@ -1277,11 +1277,27 @@
         tier3: "Private Placement"
       },
       {
+        name: "Linear Zero Callable Notes",
+        assetTest: /^Structured FI\b/i,
+        test: /linear\s+zero(?:\s+callable)?\s+notes?/i,
+        tier1: "Structured Rates",
+        tier2: "Interest Rate Linked Note -PPN",
+        tier3: "Interest Rate Linked Note -PPN"
+      },
+      {
         name: "CLN",
         test: /\bcln\b|credit\s+linked\s+notes?/i,
         tier1: "Structured Credit",
         tier2: "Structured Credit",
-        tier3: "Credit Linked Notes"
+        tier3: "Credit Linked Note"
+      },
+      {
+        name: "Range Accrual with Conversion",
+        assetTest: /^Structured FI\b/i,
+        test: /range\s+accrual\s+with\s+conversion/i,
+        tier1: "Structured Rates",
+        tier2: "Interest Rate Linked Note -PPN",
+        tier3: "Range Accrual with Conversion"
       },
       {
         name: "Repackaged / Illiquid Credit",
@@ -1368,21 +1384,21 @@
         global: "Defaults to the constant USD because the $ template fields are USD-denominated. Add a 'source' rule -> primaryCcy to copy Primary CCY instead."
       },
       "*Tier 1 Product Type": {
-        structuredFi: "OCR-preserved Linear Zero layout locks to 'Structured Rates'; current Structured FI rows may still use product taxonomy such as CLN.",
+        structuredFi: "OCR-preserved Linear Zero layout locks to 'Structured Rates'; current Structured FI rows branch by Product text for Linear Zero Callable Notes, CLN, and Range Accrual with Conversion.",
         illiquidRepack: "Instruction mapping: Structured Credit.",
         collar: "Equity Derivatives family default; confirm exact firm label if different.",
         trs: "Equity Derivatives family default; confirm exact firm label if different.",
         global: "Per-asset taxonomy default, overridable by Product reference CSV or Mapping Studio rules. No generic 'Markets' fallback."
       },
       "*Tier 2 Product Type": {
-        structuredFi: "OCR-preserved Linear Zero layout locks to 'Interest Rate Linked Note -PPN'; current Structured FI rows may still use product taxonomy such as CLN.",
+        structuredFi: "OCR-preserved Linear Zero layout locks to 'Interest Rate Linked Note -PPN'; current Structured FI rows branch by Product text for Linear Zero Callable Notes, CLN, and Range Accrual with Conversion.",
         illiquidRepack: "Instruction mapping: Structured Credit.",
         collar: "Equity Derivatives family default; confirm exact firm label if different.",
         trs: "Equity Derivatives family default; confirm exact firm label if different.",
         global: "Per-asset-class default tier 2, overridable by the Product reference CSV."
       },
       "*Tier 3 Product Type": {
-        structuredFi: "OCR-preserved Linear Zero layout locks to 'Interest Rate Linked Note -PPN'; current Structured FI rows may still use product taxonomy such as CLN.",
+        structuredFi: "OCR-preserved Linear Zero layout locks to 'Interest Rate Linked Note -PPN'; current Structured FI rows branch by Product text for Linear Zero Callable Notes, CLN, and Range Accrual with Conversion.",
         illiquidRepack: "Instruction mapping: Structured Credit Notes.",
         collar: "Collar / Options.",
         trs: "Total Return Swap.",
@@ -2909,7 +2925,8 @@
     }
     function getBuiltInProductTaxonomy(row) {
       const hay = productTaxonomyHaystack(row);
-      return BUILT_IN_PRODUCT_TAXONOMY.find(rule => rule.test.test(hay)) || null;
+      const asset = cleanText(row && row.assetClass);
+      return BUILT_IN_PRODUCT_TAXONOMY.find(rule => (!rule.assetTest || rule.assetTest.test(asset)) && rule.test.test(hay)) || null;
     }
     function getBuiltInTreatsAcronym(row) {
       const hay = [
@@ -4210,7 +4227,9 @@
         { item: "Run mode", value: state.runMode === "aggregate_addons" ? `Aggregate add-ons (${state.addonWindowDays}d)` : "Trade by trade" },
         { item: "Trade ID mode", value: state.tradeIdMode },
         { item: "PLUTO mandatory fields", value: plutoRequiredFields(headers).join(", ") },
-        { item: "CLN taxonomy", value: "Structured Credit / Structured Credit / Credit Linked Notes" },
+        { item: "Linear Zero Callable Notes taxonomy", value: "Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN" },
+        { item: "CLN taxonomy", value: "Structured Credit / Structured Credit / Credit Linked Note" },
+        { item: "Range Accrual with Conversion taxonomy", value: "Structured Rates / Interest Rate Linked Note -PPN / Range Accrual with Conversion" },
         { item: "Repack + Illiquid Credit taxonomy", value: "Structured Credit / Structured Credit / Structured Credit Notes" },
         { item: "Private Credit taxonomy", value: "Private Credit Primary / Private Placement / Private Placement" },
         { item: "Treats fallbacks", value: "Nomura Private Bank = NOSGSGH; HASE/Hang Seng = HASEHKP; PB SG/HK routing retained" }
@@ -5500,7 +5519,7 @@
         { item: "Trade ID output standard", value: "*Trade ID is exported as a numeric value. Alphanumeric native references are retained in ISIN Code and/or Comment." },
         { item: "Trade ID derivation", value: "2 output formulas: (1) native numeric passthrough when the source ref is all-digit; (2) deterministic FNV-1a numeric hash (seed: raw|sheet|row|asset|date|client|book|ccy|volume) otherwise. Internal IDs use 7 synthetic prefixes SFI/ILC/RPK/COL/COLLEG/TRS/SC, native ref preferred. See docs/trade_id_derivation.md." },
         { item: "Template detection", value: "6 header-signature templates with a confidence threshold, name-based-first then signature-fallback routing, and a Linear-Zero-vs-Structured-FI discriminator. See docs/template_detection.md." },
-        { item: "Built-in product taxonomy", value: "CLN -> Structured Credit / Structured Credit / Credit Linked Notes; Repack/Illiquid -> Structured Credit / Structured Credit / Structured Credit Notes; Private Credit -> Private Credit Primary / Private Placement / Private Placement." },
+        { item: "Built-in product taxonomy", value: "Linear Zero Callable Notes -> Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN; CLN -> Structured Credit / Structured Credit / Credit Linked Note; Range Accrual with Conversion -> Structured Rates / Interest Rate Linked Note -PPN / Range Accrual with Conversion; Repack/Illiquid -> Structured Credit / Structured Credit / Structured Credit Notes; Private Credit -> Private Credit Primary / Private Placement / Private Placement." },
         { item: "Built-in Treats fallback", value: "Nomura Private Bank -> NOSGSGH; HASE / Hang Seng -> HASEHKP, unless coverage/legal references override." },
         { item: "Structured FI input layouts", value: "Current Structured FI columns and existing Linear Zero aliases are both accepted; source layout is written into Comment." },
         { item: "Expected row-level sheets", value: EXPECTED_SHEETS.join(", ") },

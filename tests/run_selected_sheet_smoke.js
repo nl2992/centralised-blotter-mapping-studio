@@ -72,6 +72,17 @@ function buildReofferRegressionFixture(filePath) {
   XLSX.writeFile(wb, filePath);
 }
 
+function buildStructuredFiProductFixture(filePath) {
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, aoaSheet([
+    ["ISIN Front", "SALETEAM", "First Trade Date", "FINAL CUSTOMER", "Book", "Currency", "Structure", "Underlying", "Product", "Maturity", "Total NNBV", "First Reoffer", "Volume ('MM) USD", "Trader", "Issuer", "Product Type"],
+    ["XSLCALLABLE01", "HK", "23-Feb-26", "HASE", "HK", "USD", "Linear Zero Callable Notes", "SOFR", "Linear Zero Callable Notes", "3/9/2028", 1000, "99.00%", 1, "HCIB", "HSBC", "Rate"],
+    ["XSRANGEACCR01", "HK", "23-Feb-26", "HASE", "HK", "USD", "Range Accrual with Conversion", "XAUUSD", "Range Accrual with Conversion", "3/9/2028", 10742, "98.50%", 1, "HCIB", "HSBC", "Rate"],
+    ["XSCLNRANGE01", "HK", "23-Feb-26", "Nomura Private Bank", "HK", "USD", "CLN Range Accrual with Conversion", "XAUUSD", "CLN Credit Linked Note", "3/9/2028", 10742, "98.50%", 1, "HCIB", "HSBC", "Credit"]
+  ]), "Structured FI Product Taxonomy");
+  XLSX.writeFile(wb, filePath);
+}
+
 async function newPage(browser, appUrl) {
   const context = await browser.newContext();
   await context.addInitScript(() => {
@@ -198,6 +209,8 @@ async function main() {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "cbms-selected-"));
   const reofferRegressionFixture = path.join(tmpDir, "reoffer_regression.xlsx");
   buildReofferRegressionFixture(reofferRegressionFixture);
+  const structuredFiProductFixture = path.join(tmpDir, "structured_fi_product_taxonomy.xlsx");
+  buildStructuredFiProductFixture(structuredFiProductFixture);
 
   const port = await findFreePort();
   const server = await startHttpServer(port);
@@ -222,9 +235,34 @@ async function main() {
           assertValue(r, "TC01:layout", row, "sourceLayout", "structured_fi_current");
           assertValue(r, "TC01:tier1", row, "tier1", "Structured Credit");
           assertValue(r, "TC01:tier2", row, "tier2", "Structured Credit");
-          assertValue(r, "TC01:tier3", row, "tier3", "Credit Linked Notes");
+          assertValue(r, "TC01:tier3", row, "tier3", "Credit Linked Note");
           assertValue(r, "TC01:treats", row, "treats", "NOSGSGH");
           assertNumericTradeId(r, "TC01:trade-id", row);
+        }
+      },
+      {
+        id: "TC01B Structured FI product taxonomy",
+        fixture: structuredFiProductFixture,
+        asset: "structured_fi",
+        sheet: "Structured FI Product Taxonomy",
+        rows: 3,
+        checks(snapshot, r) {
+          const linearZero = snapshot.find(row => String(row.comment || "").includes("XSLCALLABLE01"));
+          const rangeAccrual = snapshot.find(row => String(row.comment || "").includes("XSRANGEACCR01"));
+          const clnRange = snapshot.find(row => String(row.comment || "").includes("XSCLNRANGE01"));
+          assertValue(r, "TC01B:linear-layout", linearZero, "sourceLayout", "structured_fi_current");
+          assertValue(r, "TC01B:linear-tier1", linearZero, "tier1", "Structured Rates");
+          assertValue(r, "TC01B:linear-tier2", linearZero, "tier2", "Interest Rate Linked Note -PPN");
+          assertValue(r, "TC01B:linear-tier3", linearZero, "tier3", "Interest Rate Linked Note -PPN");
+          assertNumericTradeId(r, "TC01B:linear-trade-id", linearZero);
+          assertValue(r, "TC01B:range-tier1", rangeAccrual, "tier1", "Structured Rates");
+          assertValue(r, "TC01B:range-tier2", rangeAccrual, "tier2", "Interest Rate Linked Note -PPN");
+          assertValue(r, "TC01B:range-tier3", rangeAccrual, "tier3", "Range Accrual with Conversion");
+          assertNumericTradeId(r, "TC01B:range-trade-id", rangeAccrual);
+          assertValue(r, "TC01B:cln-wins-tier1", clnRange, "tier1", "Structured Credit");
+          assertValue(r, "TC01B:cln-wins-tier2", clnRange, "tier2", "Structured Credit");
+          assertValue(r, "TC01B:cln-wins-tier3", clnRange, "tier3", "Credit Linked Note");
+          assertNumericTradeId(r, "TC01B:cln-trade-id", clnRange);
         }
       },
       {
@@ -321,7 +359,7 @@ async function main() {
           const pc = snapshot.find(row => row.assetClass === "Private Credit");
           assertValue(r, "TC05:quality", cln, "quality", "FAIL");
           assertValue(r, "TC05:tier1", cln, "tier1", "Structured Credit");
-          assertValue(r, "TC05:tier3", cln, "tier3", "Credit Linked Notes");
+          assertValue(r, "TC05:tier3", cln, "tier3", "Credit Linked Note");
           assertNumericTradeId(r, "TC05:trade-id", cln);
           assertValue(r, "TC06:quality", pc, "quality", "FAIL");
           assertValue(r, "TC06:tier1", pc, "tier1", "Private Credit Primary");

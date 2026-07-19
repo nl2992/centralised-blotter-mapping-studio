@@ -44,7 +44,9 @@ These rules are built-in defaults. Product reference CSVs, Mapping Studio rules,
 
 | Source signal | `*Tier 1 Product Type` | `*Tier 2 Product Type` | `*Tier 3 Product Type` |
 |---|---|---|---|
-| CLN / Credit Linked Note(s) | Structured Credit | Structured Credit | Credit Linked Notes |
+| Linear Zero Callable Notes in current Structured FI layout | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN |
+| Range Accrual with Conversion in current Structured FI layout | Structured Rates | Interest Rate Linked Note -PPN | Range Accrual with Conversion |
+| CLN / Credit Linked Note(s) | Structured Credit | Structured Credit | Credit Linked Note |
 | Repackaged / Repack / Illiquid Credit | Structured Credit | Structured Credit | Structured Credit Notes |
 | Private Credit / Private Placement | Private Credit Primary | Private Placement | Private Placement |
 
@@ -120,7 +122,8 @@ Screenshot-confirmed source family: first block in supplied image. This is the e
 ### Implementation Notes
 
 - Structured FI should remain a source-backed expansion of Linear Zero, not a separate output template.
-- The current parser already classifies Structured FI into Rate, Credit, FX, or Unknown using `Product Type` first and then Product/Underlying/Structure heuristics.
+- The current parser classifies Structured FI into Rate, Credit, FX, or Unknown using `Product Type` first and then Product/Underlying/Structure heuristics.
+- After the current Structured FI layout is recognized, `Product`/`Structure` text applies product-specific taxonomy: `Linear Zero Callable Notes` keeps the OCR Linear Zero rates tiers; `Range Accrual with Conversion` keeps the rates family but uses `Range Accrual with Conversion` for tier 3; `CLN` maps to Structured Credit tiers and takes priority when CLN and Range Accrual wording both appear.
 - Fields like Range 1, Range 2, Coupon, Coupon raw, BBG Tix 2, and BBG Tix 3 are source evidence but do not yet have direct target-template destinations unless rules are added.
 
 ## Collar Blotter

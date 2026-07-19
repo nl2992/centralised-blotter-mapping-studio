@@ -105,7 +105,7 @@ const EXPECT = {
     // classify() -- intentional, correct app behavior.
     "*Tier 1 Product Type": v("Structured Credit", POLICY_OR_LOOKUP),
     "*Tier 2 Product Type": v("Structured Credit", POLICY_OR_LOOKUP),
-    "*Tier 3 Product Type": v("Credit Linked Notes", POLICY_OR_LOOKUP),
+    "*Tier 3 Product Type": v("Credit Linked Note", POLICY_OR_LOOKUP),
     "*Salesperson (Coverage)": SALES, "*Legal Entity": LEGAL,
     "*Treats Acronym": v("HASEHKP", POLICY_OR_LOOKUP)
   },
@@ -187,10 +187,10 @@ const EXPECT = {
     "*Revenue CCY": REV,
     // Product = "CLN Basket Note" matches the built-in "CLN" taxonomy rule the
     // same way as Structured FI - Credit above -- Structured Credit/Structured
-    // Credit/Credit Linked Notes wins over the plain TIER_DEFAULTS entry.
+    // Credit/Credit Linked Note wins over the plain TIER_DEFAULTS entry.
     "*Tier 1 Product Type": v("Structured Credit", POLICY_OR_LOOKUP),
     "*Tier 2 Product Type": v("Structured Credit", POLICY_OR_LOOKUP),
-    "*Tier 3 Product Type": v("Credit Linked Notes", POLICY_OR_LOOKUP),
+    "*Tier 3 Product Type": v("Credit Linked Note", POLICY_OR_LOOKUP),
     "*Salesperson (Coverage)": SALES, "*Legal Entity": LEGAL,
     // client/book/saleTeam are all hardcoded "" by the parser (no such columns
     // exist on the sheet either) -> neither the built-in client Treats map nor PB

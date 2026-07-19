@@ -24,7 +24,7 @@ const BASELINE = {
         tradeId: "4204720592",
         tier1: "Structured Credit",
         tier2: "Structured Credit",
-        tier3: "Credit Linked Notes",
+        tier3: "Credit Linked Note",
         tradeDate: "23/02/2026",
         primaryCcy: "USD",
         volume: "1000000",
@@ -96,7 +96,7 @@ const BASELINE = {
         tradeId: "2635637780",
         tier1: "Structured Credit",
         tier2: "Structured Credit",
-        tier3: "Credit Linked Notes",
+        tier3: "Credit Linked Note",
         tradeDate: "",
         volume: "5000000",
         va: "100000"

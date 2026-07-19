@@ -33,7 +33,9 @@ Expand the mapper beyond the original Linear Zero / Structured FI flow so Struct
 
 | New instruction | Mapping now required |
 |---|---|
-| CLN taxonomy | `*Tier 1 Product Type = Structured Credit`; `*Tier 2 Product Type = Structured Credit`; `*Tier 3 Product Type = Credit Linked Notes`. |
+| Current Structured FI Linear Zero Callable Notes taxonomy | `Product = Linear Zero Callable Notes` maps to `*Tier 1 Product Type = Structured Rates`; `*Tier 2 Product Type = Interest Rate Linked Note -PPN`; `*Tier 3 Product Type = Interest Rate Linked Note -PPN`, matching the original zero-linear taxonomy. |
+| Current Structured FI Range Accrual with Conversion taxonomy | `Product = Range Accrual with Conversion` maps to `*Tier 1 Product Type = Structured Rates`; `*Tier 2 Product Type = Interest Rate Linked Note -PPN`; `*Tier 3 Product Type = Range Accrual with Conversion`. |
+| CLN taxonomy | `*Tier 1 Product Type = Structured Credit`; `*Tier 2 Product Type = Structured Credit`; `*Tier 3 Product Type = Credit Linked Note`. |
 | Repackaged + Illiquid Credit taxonomy | `*Tier 1 Product Type = Structured Credit`; `*Tier 2 Product Type = Structured Credit`; `*Tier 3 Product Type = Structured Credit Notes`. |
 | Private Credit taxonomy | `*Tier 1 Product Type = Private Credit Primary`; `*Tier 2 Product Type = Private Placement`; `*Tier 3 Product Type = Private Placement`. |
 | Nomura Private Bank Treats | `*Treats Acronym = NOSGSGH` when the client/source text identifies Nomura Private Bank or Nomura PB and no reference CSV value overrides it. |
@@ -51,7 +53,7 @@ Expand the mapper beyond the original Linear Zero / Structured FI flow so Struct
 | D1: Preserve firm/template connections | Done | No firm URLs/endpoints removed. Existing local fallback remains. |
 | D2: Preserve existing Linear Zero / Structured FI behavior | Done | The parser still accepts existing Structured FI sheets and now also scans optional Linear Zero sheet aliases without double-parsing already matched sheets. |
 | D3: Add current Structured FI layout condition | Done | Rows are tagged internally as `structured_fi_current` or `linear_zero_existing`; this appears in `Comment` for audit. |
-| D4: Add CLN taxonomy | Done | Built-in policy taxonomy applies when product/source text contains `CLN` or `Credit Linked Note(s)`. Product reference CSV still wins. |
+| D4: Add Structured FI product-specific taxonomy | Done | Current-layout Structured FI rows branch on `Product`: Linear Zero Callable Notes gets the OCR Linear Zero tiers; Range Accrual with Conversion differentiates tier 3; CLN gets Structured Credit tiers and wins over Range Accrual wording when both appear. Product reference CSV still wins. |
 | D5: Add Repackaged + Illiquid Credit taxonomy | Done | Built-in policy taxonomy applies when source text indicates Repack/Repackaged/Illiquid Credit. |
 | D6: Add Private Credit taxonomy | Done | Structured Credit rows matching Private Credit or Private Placement are scoped as `Private Credit` and get the requested tier values. |
 | D7: Add Nomura/HASE Treats fallback | Done | Coverage/legal reference values still win; built-in Treats is used only when references do not resolve. |
@@ -143,7 +145,8 @@ Product tiers resolve in this order:
 | Selected-sheet isolation | Passed: every smoke process produced rows only from the selected worksheet. |
 | PLUTO mandatory `*` fields | Passed: rows with blank starred PLUTO fields remain Fail; no source values are invented. |
 | Numeric `*Trade ID` | Passed: all selected-sheet smoke rows show numeric output IDs. |
-| CLN taxonomy | Passed: Structured Credit / Structured Credit / Credit Linked Notes. |
+| Structured FI product taxonomy | Passed: current-layout Linear Zero Callable Notes, Range Accrual with Conversion, and CLN priority over range wording. |
+| CLN taxonomy | Passed: Structured Credit / Structured Credit / Credit Linked Note. |
 | Illiquid/Repack taxonomy | Passed: Structured Credit / Structured Credit / Structured Credit Notes. |
 | Private Credit taxonomy | Passed: Private Credit Primary / Private Placement / Private Placement. |
 | Nomura/HASE Treats | Passed: Nomura Private Bank -> `NOSGSGH`; HASE -> `HASEHKP`. |
