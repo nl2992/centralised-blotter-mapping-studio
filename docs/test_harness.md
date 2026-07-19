@@ -34,7 +34,9 @@ cd tests
 APP_FILE=dist/centralised_blotter_mapping_studio.html npm run test:selected
 ```
 
-The older harnesses below are retained for engineering reference, but `run_tests.js`, `run_template_detection.js`, and `run_starred_field_matrix.js` were authored around the previous workbook-wide parse behavior and should not be treated as the primary gate for the OCR-restored selected-sheet workflow until rewritten.
+`run_starred_field_matrix.js` has also been rewritten for the selected-sheet workflow. It loads the complete matrix fixture once, processes each target worksheet through the same Asset + Worksheet + `Process selected sheet` controls, and concatenates the `__BOARD_STAR_AUDIT()` rows to verify the 13 PLUTO required `*` fields by asset family.
+
+The older `run_tests.js` and `run_template_detection.js` harnesses are retained for engineering reference, but they were authored around the previous workbook-wide parse behavior and should not be treated as the primary gate for the OCR-restored selected-sheet workflow.
 
 ## Legacy Workbook-Wide Harness Notes
 
@@ -43,14 +45,17 @@ The older harnesses below are retained for engineering reference, but `run_tests
 1. All TC01-TC07 expectations documented in `docs/non_linear_test_cases.md`
    (tiers, treats, trade IDs, volumes, VA/GNBV, PC, Buy/Sell, Working
    Pass / Fail quality) still hold against `ocr_work/test_non_linear_taxonomy.xlsx`.
-2. **Illiquid/Repack Status -> Buy/Sell** (TC04-type row): source `Status`
-   of `New` (or `Fee`) maps to `Buy/Sell = Sell` under the default
-   `illiquidStatusToBuySell = new_fee_to_sell` setting, and to `Buy/Sell = ""`
-   (blank) when the select is switched to `off`.
-3. **TRS FX convention** (TC07-type row): `*$ PC = 9984` under the default
+2. **Action -> Buy/Sell**: `New`, `Addon`/`Add-on`, and `Fee` map to
+   `Buy/Sell = Sell`; `Unwind` maps to `Buy`. Illiquid/Repack applies this under
+   the default `illiquidStatusToBuySell = new_fee_to_sell` setting, and returns
+   `Buy/Sell = ""` (blank) when the select is switched to `off`.
+3. **PC default**: source-backed PC candidates still win (Collar `PB Fee (USD)`,
+   TRS `Commission to PB`), but rows without a PC source/reference/rule default
+   `*$ PC` to `0`, not VA proxy.
+4. **TRS FX convention** (TC07-type row): `*$ PC = 9984` under the default
    `trsFxConvention = multiply` (`78000 x 0.128`), and `*$ PC = 609375` under
    `trsFxConvention = divide` (`78000 / 0.128`).
-4. **Economics comment tokens**: Structured FI rows (TC01-type) carry
+5. **Economics comment tokens**: Structured FI rows (TC01-type) carry
    `coupon=`, `coupon_raw=`, `first_reoffer=` (etc.) tokens in `Comment` when
    the corresponding source columns are present; Collar rows (TC03-type)
    carry `strike_pct=`, `strike_level=`, `num_options=`, `client_price=`,

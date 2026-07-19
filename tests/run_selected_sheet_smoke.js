@@ -75,10 +75,10 @@ function buildReofferRegressionFixture(filePath) {
 function buildStructuredFiProductFixture(filePath) {
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, aoaSheet([
-    ["ISIN Front", "SALETEAM", "First Trade Date", "FINAL CUSTOMER", "Book", "Currency", "Structure", "Underlying", "Product", "Maturity", "Total NNBV", "First Reoffer", "Volume ('MM) USD", "Trader", "Issuer", "Product Type"],
-    ["XSLCALLABLE01", "HK", "23-Feb-26", "HASE", "HK", "USD", "Linear Zero Callable Notes", "SOFR", "Linear Zero Callable Notes", "3/9/2028", 1000, "99.00%", 1, "HCIB", "HSBC", "Rate"],
-    ["XSRANGEACCR01", "HK", "23-Feb-26", "HASE", "HK", "USD", "Range Accrual with Conversion", "XAUUSD", "Range Accrual with Conversion", "3/9/2028", 10742, "98.50%", 1, "HCIB", "HSBC", "Rate"],
-    ["XSCLNRANGE01", "HK", "23-Feb-26", "Nomura Private Bank", "HK", "USD", "Range Accrual with Conversion", "XAUUSD", "YieldEnhancedCLNRangeAccrual", "3/9/2028", 10742, "98.50%", 1, "HCIB", "HSBC", "Credit"]
+    ["ISIN Front", "SALETEAM", "First Trade Date", "FINAL CUSTOMER", "Book", "Currency", "Structure", "Underlying", "Product", "Maturity", "Total NNBV", "First Reoffer", "Volume ('MM) USD", "Trader", "Issuer", "Product Type", "New/Tap/Sell"],
+    ["XSLCALLABLE01", "HK", "23-Feb-26", "HASE", "HK", "USD", "Linear Zero Callable Notes", "SOFR", "Linear Zero Callable Notes", "3/9/2028", 1000, "99.00%", 1, "HCIB", "HSBC", "Rate", "Addon"],
+    ["XSRANGEACCR01", "HK", "23-Feb-26", "HASE", "HK", "USD", "Range Accrual with Conversion", "XAUUSD", "Range Accrual with Conversion", "3/9/2028", 10742, "98.50%", 1, "HCIB", "HSBC", "Rate", "Unwind"],
+    ["XSCLNRANGE01", "HK", "23-Feb-26", "Nomura Private Bank", "HK", "USD", "Range Accrual with Conversion", "XAUUSD", "YieldEnhancedCLNRangeAccrual", "3/9/2028", 10742, "98.50%", 1, "HCIB", "HSBC", "Credit", "New"]
   ]), "Structured FI Product Taxonomy");
   XLSX.writeFile(wb, filePath);
 }
@@ -116,10 +116,10 @@ async function processSelectedSheet(page, fixturePath, asset, sheet) {
     set("defaultLegalEntity", "HBAP");
     set("allowTreatsPlaceholder", "true");
     set("allowTier3Placeholder", "true");
-    set("pcPolicyStructuredFi", "lookup_then_va");
-    set("pcPolicyIlliquid", "lookup_then_va");
-    set("pcPolicyCollar", "pbfee_then_lookup");
-    set("pcPolicyTrs", "commission_then_bankminusmss_then_lookup");
+    set("pcPolicyStructuredFi", "lookup_then_zero");
+    set("pcPolicyIlliquid", "lookup_then_zero");
+    set("pcPolicyCollar", "pbfee_then_zero");
+    set("pcPolicyTrs", "commission_then_lookup_then_zero");
   });
 
   await page.setInputFiles("#workbookInput", fixturePath);
@@ -237,6 +237,7 @@ async function main() {
           assertValue(r, "TC01:tier2", row, "tier2", "Structured Credit");
           assertValue(r, "TC01:tier3", row, "tier3", "Credit Linked Notes");
           assertValue(r, "TC01:treats", row, "treats", "NOSGSGH");
+          assertValue(r, "TC01:pc-default", row, "pc", "0");
           assertNumericTradeId(r, "TC01:trade-id", row);
         }
       },
@@ -254,14 +255,20 @@ async function main() {
           assertValue(r, "TC01B:linear-tier1", linearZero, "tier1", "Structured Rates");
           assertValue(r, "TC01B:linear-tier2", linearZero, "tier2", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC01B:linear-tier3", linearZero, "tier3", "Interest Rate Linked Note -PPN");
+          assertValue(r, "TC01B:linear-pc-default", linearZero, "pc", "0");
+          assertValue(r, "TC01B:addon-sell", linearZero, "buySell", "Sell");
           assertNumericTradeId(r, "TC01B:linear-trade-id", linearZero);
           assertValue(r, "TC01B:range-tier1", rangeAccrual, "tier1", "Structured Rates");
           assertValue(r, "TC01B:range-tier2", rangeAccrual, "tier2", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC01B:range-tier3", rangeAccrual, "tier3", "Range Accrual with Conversion");
+          assertValue(r, "TC01B:range-pc-default", rangeAccrual, "pc", "0");
+          assertValue(r, "TC01B:unwind-buy", rangeAccrual, "buySell", "Buy");
           assertNumericTradeId(r, "TC01B:range-trade-id", rangeAccrual);
           assertValue(r, "TC01B:cln-wins-tier1", clnRange, "tier1", "Structured Credit");
           assertValue(r, "TC01B:cln-wins-tier2", clnRange, "tier2", "Structured Credit");
           assertValue(r, "TC01B:cln-wins-tier3", clnRange, "tier3", "Credit Linked Notes");
+          assertValue(r, "TC01B:cln-pc-default", clnRange, "pc", "0");
+          assertValue(r, "TC01B:new-sell", clnRange, "buySell", "Sell");
           assertNumericTradeId(r, "TC01B:cln-trade-id", clnRange);
         }
       },
@@ -279,6 +286,7 @@ async function main() {
           assertValue(r, "TC02:tier1", row, "tier1", "Structured Rates");
           assertValue(r, "TC02:tier2", row, "tier2", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC02:tier3", row, "tier3", "Interest Rate Linked Note -PPN");
+          assertValue(r, "TC02:pc-default", row, "pc", "0");
           assertNumericTradeId(r, "TC02:trade-id", row);
         }
       },
@@ -297,6 +305,7 @@ async function main() {
           assertValue(r, "TC02B:tier2", row, "tier2", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC02B:tier3", row, "tier3", "Interest Rate Linked Note -PPN");
           assertValue(r, "TC02B:price", row, "price", "99.1");
+          assertValue(r, "TC02B:pc-default", row, "pc", "0");
           assertNumericTradeId(r, "TC02B:trade-id", row);
         }
       },
@@ -313,6 +322,8 @@ async function main() {
           assertValue(r, "TC03:tier1", row, "tier1", "Equity Derivatives");
           assertValue(r, "TC03:tier3", row, "tier3", "Collar / Options");
           assertValue(r, "TC03:treats", row, "treats", "HASEHKP");
+          assertValue(r, "TC03:pc-source", row, "pc", "46135");
+          assertValue(r, "TC03:new-sell", row, "buySell", "Sell");
           assertNumericTradeId(r, "TC03:trade-id", row);
         }
       },
@@ -330,6 +341,8 @@ async function main() {
           assertValue(r, "TC04:tier3", row, "tier3", "Structured Credit Notes");
           assertValue(r, "TC04:treats", row, "treats", "HASEHKP");
           assertValue(r, "TC04:price", row, "price", "97.5");
+          assertValue(r, "TC04:pc-default", row, "pc", "0");
+          assertValue(r, "TC04:new-sell", row, "buySell", "Sell");
           assertNumericTradeId(r, "TC04:trade-id", row);
         }
       },
@@ -345,6 +358,8 @@ async function main() {
           assertValue(r, "TC04B:asset", row, "assetClass", "Illiquid Credit");
           assertValue(r, "TC04B:tier1", row, "tier1", "Structured Credit");
           assertValue(r, "TC04B:price", row, "price", "97.5");
+          assertValue(r, "TC04B:pc-default", row, "pc", "0");
+          assertValue(r, "TC04B:new-sell", row, "buySell", "Sell");
           assertNumericTradeId(r, "TC04B:trade-id", row);
         }
       },
@@ -360,11 +375,13 @@ async function main() {
           assertValue(r, "TC05:quality", cln, "quality", "FAIL");
           assertValue(r, "TC05:tier1", cln, "tier1", "Structured Credit");
           assertValue(r, "TC05:tier3", cln, "tier3", "Credit Linked Notes");
+          assertValue(r, "TC05:pc-default", cln, "pc", "0");
           assertNumericTradeId(r, "TC05:trade-id", cln);
           assertValue(r, "TC06:quality", pc, "quality", "FAIL");
           assertValue(r, "TC06:tier1", pc, "tier1", "Private Credit Primary");
           assertValue(r, "TC06:tier2", pc, "tier2", "Private Placement");
           assertValue(r, "TC06:tier3", pc, "tier3", "Private Placement");
+          assertValue(r, "TC06:pc-default", pc, "pc", "0");
           assertNumericTradeId(r, "TC06:trade-id", pc);
         },
         async postCheck(page, r) {
@@ -428,6 +445,8 @@ async function main() {
           assertValue(r, "TC07:tier1", row, "tier1", "Equity Derivatives");
           assertValue(r, "TC07:tier3", row, "tier3", "Total Return Swap");
           assertValue(r, "TC07:treats", row, "treats", "NOSGSGH");
+          assertValue(r, "TC07:pc-source", row, "pc", "9984");
+          assertValue(r, "TC07:new-sell", row, "buySell", "Sell");
           assertNumericTradeId(r, "TC07:trade-id", row);
         }
       }

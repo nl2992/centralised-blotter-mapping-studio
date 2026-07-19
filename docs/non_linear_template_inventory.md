@@ -164,7 +164,7 @@ Screenshot-confirmed source family: second block in supplied image.
 | `PB Fee (%)` | PC economics | Example row shows `1.00%`. |
 | `PB Fee (USD)` | `*$ PC` waterfall candidate | Example row shows `46,135`. |
 | `Note` | Comment | May be blank in the visible row. |
-| `New/Unwind` | Buy/Sell derivation | Example row shows `New`; current mapper maps New to Buy and Unwind to Sell. |
+| `New/Unwind` | Buy/Sell derivation | Example row shows `New`; current mapper maps New/Add-on/Fee to Sell and Unwind to Buy. |
 
 ### Example Row Snapshot
 
@@ -221,13 +221,13 @@ Current working coverage is from the runnable mapper and recovered OCR registry;
 | `Issuer` | Issuer / issuerRaw | Also supports legal lookup matching. |
 | `BBG Tix 1` | Ticker | Blank if source is blank. |
 | `Reoffer` | Price | OCR price-point normalization (`0.975`, `97.5`, and `97.50%` all output as `97.5`). |
-| `Status` | Comment/status audit | Not mapped to Buy/Sell by default. |
+| `Status` | Comment/status audit; optional Buy/Sell derivation | With the default status policy, New/Add-on/Fee maps to Sell and Unwind maps to Buy. Unrelated statuses stay blank. |
 | `Remarks` | Comment | Appends with status/deal name. |
 
 ### Known Blank / Missing Items
 
 - Sales Team is not currently source-backed for Illiquid/Repack unless supplied via a reference lookup or rule.
-- Buy/Sell is blank by default. If the firm wants `Status` to drive Buy/Sell, add an explicit value map.
+- Buy/Sell is action-derived by default only for recognized Status values: New/Add-on/Fee -> Sell, Unwind -> Buy. Other statuses stay blank.
 - Coverage, Legal Entity, Treats Acronym, Site Code, Platform, PC Code, CVA/FVA, Risk Book, and TFX Flag require reference data or rules.
 - Screenshot-confirmed example values are still needed.
 
@@ -257,7 +257,7 @@ Current working coverage is from the runnable mapper and recovered OCR registry;
 | `Commision to PB (HKD)` / `Commission to PB (HKD)` | `*$ PC` candidate | Current parser multiplies by FX rate. Spelling variant is supported. |
 | `FX rate` / `FX Rate Used` | PC FX helper | Confirm multiply vs divide convention. |
 | `Net Price` / `Gross Price` / `Gross Price Local` | Price | Current parser prefers Net Price, then Gross Price. |
-| `New/Unwind` / `Status` | Buy/Sell derivation | Current mapper maps New to Buy and Unwind to Sell. |
+| `New/Unwind` / `Status` | Buy/Sell derivation | Current mapper maps New/Add-on/Fee to Sell and Unwind to Buy. |
 | `No. of shares` | Comment/audit | Not currently a target-template field. |
 
 ### Known Blank / Missing Items

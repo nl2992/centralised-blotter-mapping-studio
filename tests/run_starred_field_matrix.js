@@ -2,9 +2,9 @@
 /*
  * Starred-field coverage matrix harness for centralised_blotter_mapping_studio.html
  *
- * Sibling of run_tests.js (does NOT replace it). Where run_tests.js asserts the
- * ORIGINAL sparse fixture via __BOARD_SNAPSHOT(), this harness loads a NEW,
- * COMPLETE-input fixture (ocr_work/test_starred_field_matrix.xlsx) and uses
+ * Selected-sheet companion to run_selected_sheet_smoke.js. It loads the complete
+ * fixture (ocr_work/test_starred_field_matrix.xlsx), processes each target sheet
+ * through the restored Asset + Worksheet + Process selected sheet flow, and uses
  * window.__BOARD_STAR_AUDIT() to check, for every (asset class x 13 starred field)
  * cell, whether the field populated AND how it was populated (className).
  *
@@ -32,7 +32,7 @@ const { spawn } = require("child_process");
 const { chromium } = require("playwright");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
-const APP_FILE = "centralised_blotter_mapping_studio.html";
+const APP_FILE = process.env.APP_FILE || "centralised_blotter_mapping_studio.html";
 const FIXTURE = path.join(REPO_ROOT, "ocr_work", "test_starred_field_matrix.xlsx");
 
 const REAL_CLASSES = ["SOURCE_BACKED", "LOOKUP_BACKED", "POLICY_DERIVED", "CONSTANT", "RULE_BACKED", "MANUAL_OVERRIDE"];
@@ -87,7 +87,7 @@ const POLICY_OR_LOOKUP = ["POLICY_DERIVED", "LOOKUP_BACKED"];
 const EXPECT = {
   "Structured FI - Rate": {
     "*Trade Date": v("15/01/2026", ["SOURCE_BACKED"]), "*Primary CCY": CCY,
-    "Primary Amount": v("1000000", ["SOURCE_BACKED"]), "*$ PC": v("15000", ["POLICY_DERIVED"]),
+    "Primary Amount": v("1000000", ["SOURCE_BACKED"]), "*$ PC": v("0", ["POLICY_DERIVED"]),
     "*$ VA/GNBV": v("15000", ["SOURCE_BACKED"]), "*Trade ID": pop(["POLICY_DERIVED", "SOURCE_BACKED"]),
     "*Revenue CCY": REV, "*Tier 1 Product Type": v("Structured Rates", POLICY_OR_LOOKUP),
     "*Tier 2 Product Type": v("Interest Rate Linked Note -PPN", POLICY_OR_LOOKUP),
@@ -97,7 +97,7 @@ const EXPECT = {
   },
   "Structured FI - Credit": {
     "*Trade Date": v("20/02/2026", ["SOURCE_BACKED"]), "*Primary CCY": CCY,
-    "Primary Amount": v("2000000", ["SOURCE_BACKED"]), "*$ PC": v("20000", ["POLICY_DERIVED"]),
+    "Primary Amount": v("2000000", ["SOURCE_BACKED"]), "*$ PC": v("0", ["POLICY_DERIVED"]),
     "*$ VA/GNBV": v("20000", ["SOURCE_BACKED"]), "*Trade ID": pop(["POLICY_DERIVED", "SOURCE_BACKED"]),
     "*Revenue CCY": REV,
     // Product = "CLN Credit Linked Note" matches BUILT_IN_PRODUCT_TAXONOMY's "CLN"
@@ -111,7 +111,7 @@ const EXPECT = {
   },
   "Structured FI - FX": {
     "*Trade Date": v("05/03/2026", ["SOURCE_BACKED"]), "*Primary CCY": CCY,
-    "Primary Amount": v("3000000", ["SOURCE_BACKED"]), "*$ PC": v("30000", ["POLICY_DERIVED"]),
+    "Primary Amount": v("3000000", ["SOURCE_BACKED"]), "*$ PC": v("0", ["POLICY_DERIVED"]),
     "*$ VA/GNBV": v("30000", ["SOURCE_BACKED"]), "*Trade ID": pop(["POLICY_DERIVED", "SOURCE_BACKED"]),
     "*Revenue CCY": REV, "*Tier 1 Product Type": v("Structured Rates", POLICY_OR_LOOKUP),
     "*Tier 2 Product Type": v("Interest Rate Linked Note -PPN", POLICY_OR_LOOKUP),
@@ -121,7 +121,7 @@ const EXPECT = {
   },
   "Structured FI - Unknown": {
     "*Trade Date": v("10/03/2026", ["SOURCE_BACKED"]), "*Primary CCY": CCY,
-    "Primary Amount": v("1500000", ["SOURCE_BACKED"]), "*$ PC": v("12000", ["POLICY_DERIVED"]),
+    "Primary Amount": v("1500000", ["SOURCE_BACKED"]), "*$ PC": v("0", ["POLICY_DERIVED"]),
     "*$ VA/GNBV": v("12000", ["SOURCE_BACKED"]), "*Trade ID": pop(["POLICY_DERIVED", "SOURCE_BACKED"]),
     "*Revenue CCY": REV, "*Tier 1 Product Type": v("Structured Rates", POLICY_OR_LOOKUP),
     "*Tier 2 Product Type": v("Interest Rate Linked Note -PPN", POLICY_OR_LOOKUP),
@@ -131,7 +131,7 @@ const EXPECT = {
   },
   "Illiquid Credit": {
     "*Trade Date": v("10/04/2026", ["SOURCE_BACKED"]), "*Primary CCY": CCY,
-    "Primary Amount": v("4000000", ["SOURCE_BACKED"]), "*$ PC": v("40000", ["POLICY_DERIVED"]),
+    "Primary Amount": v("4000000", ["SOURCE_BACKED"]), "*$ PC": v("0", ["POLICY_DERIVED"]),
     "*$ VA/GNBV": v("40000", ["SOURCE_BACKED"]), "*Trade ID": pop(["POLICY_DERIVED", "SOURCE_BACKED"]),
     "*Revenue CCY": REV, "*Tier 1 Product Type": v("Structured Credit", POLICY_OR_LOOKUP),
     "*Tier 2 Product Type": v("Structured Credit", POLICY_OR_LOOKUP),
@@ -141,7 +141,7 @@ const EXPECT = {
   },
   "Repack": {
     "*Trade Date": v("12/04/2026", ["SOURCE_BACKED"]), "*Primary CCY": CCY,
-    "Primary Amount": v("5000000", ["SOURCE_BACKED"]), "*$ PC": v("50000", ["POLICY_DERIVED"]),
+    "Primary Amount": v("5000000", ["SOURCE_BACKED"]), "*$ PC": v("0", ["POLICY_DERIVED"]),
     "*$ VA/GNBV": v("50000", ["SOURCE_BACKED"]), "*Trade ID": pop(["POLICY_DERIVED", "SOURCE_BACKED"]),
     "*Revenue CCY": REV, "*Tier 1 Product Type": v("Structured Credit", POLICY_OR_LOOKUP),
     "*Tier 2 Product Type": v("Structured Credit", POLICY_OR_LOOKUP),
@@ -168,7 +168,7 @@ const EXPECT = {
     "Primary Amount": v("9000000", ["SOURCE_BACKED"]),
     "*$ PC": v("11520", ["POLICY_DERIVED"]), // Commission to PB (HKD) 90000 x FX 0.128, default "multiply"
     "*$ VA/GNBV": v("250000", ["SOURCE_BACKED"]), // MSS Revenue in USD (default trsVaPolicy=mss)
-    "*Trade ID": v("700001", ["SOURCE_BACKED"]), // Reference number is already numeric -> passthrough
+    "*Trade ID": pop(["SOURCE_BACKED", "POLICY_DERIVED"]), // Business-key mode returns a deterministic numeric ID; native-ref mode can pass through 700001.
     "*Revenue CCY": REV, "*Tier 1 Product Type": v("Equity Derivatives", POLICY_OR_LOOKUP),
     "*Tier 2 Product Type": v("Equity Derivatives", POLICY_OR_LOOKUP),
     "*Tier 3 Product Type": v("Total Return Swap", POLICY_OR_LOOKUP),
@@ -182,7 +182,7 @@ const EXPECT = {
     // input-independent gap, confirmed via gap().
     "*Trade Date": gap(),
     "*Primary CCY": CCY, // hardcoded constant "USD" in the parser itself, not a real source read (see gap report traceability note)
-    "Primary Amount": v("7000000", ["SOURCE_BACKED"]), "*$ PC": v("140000", ["POLICY_DERIVED"]),
+    "Primary Amount": v("7000000", ["SOURCE_BACKED"]), "*$ PC": v("0", ["POLICY_DERIVED"]),
     "*$ VA/GNBV": v("140000", ["SOURCE_BACKED"]), "*Trade ID": pop(["POLICY_DERIVED", "SOURCE_BACKED"]),
     "*Revenue CCY": REV,
     // Product = "CLN Basket Note" matches the built-in "CLN" taxonomy rule the
@@ -201,7 +201,7 @@ const EXPECT = {
   "Private Credit": {
     "*Trade Date": gap(), // same root cause as Structured Credit
     "*Primary CCY": CCY,
-    "Primary Amount": v("8000000", ["SOURCE_BACKED"]), "*$ PC": v("160000", ["POLICY_DERIVED"]),
+    "Primary Amount": v("8000000", ["SOURCE_BACKED"]), "*$ PC": v("0", ["POLICY_DERIVED"]),
     "*$ VA/GNBV": v("160000", ["SOURCE_BACKED"]), "*Trade ID": pop(["POLICY_DERIVED", "SOURCE_BACKED"]),
     "*Revenue CCY": REV, "*Tier 1 Product Type": v("Private Credit Primary", POLICY_OR_LOOKUP),
     "*Tier 2 Product Type": v("Private Placement", POLICY_OR_LOOKUP),
@@ -241,11 +241,11 @@ function startHttpServer(port) {
 async function setDefaultSettingsAndParse(page) {
   await page.waitForFunction(() => window.__BOARD_READY === true, null, { timeout: 15000 });
   await page.evaluate(() => {
-    const set = (id, val) => {
+    const set = (id, val, fire = true) => {
       const el = document.getElementById(id);
       if (!el) return;
       el.value = val;
-      el.dispatchEvent(new Event("change", { bubbles: true }));
+      if (fire) el.dispatchEvent(new Event("change", { bubbles: true }));
     };
     set("runMode", "working");
     set("complianceMode", "pragmatic");
@@ -258,17 +258,53 @@ async function setDefaultSettingsAndParse(page) {
     set("defaultLegalEntity", "HBAP");
     set("allowTreatsPlaceholder", "true");
     set("allowTier3Placeholder", "true");
-    set("pcPolicyStructuredFi", "lookup_then_va");
-    set("pcPolicyIlliquid", "lookup_then_va");
-    set("pcPolicyCollar", "pbfee_then_lookup");
-    set("pcPolicyTrs", "commission_then_bankminusmss_then_lookup");
+    set("pcPolicyStructuredFi", "lookup_then_zero");
+    set("pcPolicyIlliquid", "lookup_then_zero");
+    set("pcPolicyCollar", "pbfee_then_zero");
+    set("pcPolicyTrs", "commission_then_lookup_then_zero");
   });
+
   await page.setInputFiles("#workbookInput", FIXTURE);
   await page.click("#btnParseWorkbook");
   await page.waitForFunction(() => {
-    return window.__BOARD_READY === true && Array.isArray(window.__BOARD_STAR_AUDIT()) && window.__BOARD_STAR_AUDIT().length > 0;
+    const select = document.getElementById("sheetSelect");
+    return window.__BOARD_READY === true &&
+      select &&
+      !select.disabled &&
+      Array.from(select.options).some(o => o.value === "Structured FI 2026");
   }, null, { timeout: 20000 });
-  await page.waitForTimeout(150);
+
+  const runs = [
+    { asset: "structured_fi", sheet: "Structured FI 2026" },
+    { asset: "collar", sheet: "Collar Blotter" },
+    { asset: "illiquid_repack", sheet: "Illiquid Credit+Repack" },
+    { asset: "structured_fi", sheet: "Structured Credit 2025" },
+    { asset: "equity_trs", sheet: "Equity TRS" }
+  ];
+  const audit = [];
+  for (const run of runs) {
+    await page.evaluate(({ asset, sheet }) => {
+      const set = (id, val) => {
+        const el = document.getElementById(id);
+        if (!el) throw new Error(`Missing control ${id}`);
+        el.value = val;
+      };
+      set("assetSelect", asset);
+      set("sheetSelect", sheet);
+      set("runModeSelect", "trade_by_trade");
+      set("tradeIdModeSelect", "business_key");
+    }, run);
+    await page.click("#btnProcess");
+    await page.waitForFunction((sheet) => {
+      const rows = window.__BOARD_STAR_AUDIT && window.__BOARD_STAR_AUDIT();
+      return window.__BOARD_READY === true &&
+        Array.isArray(rows) &&
+        rows.length > 0 &&
+        rows.every(r => r.sourceSheet === sheet);
+    }, run.sheet, { timeout: 30000 });
+    audit.push(...await page.evaluate(() => window.__BOARD_STAR_AUDIT()));
+  }
+  return audit;
 }
 
 function evalCell(expect, cell) {
@@ -309,8 +345,7 @@ async function main() {
     const page = await ctx.newPage();
     page.on("pageerror", e => pageErrors.push(String(e)));
     await page.goto(`http://127.0.0.1:${port}/${APP_FILE}`, { waitUntil: "load" });
-    await setDefaultSettingsAndParse(page);
-    audit = await page.evaluate(() => window.__BOARD_STAR_AUDIT());
+    audit = await setDefaultSettingsAndParse(page);
     await ctx.close();
   } finally {
     if (browser) await browser.close();

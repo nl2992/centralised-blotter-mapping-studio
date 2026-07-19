@@ -80,7 +80,7 @@ Required PLUTO fields in the current template:
 | `*Legal Entity` | Legal reference, rule, manual override, else configurable default (`defaultLegalEntity`, default `HBAP`, learned from Linear Zero). Always populated. |
 | `*Treats Acronym` | Coverage/legal reference, built-in Nomura/HASE client fallback, else Linear Zero booking-site routing (SG -> `HRCHSGH`, HK -> `HRCHHKH`), rule, manual override, or working placeholder only when no client and no SG/HK book resolves. |
 | `*$ Volume` | Source amount derivation or rule. Required by PLUTO. |
-| `*$ PC` | PC waterfall, PC reference, policy rule, or override. |
+| `*$ PC` | PC waterfall, PC reference, policy rule, or override. Default fallback is `0` rather than VA proxy. |
 | `*$ VA/GNBV` | Source VA/GNBV derivation or rule. |
 | `*Trade ID` | Numeric output ID. |
 | `*Revenue CCY` | Default `USD` unless overridden. |
@@ -122,7 +122,7 @@ Product tiers resolve in this order:
 
 | Decision | Why it remains open |
 |---|---|
-| Illiquid/Repack `Status` to Buy/Sell | Current mapping keeps Status in Comment and leaves Buy/Sell blank unless a rule says otherwise. |
+| Illiquid/Repack `Status` to Buy/Sell | Implemented default: `New`, `Addon`/`Add-on`, and `Fee` map to `Sell`; `Unwind` maps to `Buy`; unrelated statuses stay blank and remain in Comment. |
 | TRS FX convention | Current PC logic multiplies HKD commission by FX rate; confirm if the source rate is inverse. |
 | Legal/Salesperson reference gaps | `*Legal Entity`, `Site Code`, `Salesperson`, platform, PC code, CVA/FVA, Risk Book, and TFX still require reference CSVs or firm rules for full clean-pass output. |
 | Product-specific economics destination | Coupon, Range, Strike, Initial Fixing, No. of options, and Option Premium are source evidence but not target-template columns unless placed into Comment or future fields. |

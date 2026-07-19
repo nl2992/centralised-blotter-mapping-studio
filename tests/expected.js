@@ -66,7 +66,7 @@ const BASELINE = {
         volume: "4613500",
         va: "23493",
         pc: "46135",
-        buySell: "Buy",
+        buySell: "Sell",
         treats: "HASEHKP"
       },
       commentContains: []
@@ -131,7 +131,7 @@ const BASELINE = {
         volume: "7000000",
         va: "200000",
         pc: "9984", // NEW: 78000 * 0.128 under default "multiply" convention
-        buySell: "Buy",
+        buySell: "Sell",
         treats: "NOSGSGH"
       },
       commentContains: []

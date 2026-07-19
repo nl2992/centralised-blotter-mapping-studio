@@ -28,17 +28,17 @@ PLUTO means the output template. Every output field beginning with `*` has to be
 
 | ID | Expected asset class | Tier 1 | Tier 2 | Tier 3 | Treats | Trade ID behavior | Key expected outputs |
 |---|---|---|---|---|---|---|---|
-| TC01 | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Business-key numeric smoke ID `2484390147`; native ref in Comment and ISIN Code | Trade Date `23/02/2026`; Primary CCY `USD`; `*$ Volume` `1000000`; VA/GNBV `10742`; PC via VA proxy. |
-| TC01B-A | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HASEHKP` | Numeric deterministic ID | Current-layout `Product = Linear Zero Callable Notes` uses the original zero-linear tier taxonomy. |
-| TC01B-B | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Range Accrual with Conversion | `HASEHKP` | Numeric deterministic ID | Current-layout `Product = Range Accrual with Conversion` differentiates tier 3 while remaining in the Structured FI rates family. |
-| TC01B-C | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Numeric deterministic ID | Current-layout `Product` containing `CLN`, for example `YieldEnhancedCLNRangeAccrual`, wins over `Structure = Range Accrual with Conversion`. |
-| TC02 | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HRCHHKH` | Business-key numeric smoke ID `2984344667`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; Primary CCY `USD`; `*$ Volume` `2000000`; VA/GNBV `2500`; PC via VA proxy; `source_layout=linear_zero_existing`. |
+| TC01 | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Business-key numeric smoke ID `2484390147`; native ref in Comment and ISIN Code | Trade Date `23/02/2026`; Primary CCY `USD`; `*$ Volume` `1000000`; VA/GNBV `10742`; PC defaults to `0`. |
+| TC01B-A | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HASEHKP` | Numeric deterministic ID | Current-layout `Product = Linear Zero Callable Notes` uses the original zero-linear tier taxonomy; `Addon` maps to `Sell`. |
+| TC01B-B | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Range Accrual with Conversion | `HASEHKP` | Numeric deterministic ID | Current-layout `Product = Range Accrual with Conversion` differentiates tier 3 while remaining in the Structured FI rates family; `Unwind` maps to `Buy`. |
+| TC01B-C | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Numeric deterministic ID | Current-layout `Product` containing `CLN`, for example `YieldEnhancedCLNRangeAccrual`, wins over `Structure = Range Accrual with Conversion`; `New` maps to `Sell`. |
+| TC02 | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HRCHHKH` | Business-key numeric smoke ID `2984344667`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; Primary CCY `USD`; `*$ Volume` `2000000`; VA/GNBV `2500`; PC defaults to `0`; `source_layout=linear_zero_existing`. |
 | TC02B | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HRCHHKH` | Numeric deterministic ID; native ref in Comment and ISIN Code | Same legacy zero-linear economics as TC02; confirms CLN/free-text product wording does not override the original OCR Linear Zero tier logic. |
-| TC03 | Collar | Equity Derivatives | Equity Derivatives | Collar / Options | `HASEHKP` | Business-key numeric smoke ID `4416263868`; native ref remains traceable | Trade Date `31/10/2023`; `*$ Volume` `4613500`; VA/GNBV `23493`; PC `46135`; Buy/Sell `Buy`. |
-| TC04 | Illiquid Credit | Structured Credit | Structured Credit | Structured Credit Notes | `HASEHKP` | Business-key numeric smoke ID `4286094171`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; `*$ Volume` `3000000`; VA/GNBV `45000`; PC via VA proxy; Status retained in Comment; Buy/Sell `Sell` under default `illiquidStatusToBuySell=new_fee_to_sell` setting (Status "New"). |
+| TC03 | Collar | Equity Derivatives | Equity Derivatives | Collar / Options | `HASEHKP` | Business-key numeric smoke ID `4416263868`; native ref remains traceable | Trade Date `31/10/2023`; `*$ Volume` `4613500`; VA/GNBV `23493`; PC `46135`; Buy/Sell `Sell` from `New`. |
+| TC04 | Illiquid Credit | Structured Credit | Structured Credit | Structured Credit Notes | `HASEHKP` | Business-key numeric smoke ID `4286094171`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; `*$ Volume` `3000000`; VA/GNBV `45000`; PC defaults to `0`; Status retained in Comment; Buy/Sell `Sell` under default `illiquidStatusToBuySell=new_fee_to_sell` setting (Status "New"). |
 | TC05 | Structured Credit | Structured Credit | Structured Credit | Credit Linked Notes | Placeholder unless reference/rule supplied | Business-key numeric smoke ID `1739969105` | Primary CCY `USD`; `*$ Volume` `5000000`; VA/GNBV `100000`; Trade Date blank by source limitation. |
 | TC06 | Private Credit | Private Credit Primary | Private Placement | Private Placement | Placeholder unless reference/rule supplied | Business-key numeric smoke ID `3173193476` | Primary CCY `USD`; `*$ Volume` `6000000`; VA/GNBV `120000`; Trade Date blank by source limitation. |
-| TC07 | Equity TRS | Equity Derivatives | Equity Derivatives | Total Return Swap | `NOSGSGH` | Business-key numeric smoke ID `4271065392`; `native_ref_preferred` mode can pass through native `123456` | Trade Date `18/07/2026`; `*$ Volume` `7000000`; VA/GNBV `200000` by MSS policy; PC `9984` by HKD commission x FX; Buy/Sell `Buy`. |
+| TC07 | Equity TRS | Equity Derivatives | Equity Derivatives | Total Return Swap | `NOSGSGH` | Business-key numeric smoke ID `4271065392`; `native_ref_preferred` mode can pass through native `123456` | Trade Date `18/07/2026`; `*$ Volume` `7000000`; VA/GNBV `200000` by MSS policy; PC `9984` by HKD commission x FX; Buy/Sell `Sell` from `New`. |
 
 ## TC01 Structured FI Current Layout / CLN
 
@@ -170,7 +170,7 @@ Expected assertions:
 | `*$ Volume` | `4613500` |
 | `*$ VA/GNBV` | `23493` |
 | `*$ PC` | `46135` |
-| `Buy/Sell` | `Buy` |
+| `Buy/Sell` | `Sell` |
 | `Comment` | Now also contains economics key=value tokens sourced from `Strike (%)`, `Strike (Level)`, `Initial Fixing`, `No. of options`, `Option Premium Amount (Original ccy)`, `Client Price`, `Total GNBV (bps)` when present (this row: `strike_pct=136.00%`, `client_price=6.97%`, `total_gnbv_bps=50.9223`) |
 
 ## TC04 Illiquid Credit + Repack
@@ -210,7 +210,8 @@ Expected assertions:
 | `*$ Volume` | `3000000` |
 | `*$ VA/GNBV` | `45000` |
 | `Price` | `97.5`; decimal regression uses `Reoffer = 0.975` and must also output `97.5` |
-| `Buy/Sell` | **`Sell`** under the default `illiquidStatusToBuySell = new_fee_to_sell` setting, because source `Status` is `New` (regex `/\b(new|fee)\b/i`). Set the `illiquidStatusToBuySell` select to `off` to restore the previous blank behavior. |
+| `*$ PC` | `0` by default unless a PC reference/rule is supplied. |
+| `Buy/Sell` | **`Sell`** under the default `illiquidStatusToBuySell = new_fee_to_sell` setting, because source `Status` is `New`. The same policy maps `Addon`/`Add-on`/`Fee` to `Sell` and `Unwind` to `Buy`; set the select to `off` to restore blank Buy/Sell. |
 
 ## TC05 Structured Credit CLN
 
@@ -296,7 +297,7 @@ Expected assertions:
 | `*$ Volume` | `7000000` |
 | `*$ VA/GNBV` | `200000` under default MSS Revenue policy |
 | `*$ PC` | `9984` under default `trsFxConvention = multiply` (HKD commission `78000` x FX rate `0.128` = `9984`) |
-| `Buy/Sell` | `Buy` |
+| `Buy/Sell` | `Sell` |
 
 ### TC07 alternate: `trsFxConvention = divide`
 
@@ -314,16 +315,17 @@ All other TC07 fields (Trade ID, Volume, VA/GNBV, Buy/Sell, Treats) are unchange
 |---|---|
 | Structured Credit and Private Credit are Fail in smoke | Their sparse source sheet has no `*Trade Date`. This is expected until PLUTO-required fields are supplied by rules/reference/source fields/manual overrides. |
 | Placeholder Treats on non-Nomura/non-HASE rows | Only Nomura Private Bank and HASE were provided as built-in Treats fallbacks. Other clients still need coverage/legal reference data. |
-| Illiquid/Repack Buy/Sell defaults to Sell | As of this update, `Status` values matching `new` or `fee` map to `Sell` by default (`illiquidStatusToBuySell = new_fee_to_sell`). Set the select to `off` to restore blank Buy/Sell if the Sell mapping is not desired for a given run. |
+| Default PC is 0 | Structured FI, Illiquid/Repack, Structured Credit, and Private Credit now default `*$ PC` to `0` unless a PC reference/rule/source candidate exists. Collar still uses `PB Fee (USD)` first; TRS still uses commission first. |
+| Buy/Sell action convention | `New`, `Addon`/`Add-on`, and `Fee` map to `Sell`; `Unwind` maps to `Buy`. Set Illiquid/Repack status mapping to `off` to restore blank Buy/Sell for that family. |
 | TRS PC FX direction | Both conventions are now implemented and selectable via `trsFxConvention` (`multiply` default, `divide` alternate). Confirm with the business which convention matches the firm's workbook FX direction before final production sign-off. |
 
 ## Automated Harness Status
 
-The historical harness under `tests/` was written for the broken workbook-wide parse behavior. It should be rewritten before being treated as a regression gate for the OCR-restored workflow.
-
 Current verified path for this document is the selected-sheet browser smoke described in `docs/restored_ocr_workflow.md`: load `ocr_work/test_non_linear_taxonomy.xlsx`, process each target worksheet one at a time, and confirm the snapshot only contains rows from that selected worksheet.
 
-Legacy harness quick start, for reference only:
+The starred-field matrix harness has also been rewritten for the OCR-restored selected-sheet flow. It processes each target matrix worksheet one at a time and confirms the 13 PLUTO required `*` fields by asset family, with documented gaps separated from unexpected failures.
+
+Harness quick start:
 
 ```
 cd tests

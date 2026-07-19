@@ -54,7 +54,7 @@ back to a regex over `Underlying`+`Structure` text; anything unmatched is
 | `First Trade Date`, `Trade Date`, `Date` | REQUIRED (hard fail, no placeholder) | `*Trade Date` |
 | `Currency`, `Primary CCY`, `CCY` | REQUIRED (hard fail, no placeholder) | `*Primary CCY` |
 | `Volume ('MM) USD`, `Volume (MM) USD`, `Notional USD Mio`, `Notional USD MM`, `Notional USD`, `Primary Amount` (MM heuristic: `abs<100000` => `x1,000,000`) else `Size (Org Curr)` x `FX rate`/`FX Rate`/`FX Rate Used` | REQUIRED (hard fail) | `*$ Volume` |
-| `Total NNBV` else `GNBV in $`/`GNBV USD`/`GNBV (USD)` else `NNBV`/`GNBV` (x `Size` x `FX` if only unit NNBV) | REQUIRED (hard fail; also feeds `*$ PC` via VA-proxy PC policy) | `*$ VA/GNBV`, `*$ PC` (proxy) |
+| `Total NNBV` else `GNBV in $`/`GNBV USD`/`GNBV (USD)` else `NNBV`/`GNBV` (x `Size` x `FX` if only unit NNBV) | REQUIRED (hard fail; `*$ PC` defaults to `0` unless a PC reference/rule/source is supplied) | `*$ VA/GNBV` |
 | `Product Type` (else `Underlying`+`Structure` regex fallback), plus `Product`/`Structure` product signals | Optional -- classification only, never blocks a row. Current Structured FI rows branch on `Product` signals for `Linear Zero Callable Notes`, `Range Accrual with Conversion`, and `ifexists(CLN)` substring detection; legacy zero-linear layout stays locked to the original OCR tier defaults. | `*Tier 1/2/3 Product Type` (via `classify()`/`BUILT_IN_PRODUCT_TAXONOMY`) |
 | `FINAL CUSTOMER`, `Client`, `Sales Client` | Optional field-wise (`Sales Client`), but drives `*Treats Acronym` built-in client match (`BUILT_IN_TREATS_BY_CLIENT`) and `getPbRouting()` | `Sales Client`, `*Treats Acronym` |
 | `Book`, `Booking` | Optional (`Book`), also feeds legal-entity lookup and PB-site routing | `Book`, `*Legal Entity` (lookup key), `*Treats Acronym` (routing fallback) |
@@ -94,12 +94,12 @@ A row is skipped only if BOTH `Product Type` and `Deal Name` are blank.
 | `Trade Date` | REQUIRED (hard fail, no placeholder) | `*Trade Date` |
 | `Ccy`, `Currency` | REQUIRED (hard fail) | `*Primary CCY` |
 | `Volume ('MM) USD`, `Volume (MM) USD` (same MM heuristic) else `Size (Org Curr)` x `FX Rate` | REQUIRED (hard fail) | `*$ Volume` |
-| `GNBV (USD)` else `NNBV` | REQUIRED (hard fail; also VA-proxy PC) | `*$ VA/GNBV`, `*$ PC` (proxy) |
+| `GNBV (USD)` else `NNBV` | REQUIRED for VA/GNBV (hard fail); no longer used as default PC unless the VA-proxy PC policy is deliberately selected | `*$ VA/GNBV` |
 | `ISIN`, `SVCS No.` | Native `*Trade ID` path; synthetic fallback (`ILC-`/`RPK-` hash) always available | `*Trade ID`, `ISIN Code` |
 | `Product Type` / `Deal Name` | Optional; drives tier1/2/3 default (`Structured Credit`/`Structured Credit`/`Structured Credit Notes`) or `BUILT_IN_PRODUCT_TAXONOMY` "Repackaged / Illiquid Credit" rule | `*Tier 1/2/3 Product Type` |
 | `FINAL CUSTOMER` | Optional field-wise, drives Treats built-in match | `Sales Client`, `*Treats Acronym` |
 | `Booking` | Optional, drives legal lookup + PB routing | `Book`, `*Legal Entity` key, `*Treats Acronym` routing |
-| `Status` | Optional -- feeds Buy/Sell only when `illiquidStatusToBuySell = "new_fee_to_sell"` (default) and text matches `/\b(new|fee)\b/i` | `Buy/Sell`, `Comment` |
+| `Status` | Optional -- feeds Buy/Sell only when `illiquidStatusToBuySell = "new_fee_to_sell"` (default): New/Add-on/Fee -> Sell; Unwind -> Buy; unrelated statuses stay blank | `Buy/Sell`, `Comment` |
 | `Trader`, `Issuer`, `BBG Tix 1`, `Reoffer`, `Maturity`, `Remarks` | Optional | `Trader`, `Issuer`, `Ticker`, `Price` with OCR price-point normalization (`0.975`, `97.5`, `97.50%` -> `97.5`), `Maturity Date`, `Comment` |
 
 Note: **no `SALETEAM` column is ever read for this family** -- `saleTeam` is
@@ -129,7 +129,7 @@ only if `Product`, `Notional (USD)/Notional`, and `GNBV (USD)/GNBV` are ALL blan
 | `Category` | Optional | `structureName`, `Comment`, sub-class decision |
 | `Region` | Optional | `Comment` only |
 | `Notional (USD)`, `Notional` | REQUIRED (hard fail if both blank) | `*$ Volume` |
-| `GNBV (USD)`, `GNBV` | REQUIRED (hard fail if both blank; also VA-proxy PC) | `*$ VA/GNBV`, `*$ PC` (proxy) |
+| `GNBV (USD)`, `GNBV` | REQUIRED (hard fail if both blank; `*$ PC` defaults to `0` unless a PC reference/rule/source is supplied) | `*$ VA/GNBV` |
 
 **This is the entire column set the parser reads** -- confirmed against the actual
 `Structured Credit 2025` sheet in `ocr_work/test_non_linear_taxonomy.xlsx`, whose
@@ -152,9 +152,8 @@ via `docs/starred_field_gap_report.md`):
   constant, not a real source column -- `mapOne()` still labels it `SOURCE_BACKED`
   in the audit, which is a minor traceability mislabel (see gap report).
 - `*$ Volume`, `*$ VA/GNBV`: real, source-backed, given `Notional (USD)`/`GNBV (USD)`.
-- `*$ PC`: resolves via VA-proxy under the default `pcPolicyIlliquid` policy
-  (`Illiquid|Repack|Structured Credit|Private Credit` all share this policy
-  setting, ~line 2317) -- real coverage, no PC reference CSV required.
+- `*$ PC`: defaults to `0` under the default `pcPolicyIlliquid` policy unless
+  a PC reference/rule/source candidate is supplied. The VA-proxy policy remains selectable.
 - `*Trade ID`: always resolves via `outputTradeIdNumber()`'s deterministic hash
   fallback (seed includes `sourceSheet`+`sourceRowNumber`+`assetClass`, always
   non-empty) -- real coverage.
@@ -196,15 +195,15 @@ one row per source row at leg grain.
 | `First Trade Date` | REQUIRED (hard fail) | `*Trade Date` |
 | `Currency` | REQUIRED (hard fail) | `*Primary CCY` |
 | `Notional Amount (USD)` | REQUIRED (hard fail). Strategy grain: `MAX` across legs in the group | `*$ Volume` |
-| `Total GNBV (USD)` | REQUIRED (hard fail). Strategy grain: `SUM` across legs | `*$ VA/GNBV`, `*$ PC` (proxy fallback) |
-| `PB Fee (USD)` | Drives `*$ PC` primary path (`pbfee_then_lookup`, default policy) -- strategy grain sums across legs | `*$ PC` |
+| `Total GNBV (USD)` | REQUIRED (hard fail). Strategy grain: `SUM` across legs | `*$ VA/GNBV` |
+| `PB Fee (USD)` | Drives `*$ PC` primary path (`pbfee_then_zero`, default policy) -- strategy grain sums across legs; fallback is `0` | `*$ PC` |
 | `PIMS Code`, `OTC ISIN` | Native `*Trade ID`/grouping key; synthetic (`COL-`/`COLLEG-` hash) fallback available | `*Trade ID`, `ISIN Code` (`OTC ISIN` only) |
 | `FINAL CUSTOMER` | Optional field-wise, Treats built-in match | `Sales Client`, `*Treats Acronym` |
 | `Book` | Optional, legal lookup + PB routing | `Book`, `*Legal Entity` key, `*Treats Acronym` routing |
 | `SALETEAM` | Optional, coverage lookup key | `Sales Team (Coverage)`, `*Salesperson` key |
 | `Product` (`/call/i`/`/put/i`) | Optional; leg call/put tagging only, no tier effect (tier3 = `Collar / Options` default) | `Comment`, `productName` |
 | `Structure`, `Underlying`, `Client Price`, `Maturity` | Optional | `Security`, `Ticker`, `Price`, `Maturity Date` |
-| `New/Unwind` | Optional, mapped New->Buy / Unwind->Sell | `Buy/Sell` |
+| `New/Unwind` | Optional, mapped New/Add-on/Fee -> Sell and Unwind -> Buy | `Buy/Sell` |
 | `Strike (%)`, `Strike (Level)`, `Initial Fixing`, `No. of options`, `Option Premium Amount (Original ccy)`, `Total GNBV (bps)` | Optional, economics tokens | `Comment` |
 
 Same `*Salesperson`/`*Legal Entity`/`*Treats Acronym`/`*Revenue CCY` resolution
@@ -225,13 +224,13 @@ both `Reference number` and `Product` are blank.
 | `Notional in USD` (direct, no MM heuristic) | REQUIRED (hard fail) | `*$ Volume` |
 | `MSS Revenue in USD` (default `trsVaPolicy="mss"`) or `Total Bank Revenue in USD` (`"bank"`) | REQUIRED (hard fail) | `*$ VA/GNBV` |
 | `Commission to PB (HKD)`/`Commision to PB (HKD)` x `FX rate`/`FX Rate Used` (multiply by default, `trsFxConvention`) | Primary `*$ PC` path | `*$ PC` |
-| `Total Bank Revenue in USD` minus `MSS Revenue in USD` | Secondary `*$ PC` path if commission unavailable | `*$ PC` |
+| `Total Bank Revenue in USD` minus `MSS Revenue in USD` | Optional `*$ PC` path if the Bank-MSS policy is selected | `*$ PC` |
 | `Reference number` | Native `*Trade ID` (numeric passthrough if already digits); synthetic (`TRS-` hash) fallback otherwise | `*Trade ID` |
 | `FINAL CUSTOMER` | Optional field-wise, Treats built-in match | `Sales Client`, `*Treats Acronym` |
 | `Book` | Optional, legal lookup + PB routing | `Book`, `*Legal Entity` key, `*Treats Acronym` routing |
 | `SALETEAM` | Optional, coverage lookup key | `Sales Team (Coverage)`, `*Salesperson` key |
 | `Underlying`, `Structure`, `Net Price`/`Gross Price`/`Gross Price Local`, `Maturity`, `Settlement Date`, `No. of shares` | Optional | `Ticker`, `Security`, `Price`, `Maturity Date`, `Comment` |
-| `New/Unwind`/`Status` | Optional, mapped New->Buy / Unwind->Sell | `Buy/Sell` |
+| `New/Unwind`/`Status` | Optional, mapped New/Add-on/Fee -> Sell and Unwind -> Buy | `Buy/Sell` |
 
 Same `*Salesperson`/`*Legal Entity`/`*Treats Acronym`/`*Revenue CCY` chain as
 Structured FI; all REQUIRED and resolve to real values given TRS's `FINAL

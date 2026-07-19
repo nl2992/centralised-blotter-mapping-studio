@@ -964,8 +964,8 @@
             <div class="field tight">
               <label>Structured FI PC</label>
               <select id="pcPolicyStructuredFi">
-                <option value="lookup_then_va" selected>Override lookup -> VA proxy</option>
-                <option value="lookup_then_zero">Override lookup -> 0</option>
+                <option value="lookup_then_zero" selected>Override lookup -> 0 (default)</option>
+                <option value="lookup_then_va">Override lookup -> VA proxy</option>
                 <option value="va_proxy">VA proxy only</option>
                 <option value="lookup_only">Override lookup only</option>
                 <option value="zero">0 only</option>
@@ -974,8 +974,8 @@
             <div class="field tight">
               <label>Illiquid / Repack PC</label>
               <select id="pcPolicyIlliquid">
-                <option value="lookup_then_va" selected>Override lookup -> VA proxy</option>
-                <option value="lookup_then_zero">Override lookup -> 0</option>
+                <option value="lookup_then_zero" selected>Override lookup -> 0 (default)</option>
+                <option value="lookup_then_va">Override lookup -> VA proxy</option>
                 <option value="va_proxy">VA proxy only</option>
                 <option value="lookup_only">Override lookup only</option>
                 <option value="zero">0 only</option>
@@ -984,8 +984,8 @@
             <div class="field tight">
               <label>Collar PC</label>
               <select id="pcPolicyCollar">
-                <option value="pbfee_then_lookup" selected>PB Fee -> override lookup</option>
-                <option value="pbfee_then_zero">PB Fee -> 0</option>
+                <option value="pbfee_then_zero" selected>PB Fee -> 0 (default)</option>
+                <option value="pbfee_then_lookup">PB Fee -> override lookup</option>
                 <option value="lookup_only">Override lookup only</option>
                 <option value="va_proxy">VA proxy only</option>
                 <option value="zero">0 only</option>
@@ -994,8 +994,8 @@
             <div class="field tight">
               <label>TRS PC</label>
               <select id="pcPolicyTrs">
-                <option value="commission_then_bankminusmss_then_lookup" selected>Commission -> Bank-MSS -> override lookup</option>
-                <option value="commission_then_lookup_then_zero">Commission -> override lookup -> 0</option>
+                <option value="commission_then_lookup_then_zero" selected>Commission -> override lookup -> 0 (default)</option>
+                <option value="commission_then_bankminusmss_then_lookup">Commission -> Bank-MSS -> override lookup</option>
                 <option value="bankminusmss_then_lookup">Bank-MSS -> override lookup</option>
                 <option value="lookup_only">Override lookup only</option>
                 <option value="va_proxy">VA proxy only</option>
@@ -1013,6 +1013,7 @@
 
   <script>
   (() => {
+    const APP_VERSION = "v16-pc-zero-actions-sell-buy";
     const STORAGE_KEY = "centralised_blotter_mapping_cross_asset_v12";
     const SAVED_SETTINGS_KEY = "centralised_blotter_mapping_saved_profiles_v1";
     const CURRENT_APP_URL = "/studio/shared-html/YE32UpkrboADOQLtMmaLohqjypizQ9ES";
@@ -1367,10 +1368,10 @@
         global: "Per-asset-class VA/GNBV derivation."
       },
       "*$ PC": {
-        structuredFi: "PC reference-CSV lookup, else VA proxy, per Structured FI PC policy.",
-        illiquidRepack: "PC reference-CSV lookup, else VA proxy, per Illiquid/Repack PC policy.",
-        collar: "Sum of PB Fee (USD) per leg, else PC lookup, per Collar PC policy.",
-        trs: "Commission to PB (HKD) x FX rate (verify whether FX rate is USD-per-HKD [multiply] or HKD-per-USD [divide] -- add a formula rule to flip it), else Bank Revenue minus MSS Revenue, else PC lookup.",
+        structuredFi: "PC reference-CSV lookup, else 0 by default. VA proxy remains an optional policy.",
+        illiquidRepack: "PC reference-CSV lookup, else 0 by default. VA proxy remains an optional policy.",
+        collar: "Sum of PB Fee (USD) per leg, else 0 by default. PC lookup remains an optional policy.",
+        trs: "Commission to PB (HKD) x FX rate by default, else PC lookup, else 0. Bank-MSS remains an optional policy.",
         global: "Per-asset-class PC waterfall; open the asset-class tab for the exact policy."
       },
       "*Trade ID": {
@@ -1405,10 +1406,10 @@
         global: "Per-asset-class default tier 3, overridable by the Product reference CSV or placeholder."
       },
       "Buy/Sell": {
-        structuredFi: "New/Tap/Sell column (2024 sheet only; blank on 2025/2026).",
-        illiquidRepack: "Left blank by default; Status is recorded in Comment instead.",
-        collar: "New/Unwind mapped New->Buy, Unwind->Sell (Call/Put stays in Comment, not Buy/Sell, at leg grain).",
-        trs: "New/Unwind mapped New->Buy, Unwind->Sell.",
+        structuredFi: "New/Add-on/Fee maps to Sell; Unwind maps to Buy; direct Buy/Sell values pass through.",
+        illiquidRepack: "When enabled, Status uses the same New/Add-on/Fee -> Sell and Unwind -> Buy mapping; unrelated statuses stay blank and remain in Comment.",
+        collar: "New/Add-on/Fee maps to Sell; Unwind maps to Buy (Call/Put stays in Comment, not Buy/Sell, at leg grain).",
+        trs: "New/Add-on/Fee maps to Sell; Unwind maps to Buy.",
         global: "Per-asset-class buy/sell derivation."
       },
       "*Salesperson (Coverage)": { global: "Coverage reference-CSV lookup by Sales Team; placeholder when unresolved in Working+Pragmatic mode. Add a 'constant' rule per asset class to hard-fill it." },
@@ -1858,8 +1859,20 @@
     function placeholderAllowed(flag) {
       return currentSettings().runMode === "working" && currentSettings().complianceMode === "pragmatic" && !flag;
     }
+    function migratePcPolicyDefaultsFromVersion(version) {
+      if (version === APP_VERSION) return;
+      const migrateDefault = (id, from, to) => {
+        const el = qs(id);
+        if (el && el.value === from) el.value = to;
+      };
+      migrateDefault("pcPolicyStructuredFi", "lookup_then_va", "lookup_then_zero");
+      migrateDefault("pcPolicyIlliquid", "lookup_then_va", "lookup_then_zero");
+      migrateDefault("pcPolicyCollar", "pbfee_then_lookup", "pbfee_then_zero");
+      migrateDefault("pcPolicyTrs", "commission_then_bankminusmss_then_lookup", "commission_then_lookup_then_zero");
+    }
     function saveLocal() {
       const payload = {
+        version: APP_VERSION,
         settings: {
           runMode: qs("runMode").value,
           finalExportGate: qs("finalExportGate").value,
@@ -1911,6 +1924,7 @@
       try {
         const payload = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
         if (payload.settings) Object.entries(payload.settings).forEach(([k, v]) => { if (qs(k)) qs(k).value = String(v); });
+        migratePcPolicyDefaultsFromVersion(payload.version);
         if (payload.texts) ["coverageCsv", "legalCsv", "productCsv", "pcCsv"].forEach(k => { if (qs(k)) qs(k).value = payload.texts[k] || ""; });
         if (payload.meta) Object.entries(payload.meta).forEach(([k, v]) => { state.refMeta[k] = v || ""; if (qs(k)) qs(k).value = v || ""; });
         state.mappingRules = (payload.mappingRules && typeof payload.mappingRules === "object") ? payload.mappingRules : (state.mappingRules || {});
@@ -2091,8 +2105,10 @@
     function mapNewUnwindToBuySell(v) {
       const t = lower(v);
       if (!t) return "";
-      if (/new/.test(t)) return "Buy";
-      if (/unwind/.test(t)) return "Sell";
+      if (/\bunwind\b/.test(t)) return "Buy";
+      if (/\bnew\b|\badd[\s-]?on\b|\baddon\b|\bfee\b/.test(t)) return "Sell";
+      if (/\bbuy\b/.test(t)) return "Buy";
+      if (/\bsell\b/.test(t)) return "Sell";
       return cleanText(v);
     }
     function isStructuredFiTradeRow(r) {
@@ -2199,7 +2215,7 @@
             vaSource: totalNnbv != null ? "TOTAL_NNBV" : (gnbvUsd != null ? "GNBV_USD" : (nnbv != null && size != null ? "NNBV_X_SIZE_X_FX" : (nnbv != null ? "NNBV_DIRECT" : "UNRESOLVED"))),
             pcCandidate1: null,
             pcCandidate2: null,
-            buySell: cleanText(rowValue(r, ["New/Tap/Sell"])),
+            buySell: mapNewUnwindToBuySell(cleanText(rowValue(r, ["New/Tap/Sell"]))),
             sourceAction: cleanText(rowValue(r, ["New/Tap/Sell", "Remarks"])),
             comments: [
               cleanText(rowValue(r, ["Remarks", "Notes", "Comment"])),
@@ -2239,7 +2255,8 @@
           recordSourceHeaders(assetClass, r);
           const statusText = cleanText(rowValue(r, ["Status"]));
           const illiquidStatusPolicy = currentSettings().illiquidStatusToBuySell;
-          const buySell = (illiquidStatusPolicy === "new_fee_to_sell" && /\b(new|fee)\b/i.test(statusText)) ? "Sell" : "";
+          const statusMappedBuySell = mapNewUnwindToBuySell(statusText);
+          const buySell = (illiquidStatusPolicy === "new_fee_to_sell" && /^(Buy|Sell)$/.test(statusMappedBuySell)) ? statusMappedBuySell : "";
           const size = num(rowValue(r, ["Size (Org Curr)"]));
           const fx = num(rowValue(r, ["FX Rate"])) ?? 1;
           const volumeDirect = num(rowValue(r, ["Volume ('MM) USD", "Volume (MM) USD"]));
@@ -4287,7 +4304,7 @@
         } else if (t.type === "mmToUsd") {
           params = `<input class="ms-config ms-transform-threshold" data-field="${fesc}" type="text" value="${escapeHtml(t.threshold != null ? t.threshold : "")}" placeholder="MM threshold (100000)" style="max-width:170px" />`;
         } else if (t.type === "map") {
-          params = `<input class="ms-config ms-transform-pairs" data-field="${fesc}" type="text" value="${escapeHtml(t.pairs != null ? t.pairs : "")}" placeholder="New=>Buy; Unwind=>Sell" /> <input class="ms-config ms-transform-default" data-field="${fesc}" type="text" value="${escapeHtml(t.default != null ? t.default : "")}" placeholder="default (or __keep__)" style="max-width:170px" />`;
+          params = `<input class="ms-config ms-transform-pairs" data-field="${fesc}" type="text" value="${escapeHtml(t.pairs != null ? t.pairs : "")}" placeholder="New=>Sell; Addon=>Sell; Unwind=>Buy" /> <input class="ms-config ms-transform-default" data-field="${fesc}" type="text" value="${escapeHtml(t.default != null ? t.default : "")}" placeholder="default (or __keep__)" style="max-width:170px" />`;
         } else if (t.type === "custom") {
           params = `<input class="ms-config ms-transform-expr mono" data-field="${fesc}" type="text" value="${escapeHtml(t.expr != null ? t.expr : "")}" placeholder="e.g. num(value) * num(raw['FX rate'])" />`;
         }
@@ -4716,7 +4733,7 @@
               <button class="btn ghost" id="btnMsResetAll">Reset all rules</button>
             </div>
           </div>
-          <div class="note" style="margin-bottom:12px">Precedence: manual override &gt; user rule (asset-class rule wins over Global) &gt; reference lookup &gt; built-in default &gt; placeholder. Drag a source field onto a template field to wire it (solid red line = your rule, dashed gray = built-in default; click a red line or the &#10005; to remove a rule). After wiring, set a <b>conversion</b> in the Configuration column (scale &times;, MM&rarr;USD, date&rarr;dd/mm/yyyy, UPPER/lower, value-map like <span class="inline-code">New=&gt;Buy; Unwind=&gt;Sell</span>, or a custom expression using <span class="inline-code">value</span>) to transform the source on top of the default. The table below is the detailed editor for the same rules.</div>
+          <div class="note" style="margin-bottom:12px">Precedence: manual override &gt; user rule (asset-class rule wins over Global) &gt; reference lookup &gt; built-in default &gt; placeholder. Drag a source field onto a template field to wire it (solid red line = your rule, dashed gray = built-in default; click a red line or the &#10005; to remove a rule). After wiring, set a <b>conversion</b> in the Configuration column (scale &times;, MM&rarr;USD, date&rarr;dd/mm/yyyy, UPPER/lower, value-map like <span class="inline-code">New=&gt;Sell; Addon=&gt;Sell; Unwind=&gt;Buy</span>, or a custom expression using <span class="inline-code">value</span>) to transform the source on top of the default. The table below is the detailed editor for the same rules.</div>
           ${canvasHtml(scope)}
           ${tableHtml(rowsData, cols)}
         </section>`;
@@ -4789,7 +4806,7 @@
     function collectSettingsSnapshot() {
       return {
         app: "Centralised Blotter Mapping Studio",
-        version: "v15-cln-credit-linked-notes-tier3",
+        version: APP_VERSION,
         savedAt: new Date().toISOString(),
         assetKey: state.assetKey || "structured_fi",
         sourceLogicUrl: BASE_LOGIC_URL,
@@ -5199,6 +5216,7 @@
       if (!payload || typeof payload !== "object") throw new Error("Settings JSON must be an object.");
       if (payload.settings) {
         Object.entries(payload.settings).forEach(([k, v]) => { if (qs(k)) qs(k).value = String(v); });
+        migratePcPolicyDefaultsFromVersion(payload.version);
       }
       if (payload.texts) {
         ["coverageCsv", "legalCsv", "productCsv", "pcCsv"].forEach(k => { if (qs(k)) qs(k).value = payload.texts[k] || ""; });
