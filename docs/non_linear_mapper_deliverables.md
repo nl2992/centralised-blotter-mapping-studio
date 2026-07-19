@@ -35,7 +35,7 @@ Expand the mapper beyond the original Linear Zero / Structured FI flow so Struct
 |---|---|
 | Current Structured FI Linear Zero Callable Notes taxonomy | `Product = Linear Zero Callable Notes` maps to `*Tier 1 Product Type = Structured Rates`; `*Tier 2 Product Type = Interest Rate Linked Note -PPN`; `*Tier 3 Product Type = Interest Rate Linked Note -PPN`, matching the original zero-linear taxonomy. |
 | Current Structured FI Range Accrual with Conversion taxonomy | `Product = Range Accrual with Conversion` maps to `*Tier 1 Product Type = Structured Rates`; `*Tier 2 Product Type = Interest Rate Linked Note -PPN`; `*Tier 3 Product Type = Range Accrual with Conversion`. |
-| CLN taxonomy | `*Tier 1 Product Type = Structured Credit`; `*Tier 2 Product Type = Structured Credit`; `*Tier 3 Product Type = Credit Linked Note`. |
+| CLN taxonomy | `*Tier 1 Product Type = Structured Credit`; `*Tier 2 Product Type = Structured Credit`; `*Tier 3 Product Type = Credit Linked Notes`. |
 | Repackaged + Illiquid Credit taxonomy | `*Tier 1 Product Type = Structured Credit`; `*Tier 2 Product Type = Structured Credit`; `*Tier 3 Product Type = Structured Credit Notes`. |
 | Private Credit taxonomy | `*Tier 1 Product Type = Private Credit Primary`; `*Tier 2 Product Type = Private Placement`; `*Tier 3 Product Type = Private Placement`. |
 | Nomura Private Bank Treats | `*Treats Acronym = NOSGSGH` when the client/source text identifies Nomura Private Bank or Nomura PB and no reference CSV value overrides it. |
@@ -146,7 +146,7 @@ Product tiers resolve in this order:
 | PLUTO mandatory `*` fields | Passed: rows with blank starred PLUTO fields remain Fail; no source values are invented. |
 | Numeric `*Trade ID` | Passed: all selected-sheet smoke rows show numeric output IDs. |
 | Structured FI product taxonomy | Passed: current-layout Linear Zero Callable Notes, Range Accrual with Conversion, and embedded-CLN substring priority over range wording. |
-| CLN taxonomy | Passed: Structured Credit / Structured Credit / Credit Linked Note. |
+| CLN taxonomy | Passed: Structured Credit / Structured Credit / Credit Linked Notes. |
 | Illiquid/Repack taxonomy | Passed: Structured Credit / Structured Credit / Structured Credit Notes. |
 | Private Credit taxonomy | Passed: Private Credit Primary / Private Placement / Private Placement. |
 | Nomura/HASE Treats | Passed: Nomura Private Bank -> `NOSGSGH`; HASE -> `HASEHKP`. |

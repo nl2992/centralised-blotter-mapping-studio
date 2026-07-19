@@ -46,7 +46,7 @@ These rules are built-in defaults. Product reference CSVs, Mapping Studio rules,
 |---|---|---|---|
 | Linear Zero Callable Notes in current Structured FI layout | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN |
 | Range Accrual with Conversion in current Structured FI layout | Structured Rates | Interest Rate Linked Note -PPN | Range Accrual with Conversion |
-| `ifexists(CLN)` / Credit Linked Note(s) | Structured Credit | Structured Credit | Credit Linked Note |
+| `ifexists(CLN)` / Credit Linked Note(s) | Structured Credit | Structured Credit | Credit Linked Notes |
 | Repackaged / Repack / Illiquid Credit | Structured Credit | Structured Credit | Structured Credit Notes |
 | Private Credit / Private Placement | Private Credit Primary | Private Placement | Private Placement |
 

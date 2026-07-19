@@ -235,7 +235,7 @@ async function main() {
           assertValue(r, "TC01:layout", row, "sourceLayout", "structured_fi_current");
           assertValue(r, "TC01:tier1", row, "tier1", "Structured Credit");
           assertValue(r, "TC01:tier2", row, "tier2", "Structured Credit");
-          assertValue(r, "TC01:tier3", row, "tier3", "Credit Linked Note");
+          assertValue(r, "TC01:tier3", row, "tier3", "Credit Linked Notes");
           assertValue(r, "TC01:treats", row, "treats", "NOSGSGH");
           assertNumericTradeId(r, "TC01:trade-id", row);
         }
@@ -261,7 +261,7 @@ async function main() {
           assertNumericTradeId(r, "TC01B:range-trade-id", rangeAccrual);
           assertValue(r, "TC01B:cln-wins-tier1", clnRange, "tier1", "Structured Credit");
           assertValue(r, "TC01B:cln-wins-tier2", clnRange, "tier2", "Structured Credit");
-          assertValue(r, "TC01B:cln-wins-tier3", clnRange, "tier3", "Credit Linked Note");
+          assertValue(r, "TC01B:cln-wins-tier3", clnRange, "tier3", "Credit Linked Notes");
           assertNumericTradeId(r, "TC01B:cln-trade-id", clnRange);
         }
       },
@@ -359,7 +359,7 @@ async function main() {
           const pc = snapshot.find(row => row.assetClass === "Private Credit");
           assertValue(r, "TC05:quality", cln, "quality", "FAIL");
           assertValue(r, "TC05:tier1", cln, "tier1", "Structured Credit");
-          assertValue(r, "TC05:tier3", cln, "tier3", "Credit Linked Note");
+          assertValue(r, "TC05:tier3", cln, "tier3", "Credit Linked Notes");
           assertNumericTradeId(r, "TC05:trade-id", cln);
           assertValue(r, "TC06:quality", pc, "quality", "FAIL");
           assertValue(r, "TC06:tier1", pc, "tier1", "Private Credit Primary");

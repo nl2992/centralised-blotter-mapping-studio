@@ -62,7 +62,7 @@ Only the selected worksheet is processed. Changing Asset can auto-select the bes
 | Linear Zero default | `Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN`, preserved from the OCR-original board. When the source row is recognized as the legacy Linear Zero layout, product text such as `CLN` or `Credit Linked Note` does not trigger the newer product taxonomy. |
 | Current Structured FI `Product = Linear Zero Callable Notes` | `Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN`, matching the original zero-linear taxonomy even though the row is in the consolidated Structured FI layout. |
 | Current Structured FI `Product = Range Accrual with Conversion` | `Structured Rates / Interest Rate Linked Note -PPN / Range Accrual with Conversion`; this follows the Structured FI rates family but differentiates tier 3 by product. |
-| CLN | `Structured Credit / Structured Credit / Credit Linked Note`. This uses `ifexists(CLN)`, so embedded values such as `YieldEnhancedCLNRangeAccrual` classify as CLN; CLN wins when both `CLN` and `Range Accrual with Conversion` appear in the same current-layout Structured FI row. |
+| CLN | `Structured Credit / Structured Credit / Credit Linked Notes`. This uses `ifexists(CLN)`, so embedded values such as `YieldEnhancedCLNRangeAccrual` classify as CLN; CLN wins when both `CLN` and `Range Accrual with Conversion` appear in the same current-layout Structured FI row. |
 | Repackaged + Illiquid Credit | `Structured Credit / Structured Credit / Structured Credit Notes`. |
 | Private Credit | `Private Credit Primary / Private Placement / Private Placement`. |
 | Collar | `Equity Derivatives / Equity Derivatives / Collar / Options`. |

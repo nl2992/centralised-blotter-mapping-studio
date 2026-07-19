@@ -28,15 +28,15 @@ PLUTO means the output template. Every output field beginning with `*` has to be
 
 | ID | Expected asset class | Tier 1 | Tier 2 | Tier 3 | Treats | Trade ID behavior | Key expected outputs |
 |---|---|---|---|---|---|---|---|
-| TC01 | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Note | `NOSGSGH` | Business-key numeric smoke ID `2484390147`; native ref in Comment and ISIN Code | Trade Date `23/02/2026`; Primary CCY `USD`; `*$ Volume` `1000000`; VA/GNBV `10742`; PC via VA proxy. |
+| TC01 | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Business-key numeric smoke ID `2484390147`; native ref in Comment and ISIN Code | Trade Date `23/02/2026`; Primary CCY `USD`; `*$ Volume` `1000000`; VA/GNBV `10742`; PC via VA proxy. |
 | TC01B-A | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HASEHKP` | Numeric deterministic ID | Current-layout `Product = Linear Zero Callable Notes` uses the original zero-linear tier taxonomy. |
 | TC01B-B | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Range Accrual with Conversion | `HASEHKP` | Numeric deterministic ID | Current-layout `Product = Range Accrual with Conversion` differentiates tier 3 while remaining in the Structured FI rates family. |
-| TC01B-C | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Note | `NOSGSGH` | Numeric deterministic ID | Current-layout `Product` containing `CLN`, for example `YieldEnhancedCLNRangeAccrual`, wins over `Structure = Range Accrual with Conversion`. |
+| TC01B-C | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Numeric deterministic ID | Current-layout `Product` containing `CLN`, for example `YieldEnhancedCLNRangeAccrual`, wins over `Structure = Range Accrual with Conversion`. |
 | TC02 | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HRCHHKH` | Business-key numeric smoke ID `2984344667`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; Primary CCY `USD`; `*$ Volume` `2000000`; VA/GNBV `2500`; PC via VA proxy; `source_layout=linear_zero_existing`. |
 | TC02B | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HRCHHKH` | Numeric deterministic ID; native ref in Comment and ISIN Code | Same legacy zero-linear economics as TC02; confirms CLN/free-text product wording does not override the original OCR Linear Zero tier logic. |
 | TC03 | Collar | Equity Derivatives | Equity Derivatives | Collar / Options | `HASEHKP` | Business-key numeric smoke ID `4416263868`; native ref remains traceable | Trade Date `31/10/2023`; `*$ Volume` `4613500`; VA/GNBV `23493`; PC `46135`; Buy/Sell `Buy`. |
 | TC04 | Illiquid Credit | Structured Credit | Structured Credit | Structured Credit Notes | `HASEHKP` | Business-key numeric smoke ID `4286094171`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; `*$ Volume` `3000000`; VA/GNBV `45000`; PC via VA proxy; Status retained in Comment; Buy/Sell `Sell` under default `illiquidStatusToBuySell=new_fee_to_sell` setting (Status "New"). |
-| TC05 | Structured Credit | Structured Credit | Structured Credit | Credit Linked Note | Placeholder unless reference/rule supplied | Business-key numeric smoke ID `1739969105` | Primary CCY `USD`; `*$ Volume` `5000000`; VA/GNBV `100000`; Trade Date blank by source limitation. |
+| TC05 | Structured Credit | Structured Credit | Structured Credit | Credit Linked Notes | Placeholder unless reference/rule supplied | Business-key numeric smoke ID `1739969105` | Primary CCY `USD`; `*$ Volume` `5000000`; VA/GNBV `100000`; Trade Date blank by source limitation. |
 | TC06 | Private Credit | Private Credit Primary | Private Placement | Private Placement | Placeholder unless reference/rule supplied | Business-key numeric smoke ID `3173193476` | Primary CCY `USD`; `*$ Volume` `6000000`; VA/GNBV `120000`; Trade Date blank by source limitation. |
 | TC07 | Equity TRS | Equity Derivatives | Equity Derivatives | Total Return Swap | `NOSGSGH` | Business-key numeric smoke ID `4271065392`; `native_ref_preferred` mode can pass through native `123456` | Trade Date `18/07/2026`; `*$ Volume` `7000000`; VA/GNBV `200000` by MSS policy; PC `9984` by HKD commission x FX; Buy/Sell `Buy`. |
 
@@ -71,7 +71,7 @@ Expected assertions:
 |---|---|
 | `*Tier 1 Product Type` | `Structured Credit` |
 | `*Tier 2 Product Type` | `Structured Credit` |
-| `*Tier 3 Product Type` | `Credit Linked Note` |
+| `*Tier 3 Product Type` | `Credit Linked Notes` |
 | `*Treats Acronym` | `NOSGSGH` |
 | `*Trade ID` | Numeric, current selected-sheet smoke value `2484390147` in `business_key` mode |
 | `Price` | `98.5` from `First Reoffer = 98.50%` |
@@ -85,7 +85,7 @@ This generated smoke fixture keeps the current consolidated Structured FI column
 |---|---|---|---|
 | A | `Product = Linear Zero Callable Notes`; `Structure = Linear Zero Callable Notes` | `Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN` | Uses the old zero-linear product taxonomy even though the input layout is `structured_fi_current`. |
 | B | `Product = Range Accrual with Conversion`; `Structure = Range Accrual with Conversion` | `Structured Rates / Interest Rate Linked Note -PPN / Range Accrual with Conversion` | Follows the rates family and differentiates tier 3. |
-| C | `Product = YieldEnhancedCLNRangeAccrual`; `Structure = Range Accrual with Conversion` | `Structured Credit / Structured Credit / Credit Linked Note` | `ifexists(CLN)` priority avoids being misclassified as Range Accrual. |
+| C | `Product = YieldEnhancedCLNRangeAccrual`; `Structure = Range Accrual with Conversion` | `Structured Credit / Structured Credit / Credit Linked Notes` | `ifexists(CLN)` priority avoids being misclassified as Range Accrual. |
 
 Each row includes current-layout columns `ISIN Front`, `SALETEAM`, `First Trade Date`, `FINAL CUSTOMER`, `Book`, `Currency`, `Maturity`, `Total NNBV`, `First Reoffer`, `Volume ('MM) USD`, `Trader`, `Issuer`, and `Product Type`, and each row asserts numeric `*Trade ID`.
 
@@ -230,7 +230,7 @@ Expected assertions:
 |---|---|
 | `*Tier 1 Product Type` | `Structured Credit` |
 | `*Tier 2 Product Type` | `Structured Credit` |
-| `*Tier 3 Product Type` | `Credit Linked Note` |
+| `*Tier 3 Product Type` | `Credit Linked Notes` |
 | `*Trade ID` | Numeric, current selected-sheet smoke value `1739969105` in `business_key` mode |
 | `*$ Volume` | `5000000` |
 | `*$ VA/GNBV` | `100000` |
