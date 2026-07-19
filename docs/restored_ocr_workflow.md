@@ -106,6 +106,15 @@ The OCR-original helper `normalizePricePoints` treated reoffer values as price p
 
 That behavior is restored for Structured FI / Linear Zero `First Reoffer` / `Reoffer` and Illiquid/Repack `Reoffer`. TRS `Net Price` / `Gross Price` stays a direct numeric source price because the OCR mapping described that as source-backed rather than reoffer-normalized.
 
+## Export File Names
+
+PLUTO CSV/XLSX exports use the selected asset, selected worksheet, and browser-local timestamp:
+
+`pluto_export_<asset>_<worksheet>_<YYYYMMDD_HHMMSS>.csv`  
+`pluto_export_<asset>_<worksheet>_<YYYYMMDD_HHMMSS>.xlsx`
+
+Example: `pluto_export_Structured_FI_Linear_Zero_Linear_Zero_Traded_20260719_213045.xlsx`.
+
 ## Trade ID Modes
 
 | Mode | Numeric output behavior |

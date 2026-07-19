@@ -3407,6 +3407,16 @@
       const cls = rows.length ? "blue" : "amber";
       setPill("gatePill", `Gate: ${rows.length} exportable`, cls);
     }
+    function exportTimestamp() {
+      const d = new Date();
+      const pad = n => String(n).padStart(2, "0");
+      return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
+    }
+    function exportFileName(ext) {
+      const asset = safeFileStem(assetConfig().label || state.assetKey || "asset", "asset");
+      const sheet = safeFileStem(state.sheetName || "selected_sheet", "selected_sheet");
+      return `pluto_export_${asset}_${sheet}_${exportTimestamp()}.${ext}`;
+    }
     function exportCsv() {
       if (!window.Papa) { setFatalError("PapaParse library not loaded. Check network access to the preserved CDN script."); return; }
       const rows = exportRowsForGate().map(m => {
@@ -3420,7 +3430,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `centralised_blotter_mapping_studio_${new Date().toISOString().slice(0,10)}.csv`;
+      a.download = exportFileName("csv");
       a.click();
       URL.revokeObjectURL(url);
       log(`CSV exported: ${rows.length} rows`, "success");
@@ -3441,7 +3451,7 @@
       if (state.dataQuality.warnings.length) {
         XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(state.dataQuality.warnings), "Data Quality");
       }
-      XLSX.writeFile(wb, "centralised_blotter_mapping_studio.xlsx");
+      XLSX.writeFile(wb, exportFileName("xlsx"));
       log(`XLSX exported: ${rows.length} rows`, "success");
       showToast(`XLSX exported: ${rows.length} rows`);
     }
