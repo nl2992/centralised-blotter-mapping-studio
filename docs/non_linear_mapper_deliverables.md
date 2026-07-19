@@ -14,6 +14,7 @@ Expand the mapper beyond the original Linear Zero / Structured FI flow so Struct
 - Detailed source inventory: `docs/non_linear_template_inventory.md`
 - Test cases: `docs/non_linear_test_cases.md`
 - Current coverage report: `ocr_work/current_mapping_coverage.md`
+- OCR workflow restoration note: `docs/restored_ocr_workflow.md`
 
 ## What We Had Before
 
@@ -55,6 +56,7 @@ Expand the mapper beyond the original Linear Zero / Structured FI flow so Struct
 | D8: Make template `*Trade ID` numeric | Done | Numeric native references remain numeric; alphanumeric references produce a deterministic numeric hash. Native source references are retained in Comment and ISIN fields where applicable. |
 | D9: Enforce PLUTO starred-field readiness | Done | All template fields beginning with `*` are treated as required. Rows with blank required fields fail; rows with working placeholders are not Clean Pass. |
 | D10: Document mapping and gaps | Done | This document plus `docs/non_linear_template_inventory.md`, `docs/non_linear_test_cases.md`, and `ocr_work/current_mapping_coverage.md`. |
+| D11: Restore OCR-original selected-sheet workflow | Done | `Load Workbook` only loads sheet names; `Process selected sheet` maps exactly one worksheet. Original tabs restored. See `docs/restored_ocr_workflow.md`. |
 
 ## PLUTO Mandatory Field Policy
 
@@ -132,16 +134,18 @@ Product tiers resolve in this order:
 
 | Check | Result |
 |---|---|
-| Embedded script syntax | Passed: 4 embedded scripts compile. |
-| Browser smoke workbook | Passed with `ocr_work/test_non_linear_taxonomy.xlsx`. |
-| Parsed row count | Passed: 7 mapped rows. |
-| PLUTO mandatory `*` fields | Passed: rows with blank starred PLUTO fields remain Fail; rows with placeholders remain Working, not Clean. |
-| Numeric `*Trade ID` | Passed: all 7 smoke rows show numeric output IDs; numeric native TRS reference `123456` remains source-backed. |
+| Embedded script syntax | Passed: embedded app script compiles. |
+| Browser selected-sheet smoke | Passed with `ocr_work/test_non_linear_taxonomy.xlsx`; each original asset/worksheet was processed one at a time. |
+| OCR tab restoration | Passed: visible tabs are Overview, Mapping Studio, Processed Sheet, Exceptions, Golden Record, Default Rules, Saved Settings, Activity Log. |
+| Selected-sheet isolation | Passed: every smoke process produced rows only from the selected worksheet. |
+| PLUTO mandatory `*` fields | Passed: rows with blank starred PLUTO fields remain Fail; no source values are invented. |
+| Numeric `*Trade ID` | Passed: all selected-sheet smoke rows show numeric output IDs. |
 | CLN taxonomy | Passed: Structured Credit / Structured Credit / Credit Linked Notes. |
 | Illiquid/Repack taxonomy | Passed: Structured Credit / Structured Credit / Structured Credit Notes. |
 | Private Credit taxonomy | Passed: Private Credit Primary / Private Placement / Private Placement. |
 | Nomura/HASE Treats | Passed: Nomura Private Bank -> `NOSGSGH`; HASE -> `HASEHKP`. |
-| Existing Linear Zero preservation | Passed: `Linear Zero` sheet parsed as `linear_zero_existing` and mapped as Working Pass. |
+| Existing Linear Zero preservation | Passed: `Linear Zero` sheet parsed as `linear_zero_existing` and mapped as Clean Pass in the selected-sheet smoke. |
+| Remaining known source gap | `Structured Credit 2025` sparse fixture maps taxonomy/amounts but still lacks source `*Trade Date`; see `docs/restored_ocr_workflow.md`. |
 
 Smoke artifacts:
 

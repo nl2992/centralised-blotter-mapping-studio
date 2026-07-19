@@ -1,10 +1,10 @@
 # Non-Linear Mapper Test Cases
 
-Generated: 2026-07-18. Updated: 2026-07-18 to cover the automated harness and new settings-driven behavior (Illiquid Status->Buy/Sell, TRS FX convention, economics comment tokens).  
+Generated: 2026-07-18. Updated: 2026-07-19 for the OCR-restored selected-sheet workflow.  
 Workbook fixture: `ocr_work/test_non_linear_taxonomy.xlsx`  
 Browser smoke log: `ocr_work/non_linear_taxonomy_smoke.log`  
 Browser smoke screenshot: `ocr_work/non_linear_taxonomy_smoke.png`  
-Automated harness run log: `ocr_work/automated_test_run.log` (see "Automated Harness" section below)
+Restoration note: `docs/restored_ocr_workflow.md`
 
 These are the minimum one-row-per-family test cases currently wired into the mapper smoke test. The rows are intentionally small and focused: each one proves a specific branch while preserving the existing zero-linear path.
 
@@ -14,25 +14,25 @@ PLUTO means the output template. Every output field beginning with `*` has to be
 
 | ID | Source sheet | Scenario | Expected status |
 |---|---|---|---|
-| TC01 | `Structured FI 2026` | Current Structured FI layout with CLN text and Nomura Private Bank client | Working Pass |
-| TC02 | `Linear Zero` | Existing zero-linear layout using accepted aliases | Working Pass |
-| TC03 | `Collar Blotter` | Collar strategy row with HASE client and PB Fee PC | Working Pass |
-| TC04 | `Illiquid Credit+Repack` | Illiquid/Repack row with Repackaged text and HASE client | Working Pass |
+| TC01 | `Structured FI 2026` | Current Structured FI layout with CLN text and Nomura Private Bank client | Clean Pass |
+| TC02 | `Linear Zero` | Existing zero-linear layout using accepted aliases | Clean Pass |
+| TC03 | `Collar Blotter` | Collar strategy row with HASE client and PB Fee PC | Clean Pass |
+| TC04 | `Illiquid Credit+Repack` | Illiquid/Repack row with Repackaged text and HASE client | Clean Pass |
 | TC05 | `Structured Credit 2025` | CLN Structured Credit row with sparse source columns | Fail until missing starred PLUTO fields are supplied |
 | TC06 | `Structured Credit 2025` | Private Credit / Private Placement row with sparse source columns | Fail until missing starred PLUTO fields are supplied |
-| TC07 | `Equity TRS` | TRS row with numeric native reference and Nomura PB client | Working Pass |
+| TC07 | `Equity TRS` | TRS row with numeric native reference and Nomura PB client | Clean Pass |
 
 ## Expected Output Matrix
 
 | ID | Expected asset class | Tier 1 | Tier 2 | Tier 3 | Treats | Trade ID behavior | Key expected outputs |
 |---|---|---|---|---|---|---|---|
-| TC01 | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Numeric derived from native `XS3307267255`; native ref in Comment and ISIN Code | Trade Date `23/02/2026`; Primary CCY `USD`; `*$ Volume` `1000000`; VA/GNBV `10742`; PC via VA proxy. |
-| TC02 | Structured FI - Rate | Markets | Structured Products | Structured Rates | Placeholder unless reference supplied | Numeric derived from native `XS0000000001`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; Primary CCY `USD`; `*$ Volume` `2000000`; VA/GNBV `2500`; PC via VA proxy; `source_layout=linear_zero_existing`. |
-| TC03 | Collar | Markets | Equity Derivatives | Collar / Options | `HASEHKP` | Numeric derived from native PIMS/OTC reference | Trade Date `31/10/2023`; `*$ Volume` `4613500`; VA/GNBV `23493`; PC `46135`; Buy/Sell `Buy`. |
-| TC04 | Illiquid Credit | Structured Credit | Structured Credit | Structured Credit Notes | `HASEHKP` | Numeric derived from native `XS1111111111`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; `*$ Volume` `3000000`; VA/GNBV `45000`; PC via VA proxy; Status retained in Comment; Buy/Sell `Sell` under default `illiquidStatusToBuySell=new_fee_to_sell` setting (Status "New"). |
-| TC05 | Structured Credit | Structured Credit | Structured Credit | Credit Linked Notes | Placeholder unless reference/rule supplied | Deterministic numeric ID from internal synthetic `SC-*` seed | Primary CCY `USD`; `*$ Volume` `5000000`; VA/GNBV `100000`; Trade Date blank by source limitation. |
-| TC06 | Private Credit | Private Credit Primary | Private Placement | Private Placement | Placeholder unless reference/rule supplied | Deterministic numeric ID from internal synthetic `SC-*` seed | Primary CCY `USD`; `*$ Volume` `6000000`; VA/GNBV `120000`; Trade Date blank by source limitation. |
-| TC07 | Equity TRS | Markets | Equity Derivatives | Total Return Swap | `NOSGSGH` | Native numeric `123456` remains source-backed numeric output | Trade Date `18/07/2026`; `*$ Volume` `7000000`; VA/GNBV `200000` by MSS policy; PC `9984` by HKD commission x FX; Buy/Sell `Buy`. |
+| TC01 | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Business-key numeric smoke ID `2484390147`; native ref in Comment and ISIN Code | Trade Date `23/02/2026`; Primary CCY `USD`; `*$ Volume` `1000000`; VA/GNBV `10742`; PC via VA proxy. |
+| TC02 | Structured FI - Rate | Markets | Structured Products | Structured Rates | `HRCHHKH` | Business-key numeric smoke ID `2984344667`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; Primary CCY `USD`; `*$ Volume` `2000000`; VA/GNBV `2500`; PC via VA proxy; `source_layout=linear_zero_existing`. |
+| TC03 | Collar | Markets | Equity Derivatives | Collar / Options | `HASEHKP` | Business-key numeric smoke ID `4416263868`; native ref remains traceable | Trade Date `31/10/2023`; `*$ Volume` `4613500`; VA/GNBV `23493`; PC `46135`; Buy/Sell `Buy`. |
+| TC04 | Illiquid Credit | Structured Credit | Structured Credit | Structured Credit Notes | `HASEHKP` | Business-key numeric smoke ID `4286094171`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; `*$ Volume` `3000000`; VA/GNBV `45000`; PC via VA proxy; Status retained in Comment; Buy/Sell `Sell` under default `illiquidStatusToBuySell=new_fee_to_sell` setting (Status "New"). |
+| TC05 | Structured Credit | Structured Credit | Structured Credit | Credit Linked Notes | Placeholder unless reference/rule supplied | Business-key numeric smoke ID `1739969105` | Primary CCY `USD`; `*$ Volume` `5000000`; VA/GNBV `100000`; Trade Date blank by source limitation. |
+| TC06 | Private Credit | Private Credit Primary | Private Placement | Private Placement | Placeholder unless reference/rule supplied | Business-key numeric smoke ID `3173193476` | Primary CCY `USD`; `*$ Volume` `6000000`; VA/GNBV `120000`; Trade Date blank by source limitation. |
+| TC07 | Equity TRS | Markets | Equity Derivatives | Total Return Swap | `NOSGSGH` | Business-key numeric smoke ID `4271065392`; `native_ref_preferred` mode can pass through native `123456` | Trade Date `18/07/2026`; `*$ Volume` `7000000`; VA/GNBV `200000` by MSS policy; PC `9984` by HKD commission x FX; Buy/Sell `Buy`. |
 
 ## TC01 Structured FI Current Layout / CLN
 
@@ -67,7 +67,7 @@ Expected assertions:
 | `*Tier 2 Product Type` | `Structured Credit` |
 | `*Tier 3 Product Type` | `Credit Linked Notes` |
 | `*Treats Acronym` | `NOSGSGH` |
-| `*Trade ID` | Numeric, current smoke value `4204720592` |
+| `*Trade ID` | Numeric, current selected-sheet smoke value `2484390147` in `business_key` mode |
 | `Comment` | Contains `source_layout=structured_fi_current` and `native_trade_ref=XS3307267255`; now also contains economics key=value tokens sourced from the row's `Coupon`, `Coupon (raw)`, and `First Reoffer` columns when present (e.g. `coupon=6.00% p.a`, `first_reoffer=98.50%`) |
 
 ## TC02 Existing Linear Zero Layout
@@ -101,7 +101,7 @@ Expected assertions:
 | `*Tier 3 Product Type` | `Structured Rates` |
 | `*$ Volume` | `2000000` |
 | `*$ VA/GNBV` | `2500` |
-| `*Trade ID` | Numeric, current smoke value `3329199354` |
+| `*Trade ID` | Numeric, current selected-sheet smoke value `2984344667` in `business_key` mode |
 | `Comment` | Contains `source_layout=linear_zero_existing` and `native_trade_ref=XS0000000001` |
 
 ## TC03 Collar Blotter
@@ -133,7 +133,7 @@ Expected assertions:
 | Output field | Expected |
 |---|---|
 | `*Treats Acronym` | `HASEHKP` |
-| `*Trade ID` | Numeric, current smoke value `2381983830` |
+| `*Trade ID` | Numeric, current selected-sheet smoke value `4416263868` in `business_key` mode |
 | `*$ Volume` | `4613500` |
 | `*$ VA/GNBV` | `23493` |
 | `*$ PC` | `46135` |
@@ -173,7 +173,7 @@ Expected assertions:
 | `*Tier 2 Product Type` | `Structured Credit` |
 | `*Tier 3 Product Type` | `Structured Credit Notes` |
 | `*Treats Acronym` | `HASEHKP` |
-| `*Trade ID` | Numeric, current smoke value `2810938652` |
+| `*Trade ID` | Numeric, current selected-sheet smoke value `4286094171` in `business_key` mode |
 | `*$ Volume` | `3000000` |
 | `*$ VA/GNBV` | `45000` |
 | `Buy/Sell` | **`Sell`** under the default `illiquidStatusToBuySell = new_fee_to_sell` setting, because source `Status` is `New` (regex `/\b(new|fee)\b/i`). Set the `illiquidStatusToBuySell` select to `off` to restore the previous blank behavior. |
@@ -197,7 +197,7 @@ Expected assertions:
 | `*Tier 1 Product Type` | `Structured Credit` |
 | `*Tier 2 Product Type` | `Structured Credit` |
 | `*Tier 3 Product Type` | `Credit Linked Notes` |
-| `*Trade ID` | Numeric, current smoke value `2635637780` |
+| `*Trade ID` | Numeric, current selected-sheet smoke value `1739969105` in `business_key` mode |
 | `*$ Volume` | `5000000` |
 | `*$ VA/GNBV` | `100000` |
 | `Quality` | Fail until Trade Date and other sparse-source fields are supplied by source/rule/reference/manual override |
@@ -222,7 +222,7 @@ Expected assertions:
 | `*Tier 1 Product Type` | `Private Credit Primary` |
 | `*Tier 2 Product Type` | `Private Placement` |
 | `*Tier 3 Product Type` | `Private Placement` |
-| `*Trade ID` | Numeric, current smoke value `5141050790` |
+| `*Trade ID` | Numeric, current selected-sheet smoke value `3173193476` in `business_key` mode |
 | `*$ Volume` | `6000000` |
 | `*$ VA/GNBV` | `120000` |
 | `Quality` | Fail until Trade Date and other sparse-source fields are supplied by source/rule/reference/manual override |
@@ -258,7 +258,7 @@ Expected assertions:
 | Output field | Expected |
 |---|---|
 | `*Treats Acronym` | `NOSGSGH` |
-| `*Trade ID` | Numeric native value `123456`, source-backed |
+| `*Trade ID` | Numeric selected-sheet smoke value `4271065392` in `business_key` mode; switching Trade ID mode to `native_ref_preferred` can pass through native `123456` |
 | `*$ Volume` | `7000000` |
 | `*$ VA/GNBV` | `200000` under default MSS Revenue policy |
 | `*$ PC` | `9984` under default `trsFxConvention = multiply` (HKD commission `78000` x FX rate `0.128` = `9984`) |
@@ -278,14 +278,18 @@ All other TC07 fields (Trade ID, Volume, VA/GNBV, Buy/Sell, Treats) are unchange
 
 | Gap | Reason |
 |---|---|
-| Structured Credit and Private Credit are Fail in smoke | Their sparse source sheet has no `*Trade Date`, `*Salesperson (Coverage)`, `*Legal Entity`, or `*Treats Acronym`. This is expected until PLUTO-required fields are supplied by rules/reference/source fields/manual overrides. |
+| Structured Credit and Private Credit are Fail in smoke | Their sparse source sheet has no `*Trade Date`. This is expected until PLUTO-required fields are supplied by rules/reference/source fields/manual overrides. |
 | Placeholder Treats on non-Nomura/non-HASE rows | Only Nomura Private Bank and HASE were provided as built-in Treats fallbacks. Other clients still need coverage/legal reference data. |
 | Illiquid/Repack Buy/Sell defaults to Sell | As of this update, `Status` values matching `new` or `fee` map to `Sell` by default (`illiquidStatusToBuySell = new_fee_to_sell`). Set the select to `off` to restore blank Buy/Sell if the Sell mapping is not desired for a given run. |
 | TRS PC FX direction | Both conventions are now implemented and selectable via `trsFxConvention` (`multiply` default, `divide` alternate). Confirm with the business which convention matches the firm's workbook FX direction before final production sign-off. |
 
-## Automated Harness
+## Automated Harness Status
 
-The scenarios above (including both new-behavior toggle cases) are now exercised automatically by a headless-Chromium test harness under `tests/`. See `docs/test_harness.md` for full details. Quick start:
+The historical harness under `tests/` was written for the broken workbook-wide parse behavior. It should be rewritten before being treated as a regression gate for the OCR-restored workflow.
+
+Current verified path for this document is the selected-sheet browser smoke described in `docs/restored_ocr_workflow.md`: load `ocr_work/test_non_linear_taxonomy.xlsx`, process each target worksheet one at a time, and confirm the snapshot only contains rows from that selected worksheet.
+
+Legacy harness quick start, for reference only:
 
 ```
 cd tests
@@ -293,6 +297,6 @@ npm install        # one-time: fetches Playwright + its Chromium binary
 node run_tests.js
 ```
 
-The harness serves the repo over `http://127.0.0.1:<port>/`, drives the app with `window.__SNAPSHOT_MODE = true`, uploads `ocr_work/test_non_linear_taxonomy.xlsx`, toggles `illiquidStatusToBuySell` and `trsFxConvention` across three scenarios (default settings, Illiquid `off`, TRS `divide`), and asserts against `tests/expected.js`. It exits non-zero on any failed assertion. The latest run's full PASS/FAIL report is saved at `ocr_work/automated_test_run.log` (81/81 assertions passing as of this update, with all documented trade IDs unchanged).
+The old harness serves the repo over `http://127.0.0.1:<port>/`, drives the app with `window.__SNAPSHOT_MODE = true`, uploads `ocr_work/test_non_linear_taxonomy.xlsx`, and expects all workbook sheets to be parsed together. That expectation is intentionally obsolete.
 
 For a complete-input, best-case audit of all 13 starred PLUTO fields across every asset class (using `window.__BOARD_STAR_AUDIT()` and a separate, fuller fixture), see `docs/starred_field_gap_report.md` and `tests/run_starred_field_matrix.js` (`npm run test:matrix`) -- it documents exactly which asset classes reach full real coverage and which cannot, and why.

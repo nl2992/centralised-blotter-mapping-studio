@@ -489,6 +489,32 @@
     .saved-validation-list { margin: 6px 0 0; padding-left: 18px; }
     .saved-validation-list li { margin: 2px 0; }
     .wrap-table { white-space: normal; min-width: 180px; }
+    .processed-table th, .processed-table td { white-space: nowrap; }
+    .processed-cell-wrap { min-width: 150px; }
+    .processed-cell {
+      min-width: 140px;
+      width: 100%;
+      padding: 5px 7px;
+      font-size: 11.5px;
+      font-family: Consolas, Monaco, monospace;
+    }
+    .processed-cell.MANUAL_OVERRIDE { border-color: var(--purple); background: var(--soft-purple); }
+    .processed-cell.UNRESOLVED, .processed-cell.PLACEHOLDER { border-color: var(--amber); background: var(--soft-amber); }
+    .json-pre {
+      margin: 0;
+      padding: 12px;
+      max-height: 420px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-2);
+      color: var(--ink);
+      font-family: Consolas, Monaco, monospace;
+      font-size: 11px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
     @media (max-width: 900px) { .saved-status-strip { grid-template-columns: 1fr; } }
     .log-box {
       background: #0f172a;
@@ -692,8 +718,8 @@
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">
-        <h1>Centralised Blotter Mapping Studio</h1>
-        <p>Map cross-asset trade blotters into the firm's central output template. Configurable mapping rules, reference data, per-row overrides, exceptions handling, golden-record controls, and one-click export &mdash; with firm profile and template connections, and a local fallback when those endpoints are unavailable.</p>
+        <h1>Centralised Blotter</h1>
+        <p>Process one selected blotter worksheet into the firm's PLUTO output template. The original control flow, worksheet-level processing, inline edit grid, exceptions, golden record, default rules, saved settings, and activity log are preserved while adding the requested multi-asset mappings.</p>
       </div>
       <div class="pills">
         <button id="themeToggle" class="theme-toggle" type="button" title="Switch theme" aria-label="Switch between light and dark theme">
@@ -701,6 +727,12 @@
         </button>
         <span id="templatePill" class="pill amber">Template: loading</span>
         <span id="workbookPill" class="pill amber">Workbook: none</span>
+        <span id="assetPill" class="pill amber">Asset: none</span>
+        <span id="sheetPill" class="pill amber">Sheet: none</span>
+        <span id="modePill" class="pill blue">Mode: trade by trade</span>
+        <span id="tradeIdPill" class="pill blue">Trade ID: business key</span>
+        <span id="selectedRowsPill" class="pill blue">Selected: 0</span>
+        <span id="goldenPill" class="pill">Golden: 0</span>
         <span id="mappingPill" class="pill">Mapping: idle</span>
         <span id="profilePill" class="pill amber">Profiles: checking</span>
         <span id="pillDateFmt" class="pill blue">Date format: dd/mm/yyyy</span>
@@ -714,7 +746,7 @@
 
   <main class="shell">
     <section class="card section">
-      <div class="section-title">Load inputs</div>
+      <div class="section-title">Load &amp; process selected worksheet</div>
       <div class="controls">
         <div class="field wide">
           <label>Template source</label>
@@ -725,7 +757,42 @@
           <label>Upload WSG blotter workbook</label>
           <input id="workbookInput" type="file" accept=".xlsx,.xls" />
         </div>
-        <button id="btnParseWorkbook" class="btn">Parse Workbook</button>
+        <button id="btnParseWorkbook" class="btn secondary">Load Workbook</button>
+        <div class="field tight">
+          <label>Asset</label>
+          <select id="assetSelect">
+            <option value="structured_fi">Structured FI / Linear Zero</option>
+            <option value="collar">Collar</option>
+            <option value="illiquid_repack">Illiquid Credit + Repack</option>
+            <option value="equity_trs">Equity TRS</option>
+          </select>
+        </div>
+        <div class="field wide">
+          <label>Worksheet</label>
+          <select id="sheetSelect">
+            <option value="">Load workbook first</option>
+          </select>
+        </div>
+        <div class="field tight">
+          <label>Run mode</label>
+          <select id="runModeSelect">
+            <option value="trade_by_trade" selected>Trade by trade</option>
+            <option value="aggregate_addons">Aggregate add-ons</option>
+          </select>
+        </div>
+        <div class="field tight">
+          <label>Add-on window</label>
+          <input id="addonWindowDays" type="number" min="0" max="30" step="1" value="7" />
+        </div>
+        <div class="field tight">
+          <label>Trade ID mode</label>
+          <select id="tradeIdModeSelect">
+            <option value="business_key" selected>Deterministic business-key ID</option>
+            <option value="native_ref_preferred">Deterministic native-ref preferred ID</option>
+            <option value="legacy_row_order">Legacy row-order ID</option>
+          </select>
+        </div>
+        <button id="btnProcess" class="btn">Process selected sheet</button>
         <button id="btnRebuildAll" class="btn ghost">Rebuild Mapping</button>
       </div>
       <div class="split" style="margin-top:12px">
@@ -734,41 +801,36 @@
           <a id="templateVerifyLink" href="/studio/api/knowledge-base/download?file_id=17e95c45-7694-4233-8165-ed0efb09ae31" target="_blank">verify template header</a><br />
           Export rows are written in the exact template header order.
         </div>
+        <div id="workflowStatus" class="blue-note">Load a workbook, select one worksheet, then process that sheet only. Existing firm profile and template connections are kept intact.</div>
       </div>
     </section>
 
     <div class="tabbar">
       <button class="tab active" data-tab="overview" data-label="Overview">Overview</button>
-      <button class="tab" data-tab="mapping" data-label="Template Mapping">Template Mapping</button>
       <button class="tab" data-tab="mappingstudio" data-label="Mapping Studio">Mapping Studio</button>
+      <button class="tab" data-tab="processedSheet" data-label="Processed Sheet">Processed Sheet</button>
       <button class="tab" data-tab="exceptions" data-label="Exceptions">Exceptions</button>
+      <button class="tab" data-tab="goldenRecord" data-label="Golden Record">Golden Record</button>
+      <button class="tab" data-tab="defaultRules" data-label="Default Rules">Default Rules</button>
       <button class="tab" data-tab="savedsettings" data-label="Saved Settings">Saved Settings</button>
-      <div class="tab-more">
-        <button type="button" class="tab-more-btn" id="tabMoreBtn" aria-haspopup="true" aria-expanded="false">More <span class="tab-more-caret" aria-hidden="true">&#9662;</span></button>
-        <div class="tab-more-menu" id="tabMoreMenu" role="menu">
-          <button class="tab" data-tab="reconciliation" data-label="Reconciliation" role="menuitem">Reconciliation</button>
-          <button class="tab" data-tab="diagnostics" data-label="Diagnostics" role="menuitem">Diagnostics</button>
-          <button class="tab" data-tab="canonical" data-label="Canonical Rows" role="menuitem">Canonical Rows</button>
-          <button class="tab" data-tab="fieldmatrix" data-label="Field Matrix" role="menuitem">Field Matrix</button>
-          <button class="tab" data-tab="references" data-label="References" role="menuitem">References</button>
-          <button class="tab" data-tab="governance" data-label="Governance" role="menuitem">Governance</button>
-          <button class="tab" data-tab="settings" data-label="Settings" role="menuitem">Settings</button>
-          <button class="tab" data-tab="debuglog" data-label="Debug Log" role="menuitem">Debug Log</button>
-        </div>
-      </div>
+      <button class="tab" data-tab="activityLog" data-label="Activity Log">Activity Log</button>
     </div>
 
     <div id="overview" class="view active"></div>
+    <div id="mappingstudio" class="view"></div>
+    <div id="processedSheet" class="view"></div>
+    <div id="exceptions" class="view"></div>
+    <div id="goldenRecord" class="view"></div>
+    <div id="defaultRules" class="view"></div>
+    <div id="savedsettings" class="view"></div>
+    <div id="activityLog" class="view"></div>
     <div id="reconciliation" class="view"></div>
     <div id="diagnostics" class="view"></div>
     <div id="canonical" class="view"></div>
     <div id="mapping" class="view"></div>
-    <div id="mappingstudio" class="view"></div>
     <div id="fieldmatrix" class="view"></div>
-    <div id="exceptions" class="view"></div>
     <div id="references" class="view"></div>
     <div id="governance" class="view"></div>
-    <div id="savedsettings" class="view"></div>
     <div id="debuglog" class="view"></div>
     <div id="settings" class="view">
     <section class="card section">
@@ -1003,28 +1065,28 @@
         label: "Collar",
         signature: ["OTC ISIN", "Notional Amount (USD)", "Total GNBV (USD)", "PB Fee (USD)", "New/Unwind", "Client Price", "PIMS Code"],
         exclude: [],
-        parser: (rows) => parseCollar(rows, currentSettings().collarRowGrain)
+        parser: (rows, sheetName) => parseCollar(rows, currentSettings().collarRowGrain, sheetName)
       },
       {
         id: "illiquid_repack",
         label: "Illiquid / Repack",
         signature: ["Product Type", "Deal Name", "GNBV (USD)", "Booking", "Reoffer", "SVCS No."],
         exclude: [],
-        parser: (rows) => parseIlliquid(rows)
+        parser: (rows, sheetName) => parseIlliquid(rows, sheetName)
       },
       {
         id: "structured_credit_2025",
         label: "Structured Credit 2025",
         signature: ["Product", "Category", "Region", "Notional (USD)", "GNBV (USD)"],
         exclude: [],
-        parser: (rows) => parseStructuredCredit2025(rows)
+        parser: (rows, sheetName) => parseStructuredCredit2025(rows, sheetName)
       },
       {
         id: "equity_trs",
         label: "Equity TRS",
         signature: ["Reference number", "Notional in USD", "MSS Revenue in USD", "Commission to PB (HKD)", "Commision to PB (HKD)", "SALETEAM", "Structure"],
         exclude: [],
-        parser: (rows) => parseTrs(rows)
+        parser: (rows, sheetName) => parseTrs(rows, sheetName)
       }
     ];
     // Minimum number of distinctive signature columns that must be present before we
@@ -1044,6 +1106,32 @@
       });
       if (!best || bestScore < TEMPLATE_DETECTION_MIN_SCORE) return { template: null, label: null, score: Math.max(bestScore, 0), confident: false };
       return { template: best.id, label: best.label, score: bestScore, confident: true };
+    }
+    const ORIGINAL_ASSET_CONFIGS = {
+      structured_fi: {
+        label: "Structured FI / Linear Zero",
+        aliases: STRUCTURED_FI_REQUIRED_SHEETS.concat(STRUCTURED_FI_OPTIONAL_SHEETS, ["Structured Rate + Credit", "Structured Credit 2025"]),
+        supportsAggregation: true
+      },
+      collar: { label: "Collar", aliases: ["Collar Blotter"], supportsAggregation: false },
+      illiquid_repack: { label: "Illiquid Credit + Repack", aliases: ["Illiquid Credit+Repack", "Illiquid Credit + Repack", "Repack"], supportsAggregation: false },
+      equity_trs: { label: "Equity TRS", aliases: ["Equity TRS"], supportsAggregation: false }
+    };
+    const ASSET_KEY_ALIASES = {
+      structured_fi_linear_zero: "structured_fi",
+      structuredfi: "structured_fi",
+      illiquid_credit_repack: "illiquid_repack",
+      illiquidcreditrepack: "illiquid_repack",
+      trs: "equity_trs",
+      equitytrs: "equity_trs"
+    };
+    function normalizeAssetKey(key) {
+      const raw = cleanText(key || "structured_fi");
+      const simplified = simplifyHeader(raw);
+      return ORIGINAL_ASSET_CONFIGS[raw] ? raw : (ASSET_KEY_ALIASES[simplified] || (ORIGINAL_ASSET_CONFIGS[simplified] ? simplified : "structured_fi"));
+    }
+    function assetConfig(key = state.assetKey) {
+      return ORIGINAL_ASSET_CONFIGS[normalizeAssetKey(key)] || ORIGINAL_ASSET_CONFIGS.structured_fi;
     }
     const HARD_FIELDS = [
       "*Trade Date",
@@ -1395,6 +1483,17 @@
       savedSettingsLoading: false,
       profileUserName: "",
       profileUserId: "",
+      workbook: null,
+      workbookSheets: [],
+      assetKey: "structured_fi",
+      sourceRows: [],
+      runMode: "trade_by_trade",
+      addonWindowDays: 7,
+      exportExcludedRows: {},
+      goldenRecords: [],
+      selectedGoldenKey: "",
+      fileHistory: [],
+      processedQuickSelectCount: 5,
       formulaErrorLoggedFields: new Set(),
       dataQuality: { warnings: [], duplicateIds: 0 }
     };
@@ -1416,6 +1515,7 @@
       state.logs.push({ time: nowStr(), level, msg: String(msg) });
       if (state.logs.length > 3000) state.logs.shift();
       if (qs("debuglog").classList.contains("active")) renderDebugLog();
+      if (qs("activityLog") && qs("activityLog").classList.contains("active")) renderActivityLog();
     }
     function clearLogs() { state.logs = []; }
     function setFatalError(msg) {
@@ -1433,10 +1533,16 @@
       const html = String(message || "");
       const text = html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
       const el = qs("savedSettingsStatus");
+      const workflowEl = qs("workflowStatus");
       if (el) {
         const cls = tone === "good" || tone === "success" ? "good-note" : (tone === "bad" || tone === "error" ? "bad-note" : (tone === "warn" ? "warn-note" : (tone === "blue" || tone === "info" ? "blue-note" : "note")));
         el.className = cls;
         el.innerHTML = html;
+      }
+      if (workflowEl) {
+        const cls = tone === "good" || tone === "success" ? "good-note" : (tone === "bad" || tone === "error" ? "bad-note" : (tone === "warn" ? "warn-note" : (tone === "blue" || tone === "info" ? "blue-note" : "note")));
+        workflowEl.className = cls;
+        workflowEl.innerHTML = html;
       }
       if (text) {
         log(text, tone === "bad" ? "error" : (tone === "good" ? "success" : (tone === "blue" ? "info" : tone)));
@@ -1579,7 +1685,7 @@
       return badge("Blank");
     }
     function tableHtml(rows, cols, emptyMsg) {
-      if (!rows || !rows.length) return `<div class="empty">${escapeHtml(emptyMsg || "Nothing here yet. Upload a blotter workbook and click Parse Workbook to populate this view.")}</div>`;
+      if (!rows || !rows.length) return `<div class="empty">${escapeHtml(emptyMsg || "Nothing here yet. Load a blotter workbook and click Process selected sheet to populate this view.")}</div>`;
       const thead = `<thead><tr>${cols.map(c => `<th class="${c.className || ""}">${escapeHtml(c.label)}</th>`).join("")}</tr></thead>`;
       const tbody = rows.map(r => `<tr>${cols.map(c => {
         const val = typeof c.value === "function" ? c.value(r) : r[c.value];
@@ -1606,9 +1712,10 @@
     }
     function updateTabCounts() {
       const counts = {
-        canonical: state.canonicalRows.length,
-        mapping: state.mappedRows.length,
-        exceptions: state.exceptions.length
+        processedSheet: state.mappedRows.length,
+        exceptions: state.exceptions.length,
+        goldenRecord: state.goldenRecords.length,
+        activityLog: state.logs.length
       };
       qsa(".tab").forEach(t => {
         const base = t.dataset.label || t.textContent;
@@ -1676,7 +1783,18 @@
         },
         meta: state.refMeta,
         mappingRules: state.mappingRules,
-        manualOverrides: state.manualOverrides
+        manualOverrides: state.manualOverrides,
+        process: {
+          assetKey: state.assetKey,
+          sheetName: state.sheetName,
+          runMode: state.runMode,
+          tradeIdMode: state.tradeIdMode,
+          addonWindowDays: state.addonWindowDays,
+          exportExcludedRows: state.exportExcludedRows,
+          goldenRecords: state.goldenRecords,
+          selectedGoldenKey: state.selectedGoldenKey,
+          fileHistory: state.fileHistory
+        }
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     }
@@ -1688,6 +1806,22 @@
         if (payload.meta) Object.entries(payload.meta).forEach(([k, v]) => { state.refMeta[k] = v || ""; if (qs(k)) qs(k).value = v || ""; });
         state.mappingRules = (payload.mappingRules && typeof payload.mappingRules === "object") ? payload.mappingRules : (state.mappingRules || {});
         state.manualOverrides = (payload.manualOverrides && typeof payload.manualOverrides === "object") ? payload.manualOverrides : (state.manualOverrides || {});
+        const process = payload.process || payload;
+        if (process && typeof process === "object") {
+          state.assetKey = normalizeAssetKey(process.assetKey || state.assetKey || "structured_fi");
+          state.sheetName = cleanText(process.sheetName || state.sheetName);
+          state.runMode = ["trade_by_trade", "aggregate_addons"].includes(process.runMode) ? process.runMode : (state.runMode || "trade_by_trade");
+          state.tradeIdMode = ["business_key", "native_ref_preferred", "legacy_row_order"].includes(process.tradeIdMode) ? process.tradeIdMode : (state.tradeIdMode || "business_key");
+          state.addonWindowDays = Math.max(0, Math.min(30, Number(process.addonWindowDays || state.addonWindowDays || 7)));
+          state.exportExcludedRows = (process.exportExcludedRows && typeof process.exportExcludedRows === "object") ? process.exportExcludedRows : (state.exportExcludedRows || {});
+          state.goldenRecords = Array.isArray(process.goldenRecords) ? process.goldenRecords : (state.goldenRecords || []);
+          state.selectedGoldenKey = cleanText(process.selectedGoldenKey || state.selectedGoldenKey);
+          state.fileHistory = Array.isArray(process.fileHistory) ? process.fileHistory : (state.fileHistory || []);
+          if (qs("assetSelect")) qs("assetSelect").value = state.assetKey;
+          if (qs("runModeSelect")) qs("runModeSelect").value = state.runMode;
+          if (qs("tradeIdModeSelect")) qs("tradeIdModeSelect").value = state.tradeIdMode;
+          if (qs("addonWindowDays")) qs("addonWindowDays").value = String(state.addonWindowDays);
+        }
         normalizeStoredFieldMaps();
       } catch (e) {
         log(`restoreLocal failed: ${e.message}`, "warn");
@@ -1799,21 +1933,28 @@
     }
     function outputTradeIdNumber(row) {
       const raw = cleanText(row.tradeId);
-      if (/^\d+$/.test(raw)) {
+      if (state.tradeIdMode === "legacy_row_order") {
+        const n = Number(row.sourceRowNumber);
+        return Number.isFinite(n) && n > 0 ? n : numericHash([row.sourceSheet, row.assetClass, raw].map(cleanText).join("|"));
+      }
+      if (state.tradeIdMode === "native_ref_preferred" && /^\d+$/.test(raw)) {
         const n = Number(raw);
         if (Number.isSafeInteger(n)) return n;
       }
-      const seed = [
-        raw,
+      const businessSeed = [
         row.sourceSheet,
-        row.sourceRowNumber,
         row.assetClass,
         row.tradeDate,
         row.client,
         row.book,
         row.primaryCcy,
-        row.volumeUsd
+        row.volumeUsd,
+        row.productName,
+        row.security,
+        row.maturityDate
       ].map(cleanText).filter(Boolean).join("|");
+      const nativeSeed = [raw, row.sourceSheet, row.sourceRowNumber, row.assetClass, businessSeed].map(cleanText).filter(Boolean).join("|");
+      const seed = state.tradeIdMode === "native_ref_preferred" ? nativeSeed : (businessSeed || nativeSeed);
       return seed ? numericHash(seed) : "";
     }
     function pushSheetStatus(x) { state.sheetStatuses.push(x); }
@@ -1967,7 +2108,7 @@
       });
       return { rows: out, warnings };
     }
-    function parseIlliquid(rows) {
+    function parseIlliquid(rows, sheetName = "Illiquid Credit+Repack") {
       const out = [];
       let warnings = 0;
       rows.forEach(r => {
@@ -1993,7 +2134,7 @@
             rowValue(r, ["Size (Org Curr)"]), rowValue(r, ["Volume ('MM) USD", "Volume (MM) USD"]), rowValue(r, ["Maturity"])
           ]);
           out.push({
-            assetClass, sourceSheet: "Illiquid Credit+Repack", sourceRowNumber: r._source_excel_row,
+            assetClass, sourceSheet: sheetName, sourceRowNumber: r._source_excel_row,
             tradeDate: isoDate(rowValue(r, ["Trade Date"])),
             maturityDate: isoDate(rowValue(r, ["Maturity"])),
             client: cleanText(rowValue(r, ["FINAL CUSTOMER"])),
@@ -2025,7 +2166,7 @@
           });
         } catch (e) {
           warnings += 1;
-          log(`Illiquid/Repack parse warning row ${r._source_excel_row}: ${e.message}`, "warn");
+          log(`Illiquid/Repack parse warning in ${sheetName} row ${r._source_excel_row}: ${e.message}`, "warn");
         }
       });
       return { rows: out, warnings };
@@ -2044,7 +2185,7 @@
         return v ? `${key}=${v}` : "";
       }).filter(Boolean);
     }
-    function parseCollar(rows, grain) {
+    function parseCollar(rows, grain, sheetName = "Collar Blotter") {
       const out = [];
       let warnings = 0;
       if (grain === "strategy") {
@@ -2063,7 +2204,7 @@
           const puts = rs.filter(r => /put/i.test(cleanText(rowValue(r, ["Product"]))));
           const volumeUsd = Math.max(...rs.map(r => num(rowValue(r, ["Notional Amount (USD)"])) || 0), 0);
           out.push({
-            assetClass: "Collar", sourceSheet: "Collar Blotter", sourceRowNumber: first._source_excel_row,
+            assetClass: "Collar", sourceSheet: sheetName, sourceRowNumber: first._source_excel_row,
             tradeDate: isoDate(rowValue(first, ["First Trade Date"])),
             maturityDate: isoDate(rowValue(first, ["Maturity"])),
             client: cleanText(rowValue(first, ["FINAL CUSTOMER"])),
@@ -2108,7 +2249,7 @@
             ]);
             const legCallPut = /call/i.test(cleanText(rowValue(r, ["Product"]))) ? "Call" : (/put/i.test(cleanText(rowValue(r, ["Product"]))) ? "Put" : "");
             out.push({
-              assetClass: "Collar", sourceSheet: "Collar Blotter", sourceRowNumber: r._source_excel_row,
+              assetClass: "Collar", sourceSheet: sheetName, sourceRowNumber: r._source_excel_row,
               tradeDate: isoDate(rowValue(r, ["First Trade Date"])),
               maturityDate: isoDate(rowValue(r, ["Maturity"])),
               client: cleanText(rowValue(r, ["FINAL CUSTOMER"])),
@@ -2145,13 +2286,13 @@
             });
           } catch (e) {
             warnings += 1;
-            log(`Collar parse warning row ${r._source_excel_row}: ${e.message}`, "warn");
+            log(`Collar parse warning in ${sheetName} row ${r._source_excel_row}: ${e.message}`, "warn");
           }
         });
       }
       return { rows: out, warnings };
     }
-    function parseTrs(rows) {
+    function parseTrs(rows, sheetName = "Equity TRS") {
       const out = [];
       let warnings = 0;
       rows.forEach(r => {
@@ -2174,7 +2315,7 @@
             rowValue(r, ["Trade Date"]), rowValue(r, ["FINAL CUSTOMER"]), rowValue(r, ["Book"]), rowValue(r, ["Underlying"]), rowValue(r, ["Notional in USD", "Notional (HKD)"])
           ]);
           out.push({
-            assetClass: "Equity TRS", sourceSheet: "Equity TRS", sourceRowNumber: r._source_excel_row,
+            assetClass: "Equity TRS", sourceSheet: sheetName, sourceRowNumber: r._source_excel_row,
             tradeDate: isoDate(rowValue(r, ["Trade Date"])),
             maturityDate: isoDate(rowValue(r, ["Maturity"])),
             settlementDate: isoDate(rowValue(r, ["Settlement Date"])),
@@ -2207,12 +2348,12 @@
           });
         } catch (e) {
           warnings += 1;
-          log(`TRS parse warning row ${r._source_excel_row}: ${e.message}`, "warn");
+          log(`TRS parse warning in ${sheetName} row ${r._source_excel_row}: ${e.message}`, "warn");
         }
       });
       return { rows: out, warnings };
     }
-    function parseStructuredCredit2025(rows) {
+    function parseStructuredCredit2025(rows, sheetName = "Structured Credit 2025") {
       const out = [];
       let warnings = 0;
       rows.forEach(r => {
@@ -2231,7 +2372,7 @@
             rowValue(r, ["Notional (USD)", "Notional"]), rowValue(r, ["GNBV (USD)", "GNBV"])
           ]);
           out.push({
-            assetClass, sourceSheet: "Structured Credit 2025", sourceRowNumber: r._source_excel_row,
+            assetClass, sourceSheet: sheetName, sourceRowNumber: r._source_excel_row,
             tradeDate: isoDate(rowValue(r, ["Trade Date", "First Trade Date", "Date"])),
             maturityDate: isoDate(rowValue(r, ["Maturity", "Maturity Date"])),
             client: cleanText(rowValue(r, ["FINAL CUSTOMER", "Final Customer", "Customer", "Client"])),
@@ -2267,7 +2408,7 @@
           });
         } catch (e) {
           warnings += 1;
-          log(`Structured Credit 2025 parse warning row ${r._source_excel_row}: ${e.message}`, "warn");
+          log(`Structured Credit 2025 parse warning in ${sheetName} row ${r._source_excel_row}: ${e.message}`, "warn");
         }
       });
       return { rows: out, warnings };
@@ -2382,7 +2523,143 @@
       });
       return canonical;
     }
-    async function parseWorkbook() {
+    function sheetMatchesAny(sheetName, aliases) {
+      const key = norm(sheetName);
+      return (aliases || []).some(alias => {
+        const ak = norm(alias);
+        return key === ak || key.includes(ak) || ak.includes(key);
+      });
+    }
+    function preferredSheetForAsset(assetKey) {
+      const sheets = state.workbookSheets || [];
+      const aliases = assetConfig(assetKey).aliases || [];
+      return sheets.find(s => aliases.some(a => norm(s) === norm(a))) ||
+        sheets.find(s => sheetMatchesAny(s, aliases)) ||
+        sheets[0] || "";
+    }
+    function populateSheetSelect(preferred) {
+      const select = qs("sheetSelect");
+      if (!select) return;
+      const sheets = state.workbookSheets || [];
+      if (!sheets.length) {
+        select.innerHTML = `<option value="">Load workbook first</option>`;
+        select.value = "";
+        state.sheetName = "";
+        return;
+      }
+      select.innerHTML = sheets.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join("");
+      const chosen = (preferred && sheets.includes(preferred) && preferred) ||
+        (state.sheetName && sheets.includes(state.sheetName) && state.sheetName) ||
+        preferredSheetForAsset(state.assetKey);
+      select.value = chosen || sheets[0];
+      state.sheetName = select.value;
+    }
+    function autoSelectPreferredSheet() {
+      populateSheetSelect(preferredSheetForAsset(state.assetKey));
+    }
+    function rowDateMs(row) {
+      const iso = isoDate(row.tradeDate);
+      return iso ? Date.parse(`${iso}T00:00:00Z`) : 0;
+    }
+    function withinAddonWindow(baseRow, otherRow) {
+      const a = rowDateMs(baseRow);
+      const b = rowDateMs(otherRow);
+      if (!a || !b) return false;
+      const diffDays = (b - a) / (24 * 3600 * 1000);
+      return diffDays >= 0 && diffDays <= Number(state.addonWindowDays || 0);
+    }
+    function structuredAggregateKey(row) {
+      return [
+        row.isinCode,
+        row.ticker,
+        row.security,
+        row.book,
+        row.primaryCcy,
+        row.client,
+        row.maturityDate
+      ].map(v => cleanText(v).toUpperCase()).join("|");
+    }
+    function isStructuredAddonRow(row) {
+      const c = lower([row.sourceAction, row.buySell, row.comments, row.raw && rowValue(row.raw, ["New/Tap/Sell", "Remarks", "Action"])].map(cleanText).join(" "));
+      return c.includes("addon") || c.includes("add on") || c.includes("tap");
+    }
+    function isStructuredNewRow(row) {
+      const c = lower([row.sourceAction, row.buySell, row.comments, row.raw && rowValue(row.raw, ["New/Tap/Sell", "Remarks", "Action"])].map(cleanText).join(" "));
+      return c.includes("new") || (!isStructuredAddonRow(row) && !c.includes("unwind") && !c.includes("sell"));
+    }
+    function applySelectedRunMode(rows) {
+      const indexed = rows.map((row, index) => Object.assign(row, {
+        logicalIndex: index + 1,
+        aggregated: false,
+        aggregatedAddonCount: 0
+      }));
+      if (state.assetKey !== "structured_fi" || state.runMode !== "aggregate_addons") return indexed;
+      const grouped = new Map();
+      indexed.forEach(row => {
+        const key = structuredAggregateKey(row) || `row-${row.logicalIndex}`;
+        if (!grouped.has(key)) grouped.set(key, []);
+        grouped.get(key).push(row);
+      });
+      const out = [];
+      grouped.forEach(groupRows => {
+        const sorted = groupRows.slice().sort((a, b) => (rowDateMs(a) - rowDateMs(b)) || (a.logicalIndex - b.logicalIndex));
+        let cluster = null;
+        const flush = () => {
+          if (!cluster) return;
+          const base = Object.assign({}, cluster.base);
+          const addons = cluster.addons;
+          if (addons.length) {
+            const vol = [base].concat(addons).reduce((sum, r) => sum + (num(r.volumeUsd) || 0), 0);
+            const va = [base].concat(addons).reduce((sum, r) => sum + (num(r.vaCandidate) || 0), 0);
+            base.volumeUsd = vol || base.volumeUsd;
+            base.vaCandidate = va || base.vaCandidate;
+            base.volumeSource = "AGGREGATED_ADDON_SUM";
+            base.vaSource = "AGGREGATED_ADDON_SUM";
+            base.aggregated = true;
+            base.aggregatedAddonCount = addons.length;
+            base.comments = [
+              base.comments,
+              `aggregated_addons=${addons.length}`,
+              `addon_rows=${addons.map(r => r.sourceRowNumber).join(",")}`
+            ].filter(Boolean).join(" | ");
+          }
+          out.push(base);
+          cluster = null;
+        };
+        sorted.forEach(row => {
+          if (isStructuredNewRow(row)) {
+            flush();
+            cluster = { base: row, addons: [] };
+            return;
+          }
+          if (isStructuredAddonRow(row) && cluster && withinAddonWindow(cluster.base, row)) {
+            cluster.addons.push(row);
+            return;
+          }
+          flush();
+          out.push(row);
+        });
+        flush();
+      });
+      return out.sort((a, b) => (a.logicalIndex || 0) - (b.logicalIndex || 0));
+    }
+    function parseRowsForSelectedAsset(rows, sheetName) {
+      const detection = detectTemplate(Object.keys(rows[0] || {}));
+      let result;
+      if (state.assetKey === "structured_fi") {
+        result = detection.template === "structured_credit_2025" ? parseStructuredCredit2025(rows, sheetName) : parseStructuredFi(rows, sheetName);
+      } else if (state.assetKey === "collar") {
+        result = parseCollar(rows, currentSettings().collarRowGrain, sheetName);
+      } else if (state.assetKey === "illiquid_repack") {
+        result = parseIlliquid(rows, sheetName);
+      } else if (state.assetKey === "equity_trs") {
+        result = parseTrs(rows, sheetName);
+      } else {
+        result = { rows: [], warnings: 1 };
+      }
+      return { detection, result: result || { rows: [], warnings: 0 } };
+    }
+    async function loadWorkbook() {
       if (!window.XLSX) {
         setFatalError("XLSX library not loaded. Check network access to the preserved CDN script.");
         return;
@@ -2394,30 +2671,77 @@
       }
       setReady("loading");
       state.workbookName = file.name;
+      state.workbook = null;
+      state.workbookSheets = [];
       state.sheetStatuses = [];
       state.canonicalRows = [];
+      state.sourceRows = [];
       state.mappedRows = [];
       state.exceptions = [];
       state.sourceHeadersByAsset = {};
+      state.exportExcludedRows = {};
       const buf = await file.arrayBuffer();
       const workbook = XLSX.read(buf, { type: "array", cellDates: true });
+      state.workbook = workbook;
+      state.workbookSheets = workbook.SheetNames.slice();
+      populateSheetSelect(preferredSheetForAsset(state.assetKey));
       log(`Workbook loaded: ${file.name}; sheets=${workbook.SheetNames.length}`, "success");
-      const canonical = [];
-      canonical.push(...parseStructuredFiWorkbookSheets(workbook));
-      canonical.push(...parseCollar(getRowsForSheet(workbook, "Collar Blotter"), currentSettings().collarRowGrain).rows);
-      canonical.push(...parseIlliquid(getRowsForSheet(workbook, "Illiquid Credit+Repack")).rows);
-      canonical.push(...parseStructuredCredit2025(getRowsForSheet(workbook, "Structured Credit 2025")).rows);
-      canonical.push(...parseTrs(getRowsForSheet(workbook, "Equity TRS")).rows);
-      // Control-named sheets (e.g. "Structured Rate + Credit") are evaluated by signature here:
-      // parsed if they carry a blotter format, kept as skipped summaries otherwise.
-      canonical.push(...autoDetectRemainingSheets(workbook));
-      state.canonicalRows = canonical;
-      rebuildMapping();
-      setPill("workbookPill", `Workbook: ${canonical.length} rows`, canonical.length ? "green" : "amber");
+      setPill("workbookPill", `Workbook: ${file.name}`, "green");
+      setStatus(`Workbook loaded: <b>${escapeHtml(file.name)}</b>. Select an asset and worksheet, then click <b>Process selected sheet</b>.`, "good");
       refreshGatePill();
       renderAll();
       setReady("ready");
-      showToast(`Workbook parsed: ${canonical.length} rows`);
+      showToast(`Workbook loaded: ${workbook.SheetNames.length} sheets`);
+    }
+    async function parseWorkbook() {
+      await loadWorkbook();
+    }
+    async function processSelectedSheet() {
+      if (!state.workbook) {
+        await loadWorkbook();
+        if (!state.workbook) return;
+      }
+      const sheetName = qs("sheetSelect").value || state.sheetName;
+      if (!sheetName || !state.workbook.Sheets[sheetName]) {
+        setStatus("Select a worksheet from the loaded workbook before processing.", "warn");
+        return;
+      }
+      state.assetKey = normalizeAssetKey(qs("assetSelect").value || state.assetKey);
+      state.sheetName = sheetName;
+      state.runMode = qs("runModeSelect").value || "trade_by_trade";
+      state.tradeIdMode = qs("tradeIdModeSelect").value || "business_key";
+      state.addonWindowDays = Math.max(0, Math.min(30, Number(qs("addonWindowDays").value || 7)));
+      if (!assetConfig().supportsAggregation && state.runMode !== "trade_by_trade") {
+        state.runMode = "trade_by_trade";
+        qs("runModeSelect").value = "trade_by_trade";
+        setStatus(`${assetConfig().label} does not support add-on aggregation, so this sheet will run trade by trade.`, "warn");
+      }
+      setReady("loading");
+      state.sheetStatuses = [];
+      state.canonicalRows = [];
+      state.sourceRows = [];
+      state.mappedRows = [];
+      state.exceptions = [];
+      state.sourceHeadersByAsset = {};
+      state.exportExcludedRows = {};
+      const rawRows = getRowsForActualSheet(state.workbook, sheetName, sheetName);
+      const { detection, result } = parseRowsForSelectedAsset(rawRows, sheetName);
+      const parsedRows = applySelectedRunMode(result.rows);
+      state.sourceRows = parsedRows;
+      state.canonicalRows = parsedRows;
+      const status = state.sheetStatuses[state.sheetStatuses.length - 1];
+      if (status && norm(status.actual || status.sheet) === norm(sheetName)) {
+        status.rows = parsedRows.length;
+        status.template = `${assetConfig().label}${detection.confident ? ` / ${detection.label}` : ""}`;
+        status.message = `Processed selected sheet only; raw rows=${rawRows.length}, mapped rows=${parsedRows.length}, warnings=${result.warnings || 0}`;
+      }
+      rebuildRefs();
+      rebuildMapping();
+      syncGoldenRecordsFromCurrentRun();
+      saveLocal();
+      renderAll();
+      setReady("ready");
+      setStatus(`Processed <b>${escapeHtml(sheetName)}</b> as <b>${escapeHtml(assetConfig().label)}</b>: ${fmt(parsedRows.length)} mapped row${parsedRows.length === 1 ? "" : "s"}.`, parsedRows.length ? "good" : "warn");
     }
 
     function getCoverageLookup(row) {
@@ -2895,9 +3219,18 @@
       if (dateIssues.length) warnings.push({ category: "Date sanity", item: `${dateIssues.length} trade(s)`, count: dateIssues.length, detail: dateIssues.slice(0, 50).join("; ") });
       state.dataQuality = { warnings, duplicateIds };
     }
+    function rowUid(row) {
+      return [row.sourceSheet, row.sourceRowNumber, row.tradeId, row.assetClass].map(cleanText).join("::");
+    }
+    function isRowSelected(row) {
+      return !state.exportExcludedRows[rowUid(row)];
+    }
+    function selectedMappedRows() {
+      return state.mappedRows.filter(m => isRowSelected(m.row));
+    }
     function exportRowsForGate() {
       const mode = currentSettings().finalExportGate;
-      return state.mappedRows.filter(m => {
+      return selectedMappedRows().filter(m => {
         if (mode === "working_and_above") return m.quality !== "FAIL";
         if (mode === "clean_only") return m.quality === "CLEAN_PASS";
         return m.quality === "CLEAN_PASS" || m.quality === "CONTROLLED_PASS";
@@ -2965,7 +3298,7 @@
       const dupIds = state.dataQuality.duplicateIds;
       return `
         <div class="grid grid-6">
-          <div class="kpi"><div class="label">Canonical rows</div><div class="value">${fmt(state.canonicalRows.length)}</div><div class="sub">Parsed from expected row-level sheets.</div></div>
+          <div class="kpi"><div class="label">Canonical rows</div><div class="value">${fmt(state.canonicalRows.length)}</div><div class="sub">Parsed from the selected worksheet.</div></div>
           <div class="kpi"><div class="label">Mapped rows</div><div class="value">${fmt(total)}</div><div class="sub">Standardised into template fields.</div></div>
           <div class="kpi"><div class="label">Clean pass</div><div class="value${clean > 0 ? " good" : ""}">${fmt(clean)}</div><div class="sub">No mandatory gaps/placeholders.</div></div>
           <div class="kpi"><div class="label">Controlled/Working</div><div class="value${(controlled + working) > 0 ? " warn" : ""}">${fmt(controlled + working)}</div><div class="sub">Usable depending on gate mode.</div></div>
@@ -3037,12 +3370,12 @@
       if (unparsed.length) {
         const items = unparsed.map(s => `<li><b>'${escapeHtml(s.sheet || s.actual || "unknown")}'</b>${s.message ? ` &mdash; ${escapeHtml(s.message)}` : (s.status === "error" ? " &mdash; error while reading this sheet" : " &mdash; no confident template match")}</li>`).join("");
         const plural = unparsed.length === 1 ? "sheet was" : "sheets were";
-        html += `<div class="bad-note" id="unparsedSheetsNotice"><b>${unparsed.length} uploaded ${plural} not recognized and its rows were NOT mapped:</b><ul style="margin:6px 0 4px 18px">${items}</ul>Review ${unparsed.length === 1 ? "it" : "them"} in <button type="button" class="link-btn" id="btnGotoDiagnosticsWarn">Diagnostics</button> for detail.</div>`;
+        html += `<div class="bad-note" id="unparsedSheetsNotice"><b>${unparsed.length} selected ${plural} not recognized and its rows were NOT mapped:</b><ul style="margin:6px 0 4px 18px">${items}</ul>Review the Activity Log for detail.</div>`;
       }
       if (autoDetected.length) {
         const items = autoDetected.map(s => `'${escapeHtml(s.sheet || s.actual || "unknown")}' &rarr; ${escapeHtml(s.template || "template")}`).join(", ");
         const plural = autoDetected.length === 1 ? "sheet" : "sheets";
-        html += `<div class="blue-note" id="autoDetectedSheetsNotice" style="margin-top:${unparsed.length ? 8 : 0}px">${autoDetected.length} ${plural} auto-detected by column signature: ${items}. See <button type="button" class="link-btn" id="btnGotoDiagnosticsInfo">Diagnostics</button> for detail.</div>`;
+        html += `<div class="blue-note" id="autoDetectedSheetsNotice" style="margin-top:${unparsed.length ? 8 : 0}px">${autoDetected.length} ${plural} auto-detected by column signature: ${items}.</div>`;
       }
       return html;
     }
@@ -3069,10 +3402,6 @@
         </section>`;
       qs("btnExportCsv").onclick = exportCsv;
       qs("btnExportXlsx").onclick = exportXlsx;
-      const gotoWarn = qs("btnGotoDiagnosticsWarn");
-      if (gotoWarn) gotoWarn.onclick = () => activateTab("diagnostics");
-      const gotoInfo = qs("btnGotoDiagnosticsInfo");
-      if (gotoInfo) gotoInfo.onclick = () => activateTab("diagnostics");
       renderSummaryChart();
     }
     function renderReconciliation() {
@@ -3117,16 +3446,16 @@
         <section class="card section"><div class="section-title">Row counts by source sheet</div>${tableHtml(rows, [
           { label: "Source sheet", value: "sheet" },
           { label: "Canonical rows", value: "rows", className: "num", html: v => fmt(v) }
-        ], "No sheets reconciled yet. Upload a workbook and click Parse Workbook to see per-sheet row counts.")}</section>
+      ], "No sheets reconciled yet. Load a workbook and process one selected sheet to see row counts.")}</section>
         <section class="card section"><div class="section-title">Totals by asset class</div>${tableHtml(totalsRows, [
           { label: "Asset class", value: "asset", html: (v) => v === "TOTAL" ? `<b>${escapeHtml(v)}</b>` : escapeHtml(v) },
           { label: "Rows", value: "rows", className: "num", html: v => fmt(v) },
           { label: "Σ *$ Volume", value: "vol", className: "num", html: v => fmt(v) },
           { label: "Σ $ VA/GNBV", value: "va", className: "num", html: v => fmt(v) },
           { label: "Σ $ PC", value: "pc", className: "num", html: v => fmt(v) }
-        ], "No mapped rows yet. Parse a workbook to see per-asset-class totals.")}
+        ], "No mapped rows yet. Process one selected sheet to see per-asset-class totals.")}
         <div class="footer-mini" style="margin-top:8px">Sums are over final mapped values (after rules and overrides) - use them to tie back to the workbook control/summary sheets.</div></section>
-        <section class="card section"><div class="section-title">PLUTO required-field fill matrix</div>${state.mappedRows.length ? tableHtml(matrixRows, matrixCols) : `<div class="empty">No mapped rows yet. Parse a workbook to see per-asset-class fill rates for the PLUTO required fields.</div>`}
+        <section class="card section"><div class="section-title">PLUTO required-field fill matrix</div>${state.mappedRows.length ? tableHtml(matrixRows, matrixCols) : `<div class="empty">No mapped rows yet. Process one selected sheet to see per-asset-class fill rates for the PLUTO required fields.</div>`}
         <div class="footer-mini" style="margin-top:8px">Cell = % of that asset class's rows with a non-blank final value. Green &ge; 99%, amber &ge; 80%, red &lt; 80%.</div></section>`;
     }
     function renderDiagnostics() {
@@ -3137,7 +3466,7 @@
         { label: "Template", value: "template", html: v => v ? badge(v, "blue") : "" },
         { label: "Rows", value: "rows", className: "num", html: v => fmt(v) },
         { label: "Message", value: "message" }
-      ], "No sheet diagnostics yet. Parse a workbook to see how each expected sheet was detected and read.")}</section>`;
+      ], "No sheet diagnostics yet. Process one selected sheet to see how it was detected and read.")}</section>`;
     }
     function renderCanonical() {
       qs("canonical").innerHTML = `<section class="card section"><div class="section-title">Canonical rows</div>${tableHtml(state.canonicalRows.slice(0, 1000), [
@@ -3151,7 +3480,7 @@
         { label: "Volume USD", value: "volumeUsd", className: "num", html: v => fmt(v) },
         { label: "VA/GNBV", value: "vaCandidate", className: "num", html: v => fmt(v) },
         { label: "Product", value: "productName" }
-      ], "No canonical rows yet. Upload a blotter workbook above and click Parse Workbook.")}</section>`;
+      ], "No canonical rows yet. Load a blotter workbook above and click Process selected sheet.")}</section>`;
     }
     function setManualOverride(tradeId, field, value) {
       if (!state.manualOverrides[tradeId]) state.manualOverrides[tradeId] = {};
@@ -3239,7 +3568,7 @@
           <div class="section-title">Template mapping</div>
           <button class="btn secondary" id="btnClearAllOverrides">Clear all overrides</button>
         </div>
-        ${tableHtml(state.mappedRows.slice(0, 1000), cols, "No mapped rows yet. Upload a workbook to see rows standardised into the 44-column template.")}
+        ${tableHtml(state.mappedRows.slice(0, 1000), cols, "No mapped rows yet. Process one selected sheet to see rows standardised into the PLUTO template.")}
         ${totalsHtml}
       </section>${editorHtml}`;
       qs("btnClearAllOverrides").onclick = () => {
@@ -3255,6 +3584,220 @@
         renderMapping();
       }));
       bindRowEditorEvents();
+    }
+    function renderProcessedSheet() {
+      const headers = state.templateHeaders.length ? state.templateHeaders : TEMPLATE_FALLBACK_HEADERS;
+      const rows = state.mappedRows.slice(0, 1000);
+      const selectedCount = selectedMappedRows().length;
+      const headerHtml = [
+        "<th>Select</th>",
+        "<th>Quality</th>",
+        "<th>Source</th>"
+      ].concat(headers.map(h => `<th>${escapeHtml(h)}</th>`)).join("");
+      const bodyHtml = rows.map(m => {
+        const uid = rowUid(m.row);
+        const checked = isRowSelected(m.row) ? "checked" : "";
+        const source = `${m.row.sourceSheet || ""}#${m.row.sourceRowNumber || ""}`;
+        const cells = headers.map(h => {
+          const field = templateFieldName(h);
+          const value = outputFieldValue(m.out, h);
+          const prov = m.prov[field] || {};
+          const cls = prov.className || "BLANK";
+          return `<td class="processed-cell-wrap"><input class="processed-cell ${escapeHtml(cls)}" data-tradeid="${escapeHtml(m.row.tradeId)}" data-field="${escapeHtml(field)}" value="${escapeHtml(value)}" title="${escapeHtml(prov.note || cls)}" /></td>`;
+        }).join("");
+        return `<tr data-rowid="${escapeHtml(uid)}">
+          <td><input type="checkbox" class="processed-select-row" data-rowid="${escapeHtml(uid)}" ${checked} /></td>
+          <td>${qualityBadge(m.quality)}</td>
+          <td class="mono">${escapeHtml(source)}</td>
+          ${cells}
+        </tr>`;
+      }).join("");
+      qs("processedSheet").innerHTML = `
+        <section class="card section">
+          <div class="toolbar">
+            <div class="section-title">Processed Sheet</div>
+            <div class="action-row">
+              <button id="btnProcessedSelectAll" class="btn ghost">Select All</button>
+              <button id="btnProcessedClearSelection" class="btn ghost">Clear Selection</button>
+              <button id="btnProcessedExportCsv" class="btn secondary">Export CSV</button>
+              <button id="btnProcessedExportXlsx" class="btn secondary">Export XLSX</button>
+            </div>
+          </div>
+          <div class="footer-mini" style="margin-bottom:8px">${fmt(selectedCount)} of ${fmt(state.mappedRows.length)} processed row${state.mappedRows.length === 1 ? "" : "s"} selected for export.</div>
+          <div class="table-wrap"><table class="processed-table"><thead><tr>${headerHtml}</tr></thead><tbody>${bodyHtml || `<tr><td colspan="${headers.length + 3}" class="empty">No processed rows yet. Load a workbook and process one selected sheet.</td></tr>`}</tbody></table></div>
+        </section>`;
+      qs("btnProcessedSelectAll").onclick = () => {
+        state.exportExcludedRows = {};
+        saveLocal();
+        renderProcessedSheet();
+        updateTopPills();
+      };
+      qs("btnProcessedClearSelection").onclick = () => {
+        state.exportExcludedRows = {};
+        state.mappedRows.forEach(m => { state.exportExcludedRows[rowUid(m.row)] = true; });
+        saveLocal();
+        renderProcessedSheet();
+        updateTopPills();
+      };
+      qs("btnProcessedExportCsv").onclick = exportCsv;
+      qs("btnProcessedExportXlsx").onclick = exportXlsx;
+      qsa(".processed-select-row").forEach(cb => cb.addEventListener("change", () => {
+        if (cb.checked) delete state.exportExcludedRows[cb.dataset.rowid];
+        else state.exportExcludedRows[cb.dataset.rowid] = true;
+        saveLocal();
+        updateTopPills();
+        refreshGatePill();
+      }));
+      qsa(".processed-cell").forEach(input => input.addEventListener("change", () => {
+        const tradeId = input.dataset.tradeid;
+        const field = templateFieldName(input.dataset.field);
+        if (!state.manualOverrides[tradeId]) state.manualOverrides[tradeId] = {};
+        state.manualOverrides[tradeId][field] = input.value;
+        saveLocal();
+        rebuildMapping();
+        syncGoldenRecordsFromCurrentRun();
+        renderAll();
+        showToast(`Edited ${field}`);
+      }));
+    }
+    function syncGoldenRecordsFromCurrentRun() {
+      const existing = new Map((state.goldenRecords || []).map(r => [String(r.tradeId), r]));
+      const now = new Date().toISOString();
+      state.mappedRows.forEach(m => {
+        const tradeId = cleanText(outputFieldValue(m.out, "*Trade ID"));
+        if (!tradeId) return;
+        const occurrenceKey = [state.workbookName, state.sheetName, rowUid(m.row)].map(cleanText).join("|");
+        const prev = existing.get(tradeId) || {
+          tradeId,
+          firstSeenAt: now,
+          occurrences: 0,
+          occurrenceKeys: []
+        };
+        if (!prev.occurrenceKeys.includes(occurrenceKey)) {
+          prev.occurrences = Number(prev.occurrences || 0) + 1;
+          prev.occurrenceKeys = prev.occurrenceKeys.concat([occurrenceKey]).slice(-20);
+        }
+        prev.lastSeenAt = now;
+        prev.workbookName = state.workbookName;
+        prev.sourceSheet = m.row.sourceSheet;
+        prev.sourceRowNumber = m.row.sourceRowNumber;
+        prev.assetClass = m.row.assetClass;
+        prev.quality = m.quality;
+        prev.output = clonePlain(m.out);
+        prev.source = clonePlain({
+          tradeDate: m.row.tradeDate,
+          maturityDate: m.row.maturityDate,
+          client: m.row.client,
+          book: m.row.book,
+          primaryCcy: m.row.primaryCcy,
+          volumeUsd: m.row.volumeUsd,
+          productName: m.row.productName,
+          structureName: m.row.structureName,
+          nativeTradeRef: m.row.tradeId
+        });
+        existing.set(tradeId, prev);
+      });
+      state.goldenRecords = Array.from(existing.values()).sort((a, b) => String(a.tradeId).localeCompare(String(b.tradeId))).slice(-5000);
+      if (!state.selectedGoldenKey && state.goldenRecords.length) state.selectedGoldenKey = String(state.goldenRecords[0].tradeId);
+    }
+    function renderGoldenRecord() {
+      const rows = (state.goldenRecords || []).map(r => ({
+        tradeId: r.tradeId,
+        assetClass: r.assetClass,
+        quality: r.quality,
+        sourceSheet: r.sourceSheet,
+        sourceRowNumber: r.sourceRowNumber,
+        lastSeenAt: formatDateTimeDisplay(r.lastSeenAt),
+        occurrences: r.occurrences || 0
+      }));
+      const selected = (state.goldenRecords || []).find(r => String(r.tradeId) === String(state.selectedGoldenKey)) || (state.goldenRecords || [])[0];
+      qs("goldenRecord").innerHTML = `
+        <section class="card section">
+          <div class="toolbar">
+            <div class="section-title">Golden Record</div>
+            <div class="action-row">
+              <button id="btnSyncGolden" class="btn secondary">Sync Current Run</button>
+              <button id="btnClearGolden" class="btn ghost">Clear Golden</button>
+            </div>
+          </div>
+          ${tableHtml(rows, [
+            { label: "Trade ID", value: "tradeId", className: "mono", html: v => `<button class="linklike golden-link" data-tradeid="${escapeHtml(v)}">${escapeHtml(v)}</button>` },
+            { label: "Asset", value: "assetClass" },
+            { label: "Quality", value: "quality", html: v => qualityBadge(v) },
+            { label: "Sheet", value: "sourceSheet" },
+            { label: "Row", value: "sourceRowNumber", className: "num" },
+            { label: "Seen", value: "occurrences", className: "num" },
+            { label: "Last seen", value: "lastSeenAt" }
+          ], "No golden records yet. Process a selected sheet to populate the golden record store.")}
+        </section>
+        ${selected ? `<section class="card section">
+          <div class="section-title">Selected Golden Record ${escapeHtml(selected.tradeId)}</div>
+          <div class="grid grid-2">
+            <div><div class="footer-mini" style="margin-bottom:6px">Source</div><pre class="json-pre">${escapeHtml(JSON.stringify(selected.source || {}, null, 2))}</pre></div>
+            <div><div class="footer-mini" style="margin-bottom:6px">PLUTO Output</div><pre class="json-pre">${escapeHtml(JSON.stringify(selected.output || {}, null, 2))}</pre></div>
+          </div>
+        </section>` : ""}`;
+      qs("btnSyncGolden").onclick = () => {
+        syncGoldenRecordsFromCurrentRun();
+        saveLocal();
+        renderGoldenRecord();
+        updateTopPills();
+        showToast("Golden record synced");
+      };
+      qs("btnClearGolden").onclick = () => {
+        state.goldenRecords = [];
+        state.selectedGoldenKey = "";
+        saveLocal();
+        renderGoldenRecord();
+        updateTopPills();
+      };
+      qsa(".golden-link").forEach(btn => btn.addEventListener("click", () => {
+        state.selectedGoldenKey = btn.dataset.tradeid;
+        saveLocal();
+        renderGoldenRecord();
+      }));
+    }
+    function renderDefaultRules() {
+      const headers = state.templateHeaders.length ? state.templateHeaders : TEMPLATE_FALLBACK_HEADERS;
+      const scopes = Array.from(new Set(state.canonicalRows.map(r => r.assetClass))).filter(Boolean);
+      const scope = scopes[0] || "Global";
+      const rows = headers.map(h => {
+        const field = templateFieldName(h);
+        const binding = describeBinding(field, scope);
+        return {
+          field,
+          required: plutoRequiredFields(headers).includes(field) ? "Yes" : "",
+          source: binding.summary,
+          status: binding.hasRule ? "Manual rule" : "Built-in",
+          scope
+        };
+      });
+      const runRows = [
+        { item: "Asset", value: assetConfig().label },
+        { item: "Worksheet", value: state.sheetName || "" },
+        { item: "Run mode", value: state.runMode === "aggregate_addons" ? `Aggregate add-ons (${state.addonWindowDays}d)` : "Trade by trade" },
+        { item: "Trade ID mode", value: state.tradeIdMode },
+        { item: "PLUTO mandatory fields", value: plutoRequiredFields(headers).join(", ") },
+        { item: "CLN taxonomy", value: "Structured Credit / Structured Credit / Credit Linked Notes" },
+        { item: "Repack + Illiquid Credit taxonomy", value: "Structured Credit / Structured Credit / Structured Credit Notes" },
+        { item: "Private Credit taxonomy", value: "Private Credit Primary / Private Placement / Private Placement" },
+        { item: "Treats fallbacks", value: "Nomura Private Bank = NOSGSGH; HASE/Hang Seng = HASEHKP; PB SG/HK routing retained" }
+      ];
+      qs("defaultRules").innerHTML = `
+        <section class="card section"><div class="section-title">Default Rules</div>${tableHtml(runRows, [
+          { label: "Rule", value: "item" },
+          { label: "Current value", value: "value" }
+        ])}</section>
+        <section class="card section"><div class="section-title">PLUTO Field Defaults ${scope !== "Global" ? `<span class="footer-mini">Scope: ${escapeHtml(scope)}</span>` : ""}</div>${tableHtml(rows, [
+          { label: "PLUTO field", value: "field" },
+          { label: "Required", value: "required" },
+          { label: "Rule status", value: "status", html: v => badge(v, v === "Manual rule" ? "purple" : "blue") },
+          { label: "Default source / derivation", value: "source" }
+        ])}</section>`;
+    }
+    function renderActivityLog() {
+      qs("activityLog").innerHTML = `<section class="card section"><div class="toolbar"><div class="section-title">Activity Log</div><button class="btn secondary" id="btnClearActivityLog">Clear log</button></div><div class="log-box">${state.logs.map(l => `<div class="log-line log-${escapeHtml(l.level)}">[${escapeHtml(l.time)}] ${escapeHtml(l.level.toUpperCase())}: ${escapeHtml(l.msg)}</div>`).join("") || "<div class='log-line log-info'>No log entries.</div>"}</div></section>`;
+      qs("btnClearActivityLog").onclick = () => { clearLogs(); renderActivityLog(); };
     }
     function sourceOptionsForScope(scope) {
       const headerSet = new Set();
@@ -3354,7 +3897,7 @@
         }
       } catch (e) {
         log(`Mapping rules import failed: ${e.message}`, "error");
-        showToast("Rules import failed - see Debug Log");
+        showToast("Rules import failed - see Activity Log");
       }
     }
     function getDefaultBinding(field, scope) {
@@ -3744,7 +4287,7 @@
         { label: "Value", value: "value" },
         { label: "Provenance", value: "provenance", html: v => provBadge(v) },
         { label: "Note", value: "note" }
-      ], "No field-level detail yet. Parse a workbook to see every mapped value with its provenance.")}</section>`;
+      ], "No field-level detail yet. Process one selected sheet to see every mapped value with its provenance.")}</section>`;
     }
     function renderExceptions() {
       const dq = state.dataQuality;
@@ -3754,7 +4297,7 @@
           { label: "Item", value: "item" },
           { label: "Count", value: "count", className: "num", html: v => fmt(v) },
           { label: "Detail", value: "detail" }
-        ], state.mappedRows.length ? "No data-quality warnings - duplicate IDs, CCY/ISIN formats, magnitudes and dates all look sane." : "No data-quality checks yet. Parse a workbook to run duplicate/CCY/ISIN/magnitude/date validation.")}
+      ], state.mappedRows.length ? "No data-quality warnings - duplicate IDs, CCY/ISIN formats, magnitudes and dates all look sane." : "No data-quality checks yet. Process one selected sheet to run duplicate/CCY/ISIN/magnitude/date validation.")}
         <div class="footer-mini" style="margin-top:8px">Warnings are advisory only - they never change quality tiers or export gates.</div></section>
         <section class="card section"><div class="section-title">Exceptions</div>${tableHtml(state.exceptions, [
         { label: "Quality", value: "quality", html: v => qualityBadge(v) },
@@ -3763,7 +4306,7 @@
         { label: "Sheet", value: "sourceSheet" },
         { label: "Row", value: "sourceRowNumber", className: "num" },
         { label: "Issues", value: "errors" }
-      ], state.mappedRows.length ? "No exceptions - every mapped row currently passes its mandatory-field checks." : "No exceptions yet. Parse a workbook to run the mandatory-field quality checks.")}</section>`;
+      ], state.mappedRows.length ? "No exceptions - every mapped row currently passes its mandatory-field checks." : "No exceptions yet. Process one selected sheet to run the mandatory-field quality checks.")}</section>`;
     }
     function renderReferences() {
       qs("references").innerHTML = `
@@ -3797,7 +4340,7 @@
         app: "Centralised Blotter Mapping Studio",
         version: "v12-ocr-repair",
         savedAt: new Date().toISOString(),
-        assetKey: "cross_asset",
+        assetKey: state.assetKey || "structured_fi",
         sourceLogicUrl: BASE_LOGIC_URL,
         profileScopeApp: PROFILE_SCOPE_APP,
         template: {
@@ -3832,7 +4375,18 @@
         },
         meta: { ...state.refMeta },
         mappingRules: clonePlain(state.mappingRules),
-        manualOverrides: clonePlain(state.manualOverrides)
+        manualOverrides: clonePlain(state.manualOverrides),
+        process: {
+          assetKey: state.assetKey,
+          sheetName: state.sheetName,
+          runMode: state.runMode,
+          tradeIdMode: state.tradeIdMode,
+          addonWindowDays: state.addonWindowDays,
+          exportExcludedRows: clonePlain(state.exportExcludedRows),
+          goldenRecords: clonePlain(state.goldenRecords),
+          selectedGoldenKey: state.selectedGoldenKey,
+          fileHistory: clonePlain(state.fileHistory)
+        }
       };
     }
     function readSavedProfiles() {
@@ -4202,6 +4756,23 @@
       }
       state.mappingRules = (payload.mappingRules && typeof payload.mappingRules === "object") ? payload.mappingRules : {};
       state.manualOverrides = (payload.manualOverrides && typeof payload.manualOverrides === "object") ? payload.manualOverrides : {};
+      const process = payload.process || payload;
+      if (process && typeof process === "object") {
+        state.assetKey = normalizeAssetKey(process.assetKey || state.assetKey);
+        state.sheetName = cleanText(process.sheetName || state.sheetName);
+        state.runMode = ["trade_by_trade", "aggregate_addons"].includes(process.runMode) ? process.runMode : state.runMode;
+        state.tradeIdMode = ["business_key", "native_ref_preferred", "legacy_row_order"].includes(process.tradeIdMode) ? process.tradeIdMode : state.tradeIdMode;
+        state.addonWindowDays = Math.max(0, Math.min(30, Number(process.addonWindowDays || state.addonWindowDays || 7)));
+        state.exportExcludedRows = (process.exportExcludedRows && typeof process.exportExcludedRows === "object") ? process.exportExcludedRows : {};
+        state.goldenRecords = Array.isArray(process.goldenRecords) ? process.goldenRecords : state.goldenRecords;
+        state.selectedGoldenKey = cleanText(process.selectedGoldenKey || state.selectedGoldenKey);
+        state.fileHistory = Array.isArray(process.fileHistory) ? process.fileHistory : state.fileHistory;
+        if (qs("assetSelect")) qs("assetSelect").value = state.assetKey;
+        if (qs("runModeSelect")) qs("runModeSelect").value = state.runMode;
+        if (qs("tradeIdModeSelect")) qs("tradeIdModeSelect").value = state.tradeIdMode;
+        if (qs("addonWindowDays")) qs("addonWindowDays").value = String(state.addonWindowDays);
+        if (state.workbookSheets.length) populateSheetSelect(state.sheetName);
+      }
       normalizeStoredFieldMaps();
       saveLocal();
       rebuildRefs();
@@ -4510,6 +5081,14 @@
     function updateTopPills() {
       refreshGatePill();
       updateSavedSettingsPill();
+      setPill("workbookPill", state.workbookName ? `Workbook: ${state.workbookName}` : "Workbook: none", state.workbookName ? "green" : "amber");
+      setPill("assetPill", `Asset: ${assetConfig().label}`, state.assetKey ? "blue" : "amber");
+      setPill("sheetPill", `Sheet: ${state.sheetName || "none"}`, state.sheetName ? "blue" : "amber");
+      setPill("modePill", state.runMode === "aggregate_addons" ? `Mode: aggregate ${state.addonWindowDays}d` : "Mode: trade by trade", "blue");
+      const tradeIdLabel = state.tradeIdMode === "native_ref_preferred" ? "native ref preferred" : (state.tradeIdMode === "legacy_row_order" ? "legacy row order" : "business key");
+      setPill("tradeIdPill", `Trade ID: ${tradeIdLabel}`, "blue");
+      setPill("selectedRowsPill", `Selected: ${selectedMappedRows().length}/${state.mappedRows.length}`, state.mappedRows.length ? "blue" : "");
+      setPill("goldenPill", `Golden: ${state.goldenRecords.length}`, state.goldenRecords.length ? "green" : "");
       setPill("pillDateFmt", "Date format: dd/mm/yyyy", "blue");
       const sheetsPill = qs("sheetsPill");
       if (sheetsPill) {
@@ -4521,25 +5100,47 @@
     function processCurrentSheet() {
       rebuildRefs();
       rebuildMapping();
+      syncGoldenRecordsFromCurrentRun();
       renderAll();
     }
     function renderAll() {
       renderOverview();
+      renderMappingStudio();
+      renderProcessedSheet();
+      renderExceptions();
+      renderGoldenRecord();
+      renderDefaultRules();
+      if (!qs("coverageCsv")) renderReferences();
+      renderSavedSettings();
+      renderActivityLog();
       renderReconciliation();
       renderDiagnostics();
       renderCanonical();
       renderMapping();
-      renderMappingStudio();
       renderFieldMatrix();
-      renderExceptions();
-      if (!qs("coverageCsv")) renderReferences();
       renderGovernance();
-      renderSavedSettings();
       renderDebugLog();
       updateTabCounts();
       updateTopPills();
     }
     function bindRecoveredOriginalControls() {
+      const assetSelect = qs("assetSelect");
+      if (assetSelect && !assetSelect.dataset.recoveredPage199Bound) {
+        assetSelect.dataset.recoveredPage199Bound = "true";
+        assetSelect.addEventListener("change", async e => {
+          state.assetKey = normalizeAssetKey(e.target.value);
+          if (!assetConfig().supportsAggregation && state.runMode !== "trade_by_trade") {
+            state.runMode = "trade_by_trade";
+            if (qs("runModeSelect")) qs("runModeSelect").value = "trade_by_trade";
+          }
+          autoSelectPreferredSheet();
+          saveLocal();
+          updateTopPills();
+          setStatus(`Asset switched to <b>${escapeHtml(assetConfig().label)}</b>. Worksheet is now <b>${escapeHtml(state.sheetName || "none")}</b>. Click <b>Process selected sheet</b> to refresh the mapping.`, "blue");
+          if (state.sourceRows.length && state.workbook) await processSelectedSheet();
+          else renderAll();
+        });
+      }
       const sheetSelect = qs("sheetSelect");
       if (sheetSelect && !sheetSelect.dataset.recoveredPage199Bound) {
         sheetSelect.dataset.recoveredPage199Bound = "true";
@@ -4552,12 +5153,16 @@
       const runModeSelect = qs("runModeSelect");
       if (runModeSelect && !runModeSelect.dataset.recoveredPage199Bound) {
         runModeSelect.dataset.recoveredPage199Bound = "true";
-        runModeSelect.addEventListener("change", e => {
-          state.recoveredRunMode = e.target.value;
-          if (qs("runMode") && Array.from(qs("runMode").options).some(o => o.value === e.target.value)) qs("runMode").value = e.target.value;
+        runModeSelect.addEventListener("change", async e => {
+          state.runMode = e.target.value;
+          if (!assetConfig().supportsAggregation && state.runMode !== "trade_by_trade") {
+            state.runMode = "trade_by_trade";
+            runModeSelect.value = "trade_by_trade";
+            setStatus(`${assetConfig().label} does not support add-on aggregation.`, "warn");
+          }
           saveLocal();
           updateTopPills();
-          if (state.canonicalRows.length) processCurrentSheet();
+          if (state.sourceRows.length && state.workbook) await processSelectedSheet();
           else renderAll();
         });
       }
@@ -4568,6 +5173,19 @@
           state.tradeIdMode = e.target.value;
           saveLocal();
           if (state.canonicalRows.length) processCurrentSheet();
+          else renderAll();
+        });
+      }
+      const addonWindowDays = qs("addonWindowDays");
+      if (addonWindowDays && !addonWindowDays.dataset.recoveredPage199Bound) {
+        addonWindowDays.dataset.recoveredPage199Bound = "true";
+        addonWindowDays.addEventListener("change", async e => {
+          const v = Math.max(0, Math.min(30, Number(e.target.value || 7)));
+          state.addonWindowDays = v;
+          addonWindowDays.value = String(v);
+          saveLocal();
+          updateTopPills();
+          if (state.sourceRows.length && state.runMode === "aggregate_addons" && state.workbook) await processSelectedSheet();
           else renderAll();
         });
       }
@@ -4600,7 +5218,12 @@
       syncThemeToggleLabel();
       qs("btnReloadTemplate").onclick = async () => { await loadTemplateHeaders(); renderAll(); };
       qs("btnParseWorkbook").onclick = parseWorkbook;
+      qs("btnProcess").onclick = processSelectedSheet;
       qs("btnRebuildAll").onclick = () => { rebuildRefs(); rebuildMapping(); renderAll(); };
+      qs("workbookInput").addEventListener("change", async e => {
+        const file = e.target.files && e.target.files[0];
+        if (file) await loadWorkbook();
+      });
       qsa(".tab").forEach(t => t.addEventListener("click", () => activateTab(t.dataset.tab)));
       // "More" overflow menu holds the secondary tabs so the primary bar stays compact.
       const moreBtn = qs("tabMoreBtn"), moreMenu = qs("tabMoreMenu");
@@ -4617,11 +5240,11 @@
       }
       bindRecoveredOriginalControls();
       ["runMode", "finalExportGate", "complianceMode", "collarRowGrain", "trsVaPolicy", "copyVolumeToTV", "illiquidStatusToBuySell", "trsFxConvention", "defaultSalesperson", "defaultLegalEntity", "allowSalespersonPlaceholder", "allowLegalPlaceholder", "allowTreatsPlaceholder", "allowTier3Placeholder", "pcPolicyStructuredFi", "pcPolicyIlliquid", "pcPolicyCollar", "pcPolicyTrs"].forEach(id => {
-        qs(id).addEventListener("change", () => { saveLocal(); rebuildMapping(); renderAll(); });
+        if (qs(id)) qs(id).addEventListener("change", () => { saveLocal(); rebuildMapping(); renderAll(); });
       });
-      // Parse-time settings only take effect on the next Parse Workbook run - say so honestly.
+      // Parse-time settings only take effect on the next selected-sheet process run.
       qs("collarRowGrain").addEventListener("change", () => {
-        if (state.canonicalRows.length) showToast("Collar row grain changed - click Parse Workbook again to apply");
+        if (state.canonicalRows.length) showToast("Collar row grain changed - click Process selected sheet again to apply");
       });
       window.addEventListener("resize", () => { syncTopbarHeight(); scheduleCanvasDraw(); });
       window.addEventListener("scroll", scheduleCanvasDraw, { passive: true });
