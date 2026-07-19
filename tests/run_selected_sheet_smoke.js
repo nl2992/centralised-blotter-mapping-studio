@@ -78,7 +78,7 @@ function buildStructuredFiProductFixture(filePath) {
     ["ISIN Front", "SALETEAM", "First Trade Date", "FINAL CUSTOMER", "Book", "Currency", "Structure", "Underlying", "Product", "Maturity", "Total NNBV", "First Reoffer", "Volume ('MM) USD", "Trader", "Issuer", "Product Type"],
     ["XSLCALLABLE01", "HK", "23-Feb-26", "HASE", "HK", "USD", "Linear Zero Callable Notes", "SOFR", "Linear Zero Callable Notes", "3/9/2028", 1000, "99.00%", 1, "HCIB", "HSBC", "Rate"],
     ["XSRANGEACCR01", "HK", "23-Feb-26", "HASE", "HK", "USD", "Range Accrual with Conversion", "XAUUSD", "Range Accrual with Conversion", "3/9/2028", 10742, "98.50%", 1, "HCIB", "HSBC", "Rate"],
-    ["XSCLNRANGE01", "HK", "23-Feb-26", "Nomura Private Bank", "HK", "USD", "CLN Range Accrual with Conversion", "XAUUSD", "CLN Credit Linked Note", "3/9/2028", 10742, "98.50%", 1, "HCIB", "HSBC", "Credit"]
+    ["XSCLNRANGE01", "HK", "23-Feb-26", "Nomura Private Bank", "HK", "USD", "Range Accrual with Conversion", "XAUUSD", "YieldEnhancedCLNRangeAccrual", "3/9/2028", 10742, "98.50%", 1, "HCIB", "HSBC", "Credit"]
   ]), "Structured FI Product Taxonomy");
   XLSX.writeFile(wb, filePath);
 }

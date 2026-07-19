@@ -25,7 +25,7 @@ The same harness also opens the Processed Sheet tab for a two-row case and check
 
 It also checks OCR reoffer price-point normalization: decimal reoffer inputs such as `0.991` / `0.975` must export as `99.1` / `97.5`, matching percentage or point inputs.
 
-It also creates a current-layout Structured FI product taxonomy workbook with one row each for `Linear Zero Callable Notes`, `Range Accrual with Conversion`, and `CLN Credit Linked Note`, confirming product-based tier branching and CLN priority over range-accrual wording.
+It also creates a current-layout Structured FI product taxonomy workbook with one row each for `Linear Zero Callable Notes`, `Range Accrual with Conversion`, and an embedded-CLN product such as `YieldEnhancedCLNRangeAccrual`, confirming product-based tier branching and `ifexists(CLN)` priority over range-accrual wording.
 
 To test the built single-file artifact instead of source, run:
 
