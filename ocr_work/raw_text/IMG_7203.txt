@@ -1,0 +1,23 @@
+if(state.tradeidMode === "business_key*) return businessKeyld;
+6t 221
+cleanText(src.referenceNumber).toUpperCase(),
+Jelse if(state.assetKey === *itiquid credit repack**
+70
+cleanText(src.underlying).toUpperCase(),
+nativeRefs = [src.nativeRet, src.summitld]:
+cleanText(src.currency).toUpperCase().
+cleanText(src.book).toUpperCase(),
+String(helpers.primaryAmount ??**)
+if(state.assetKey === "structured_fi"X
+nativeRefs = [src.referenceNumber]:
+Jelse if(state.assetKey === 'collar"X
+- +
+cleanText(helpers.buySell),
+nativeRefs = [src.nativeRef];
+nativeRefs = [sro.nativeRef]:
+cleanText(src.tradeDate),
+cleanText(src.maturity),
+"EQUITY_TRS",
+let nativeRefs - U]:
+Search
+Jelsel

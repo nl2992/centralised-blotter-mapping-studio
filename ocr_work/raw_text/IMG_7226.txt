@@ -1,0 +1,26 @@
+body: JSON.stringify({ title:"Al Formuta Copilot", project_id:**, is_tool_call:true })
+if(!res.ok) throw new Error(^ Conversation create failed: HTTP $(res.status)* ):
+if(state.aiFormulaConversationid) return state.aiFormulaConversationid;
+if(f] I| tj.id) throw new Error("Conversation create returned no id");
+юt 241
+constres - await fetch("/studio/api/conversations', 1
+headers:( "Content-Type": "application/json* }.
+102
+async function ensureAiConversationK
+state.aiFormulaConversationid = j.idg
+state.eiFormulaRawResponse = **:
+state.aiFormulaSuggestion = null;
+state.siFormulaLoading = false;
+- +
+function clearAiSuggestionCl
+state.aiFormulaEditable = **:
+function updateAiStreamBox0X
+const el = qs("aiStreamBox"):
+credentials:"same-origin*,
+state.aiFormulaError = **:
+constj = await res.json(:
+updateTopPills(:
+method:"POST".
+Search
+return j.id;
+7):

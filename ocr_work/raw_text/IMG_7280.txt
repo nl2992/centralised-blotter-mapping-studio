@@ -1,0 +1,26 @@
+2. Uncertain values should return <span class=*intine-code">PENDING</span›<br
+$(trimFormulaText(state.aiFormulaEditable || **).length ? **: "disabled"]>Re-test edited
+<button id="btnClearAiSuggestion" class="btn ghost">Clear suggestion</button>
+W
+<button id="btnAskAiFormuta* class="btn" $(state.sourceRows.length ? ** :
+<b>Current baseline for $(escapeHtml(state.aiFormutaField)} in
+$(escapeHtm!(currentRuleSummary(state.aiFormulaField))}
+<button id="btnRetestAiFormula" class="btn secondary"
+<button id="btnApplyAiFormula" class="btn secondary"
+4. PB routing still depends on resolved input Book
+юxt 241
+<div class="action-row" style=*margin-top:12px'>
+<div class="note" style="margin-top:12px">
+"disabled")>Generate tailored formula</button»
+153
+"disabled"}>Apply to selected field</button>
+$(escapeHtml(assetConfig().label)}:</b>
+<div style="margin-top:12px*>
+$(renderAiSuggestionPanelQF
+formula</button>
+Search
+</div>
+e/diva
+</div>
+</div>
+</div>

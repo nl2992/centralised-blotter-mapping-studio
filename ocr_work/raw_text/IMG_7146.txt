@@ -1,0 +1,27 @@
+Font-size:10.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-
+font-weight:600;color.var(--ink);overflow:hidden;text-overflow:ellipsis;white-
+zm
+.ms-tag.source[background:fecfdf3;border-color:#b7e4c7;color#027a48)
+ms-tag.blank{background:#f3f4f6;border-color:#e5e7eb;color-#6b7280}
+.ms-tag.rule(background:#f4f0fe;border-cotor./#ddd6fe;color:#6d28d9}
+TOIE
+an tet
+.ms-dot.const/background:#2e90fa}
+.ms-dot.blank[background:#d0d5dd}
+space:nowrap;margin-top:1px;
+border: 1 px solid var(--line);
+text-transform:uppercase;
+display inline-block;
+border-radius:999px;
+background:#f8fafc;
+letter-spacing:04em;
+.ms-chip-namel
+spaceinowrap:
+Ims-chip-sub!
+padding:0 6px;
+font-size:9.5px;
+font-weight:700;
+color:#475467;
+flex:0 0 auto:
+Search
+_ms-tagt

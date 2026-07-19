@@ -1,0 +1,31 @@
+<b>Primary CCY:</b> <span class="inline-code">${escapeHtml(selected.summary
+<b>Client:</b> <span class="inline-code">$(escapeHtml(selected.summary &&
+<b>Trade date:</b> <span class="inline-code">$(escapeHtml(selected.summary
+<b>ISIN:</b> <span class="intine-code">$(escapeHtml(selected.summary &&
+code*>$/escapeHtmt(formatDateTimeDisplay(selected.firstSeenAt))}</span><br />
+code'>$(escapeHtm!(formatDateTimeDisplay(selected.lastSeenAt))|</span><br />
+<div class="table-wrap"><table class="wrap-table"><tbody><tr»<td><pre
+zm
+code*>$(escapeHtml(selected.latestWorkbook || ***}</span><br />
+code">$(escapeHtml(selected.latestSheet || **)}</span>
+or 241
+<b>Latest workbook:</b> «span class=*inline-
+&& selected.summary.tradeDate || '*)}</span><br />
+&& selected.summary.primaryCcy || ***)}</span><br />
+<div class="section-title">Golden Input</div>
+<b> Latest sheet:</b> <span class="inline-
+selected.summary.salesClient ||**)}</span><br />
+<b>First seen: </b> cspan class=*inline-
+<b>Last seen:</b> <span class=*inline-
+2))|</pre></td></tr>c/tbody>c/table>c/div>
+- +E
+selected.summary.isin || **)}</span>
+style=*margin:O;white-space.pre-
+<div class="grid grid-2">
+<div class-note">
+Search
+</div>
+s/divz
+</div>
+<div>
+</div>

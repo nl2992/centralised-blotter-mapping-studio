@@ -1,0 +1,27 @@
+setStatus(* Al suggested a tailored formula for <b>$[escapeHtml(field)]</b>. Review it
+setStatus(* Al returned a draft for <b>${escapeHtm!(field)}</b>, but it needs a quick
+assumptions: Array.isArray(parsed.assumptions) ? parsed.assumptions.map(x=>
+state.aiFormulaError = * Al returned a formula but it is not valid JavaScript yet:
+zm
+warnings: Array.isArray(parsed.warnings) ? parsed.warnings.map(x=>
+*, "warn");
+log(* Al formula invatid for $(field}: $(validation.error)*
+6t241
+log(* Al formula generated for $(field}' , "success");
+explanation: cleanText(parsed.explanation ||**).
+confidence: cleanText(parsed.confidence ||**)
+state.aiFormulaEditable - formula;
+state.aiFormulaLoading = false;
+cleanText(x)) filter(Boolean) : D,
+cleanText(x)).filter(Boolean) : 0.
+edit before applying.*, "warn");
+and apply when ready.*, "good");
+state.aiFormulaError = ***
+renderMappingStudio(:
+updateTopPills(:
+if(Ivalidation.ok)
+S(validation.error)"
+Search
+formula,
+fcatch(e)(
+Jelsel

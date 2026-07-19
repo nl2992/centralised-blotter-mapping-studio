@@ -1,0 +1,31 @@
+4b>Current sheet:</b> <span class="inline-code">${escapeHtml(state.sheetName
+<div><div id="summaryChart" class="chart-box"></div></div>
+<b>Manual processed-sheet edits:</b> <span class="inline-
+code'>$|countCurrentSheetManualOverrides()}</span><br />
+<b>Persisted golden records:</b> <span class="inline-
+<div class="section-title">Mapped Output Preview</div>
+code">$(escapeHtml(assetConfig().label)j</span><br />
+<b>Selected export rows:</b> <span class="inline-
+<b>Persisted file history:</b> <span class="inline-
+of 241
+<b>Current asset:</b> <span class="inline-
+cb>Source rows:</b> <span class="inline-
+code*>$(state.sourceRows.length}</span><br />
+<b>Output rows:</b> <span class="inline-
+code*>$[state.mappedRows.lengthj</span><br/>
+code">$[state.goldenRecords.lengthj</span><br/>
+140
+code*>$[countSelectedRows()}</span><br />
+code">$/state.fileHistory.length}</span>
+<section class="card section">
+- +
+<div class="grid grid-2">
+<div class="good-note">
+<div class="toolbar">
+<div class="search">
+l none*)j</span><br
+Search
+</section>
+</div>
+</div>
+4/div>

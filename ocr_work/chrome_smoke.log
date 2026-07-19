@@ -1,0 +1,50 @@
+Trying to load the allocator multiple times. This is *not* supported.
+178184 bytes written to file /Users/nigelli/Desktop/Centralised Mapping/ocr_work/render_smoke.png
+[97833:15284923:0718/140436.343966:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[98037:15286383:0718/140449.373558:VERBOSE1:chrome/updater/updater.cc:374] Version: 152.0.7933.0, opt, ARM_64, command line: /Users/nigelli/Library/Application Support/Google/GoogleUpdater/152.0.7933.0/GoogleUpdater.app/Contents/MacOS/GoogleUpdater --wake-all --enable-logging --vmodule=*/components/update_client/*=2,*/chrome/enterprise_companion/*=2,*/chrome/updater/*=2
+[98037:15286383:0718/140449.375218:VERBOSE1:chrome/updater/updater.cc:377] OS version: 15.5.0, arch: arm64, System uptime (seconds): 782800, parent pid: 97833
+[98037:15286383:0718/140449.376779:VERBOSE1:chrome/updater/updater.cc:382] Available disk space in install directory (/Users/nigelli/Library/Application Support/Google/GoogleUpdater): 12940103680B (12.051GiB) / 494384795648B (460.432GiB)
+[98037:15286383:0718/140449.376793:VERBOSE1:chrome/updater/updater.cc:386] Available disk space in temporary directory (/var/folders/tl/hb3sh0p16wb8f6cdsnkjq_wm0000gn/T/): 12940103680B (12.051GiB) / 494384795648B (460.432GiB)
+[98037:15286383:0718/140449.376856:VERBOSE2:chrome/updater/event_history.cc:265] Emitted a UPDATER_PROCESS START event to the history log
+[98039:15286387:0718/140449.383530:VERBOSE1:chrome/updater/updater.cc:374] Version: 152.0.7933.0, opt, ARM_64, command line: /Users/nigelli/Library/Application Support/Google/GoogleUpdater/152.0.7933.0/GoogleUpdater.app/Contents/MacOS/GoogleUpdater --crash-handler --database=/Users/nigelli/Library/Application Support/Google/GoogleUpdater/152.0.7933.0/Crashpad --url=https://clients2.google.com/cr/report --annotation=prod=Update4 --annotation=ver=152.0.7933.0 --handshake-fd=6 --enable-logging --vmodule=*/components/update_client/*=2,*/chrome/enterprise_companion/*=2,*/chrome/updater/*=2
+[98039:15286387:0718/140449.383832:VERBOSE1:chrome/updater/updater.cc:377] OS version: 15.5.0, arch: arm64, System uptime (seconds): 782800, parent pid: 1
+[98039:15286387:0718/140449.385047:VERBOSE1:chrome/updater/updater.cc:382] Available disk space in install directory (/Users/nigelli/Library/Application Support/Google/GoogleUpdater): 12940103680B (12.051GiB) / 494384795648B (460.432GiB)
+[98039:15286387:0718/140449.385057:VERBOSE1:chrome/updater/updater.cc:386] Available disk space in temporary directory (/var/folders/tl/hb3sh0p16wb8f6cdsnkjq_wm0000gn/T/): 12940103680B (12.051GiB) / 494384795648B (460.432GiB)
+[98039:15286387:0718/140449.385106:VERBOSE2:chrome/updater/event_history.cc:265] Emitted a UPDATER_PROCESS START event to the history log
+[98037:15286383:0718/140449.385404:VERBOSE1:chrome/updater/crash_reporter.cc:124] Crash handler launched and ready.
+[98037:15286383:0718/140449.385858:VERBOSE1:chrome/updater/crash_client.cc:108] Found 0 completed crash reports
+[98037:15286383:0718/140449.386052:VERBOSE1:chrome/updater/crash_client.cc:132] Found 0 pending crash reports
+[98037:15286383:0718/140449.386140:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /Users/nigelli/Library/Application Support/Google/RLZ/Crashpad/settings.dat: No such file or directory (2)
+[98037:15286383:0718/140449.386150:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /Users/nigelli/Library/Application Support/Google/Chrome for Testing/Crashpad/settings.dat: No such file or directory (2)
+[98037:15286383:0718/140449.386191:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /Users/nigelli/Library/Application Support/Google/ChromeForTesting/Crashpad/settings.dat: No such file or directory (2)
+[98037:15286383:0718/140449.386207:VERBOSE1:chrome/updater/updater.cc:105] Crash reporting initialized.
+[98037:15286395:0718/140449.386483:VERBOSE1:chrome/updater/app/app_wakeall.cc:58] Launching `/Users/nigelli/Library/Application Support/Google/GoogleUpdater/152.0.7933.0/GoogleUpdater.app/Contents/MacOS/GoogleUpdater --wake`
+[98040:15286399:0718/140449.391956:VERBOSE1:chrome/updater/updater.cc:374] Version: 152.0.7933.0, opt, ARM_64, command line: /Users/nigelli/Library/Application Support/Google/GoogleUpdater/152.0.7933.0/GoogleUpdater.app/Contents/MacOS/GoogleUpdater --wake --enable-logging --vmodule=*/components/update_client/*=2,*/chrome/enterprise_companion/*=2,*/chrome/updater/*=2
+[98040:15286399:0718/140449.392323:VERBOSE1:chrome/updater/updater.cc:377] OS version: 15.5.0, arch: arm64, System uptime (seconds): 782800, parent pid: 98037
+[98040:15286399:0718/140449.393787:VERBOSE1:chrome/updater/updater.cc:382] Available disk space in install directory (/Users/nigelli/Library/Application Support/Google/GoogleUpdater): 12940103680B (12.051GiB) / 494384795648B (460.432GiB)
+[98040:15286399:0718/140449.393798:VERBOSE1:chrome/updater/updater.cc:386] Available disk space in temporary directory (/var/folders/tl/hb3sh0p16wb8f6cdsnkjq_wm0000gn/T/): 12940103680B (12.051GiB) / 494384795648B (460.432GiB)
+[98040:15286399:0718/140449.393853:VERBOSE2:chrome/updater/event_history.cc:265] Emitted a UPDATER_PROCESS START event to the history log
+[98042:15286403:0718/140449.399633:VERBOSE1:chrome/updater/updater.cc:374] Version: 152.0.7933.0, opt, ARM_64, command line: /Users/nigelli/Library/Application Support/Google/GoogleUpdater/152.0.7933.0/GoogleUpdater.app/Contents/MacOS/GoogleUpdater --crash-handler --database=/Users/nigelli/Library/Application Support/Google/GoogleUpdater/152.0.7933.0/Crashpad --url=https://clients2.google.com/cr/report --annotation=prod=Update4 --annotation=ver=152.0.7933.0 --handshake-fd=6 --enable-logging --vmodule=*/components/update_client/*=2,*/chrome/enterprise_companion/*=2,*/chrome/updater/*=2
+[98042:15286403:0718/140449.399928:VERBOSE1:chrome/updater/updater.cc:377] OS version: 15.5.0, arch: arm64, System uptime (seconds): 782800, parent pid: 1
+[98042:15286403:0718/140449.401151:VERBOSE1:chrome/updater/updater.cc:382] Available disk space in install directory (/Users/nigelli/Library/Application Support/Google/GoogleUpdater): 12940103680B (12.051GiB) / 494384795648B (460.432GiB)
+[98042:15286403:0718/140449.401161:VERBOSE1:chrome/updater/updater.cc:386] Available disk space in temporary directory (/var/folders/tl/hb3sh0p16wb8f6cdsnkjq_wm0000gn/T/): 12940103680B (12.051GiB) / 494384795648B (460.432GiB)
+[98042:15286403:0718/140449.401211:VERBOSE2:chrome/updater/event_history.cc:265] Emitted a UPDATER_PROCESS START event to the history log
+[98040:15286399:0718/140449.401507:VERBOSE1:chrome/updater/crash_reporter.cc:124] Crash handler launched and ready.
+[98040:15286399:0718/140449.401923:VERBOSE1:chrome/updater/crash_client.cc:108] Found 0 completed crash reports
+[98040:15286399:0718/140449.401962:VERBOSE1:chrome/updater/crash_client.cc:132] Found 0 pending crash reports
+[98040:15286399:0718/140449.402010:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /Users/nigelli/Library/Application Support/Google/RLZ/Crashpad/settings.dat: No such file or directory (2)
+[98040:15286399:0718/140449.402019:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /Users/nigelli/Library/Application Support/Google/Chrome for Testing/Crashpad/settings.dat: No such file or directory (2)
+[98040:15286399:0718/140449.402038:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /Users/nigelli/Library/Application Support/Google/ChromeForTesting/Crashpad/settings.dat: No such file or directory (2)
+[98040:15286399:0718/140449.402048:VERBOSE1:chrome/updater/updater.cc:105] Crash reporting initialized.
+[98040:15286399:0718/140449.402172:VERBOSE1:chrome/updater/ipc/update_service_internal_proxy_mojo.cc:61] Run
+[98040:15286399:0718/140506.378460:VERBOSE1:chrome/updater/app/app.cc:52] Shutdown: 0
+[98040:15286399:0718/140506.382199:VERBOSE2:chrome/updater/event_history.cc:265] Emitted a UPDATER_PROCESS END event to the history log
+[98040:15286399:0718/140506.382232:VERBOSE1:chrome/updater/updater.cc:419] UpdaterMain (--wake) returned 0.
+[98037:15286395:0718/140506.389118:VERBOSE1:chrome/updater/app/app_wakeall.cc:68] `/Users/nigelli/Library/Application Support/Google/GoogleUpdater/152.0.7933.0/GoogleUpdater.app/Contents/MacOS/GoogleUpdater --wake` exited 0
+[98037:15286383:0718/140506.389469:VERBOSE1:chrome/updater/app/app.cc:52] Shutdown: 0
+[98037:15286383:0718/140506.389760:VERBOSE2:chrome/updater/event_history.cc:265] Emitted a UPDATER_PROCESS END event to the history log
+[98037:15286383:0718/140506.389774:VERBOSE1:chrome/updater/updater.cc:419] UpdaterMain (--wake-all) returned 0.
+[98042:15286403:0718/140516.392943:VERBOSE2:chrome/updater/event_history.cc:265] Emitted a UPDATER_PROCESS END event to the history log
+[98042:15286403:0718/140516.394500:VERBOSE1:chrome/updater/updater.cc:419] UpdaterMain (--crash-handler) returned 0.
+[98039:15286387:0718/140516.395376:VERBOSE2:chrome/updater/event_history.cc:265] Emitted a UPDATER_PROCESS END event to the history log
+[98039:15286387:0718/140516.395399:VERBOSE1:chrome/updater/updater.cc:419] UpdaterMain (--crash-handler) returned 0.

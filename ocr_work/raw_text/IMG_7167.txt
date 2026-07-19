@@ -1,0 +1,24 @@
+function trimFormulaText(v)( return String(v ?? **).trim(); }
+of 241
+replace(/Nu2018\u2019/g.***)
+replace(/[\u201C\u201D]/g.**)
+- +
+function canonicalHeader(v)
+.replace(/[^a-20-9]+/g,**)
+function escapeHtm[(vX
+replace(/8/g,"&amp;")
+replace(/'/g."&quot;*)
+replace(//g."&#39:");
+-replace(\u00A0/g,* *)
+return String(v ?2 **)
+replace((</g,"&it;")
+-replace(/>/g,"&gt;")
+function cleanText(vH
+.replace(/&/g," and *)
+return String(v ?? **)
+replace(As+/g.* *)
+return cleanText(v)
+.replace(\s+/g,"")
+.toLowerCasel
+Search
+trim";

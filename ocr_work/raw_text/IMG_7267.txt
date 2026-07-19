@@ -1,0 +1,21 @@
+title:( text:"Run outcome", style:( fontSize:"16px", fontWeight:"700", color:"#111" }},
+window._HC_READY_MAP = window._HC_READY_MAP|I0;
+window._HC_READY_MAP.summaryChart = true;
+6t 241
+142
+const search - qs("previewSearch");
+state.previewFilter - e.target.value;
+Highcharts.chart("summaryChart", {
+animation::SNAPSHOT_MODE,
+- +
+backgroundColor:"#ffffff",
+consts - buildSummary();
+search.oninput - e →>
+renderOverview);
+type:"column",
+load:function(X
+Search
+if(searchX
+chart: {
+events:{
+tryl

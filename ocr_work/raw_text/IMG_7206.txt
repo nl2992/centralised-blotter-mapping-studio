@@ -1,0 +1,33 @@
+: ( type:"derived", sources:filter([label("notionalUsdMio")]), summary: * Structured FI
+tabel("tenor"), label("tradeDate")]), summary:* Use explicit maturity, else derive settlement
+: { type:"derived", sources:filter([label("nnbv'")J), summary: Structured FI trade-by-
+label("tenor"), label("tradeDate")]), summary: Use explicit maturity or derive settlement +
+label("action")]), summary:*Keep current Structured Fl branch logic: issuer only resolves on
+? { type:"derived", sources:filter([labet("nnbv"), label("action")]), summary: " Keep
+type: "derived", sources:filter([label("maturity"), label("settlement"), labet("tenorNum"),
+type:"derived", sources:filter([label("maturity"), label ("settlement"), label("tenorNum*),
+case "Price": return { type:"derived", sources:filter([label("reoffer*), label("action*)]).
+case "Ticker": return ( type:"blank", sources:[], summary:"Keep current Structured Fl
++ tenor, else trade date + tenor, output dd/mm/yyyy." j;case "Maturity Date": return (
+case "Security": return ( type:"blank", sources:[label("product")]. filter(Boolean),
+? ( type:"derived", sources:filter([label("notionalUsdMio*), label('action*)]),
+summary: Keep current Structured Fl add-on logic and write amount into Primary
+summary:"Structured Fi price uses current-board price-point normalization." }:
+case "Trader": return { type:"blank", sources:[label("trader")].filter(Boolean),
+zm
+case *Issuer: return { type:"derived", sources :filter([label("issuerRaw*),
+current Structured Fl add-on aggregation logic for VA / GNBV.* }
+summary:"Keep current Structured Fl logic: Trader left blank." }:
+31 241
+return state.runMode --- "aggregate_addons"
+return state.runMode =-- "aggregate_addons*
+32
+summary:"Keep current Structured Fl logio.* }:
+aggregated path where applicable."}:
+case "Primary Amount":
+tenor, output dd/mm/yyyy.*}:
+case "*$ VA/GNBV":
+Search
+Amount.* }
+USD.* }:
+logic." };

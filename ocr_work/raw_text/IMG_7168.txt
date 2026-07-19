@@ -1,0 +1,21 @@
+const t = cleanText(v).replace(/,/g.**).reptace(/\$/g.**). replace(/%/g.**).replace(//g.*');
+zm
+if(typeof v === "number" && Number.isFinite(v)) return v;
+if(n > 0 &&n <= 1.5) return Number((n * 100).toFixed(4)):
+0t 241
+if(v -=- null || v --- undefined || v --- **) return null;
+function isBlank(v) return cleanText(v) --- **= }
+return (arr || U).find(v => lisBlank(v)) || ***;
+return Number.isFinite(n) ? n : null;
+function pickFirstNonBlank(arr)k
+function normalizePricePoints(v)
+if(n =-= nutl) return *PENDING*:
+-+
+return Number(n.toFixed(4)):
+function prettyNumber(v, d=O)
+const n = parseNumber(v):
+function parseNumber(vy
+const n = Number(t);
+ff(lt) retur null;
+Search
+trim):

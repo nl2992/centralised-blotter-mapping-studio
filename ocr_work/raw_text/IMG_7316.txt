@@ -1,0 +1,27 @@
+{ label:"Mandatory", value:"mandatory", className:"nowrap", html:(v)=> v === *Yes" ?
+$(escapeHtml(L.Level)]">[$(escapeHtml(L.time)]] $(escapeHtml(Llevel.toUpperCase()}:
+zm
+{ label:"Current Mode", value:"currentMode", className:"nowrap" },
+<button class="btn secondary" id="btnClearLog">Clear log</button>
+k label: "Target Field", value:"field", className:"nowrap" }.
+{ label:"Current Mapping", value:"currentMapping" }
+of 241
+badge("Mandatory","red") : badge("Optionat","blue") }.
+? state.logs.map(l=> <div class="log-line log-
+{ label:"Default Rute", value:"defaultRute" },
+]. "No default rutes avaitable.", *wrap-table*)}
+<div class="section-title"> Activity Log</div>
+Project-yexuk
+const activityLog = qs("activityLog"):
+$(escapeHtmt(l.msg))</div>*)-join(**)
+<section class-"card section">
+function renderActivityLogil
+activityLog.innerHTML= *|
+S/tableHtml(rows, [
+<div class-"toolbar">
+if(lactivityLog) return;
+<div class="log-box">
+$(state.logs.length
+</section>
+Search
+</div>

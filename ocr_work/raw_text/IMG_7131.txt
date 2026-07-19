@@ -1,0 +1,24 @@
+8+ 241
+- +
+field.narrow{flex:0 0140px)
+field.medium(flex:0 0 180px}
+field.tight/flex:0 0 220px}
+field.wide(flex:2 1 480px}
+text-transform.uppercase:
+flex-direction:column:
+letter-spacing: 05em;
+align-items:end;
+min-width:170px;
+coloriver(-muted);
+flex-wrap:wrap:
+font-weight:700;
+flex:1 1 170px;
+font-size:10px;
+display:flex;
+display:flex;
+Search
+controls!
+gaр:8px;
+gap:4px;
+field labell
+_fieldi

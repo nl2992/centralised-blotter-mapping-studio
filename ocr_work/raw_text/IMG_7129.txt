@@ -1,0 +1,27 @@
+-pill.amber{background:var(--soft-amber);border-color:#fed7aa;color:var(--amber)}
+pill.green{background:var(--soft-green):border-color:#b7e4c7;color:var(--green)}
+zm
+-pill.blue(background:var(--soft-blue);border-color:#bfdbfe;color:var(--blue)}
+-pill.red{background:var(-soft-red);border-color:#fecaca;color:var(--red)}
+-pitl.purple(background:#f4f0fe;border-color:#ddd6fe;color:#6d28d9}
+of241 OTD
+-pill.green:before[background:#12b76a}
+_pill.amber:before(background:#f79009)
+-pill.purple:before(background:#7c3aed}
+_pill.red:before(background:#f04438)
+-pill.blue:before{background:#2e90fa}
+- +
+white-space:nowrap;
+border-radius:999px;
+background:#98a2b3;
+display:inline-block;
+max-width:1720pxj
+line-height:1.5;
+flex:0 0 auto:
+margin:0 auto;
+Search
+pill:beforel
+content:**:
+width: 7px;
+height:7px;
+shellf

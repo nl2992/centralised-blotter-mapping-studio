@@ -1,0 +1,21 @@
+lif(m) return { y:Number(m[1]), m:Number(m[2]), d:Number(m[3]) }:
+if(typeof v =—- "number" && window.XLSX && XLSX.SSFX
+0t 241
+if(parsed && parsed y && parsed.m && parsed.dX
+const parsed = XLSX.SSF.parse_date_code(v);
+return [y:parsed y, m:parsed.m, d:parsed.d }:
+m = t.match(/~(\d{1,2])V(\d{1,2])V(\d{2,4)) $/);
+return { d:Number(m[1]), m:Number(m[2]), y}:
+m = t.match(/^(d(1,2)-(d[1,2})-(d(2,4))$/):
+31
+let m = t.match(/*(\d(4))-(\d{2})-(\d{2})$/):
+- +
+const t = cleanText(v);
+let y = Number(m[3]):
+lif(y < 100) y += 2000;
+let y = Number(m[3]):
+if(y < 100) y += 2000;
+if(lt) return null;
+Search
+if(m)
+if(m)

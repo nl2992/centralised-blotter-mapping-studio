@@ -1,0 +1,29 @@
+<meta name="viewport" content=*width=device-width, initial-scale=1.0* />
+<script src=*https://unpkg.com/xlsx@latest/dist/xlsx.full.min.js*>c/script>
+<script src=*https://unpkg.com/highcharts@latest/highcharts.js*></script>
+<link rel="icon" href="/studio/static/ui/hsbc_icon.ico* />
+ot 241
+<title>Centralised Blotter Mapping Studio</title>
+- +
+smeta charset=*UTF_8* />
+--hsbc-red:#db0011;
+soft-green:#ecfdf3;
+--soft-amber:#fffaeb;
+--muted:#667085;
+<!DOCTYPE html>
+<html lang-"en'»
+--ink:#101828;
+--Line:#e4e7ec;
+--blue:#175cd3;
+-green:#027a48;
+-amber:#b54708;
+--purple:#6d28d9;
+--soft-blue:#efffff;
+--soft-red:#fef312;
+--red:#b42318;
+—-bg:#f4f6f8;
+--card:#ffffff;
+Search
+cheaoz
+<style>
+troot!

@@ -1,0 +1,29 @@
+if(payload.addonWindowDays !== undefined && payload.addonWindowDays !=- null)(
+if(payload.assetKey && ASSET_CONFIGS[payload.assetKey]) state.assetKey=
+state.fileHistory = Array.isArray(payload.fileHistory) ? payload.fileHistory: 0;
+const payload = JSON.parse(localStorage.getltem(STORAGE_KEY) || ")*):
+state.manualOutputOverrides - payload.manualOutputOverrides ||0:
+if(payload.tradeldMode) state.tradeldMode = payload.tradeldMode:
+processedQuickSelectCount: state.processedQuickSelectCount
+state.goldenRecords = Array.isArray(payload.goldenRecords) ?
+state.goldeninstancelndex = payload.goldeninstancelndex || 0):
+state.selectedGoldenKey = payload.selectedGoldenKey || **=
+"warn");
+state.fieldRulesByAsset = payload.fieldRulesByAsset | 0:
+if(payload.runMode) state.runMode = payload.runMode;
+of 241
+exportExcludedRows: state.exportExcludedRows,
+log("Local persistence save failed: * + e.message,
+addonWindowDays: state.addorWindowDays,
+aiFormulaPrompt: state.aiFormulaPrompt,
+if(payload && typeof payload === "object"X
+49
+aiFormulaField: state.aiFormulaField,
+- +
+payload.goldenRecords : [I:
+function loadLocal0l
+payload assetKey:
+Search
+Jcatch(e)(
+7):
+tryl

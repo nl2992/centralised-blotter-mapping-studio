@@ -1,0 +1,24 @@
+if(CCY_TARGETS.has(field)) return cleanText(value).toUpperCase) II (cleanText(value)
+const value = shared !== undefined ? shared : assetSpecificField Value(field, record,
+zm
+if(UPPER_TARGETS.has(field)) return cleanText(value).toUpperCase():
+if(sourceKey startsWith("raw:")) return src.raw[sourceKey.slice(4)]:
+if(key === "addonCount") return helpers.aggregatedAddonCount;
+=== "pending" ? 'PENDING" : cleanText(value).toUpperCase());
+const shared = sharedFieldValue(field, record, helpers):
+function evaluateNodeValue(sourceKey, src, helpers)[
+sourceKeys: (meta,sources || 0) mep(h => *raw:* + h).
+function computeDefaultField(field, record, helpers)(
+const meta = defaultMappingMeta(field);
+value: normalizeFieldValue(field, vatue),
+if(sourceKey.startsWith("agg:")X
+const key = sourceKey.slice(4):
+return helpers[sourceKey] || **
+provenance: "DEFAULT_RULE".
+- +
+return cleanText(value):
+if(IsourceKey) return**;
+Search
+return ***
+helpers):
+return (

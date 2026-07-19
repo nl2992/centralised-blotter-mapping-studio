@@ -1,0 +1,26 @@
+function getSelectedMappedRows()/ return state.mappedRows.filterr=>
+) TD
+const rowlds = new Set(state.mappedRows.map(r => r.rowld));
+if(!rowlds.has(rowld)) delete state.exportExcludedRows[rowid]):
+function addFileHistoryEntry(file, sheetNames, preferredSheet)
+Object.keys(state.exportExcludedRows).forEach(rowld →> {
+of 241
+115
+sheetNames: sheetNames.slice(0, 40),
+function clearAllRowSelectionState(X
+lastModified: file.lastModified || 0,
+preferredSheet: preferredSheet||**,
+sheetCount: sheetNames.length,
+function pruneExportSelection
+state.exportExcludedRows = 0;
+fingerprint: fileFingerprint(file),
+- +
+isRowSelected(r.rowid)); }
+fileName: file.name ||',
+sizeBytes: file.size || 0,
+insertedAt: nowlso(),
+id: makeld ("file"),
+const entry = (
+saveLocal():
+saveLocal):
+Search

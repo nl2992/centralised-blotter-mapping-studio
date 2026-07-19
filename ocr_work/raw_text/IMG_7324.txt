@@ -1,0 +1,26 @@
+"Export Selected": isRowSelected(r.rowld) ? "Yes" : "No"
+TARGET_HEADERS.forEach(h => out[h] = r.output[h]);
+"Add-on Count": r.helpers.aggregatedAddonCount,
+TARGET_HEADERS.forEach(h => out[h] = r.output[h]);
+const mappedRows = selectedMapped.map(r => (
+const ruleRows = TARGET_HEADERS.map(field →> {
+const auditRows = selectedMapped.map(r => (
+"Source Row": r.record.baseRow.sourceRow,
+195
+"Trade ID Mode": state.tradeldMode,
+"Trade ID": r.output["*Trade ID"],
+- +
+"Asset": assetConfig().label,
+const rule = currentRule(field):
+"Row Status": r.rowStatus,
+"Asset": assetConfig().label,
+"Mode": state.runMode,
+"Row ID": r.rowld,
+const out = 0;
+return out;
+const out = {
+Search
+return out;
+return {
+}):
+});

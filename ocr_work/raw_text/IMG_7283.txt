@@ -1,0 +1,23 @@
+getManualOverrideValue(selectedRow.rowld, selectedFietd) !== undefined : false;
+const someFilteredSelected = filteredRows.some(r => isRowSelected(r.rowld));
+const allFiiteredSelected = filteredRows.length > 0 && filteredRows.every(r =>
+if(ITARGET_HEADERS.includes(state.processedSelectedField)X
+if(filteredRows.length && !filteredRows.find(r => r.rowld ——-
+state.processedSelectedRowld = filteredRows[0].rowld;
+181241.
+const selectedField - state.processedSelectedField;
+const filteredRows = getFilteredProcessedRows():
+const processedSheet = qs(*processedSheet"):
+state.processedSelectedField = "*Trade Date";
+const manualOverrideExists = selectedRow ?
+156
+function renderProcessedSheetX
+state.processedSelectedRowid)X
+- +
+it(JprocessedSheet) return;
+]| filteredRows[0] || null;
+isRowSelected(r.rowld)):
+const tableHead -
+Search
+<thead>
+<tro

@@ -1,0 +1,27 @@
+W
+Em
+note: "Custom source: $|rawHeaderLabetForKey(rule.sourceKey)}*
+LOD
+const raw = evaluateNodeValue(rule.sourceKey, src, helpers);
+const raw = evaluateFormula(rule.expr ]| ***, record, helpers);
+01241
+sourceKeys: rule.sourceKey ? [rule.sourceKey] = (].
+value: normalizeFieldValue(field, rule.constant),
+95
+value: normalizeFieldValue (field, raw).
+provenance: "CONSTANT_OVERRIDE",
+value: normalizeFieldValue(field, raw).
+provenance: "FORMULA_OVERRIDE'
+provenance: "SOURCE_OVERRIDE",
+note: "Constant: $(rule.constant)
+- +
+it(rule mode --- "constant"y
+if(rule.mode === "formula*X
+note: "Formula override"
+sourceKeys: I.
+sourceKeys: E.
+Search
+return (
+return
+return (
+tryl

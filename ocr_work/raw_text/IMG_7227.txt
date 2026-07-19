@@ -1,0 +1,25 @@
+setStatus('Process a worksheet first so the Al Formula Copilot can use actual headers
+setStatus("Enter a prompt describing the tailored field logic you want.", "warn"):
+if(el) el.textContent = state.aiFormulaRawResponse || *Waiting for streamed
+"warn");
+setStatus("Choose a target field for the Al formula request.",
+const prompt = trimFormulaText(state.aiFormulaPrompt);
+0+ 241
+103
+async function runAiFormulaCopilot0
+const field - state.aiFormulaField;
+setActiveTab("mappingStudio");
+state.aiFormulaLoading = true:
+- +
+if(Istate.sourceRows.length)l
+and sample rows.", "warn");
+renderMappingStudio0:
+clearAiSuggestion®:
+updateTopPills(:
+Search
+if(Lprompt)
+response..
+return;
+if(|field)
+return:
+return;

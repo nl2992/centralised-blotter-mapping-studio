@@ -1,0 +1,34 @@
+*, sources:filter([label("notionalUsd")]).
+case 'Issuer": return { type:"constant", sources:[], summary:"Still PENDING for Equity
+case "*Tier 3 Product Type": return ( type:"constant', sources:[). summary:"Still
+summary:" Map from $(label("tradeDate",'Trade Date")} and output dd/mm/yyyy.* ];
+", sources:filter([label ("tradeDate")]).
+case "Maturity Date": return { type: "source", sources:filter([label("maturity")]).
+summary:" Map from ${label("maturity"."Maturity")} and output dd/mm/yyyy where
+labe(("product")]), summary:"Security = Structure preferred, fallback Product." };
+zm
+case 'CCY PC": return { type: "source", sources:filter([label("currency")]),
+summary:" Primary Amount = $(label("notionalUsd","Notionat in USD")).* ];
+case "*$ VA/GNBV": return ( type:"source", sources:filter([label("gnbv")]),
+case "Security": return ( type:"derived", sources:filter([Label(*structure*),
+case 'Ticker": return ( type:"source', sources:filter([label("underlying")).
+case "Price": return ( type:"source", sources:filter([label("grossPrice")]).
+summary:"Ticker = $(label("underlying"."Underlying").* H:
+summary:" Map from $flabel("currency","Currency")}. }:
+6t 241
+summary: " Use $(label("gnbv","GNBV fietd")} directly.* }:
+summary:* Price = $(label('"grossPrice""Gross Price*).* }:
+case "Primary Amount": return { type:"source",
+36
+case "*Trade Date": return { type:"source",
+case "*Tier 1 Product Type*:
+case **Tier 2 Product Type":
+PENDING for Equity TRS." }:
+case "*Primary CCY":
+case "*Revenue CCY*:
+case "Secondary CCY":
+switch(field)(
+Search
+Equity TRS.' }:
+parseable.* :
+TRS." }:

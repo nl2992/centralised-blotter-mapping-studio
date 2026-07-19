@@ -1,0 +1,28 @@
+consttitle - manual ? "Manual override active. Click to edit in place.*: *Click to edit
+field="$(escapeHtm!(field)]* title=*$(escapeHtmt(title)}*>$(escapeHtmt(vatueText)j</td>*:
+<div class="note">Click any processed cell below to edit it directly in place. Manual
+return * <td class="$[cls]" data-rowid="$(escapeHtml(r.rowld))" data-
+edits update the mapped output and exports without changing the uploaded
+code">$(escapeHtml(state.sheetName || *none")}</span><br /
+<div class-*section-title'>Processed Sheet Editor</div>
+o1 241
+code">$(escapeHtml(assetConfig().tabel)j</span>cbr />
+<b>Current worksheet:‹/b> espan class=*inline-
+<b>Processed rows:</b> «span class=*inline-
+<b>Ourrent asset: </b> cspan class-*inline-
+code">$(state.mappedRows.lengthj</span>cbr />
+processedSheet.innerHTML = *
+ssection class-"card section">
+- +
+<div class="grid grid-2">
+<div class="good-note">
+<div class-"toolbar*>
+))-join(*)}
+join(***)
+workbook.</divz
+Search
+- </tbody>
+in place.";
+</tr
+</div>
+=***

@@ -1,0 +1,22 @@
+*src". "record", "helpers","parseNumber","cleanText","mapKnownissuerText","normalizePriceP
+"deriveMaturitySafe","routePbByBook","parseDatePartsNoTz",'resolveSettlementParts",
+deriveMaturitySafe, routePbByBook, parseDatePartsNoTz, resolveSettlementParts,
+src, record, helpers, parseNumber, cleanText, mapKnown|ssuerText,
+DRLL
+31 2411
+"parseTenorYears","formatOutputDateFromParts',
+function evaluateFormula(expr, record, helpersX
+parseTenorYears, formatOutputDateFromParts
+function evaluateField (fietd, record, helpers)
+const rute - currentRute(field):
+const src = record.baseRow;
+const sro = record, baseRow:
+*source"y
+constfn = new Function(
+note: meta.summary
+* return ($(expr});*
+normalizePricePoints,
+if(rule.mode =
+Search
+return fn(
+oints",

@@ -1,0 +1,29 @@
+if(field === "Book") return { type:"blank", sources:[], summary:"Output Book stays blank
+if(field === "*$PC*) return ( type:"constant", sources:[), summary:"Same current-board
+if(field === "Site Code") return ( type:"constant", sources:[], summary:"Same current-
+if(field === "Risk Book") return { type:"constant", sources:[], summary:"Same current-
+if(field === "*Treats Acronym") return ( type:"derived", sources:filter([label("book"),
+resolved input Book: SG → HRCHSGH, otherwise HK if book resolves, else PENDING." );
+if(field === 'BTB Trade Site") return { type:"constant", sources:[], summary:"Same
+label("booking*), label("status"), label(*customerText')]), summary:"PB routing from
+zm
+const blankMeta - { type: "blank", sources:[], summary:"Blank by design." ];
+if(field —=- "*Salesperson (Coverage)") return { type:"constant", sources:0.
+summary: "Same current-board logic: fixed salesperson coverage constant." ):
+if(SHARED_INTENTIONAL_BLANK_FIELDS.has(fietd)) return blankMeta;
+const native = nativeRefs.map(normalizeNativeRef).find(Boolean):
+const filter = arr => Array.from(new Set((arr || (]).filter(Boolean)));:
+6t 241
+const label - (k, fallback=**) => h[k] || fallback;
+30
+current-board logic: fixed BTB Trade Site.* }:
+function defaultMappingMeta(field)(
+return native | businessKeyld:
+- +
+consth - state.headerMap;
+board logic: fixed Legal Entity.' };
+board logic: fixed Site Code." }:
+board logic: fixed Risk Book."}:
+across all assets.' );
+logic: fixed *$ PC." }:
+Search

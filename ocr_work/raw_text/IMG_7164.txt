@@ -1,0 +1,29 @@
+zm
+function gsa(sel){ return Array.from(document.querySelectorAll(sel)): }
+function qs(id)( return document.getElementByld(id): }
+ot 241
+processedintineEdit:(rowld:"*, field:**, draft:** },
+40
+processedSelectedField:"*Trade Date",
+aiFormulaField:"Maturity Date",
+processedQuickSelectCount:5,
+- +
+tradeldMode:"business_key",
+aiFormulaLastAutoPrompt:**
+runMode:"trade_by_trade",
+aiFormulaConversationld:**
+aiFormulaRawResponse:"
+aiFormulaSuggestion:nutl,
+processedSelectedRowld:**
+goldeninstancelndex:0).
+assetKey:"structured_fi",
+aiFormulaLoading:false,
+selectedGoldenKey:**,
+addonWindowDays:7,
+exportExcludedRows:(/
+aiFormulaPrompt:
+aiFormulaEditable:"*,
+processedSearch:**
+goldenRecords:I].
+aiFormulaError:**
+Search

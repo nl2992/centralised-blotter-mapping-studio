@@ -1,0 +1,21 @@
+const partial = map.find(x => x.canonical.includes(target)):
+const exact = map.find(x => x canonical === target):
+function findHeaderMatch(headers, patterns)(
+if(iname) name = *Unnamed_Sfidx + 1}':
+name = *$(name)_ $[seen[name]]:
+const target - canonicalHeader(p):
+const target = canonicalHleader(p):
+if(seen[name]|== undefined)
+- +
+for(const p of patterns |OX
+lif(exact) return exact.raw;
+for(const p of patterns || DX
+if(partial) return partial.ravv:
+let name - cleanText(h):
+seen[name] += 1:
+seen[name] = 0;
+return name;
+Search
+return **:
+Jelsel
+2):

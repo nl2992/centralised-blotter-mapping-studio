@@ -1,0 +1,25 @@
+case "ISIN Code": return cleanText(src.isin).toUpperCase() I| "PENDING";
+if(field === "BTB Trade Site" return SHARED_CONSTANTS.btbTradeSite;
+case "*Tier 2 Product Type": return *Interest Rate Linked Note -PPN";
+case "*Tier 3 Product Type*: return *Interest Rate Linked Note -PPN*;
+if(field -=- "Risk Book*) return SHARED_CONSTANTS.riskBook;
+case **Primary CCY": return helpers.primaryCcy || "PENDING";
+case "Maturity Date": return helpers maturityDate || 'PENDING":
+if(SHARED_INTENTIONAL_BLANK_FIELDS.has(fietd)) return **;
+case "*Trade Date": return helpers tradeDate || "PENDING";
+function assetSpecificField Value(field, record, helpers){
+case **Tier 1 Product Type": return "Structured Rates";
+•
+ot 241
+if(state.assetKey === "structured_fi*X
+case "Issuer": return helpers.issuer;
+case "Price*: return helpers,price:
+const src - record .baseRow:
+case "Comment": return **;
+case "Security": retumn***
+case "Trader": return *™;
+case Ticker": return **;
+default: return ***
+return undefined:
+switch(field)
+Search

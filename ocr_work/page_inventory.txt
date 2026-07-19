@@ -1,0 +1,26 @@
+Centralised Blotter Mapping Studio OCR inventory
+Generated from /Users/nigelli/Desktop/Centralised Mapping/IMG_7125.HEIC ... IMG_7372.HEIC
+
+Observed PDF total: 241 pages (toolbar reads "of 241"; user note said /244, but visible counters in the photos read 241).
+Photo count: 242 HEIC files.
+Camera filename gaps: IMG_7275-7276, IMG_7304-7305, IMG_7368-7369. These do not correspond to PDF page gaps; pages remain continuous across those filename gaps.
+
+Confirmed duplicate/retake pages:
+- PDF page 14: IMG_7138.HEIC and IMG_7139.HEIC
+- PDF page 85: IMG_7208.HEIC and IMG_7209.HEIC
+- PDF page 200: IMG_7328.HEIC and IMG_7329.HEIC
+- PDF page 233: IMG_7361.HEIC and IMG_7362.HEIC
+
+Originally missing PDF code pages:
+- Page 15: sequence jumps from duplicate page 14 (IMG_7138/IMG_7139) to page 16 (IMG_7140)
+- Page 199: sequence jumps from page 198 (IMG_7327) to duplicate page 200 (IMG_7328/IMG_7329)
+- Page 232: sequence jumps from page 231 (IMG_7360) to duplicate page 233 (IMG_7361/IMG_7362)
+
+Supplemental screenshots supplied later:
+- Page 199: ocr_work/supplied_missing_pages/page_199.jpg
+- Page 232: ocr_work/supplied_missing_pages/page_232_a.jpg and page_232_b.jpg (same code area / retake)
+
+Remaining unsupplied missing page after supplemental screenshots:
+- Page 15
+
+OCR source text lives in ocr_work/raw_text/IMG_*.txt. The runnable app was rebuilt as clean HTML rather than copied from OCR verbatim, because the photo set has missing pages and OCR punctuation damage.

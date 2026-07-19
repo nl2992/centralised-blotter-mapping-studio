@@ -1,0 +1,23 @@
+"CREATE INDEX IF NOT EXISTS idx_user_mapping profile_store_user_scope_asset*+
+return ASSET_CONFIGS[key] ? ASSET_CONFIGS[key].label : (key || "Unknown");
+const data = await apiJson("/studio/api/user_name", { method:"GET" });
+manualOutputOverrides: clonePlain(state.manualOutputOverrides),
+"ON" + PROFILE_TABLE + " (user_id, scope_app, asset_key)";
+fieldRulesByAsset: clonePlain(state.fieldRulesByAsset),
+of 241
+"UNIQUE (user_id, scope_app, profite_name)* +
+state.profileUserName = data.user_name|| "*;
+209
+state.profileUserld = data.user_id|| ";
+function buildSavedSettingsPayloadl
+async function loadProfileUser()
+function profileAssetLabel(keyX
+updateSavedSettingsPills();
+await apiSql(createSql);
+assetKey: state.assetKey,
+runMode: state.runMode,
+await apiSql(indexSql);
+const indexSql =
+Search
+*)*:
+return {

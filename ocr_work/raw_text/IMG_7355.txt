@@ -1,0 +1,23 @@
+if(!profileName) throw new Error(*Please include profiteName in the JSON before saving
+if(!result) throw new Error(state.savedSettingsJsonError || "Editor JSON is invalid");
+zm
+throw new Error(result.validation.errors[0] || "Editor JSON failed validation*);
+log("Applied saved settings JSON editor payload to current board", 'success");
+throw new Error(result.validation.errors|0] || "Editor JSON faited validation");
+setStatus("Applied JSON editor settings to the current board.", "good"):
+const assetKey = payload.assetKey || env.assetKey || state.assetKey:
+applySavedSettingsPayload(result.unwrapped.payload);
+т241
+const profileName = cleanText(env.profileName || ***);
+226
+async function saveEditorJsonAsNewProfile()
+const resutt - validateSavedSettingsEditor();
+const note = cleanText(env.note || **):
+backupSavedSettingsDraft();
+const env = result.unwrapped;
+const payload = env.payload;
+iftresult.validation.okX
+renderSavedSettings():
+if(.result.validation.ok){
+as a new profite."):
+Search

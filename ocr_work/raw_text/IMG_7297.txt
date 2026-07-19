@@ -1,0 +1,22 @@
+log(" Rule formula changed: asset=$(assetConfig() tabel), $(field}*, "info");
+log(" Rule reset: asset=$(assetConfig().label}, ${btn.dataset.field}*, "info");
+02410
+rules[field] = [ currentRule(field), expr: inp.value );
+btn.onclick= () => jumpToAiField(btn.dataset.field);
+const rules - ensure@urrentAssetRuleStore():
+const rules - ensureCurrentAssetRuleStore(:
+170
+qsa(*.rule-formula").forEach(inp => (
+qsa(*btn-reset-field").forEach(btn => (
+qsa(".btn-ai-field") .forEach(btn => {
+const field = inp.dataset.field;
+delete rules[btn.dataset.fietd]:
+const thsList = qs(*msthsList"):
+processCurrentSheet();
+processCurrentSheet();
+linp.onchange = () => [
+btn.onclick = () ->(
+saveLocal():
+saveLocal();
+Search
+3):

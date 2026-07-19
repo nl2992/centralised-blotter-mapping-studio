@@ -1,0 +1,25 @@
+const expr = trimFormulaText(state.aiFormulaEditable || (state.aiFormulaSuggestion &&
+setStatus(" The formuta is not valid yet: $(escapeHtmt(validation.error)}*, *warn");
+2m
+state.aiFormulaError - * Formula validation failed: $(validation.error}* ;
+success"):
+log(* Al formula applied to $(field) for $(assetConfig).label}*
+rutes[field] = ( ...currentRule(field), mode:"formuta", expr}:
+setStatus(*There is no Al formula to apply yet.", *warn");
+3$ 241
+const validation = validateFormulaExpression(expr);
+const rules = ensureCurrentAssetRuleStore):
+1101
+state_aiFormulaSuggestion.formula) ||**):
+constfield = state.aiFormulaField:
+- +
+renderMappingStudio();
+state.aiFormulaError = **
+ff(-validation.okX
+saveLocal):
+Search
+if(lfield)(
+return
+if(lexpry
+return:
+return;

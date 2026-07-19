@@ -1,0 +1,26 @@
+pillWorkbook.className = "pill " + (state.fileName ? "green" : "amber");
+pillWorkbook.textContent = Workbook: $(state.fileName || "none"}* :
+pillSheet.className = "pill" + (state.sheetName ? "green" : "amber");
+pillSheet.textContent = * Sheet: $(state.sheetName || "none")* ;
+pillAsset.textContent = *Asset: $(assetConfig() label}*;
+0t241
+pillRule.textContent = "Rutebook: by asset";
+135
+const pillExceptions = qs("pillExceptions");
+const pillSelected = qs("pillSelected");:
+const pillTradeld = qs("pillTradeld");
+const pillProcess = qs("pillProcess");
+const pillManual = qs("pillManual");
+const pillGolden = qs(*pillGolden"):
+pillAsset.className = "pill blue";
+const pillRules = qs("pillRules");
+pillRule.className = "pill blue";
+const pillFiles = qs("pillFites"):
+const pillRule = qs("pillRule");
+- +
+const pillAi = qs(*pillAi*):
+it(pillWorkbook)
+Search
+if(pillSheet)(
+if(pillAsset){
+if(pillRule)(

@@ -1,0 +1,22 @@
+if(state.activeTab === "mappingStudio") setTimeout(drawDiagram, 50);
+state.aiFormulaPrompt = buildAiDefaultPrompt(state.aiFormulaField);
+of 241 / [D
+if(tb) document.documentElement.style.setProperty("-topbar-h",
+log(' All custom rules reset for $(assetConfig().label}*, "warn");
+state.aiFormulaLastAutoPrompt = state.aiFormulaPrompt;
+state.aiFormulaLastAutoPrompt = state.aiFormulaPrompt;
+if(state.sourceRows.length) processCurrentSheet();
+btnResetRules.addEventListener("click", ) => {
+state.fieldRulesByAsset[state.assetKey)= 0;
+const tb = document.querySelector("topbar");
+201
+if(!trimFormulaText(state.aiFormulaPrompt)X
+window.add EventListener("resize", () => {
+- +
+function safelnitialPrompt(X
+*$(tb.offsetHeight)px*);
+if(btnResetRules)(
+else renderAll();
+saveLocal();
+Search
+Jelsel

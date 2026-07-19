@@ -1,0 +1,27 @@
+<label style="display:block;font-size:10px;font-weight:700;color:var(--muted);text-
+zm
+transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Saved settings
+const btnLoadSelectedToEditor = qs("btnSavedLoadSelectedToEditor");
+<textarea id="savedSettings)sonEditor" class="saved-json-editor"
+const btnLoadCurrentToEditor = qs("btnSavedLoadCurrentToEditor");
+const btnSaveJsonAsNew = qs("btnSavedSaveJsonAsNew");
+const btnExportSelected = qs("btnSavedExportSelected");
+spellcheck="false">${escapeHtml(editorText)}</textarea>
+const btnExportCurrent = qs("btnSavedExportCurrent");
+const btnOverwriteJson = qs("btnSavedOverwritelson");
+of 241
+const btnValidateJson = qs("btnSavedValidateJson");
+const btnResetEditor = qs("btnSavedResetEditor"):
+const editorEl = qs("savedSettings)sonEditor");
+state.savedSettings/sonEditor = e.target.value;
+const btnApplyJson = qs("btnSavedApplyJson");
+233
+const btnlmport = qs("btnSavedImportJson");
+editorEl.addEventListener("input", e => {
+<div style="margin-top:12px">
+JSON</label>
+</section>
+Search
+if(editorEly
+</div>
+7):

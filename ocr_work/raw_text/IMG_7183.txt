@@ -1,0 +1,23 @@
+if(c.includes("the hongkong and shanghai banking corporation limited")) return "HВAP";
+if(c.includes("hongkong and shanghai banking corporation limited")) return "HBAP":
+if(c.includes("hong kong and shanghai banking corporation")) return "HВАР";
+if(looksLikelssuerCode(codeRaw)) return cleanText(codeRaw).toUpperCase():
+if(looksLikelssuerCode(rawText)) return cleanText(rawText).toUpperCase():
+const mapped - mapKnownlssuerText(rawText || codeRaw):
+if(c.includes(*hsbc continental europe")) return *HBCE*;
+const t = cleanText(v).replace(/s+/g.**).toUpperCase():
+ot 241
+function resolvelssuerValue(codeRaw, rawText)
+if(!isBlank(v)) mexCol = Math.max(maxCol, i):
+if(c.includes ("hsbc bank plc")) return *HCIB";
+function normalize NativeRef(v)
+- +
+if(mapped) return mapped;
+return t ? t.slice(0, 40) = **;
+function trimMatrix(matrix)[
+(row || []).forEach(v, i) => 1
+matrix.forEach(row => [
+return "PENDING";
+let maxCol = -1;
+Search
+return *:

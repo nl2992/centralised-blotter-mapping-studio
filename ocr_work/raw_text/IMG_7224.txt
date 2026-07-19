@@ -1,0 +1,29 @@
+"If the rule is uncertain or the input is insufficient, return 'PENDING' rather than
+zm
+if(start === -1) throw new Error("No JSON object found in Al response"):
+61 241
+if(Icleaned) throw new Error(*Empty Al response*):
+let depth = 0, inString = false, escapeNext = false;
+if(escapeNext)( escapeNext = false; continue: }
+if(ch === W*Y escapeNext = true; continue; }
+1001
+tryf return JSON.parse(cleaned): }catch(e)0
+*For all date outputs, use dd/mm/yyyy.*
+for(let i = start, i < cleaned.tength; i++)
+function extractFirstJsonObject(text)(
+const start = cleaned.indexOf(*(*):
+const cleaned - String(text ||**)
+if(ch === ***) inString = false;
+- +
+-replace(/** - json/i,**)
+const oh = cleaned(];
+_replace(/^- - -7**)
+replace(/* $/.**)
+Search
+J-join("\n");
+if(inStringX
+continue;
+guessing.
+0.9958."
+trim()
+trimi;

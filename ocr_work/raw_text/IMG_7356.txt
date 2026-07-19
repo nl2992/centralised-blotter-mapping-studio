@@ -1,0 +1,25 @@
+setStatus( Saved editor JSON as new profile <b>$(escapeHtml(profileName)}</b>.*,
+W
+if(!result) throw new Error(state.savedSettings)sonError || "Editor JSON is invalid");
+if(!profileName) throw new Error("Please include profileName in the JSON before
+zm
+throw new Error(result.validation.errors[0] || "Editor JSON failed validation");
+const profileName = cleanText(env.profileName || profile.profile_name |l"');
+await updateProfileRecord(profile.id, profileName, note, assetKey, payload);
+log(* Saved editor JSON as new profile $(profileName)' , "success");
+const assetKey = payload.assetKey || env.assetKey || state.assetKey;
+await insertProfileRecord(profileName, note, assetKey, payload);
+it(Iprofile) throw new Error("Please select a saved profile first");
+of 241
+async function overwriteSelectedProfileFromEditor(){
+227
+const result = validateSavedSettingsEditor();
+const profile = selectedSavedProfile();
+const note = cleanText(env.note || "*);
+const env = result.unwrapped;
+const payload = env.payload;
+await fetchSavedProfiles();
+iflresult.validation.ok)
+Search
+overwriting.");
+"good");

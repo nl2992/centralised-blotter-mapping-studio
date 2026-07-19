@@ -1,0 +1,27 @@
+function sourceHeaderName(key)( return state.headerMap[key] || **; )
+010
+0241
+tradeDate:getSourceField(rawRow, "tradeDate").
+issuerRaw:getSourceField(rawRow, "issuerRaw*),
+settlement:getSourceField(rawRow, "settlement*),
+product:getSourceField(rawRow, "product"),
+currency:getSourceField(rawRow, "currency"),
+63
+const header - sourceHeaderName(key):
+sourceRow: rawRow._source_excel_row,
+function buildCanonicalSource(rawRowX
+client:getSourceField(rawRow, *client"),
+tenor:getSourceField(rawRow, "tenor'),
+function getSourceField (rawRow, key)
+logicalindex: rawRow.__logical_index
+return header ? rawRow[header] : ***;
+if(state.assetKey === "structured_fi"X
+isin").
+isin:getSourceField(rawRow,
+- +
+assetKey: state.assetKey,
+const base -
+raw: rawRow,
+Search
+return (
+base.

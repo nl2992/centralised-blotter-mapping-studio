@@ -1,0 +1,24 @@
+zm
+referenceNumber getSourceField (rawRow, "referenceNumber"),
+customerText:getSourceField(rawRow, "customerText")
+finalCustomer:getSourceField(rawRow, *finalCustomer*)
+notionalUsd:getSourceField(rawRow, "notionalUsd"),
+Ю+ 241
+nativeRef:getSourceField (rawRow, "nativeRef"),
+summitid:getSourceField(rawRow, "summitld"),
+tradeDate:getSourceField(rawRow, "tradeDate*).
+grossPrice:getSourceField(rawRow, "grossPrice").
+underlying:getSourceField(rawRow, "undertying").
+currency:getSourceField (rawRow, "currency*).
+maturity:getSourceField(rawRow, "maturity").
+structure:getSourceField(rawRow, "structure*),
+product:getSourceField(rawRow, "product"),
+66
+trader getSourceField(rawRow, "trader").
+action: getSourceField(rawRow, "action"),
+action:getSourceField (rawRow, "action"),
+book:getSourceField (rawRow, "book"),
+gnbv:getSourceField(rawRow, *gnbv"),
+Search
+return ?
+hbase.

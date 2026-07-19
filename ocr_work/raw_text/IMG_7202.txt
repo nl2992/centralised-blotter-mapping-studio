@@ -1,0 +1,27 @@
+ot 241
+Jetse if(state.assetkey == *illiquid_credit_repack*X
+cleanText(helpers.resolvedBook) toUpperCase().
+cleanText(src.underlying).toUpperCase(),
+cleanText(src.currency).toUpperCase).
+cleanText(src.currency).toUpperCase(,
+cleanText(src.dealName).toUpperCase0
+cleanText(src.book).toUpperCase(),
+String(helpers.primaryAmount ?? **)
+String(helpers.primaryAmount ?? ***),
+Jelse if(state.assetKey === 'collar*X
+cleanText(src.isin).toUpperCase(),
+cleanText(src.isin).toUpperCase().
+"ILLIQUID_CREDIT_REPACK*,
+- +
+cleanText(helpers.buySell),
+cleanText(helpers.buySell),
+cleanText(src.tradeDate),
+cleanText(src.tradeDate),
+cleanText(src.maturity),
+cleanText(src.maturity),
+businessParts = [
+businessParts - [
+businessParts = 1
+"COLLAR",
+Search
+Jelsel

@@ -1,0 +1,24 @@
+_badge.green(background:#ecfdf3;border-color:#b7e4c7;color:#027a48}
+.badge.amber(background:#fffaeb;border-color:#fed7aa;color:#b54708}
+_badge.purple(background:#f4f0fe;border-color:#ddd6fe;color:#6d28d9}
+badge.red(background:#fef3f2;border-color:#fecaca;color:#b42318}
+badge.blue{background:#eff6ff;border-color:#bfdbfe;color:#175cd3}
+ot 241
+border: 1 px solid var(--line);
+border:1px deshed #dod5dd;
+letter-spacing:.01em;
+background:#0f172a;
+padding:26px 16px;
+color:var(-muted);
+border-radius:10px;
+font-weight:700;
+background:#fff;
+text-align:center;
+font-size:10px:
+color:#344054;
+background:#fff;
+font-size:12.5px;
+line-height:1.5;
+Search
+emptyl
+.log-boxl

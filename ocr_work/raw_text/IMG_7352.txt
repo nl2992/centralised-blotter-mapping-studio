@@ -1,0 +1,27 @@
+", profile.note || "*
+const payload = typeof profile.payload === "string" ? JSON.parse(profite.payload) :
+zm
+const envelope = buildSavedSettingsEnvelope(profile.profile_name || "*,
+if(!profile) throw new Error("Please select a saved profile first");
+"AND scope_app =" + sqlString(PROFILE_SCOPE_APP);
+"AND user_id = " + sqlString(state.profileUserld) + ""+
+of 241
+const envelope = buildSavedSettingsEnvelope(
+223
+* $(assetConfig() .label} - current draft*,
+setSavedSettingsEditorObject(envelope);
+state.savedSettingslmportFileName= "'*;
+setSavedSettingsEditorObject(envelope);
+state.savedSettingsImportFiteName = "*;
+function loadCurrentBoardToEditor(X
+function loadSelectedProfiteToEditor(X
+const profile = selectedSavedProfile();
+buildSavedSettingsPayload()
+validateSavedSettingsEditor();
+validateSavedSettingsEditor();
+renderSavedSettings();
+await apiSql(sql);
+profile.payload;
+Search
+payload);
+**,

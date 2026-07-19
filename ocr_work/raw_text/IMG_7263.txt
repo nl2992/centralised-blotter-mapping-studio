@@ -1,0 +1,26 @@
+if(!rows || !rows.length) return <div class="empty">$(escapeHtml(emptyMsg || "Nothing
+if(btnExportXlsx) btnExportXlsx.textContent = * Export XLSX ($(selectedCount))* :
+if(btnExportCsv) btnExportCsv.textContent = * Export CSV ($(selectedCount))* :
+zm
+const thead = <thead><tr>$(cols.map(c => * <th class="$(c.className ||
+const val = typeof c.value === "function" ? c.value(r) : r[c.value];
+function tableHtml(rows, cols, emptyMsg, extraClass=**Х
+'">$(escapeHtml(c.labet)j</th>*).join(**)}</tr>/thead>;
+ot 241
+setTextSafe("kpiAggAddons", s.aggregatedAddons);
+const tbody = rows.map(r =>* <tr>$(cols.map(c => /
+const selectedCount = countSelectedRows();
+138
+const btnExportXlsx = qs(*btnExportXlsx*);
+const btn ExportCsv = qs("btnExportCsv");
+setTextSafe("kpiRows", s.rowsLoaded);
+setTextSafe("kpiErrored", s.errorRows);
+setTextSafe("kpilssues", s.issueCount);
+setTextSafe("kpiRules", s.customRules);
+setTextSafe("kpiOutputs", s.outputs);
+setTextSafe("kpiVatid", s.validRows);
+- +
+consts = buildSummary0:
+function updateKpis(X
+to show."))</div>;
+Search

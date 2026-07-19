@@ -1,0 +1,27 @@
+<div class="note">Rules are stored per asset. Use mapping rules for systematic logic
+zm
+changes. Use the Processed Sheet tab for one-off row or cell edits.</div>
+if(state.activeTab === "mappingStudio") setTimeout(drawDiagram, 60);
+<thead><tr></tr></thead><tbody><tr></tr></tbody>,
+<div class="section-title">Field Configuration</div>
+of 241
+${tableHtml([(], 0, '', "wrap-table").replace(
+155
+<th class="nowrap">Target field</th>
+<th class="nowrap">Mode</th>
+<th class="nowrap">Fill rate</th>
+<th class="nowrap">Action</th>
+<tbody>$(fieldRows)</tbody>
+<th>Current mapping</th>
+<th> Configuration</th>
+bindMappingStudioEvents();
+<th>Default rule</th>
+<div class="toolbar">
+bindAiCopilotEvents();
+<thead>
+Search
+</thead>
+</section>
+</div>
+str>
+</tr>

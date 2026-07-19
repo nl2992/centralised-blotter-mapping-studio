@@ -1,0 +1,29 @@
+<b>Fittered rows:</b> cspan class='inline-code*>$(filteredRows.lengthJ</span><br
+<b>Date output standard:</b> <span class-*inline-code">dd/mm/yyyy</span>
+5. Use <b>Enter</b> to save and move down, <b>Tab</b> to save and move right,
+$(manualOverrideExists ? **: *disabled'>Clear selected cell manual edit</button>
+code">$(countSelectedRows))V$(state.mappedRows.length]</span><br />
+3. Use <span class=*inline-code">Keep top N filtered</span> or <span
+<b>Manual cell edits on current sheet:</b> <span class-*inline-
+LOIC
+<button id="btnClearSelectedCellEdit' class="btn secondary"
+code*>S(countCurrentSheetManualOverridesJ</span><br />
+4. Click any processed cell to edit directly in place<br />
+01 241
+<b>Selected for export:‹/b> «span class-*inline-
+class="inline-code*>Keep bottom N filtered</span>cbr />
+<div class="section-title">Direct In-Cell Editing</div>
+2. Select exactly which rows should export<br (>
+<b>Shift + Tab</b> to move left, <b>Esc</b> to cancel
+1. Flter the processed sheet if needed«br/
+150
+< section class= card section *
+cb>How to use</b>cbr />
+<div class='action-row*>
+<div class="note">
+<div class="toolbar" =
+Search
+C/section)
+</div»
+4/div>
+</div>

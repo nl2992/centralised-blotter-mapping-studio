@@ -1,0 +1,25 @@
+return { rowsLoaded, outputs, validRows, errorRows, issueCount, aggregatedAddons,
+const validRows - state.mappedRows.filter(r => r.rowStatus === "Valid").length;
+const errorRows = state.mappedRows.filter(r => r.rowStatus =-= "Error*).length;
+zm
+const aggregatedAddons = state.mappedRows.reduce((sum,r) →> sum +
+assetSelect.innerHTML = Object.values(ASSET_CONFIGS).map(cfg=>
+if(state.mappedRows.length && !state.processedSelectedRowld)
+state.processedSelectedRowld = state.mappedRows[0].rowld;
+of 241
+customRules:Object.keys(currentFieldRules()).length};
+const tradeldModeSelect = qs("tradeldModeSelect");
+const addonWindowField = qs("addonWindowField");
+const addonWindowDays = qs("addonWindowDays");
+const rowsLoaded = state.sourceRows.length;
+const runModeSelect = qs("runModeSelect");
+133
+const outputs = state.mappedRows.length;
+const issueCount - state.exceptions.length;
+(r.helpers.aggregatedAddonCount || O), O);
+const assetSelect = qs("assetSelect");
+function refreshSelectOptions(X
+function buildSummary(X
+if(assetSelect)
+Search
+renderAIl);

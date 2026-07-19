@@ -1,0 +1,22 @@
+input[type='file"].input|type="text"],input[type=*number"],select,textarea(
+ot 241
+box-shadow:0 0 0 3px rgba(219,0,17,.08);
+input:focus,select:focus,textarea:focus{
+border:1 px solid var(-hsbo-red);
+border-colorvar(-hsbc-red):
+border:1 px solid #d0d5dd;
+padding:7px 10px;
+min-height:36px;
+border-radius:8px;
+background:#fff;
+color var(-ink);
+min-height:90px;
+font-size:13px;
+line-height: 1.45;
+resize vertical;
+width: 100%;
+outline:none;
+Search
+fontinherit
+textarea
+btnf

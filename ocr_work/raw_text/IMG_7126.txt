@@ -1,0 +1,25 @@
+font-family:-apple-system,"Segoe UI", Roboto,Helvetica,Arial,sans-serif;
+of 241
+box-shadow:0 4px 12px rgba(16,24,40,03):
+--shadow:0 2px 10px rgba(16,24,40.06);
+background:rgba(255,255,255,.97);
+border-bottom: 1px solid var(-line):
+- +
+#ready-marker{display:none}
+backdrop-filter:blur(10px);
+-soft-orange:#fff7ed;
+*(box-sizing:border-box}
+background:var(--bg):
+body[min-height:100vh}
+--topbar-h:82px;
+color:var(-ink);
+position:sticky:
+width:100%;
+,topbar-inner!
+Search
+html,bodyl
+margin:0;
+padding:0;
+z-index:30;
+topbar(
+top:0;

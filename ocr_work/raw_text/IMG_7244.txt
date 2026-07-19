@@ -1,0 +1,29 @@
+W
+zm
+let record = state.goldenRecords.find(r => r.tradeKey === tradeKey);
+1
+primaryCcy: mappedRow.output["*Primary CCY"] || "''.
+of 241
+tradeDate: mappedRow.output["*Trade Date"] |l"',
+salesClient: mappedRow.output["Sales Client"] || *',
+tradeld: mappedRow.output["*Trade ID"] ||''*,
+addonWindowDays: state.addonWindowDays
+119
+isin: mappedRow.output["ISIN Code"] || "',
+rowStatus: mappedRow.rowStatus || **
+rowStatus: mappedRow.rowStatus,
+tradeldMode: state.tradeldMode,
+workbook: state.fileName || **.
+- +
+sheet: state.sheetName || **,
+asset: assetConfig().label,
+asset: assetConfig().label,
+sourceRow: src.sourceRow,
+capturedAt: nowlso),
+mode: state.runMode,
+const summary = (
+const ioMeta = [
+Search
+if(!recordX
+record ={
+tradeKey,

@@ -1,0 +1,26 @@
+if(meta.type === "constant") return" <span class=*ms-tag const">constant</span>* ;
+if(fietd === "Sales Client Country") return helpers.pb.salesClientCountry || "PENDING";
+if(meta.type ==- "source") return * «span class="ms-tag source">source</span>*;
+if(meta.type =-- "blank") return <span class="ms-tag blank">blank</span>*;
+if(field =-- "*Treats Acronym") return helpers.pb.treatsAcronym || "PENDING";
+if(field === "Sales Client Type") return helpers.pb.salesClientType || *PENDING":
+if(mode === "blank") retum* <span class="ms-tag blank">blank</span>*;
+if(field === "Sales Client") return helpers.pb.salesClient || 'PENDING";
+if(field === "*Legal Entity") return SHARED_CONSTANTS.legalEntity;
+if(field —-- "Site Code") return SHARED CONSTANTS.siteCode;
+if(field === "Primary Amount") return helpers.primaryAmount;
+if(field --- **Trade ID") return buildTradeld(record, helpers);
+if(field ==- "Secondary CCY") return helpers.secondaryCcy;
+if(field ——- **Revenue CCY") return helpers.revenueCcy;
+D$ 241
+return <span class="ms-tag rute">derived</span>;
+if(field =-- "*$PC") return SHARED_CONSTANTS.pc;
+function sharedField Value(field, record, helpers)(
+if(field --- **$ VA/GNBV") return helpers.vaGnbv;
+if(field --- "*Salesperson (Coverage)*) return
+if(field === *Buy/Sell") return helpers.buySelt;
+SHARED_CONSTANTS.salespersonCoverage:
+if(field === "CCY PC*) return helpers.ccyPc;
+const meta = defaultMappingMeta(field);
+if(field === "Book*) return ***
+Search

@@ -1,0 +1,22 @@
+log(* Parsed sheet "$(state.sheetName]" for asset "$(assetConfig().tabel}" with
+state.aiFormutaPrompt = buildAiDefaultPrompt(state.aiFormulaField);
+state.sourceRows = extracted.rows.map(buildCanonicalSource);
+setStatus(* Parsing failed. $(escapeHtml(e.message)}*, "bad");
+of241 =
+state.aiFormulaLastAutoPrompt = state.aiFormulaPrompt;
+state.headerMap = buildHeaderMap(extracted.headers);
+const extracted - extractSheetRows(matrix):
+if(ltrimFormulaText(state.aiFormutaPrompt)X
+191
+rows=$(state.sourceRows.length}* , "success");
+state.sheetHeaders = extracted.headers;
+log(" Parse failed: $(e.message)*, "error");
+const btnX = qs("btnExportX|sx");
+async function handleWorkbook(file)
+const btnC = qs("btnExportCsv");
+if(btnX) btnX.disabled = true;
+if(btnC) btnC.disabled = true;
+processCurrentSheet();
+Search
+Jcatch(e)[
+tryl

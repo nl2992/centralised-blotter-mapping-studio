@@ -1,0 +1,31 @@
+lif(field == = "Sales Client Country") return { type:"derived", sources:filter([label("book*),
+if(field —-- "*Trade ID*) return { type:"derived", sources:[], summary:"Driven by selected
+if(field ==- "Sáles Client Type") return { type:"derived", sources:filter ([label("book"),
+Trade ID mode: deterministic business-key, native-ref preferred, or legacy row-order." };
+label("booking"), label("status"), label("customerText")]), summary:*PB routing from
+label("booking"), label("status"), label("customerText")]), summary:"PB routing from
+label("booking"), label("status"), tabel("customerText")]), summary:"PB routing from
+label("status")]), summary:*Shared rule: New / Addon / Add On / Tap - S, Unwind - B,
+case "*Tier 1 Product Type": return { type:"constant", sources:[], summary:"Keep
+case **Tier 2 Product Type*: return { type:"constant", sources:[], summary:"Keep
+case "*Tier 3 Product Type": return { type:"constant", sources:[], summary:"Keep
+if(field -== "Sales Client") return { type:"derived", sources :filter([label("book").
+case "*Trade Date": return ( type:"source", sources:filter([label("tradeDate")]),
+if(field --= "Buy/Sell") return { type:"derived", sources:filter([label("action"),
+case "CCY PC": return (type:"source", sources:filter([label("currency")]).
+0+ 241
+summary:* Copy $(label("currency"."Currency")}. };
+if(state.assetKey === "structured_fi*X
+- +
+current Structured Fl logic.* }:
+current Structured Fl logic." 7:
+current Structured FI logic." ];
+case"*Primary COY":
+case "*Revenue CCYM
+case "Secondary CCY":
+resolved input Book." );
+resolved input Book"}:
+resolved input Book.' }:
+otherwise PENDING.'}:
+switch(field)
+Search

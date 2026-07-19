@@ -1,0 +1,25 @@
+const currentValue = manualValue !== undefined ? manualValue : (row.output|field] ??
+const nextTarget = commit? getProcessedMoveTarget(rowld, field, move) : null;
+zm
+state.processedinlineEdit = { rowld, field, draft:String(currentValue ?? **) );
+const row = state.mappedRows.find(r => r.rowld === rowld);
+const manualValue = getManualOverrideValue(rowld, field);
+of 241
+const input - document.createElement("input");
+126
+markProcessedSelectedCell(rowld, field);
+input.value = String(currentValue ?? "'");
+constfield - td.dataset.field || "';
+function finish(commit, move)(
+td.classList.add("editing");
+input.autocomplete = "off";
+if(!rowld || !field) return;
+td.appendChild(input);
+td.textContent ="";
+input.type = "text";
+let finished = false;
+if(finished) return;
+if(!row) return;
+finished = true;
+Search
+**):

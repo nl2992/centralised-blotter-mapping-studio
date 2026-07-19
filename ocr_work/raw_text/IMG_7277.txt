@@ -1,0 +1,31 @@
+name">${escapeHtml(field.replace(/^\*/,*')}$(field.startsWith("**)? '<span class="ms-
+<div class="ms-chip-sub">$(escapeHtml(shorten(currentRuteSummary(field),
+<td class="nowrap">$(escapeHtml(field)} ${MANDATORY_FIELDS.has(field) ?
+<button class="btn ghost btn-ai-field" data-field="$(escapeHtm!(field))">Use
+zm
+<td>$(escapeHtml(shorten(currentRuleSummary(field), 130))}</td>
+<div class="ms-chip rhs-chip* data-field="$(escapeHtml(field)}">
+<td>$(escapeHtml(defaultMappingMeta(field).summary)}</td>
+badge("Mandatory","red") : badge("Optional","blue"))</td>
+<td class-"nowrap">$(renderModeSelect(field)j</td>
+ot 241
+const fieldRows = TARGET_HEADERS.map(field →> -
+<td class="num nowrap">$(fillRate(field)}%</td>
+<button class="btn ghost btn-reset-field" data-
+150
+field="$(escapeHtml(field)*>Reset</button>
+<span class="ms-dot rule">c/span>
+«td>$[renderConfigEditor(field)</td>
+<div class=*ms-chip-row">
+<span class="ms-chip-
+star">*</span>*= **J</span>
+$(currentRuleTag(field)}
+<div class-action-row*>
+<td class-"nowrap">
+Search
+</div>
+110))]</div>
+join');
+</div>
+Al</button>
+‹tr

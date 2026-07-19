@@ -1,0 +1,27 @@
+return state.savedProfiles.find(p => String(p.id) === String(state.selectedSavedProfileld))
+*"INSERT INTO" + PROFILE_TABLE + " (user_id, scope_app, profile_name, asset_key,
+async function updateProfileRecord(profiteld, profileName, note, assetKey, payload)[
+zm
+async function insertProfileRecord(profileName, note, assetKey, payload)[
+if(lstate.profileUserld) throw new Error("User context not ready");
+of 241
+"profile_name = "+ sq(String(profiteName) + ", "+
+"note = " + (note ? sqlString(note) : "NULL") + ", "+
+222
+(note ? sqlString(note) : "NULL") + ", FALSE)";
+"asset_key ="+ sqlString(assetKey ||***) + ", "+
+sqlString(PROFILE_SCOPE_APP) + ", "+
+"UPDATE" + PROFILE_TABLE + "SET" +
+"WHERE id = " + Number(profiteld) + "*+
+payload, note, is_default) VALUES ("+
+sqlString(state.profiteUserld) + ", "+
+"payload = "+ jsonSql(payload) + ","+
+sqlString(profileName) + ", "+
+sqlString(assetKey || "*) + ", *+
+jsonSql(payload) + ", "+.
+"updated_at = NOW()*+
+await apiSql(sql);
+Search
+const sql =
+const sql =
+Il null;

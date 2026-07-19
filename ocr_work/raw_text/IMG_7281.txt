@@ -1,0 +1,29 @@
+<div class="ms-chip-list" id="msLhsList">$(lhsHitmt || * <div class="empty">Process
+<div class=note">LHS = actual blotter columns. RHS = central output template
+fields. Dashed grey = default mapping. Solid red = custom remap for the current
+<div class=*ms-col-head*>cspan class=*ms-col-title">Centralised output
+<div class="ms-col-head">sspan class="ms-col-title*>Original blotter
+<div class="ms-chip-list* id="msRhsList">$(rhsHtml}</div>
+a sheet to populate the original blotter fields.</div>* j/div>
+34241
+<div class=*section-title">Mapping Diagram</div»
+154
+<div class=*ms-canvas" id=*msCanvas>
+<div class="ms-canvas-mid">c/divp
+<div class-"ms-canvas-colrhs*
+<section class="card section"y
+<div class-"ms-canvas-col*>
+<section class="card section'>
+- +
+<svg id="msSvg"></svg>
+<div class="toolbar"»
+fields</span></div>
+fields</span></div>
+</section>
+Search
+</section>
+asset.</div>
+</div>
+c/div>
+</div>
+</div>

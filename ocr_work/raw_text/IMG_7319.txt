@@ -1,0 +1,23 @@
+const exact = names.find(n →> canonicalHeader(n) --- canonicalHeader(preferred)):
+setStatus("Please load a workbook and select a sheet first.", *warn"):
+O241 @[D
+if(sheetSelect) sheetSelect.value = state.sheetName;
+const ws = state.workbook.Sheets[state.sheetName];
+190
+Jelse if(Inames.includes(state.sheetName)X
+const matrix = XLSX.utils.sheet_to_json(ws,1
+const sheetSelect = qs("sheetSelect"):
+if(lstate.workbook || Istate.sheetName)
+if(exact) state.sheetName - exact;
+state.sheetName = names[0]|| ***;
+function parseSelectedSheet(X
+dateNF:"dd/mm/yyyy"*
+blankrows:false,
+if(preferred)
+header:1,
+raw:false,
+Search
+defval:**,
+return:
+tryt
+I):

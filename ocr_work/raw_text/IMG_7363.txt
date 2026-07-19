@@ -1,0 +1,25 @@
+setStatus(* Could not import settings JSON: ${escapeHtml(err.message)}*, "bad");
+setStatus(* Coutd not export selected profile JSON: $(escapeHtml(e.message)}*,
+zm
+btnlmport.addEventListener("click", () => importinput.click());
+of 241
+importinput.addEventListener("change", async e => {
+const importinput = qs("savedSettingslmportFile");
+btnExportSelected.addEventListener("click", () =>{
+const file - e.target.files && e.target.files[0];
+234
+await importSavedSettingsFile(file);
+- +
+if(btnimport && importinputX
+exportSelectedProfileJson();
+if(btnExportSelected)[
+e.target.value = **-
+it(file) return:
+Jcatch(errX
+Search
+Jcatch(e)[
+tryl
+3):
+tryf
+"bad");
+7):

@@ -1,0 +1,23 @@
+return qsa("#processedSheet td.editable-cell").find(td -> td.dataset.rowid -=- rowld &&
+const row = state.mappedRows.find(r => r.rowld === state.processedSelectedRowld) ||
+W
+Jelse if(state.selectedGoldenKey && !state.goldenRecords.find(r => r.tradeKey===
+log(* Golden record synced: $(created} new unique trade(s), $(refreshed} refreshed
+zm
+state.selectedGoldenKey = state.goldenRecords[0].tradeKey;
+state.selectedGoldenKey) && state.goldenRecords.length){
+state.processedintineEdit = { rowld:**, field:**, draft:**}:
+of 241
+const statusEl = qs("processedSelectionStatus");
+const clearBtn = qs("btnClearSelectedCellEdit");
+function updateProcessedSelectionPanel(X
+const infoEl - qs("processedSelectioninfo");
+const field = state.processedSelectedField;
+function findProcessedCell(rowid, fieldX
+function clearProcessedinlineEditQl
+td.dataset.field ==- field) || null;
+existing trade(s)*, "success");
+if(linfoEl || !statusEl) return;
+saveLocal():
+Search
+null;

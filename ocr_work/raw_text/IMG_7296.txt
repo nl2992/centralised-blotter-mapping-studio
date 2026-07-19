@@ -1,0 +1,24 @@
+log(' Rule constant changed: asset-$(assetConfig() label), $(field) -> $(inpvalue)*,
+log(' Rule source changed: asset-S(assetConfig) label), $(field) -* $(selvalue)*,
+zm
+of 241 ID
+rules(field) = (.ourentRule(fieid), sourcekey: sel valun k
+rules[field] = ( currentRule(feid), constant inp.value }
+const rules = ensureCurrentAstetRuleStore(;
+const rules = ensureCurrentAssetRuleStore0:
+169
+qsa(".rule-constant").forEach(inp »> (
+qsa("rule-source") .forEach(sel => (
+constfield - seldataset.field:
+const field = inp.dateset.field;
+processCurrentSheet(;
+processCurrentSheet);
+sel.onchange = 0 => (
+inp.onchange = () => (
+saveLooal(:
+saveLocal):
+Search
+V):
+"into"):
+"info");
+)):

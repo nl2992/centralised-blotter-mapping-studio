@@ -1,0 +1,21 @@
+const res = await fetch(url, Object.assign ({ credentials:"include" }, options || 0));
+throw new Error(data.error || data.message || "Request failed");
+activityView.parentNode.insertBefore(div, activityView);
+of 241
+document.querySelector(".shell").appendChild(div);
+if(!res.ok) throw new Error(* HTTP $(res.status}* );
+207
+const div = document.createElement("div");
+if(activityView && activityView.parentNode)
+return ''' + String(v ?? ""). replace(/'/g, '*)+ ™*
+const activityView = qs("activityLog");
+async function apiJson(url, options)(
+if(data && data.success === false)
+const data = await res.json();
+if(!qs("savedSettings")X
+div.id = "savedSettings";
+div.className = "view";
+function sqlString(v)(
+Search
+return data;
+Jelsel

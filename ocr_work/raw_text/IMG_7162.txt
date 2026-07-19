@@ -1,0 +1,26 @@
+{ key:"referenceNumber", patterns:[*reference number"," reference no""reference"] },
+{ key:"notionalUsd", patterns:["notional in usd',"notional usd","primary amount"] }.
+{ key:"customerText", patterns:['final customer","'customer","customer text"] )
+zm
+( key:"action", patterns:["action"," new/unwind","new unwind","status"] },
+{ key:"comment", patterns:["remarks"," remark","corfiment"," notes"]),
+{ key:"gnbv", patterns:['gnbv field","gnbv", "gnbv usd"'gnbv (usd)"] }.
+{ key:"action", patterns:['new/unwind","new unwind",'action'] },
+{ key:"productType", patterns: ['product type","product"] ),
+{ key:"ticker", patterns:["bbg tix 1"'bbg tix1", ticker']}.
+[ key: "nativeRef", patterns:["svcs no.'!"svcs no","svcs"] }.
+( key:"maturity", patterns: ["maturity","maturity date"] }.
+f key:"summitld", patterns:["summit id",'summit"] ),
+( key:"tradeDate", patterns: ['"trade date","date"] },
+{ key:"grossPrice", patterns:['gross price",' price"] }.
+{ key:"underlying", patterns:['underlying""ticker*] )
+{ key:"currency", patterns:["currency","ccy"] },
+preferredSheets: ["Equity TRS", *TRS"],
+{ key:"trader", patterns: ["trader"] ).
+{ key: "book", patterns:["book'] }.
+supportsAggregation: false,
+label: "Equity TRS",
+key: "equity_trs",
+sourceSpecs: [
+Search
+equity_trs: (

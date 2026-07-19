@@ -1,0 +1,24 @@
+qsa(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === tab));
+of241 Q| [D
+qsa(".view").forEach(v=> v.classList.toggle("active", v.id === tab));
+names.some(n => canonicalHeader(n) === canonicalHeader(p))
+if(tab === "mappingStudio") setTimeout(drawDiagram, 60);
+safeRender("processedSheet", renderProcessedSheet);
+const preferred = assetConfig().preferredSheets.find(p =>
+safeRender("mappingStudio", renderMappingStudio);
+safeRender("goldenRecord", renderGoldenRecord);
+safeRender("defaultRules", renderDefaultRules);
+const names = state.workbook.SheetNames || [];
+safeRender("exceptions", renderExceptions);
+189
+safeRender("activityLog", renderActivityLog);
+safeRender("overview", renderOverview);
+function autoSelectPreferredSheet(X
+setActiveTab(state.activeTab);
+function setActiveTab(tab
+if(Istate.workbook) return;
+function renderALlK
+state.activeTab = tab;
+updateTopPills();
+updateKpis();
+Search

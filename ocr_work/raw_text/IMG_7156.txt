@@ -1,0 +1,30 @@
+of241 O[D
+32
+- +
+"Sales Team (Coverage)*,
+"FX Platform Description",
+"Sales Person Country".
+"Sales Client Sector".
+"Sales Client Country",
+"Commission Code",
+**Revenue CCY",
+"Secondary CCY",
+*Sales Client Type",
+"*$ VA/GNBV",
+"Maturity Date",
+"BTB Trade Site",
+"Sales Client",
+**Trade ID",
+"ISIN Code",
+Search
+"Platform",
+"PC CODE",
+"СCY РC",
+"Security",
+"Buy/Sell",
+"Book",
+"Trader",
+"Issuer",
+"Ticker",
+*S TV",
+"Price",

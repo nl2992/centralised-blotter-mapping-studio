@@ -1,0 +1,24 @@
+log(* Cleared all manual processed-sheet edits for $(assetConfig().label}*, "warn");
+setStatus("Cleared all manual processed-sheet edits for the current worksheet.",
+", td.dataset.field ||
+of241 @|CD
+qsa("#processedSheet processed-row-select").forEach(cb => {
+td.onclick = () →> openProcessedCellEditor(td.dataset.rowid || **
+if(cb.checked) delete state.exportExcludedRows[rowld];
+qsa("#processedSheet .editable-cell").forEach(td →> (
+else state.exportExcludedRows[rowld] = true;
+176
+clearCurrentSheetManualOverrides);
+cb.onclick = e => e.stopPropagation();
+const rowld = cb.dataset.rowid || "™;
+setActiveTab("processedSheet");
+clearAllBtn.onclick = 0 → (
+processCurrentSheet();
+renderProcessedSheet);
+state.processedSelectedField);
+cb.onchange = () →> (
+updateTopPills():
+if(clearAllBtn)(
+saveLocal():
+Search
+"blue");

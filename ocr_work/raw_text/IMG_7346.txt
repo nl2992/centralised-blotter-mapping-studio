@@ -1,0 +1,23 @@
+return <div class="note">Validate the JSON editor before applying or saving. The editor
+$(state.savedSettingsImportFileName ?* <br/>Imported file: <span class="intine-
+$(state.savedSettingslmportFiteName? * <br/>Imported file: <span class="inline-
+$(v.warnings.length ? * <ul class="saved-validation-list">$(v.warnings.map(x →>
+code">$(escapeHtm!(state.savedSettingsImportFileName)}</span>* : ***}
+code">$[escapeHtmt(state.savedSettingsimportFileName)/</span>* : **}
+accepts either a full profile envelope or a raw payload object.</div>
+of 241
+217
+const v = state.savedSettingsLastValidation;
+• <li>$(escapeHtml(x)J</Li>^).join(**)}</u\>*:**}
+function validation PanelHtmt(X
+<b>JSON validation failed.</b>
+<div class="good-note">
+<b>JSON is valid.</b>
+<div class=*bad-note"→
+return null;
+Search
+if(v.ok)(
+if(.v)
+return
+</div>
+return *

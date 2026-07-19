@@ -1,0 +1,27 @@
+pillMode.textContent = *Mode: $(state.runMode === "trade_by_trade" ? "trade by trade"
+state tradeld Mode === "native_ref_preferred" ? "native ref preferred" : "legacy row order";
+pillProcess.textContent = * Process: $(state.mappedRows.length ? "done" : "idte"}*;
+zm
+pillProcess.className = "pill" + (state.mappedRows.length ? "green" : ***);
+const label = state tradeldMode === "business_key"? "business key" :
+Jelse if(state.aiFormutaSuggestion && state.aiFormulaSuggestion.field)(
+6+ 241
+lif(pillRules) pillRules.textContent = * Custom Rules:
+pillTradeld.textContent = *Trade ID: $(label}' ;
+pillAi.textContent = "Al Formula: generating";
+136
+:aggregate $(state.addonWindowDays)d*}*;
+S[Object.keys(currentFieldRules()).length}*;
+pillAi.textContent = "Al Formula: review";
+pillTradeld.className = "pill blue";
+pillMode.className = "pill blue";
+pillAi.className = "pill amber";
+jelse if(state.aiFormulaError)
+pillAi.className = "pill red";
+- +
+if(state.aiFormulaLoading)
+if(pillMode)
+lif(pillTradeld)
+if(pillProcess)(
+Search
+if(pillAiX

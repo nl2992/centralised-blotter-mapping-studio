@@ -1,0 +1,24 @@
+Worksheet is now <b>${escapeHtml(state.sheetName || "none")}</b>. Click <b>Process
+if(!assetConfig().supportsAggregation && state.runMode !== "trade_by_trade")
+setStatus(*Asset switched to <b>${escapeHtml(assetConfig().label)J</b>.
+if(state.sourceRows.length && state.workbook) parseSelectedSheet();
+of241| 0 | CD
+filelnput.addEventListener("change", async e => {
+selected sheet</b> to refresh the mapping.* , "blue");
+const file = e.target.files && e.target.files[O];
+assetSelect.addEventListener("change", e => {
+198
+const assetSelect = qs("assetSelect");
+if(file) await handleWorkbook(file);
+const filelnput = qs("fileinput");
+state.assetKey = e.target.value;
+state.runMode = "trade_by_trade";
+- +
+autoSelectPreferredSheet();
+if(state.workbookX
+updateTopPills();
+if(assetSelect)
+else renderAll();
+if(filelnput)
+saveLocal();
+Search

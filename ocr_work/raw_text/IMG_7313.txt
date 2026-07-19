@@ -1,0 +1,22 @@
+const clearGoldenBtn = qs("btnClearGoldenRecords*):
+of 241
+const clearFileBtn = qs("btnClearFileHistory");
+log("Persisted golden record cleared", "warn");
+log("Persisted file history cleared", "warn*);
+184
+state.currentFileHistoryld = **;
+clearGoldenBtn.onclick = () -> {
+state.goldenInstancelndex = 0:
+state.selectedGoldenKey = **;
+- +
+clearFileBtn.onclick = 0 => [
+state.goldenRecords - 0;
+state fileHistory - [J:
+if(clearGoldenBtn)(
+if(clearFileBtn)
+saveLocal);
+renderAIL):
+saveLocal);
+renderAll);
+Search
+0):

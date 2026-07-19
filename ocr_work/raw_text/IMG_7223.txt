@@ -1,0 +1,25 @@
+*Y"formuta\":\"stringl",\"explanation)":\"stringl", \"assumptions\":[\"stringl"],\"warnings!":[\*
+W
+"Do NOT wrap the expression in a function, const, let, return, or backticks.",
+normalizePricePoints, deriveMaturitySafe, routePbByBook, parseDatePartsNoTz,
+zm
+"src, record, helpers, parseNumber, cleanText, mapKnownlssuerText,
+resolveSettlementParts, parseTenorYears, formatOutputDateFromParts.",
+*Use ONLY the structured context provided in the user message..
+*The formula must be a SINGLE valid JavaScript expression only.",
+*Do NOT use web search, research, or any external knowledge.",
+"The expression will run with these identifiers already available:"*,
+*Return "PENDING' instead of guessing unresolved data."
+0: 241
+current_output_preview: currentOutputPreview
+"If the target is a date, output dd/mm/yyyy.".
+sample_source_rows: sampleSourceRows,
+string\"], \"confidence\":\"high|medium|low)"y",
+99
+function buildAiProjectInstructions(X
+- +
+*Required JSON schema:*,
+Search
+return I
+board.",
+notes."

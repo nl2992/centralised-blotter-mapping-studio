@@ -1,0 +1,31 @@
+<b>Date standard:«/b> <span class="intine-code">dd/mm/yyyy</span><br />
+zm
+$(sharedRules.map(x => <li>$(escapeHtm((x)}</i>*).join(**)}
+code">S[escapeHtml(state.runMode.replace(/_/g," *)J</span><br />
+code">$(escapeHtml(state.addonWindowDays)j</span><br />
+cdiv class=*note">Documented field-by-field logic for
+<div class="grid grid-2" style="margin-bottom: 12px">
+code">$(escapeHtml(assetConfig().label)}</span><br/>
+o+ 241
+code*>$(escapeHtml(state.tradeldMode)]</span><br />
+<b>Custom rules active:</b> <span class="intine-
+code'>$(Object.keys(currentFieldRules().lengthj</span>
+«div class-'section-title">Default Rules</div>
+<b>$(escapeHtml(assetConfig(.label)}</b>.</div>
+<b>Trade ID mode:</b> <span class="inline-
+<b>Add-on window:</b> <span class=*inline-
+180
+<b>Asset:</b> <span class=*inline-
+*b>Mode:</b> <span class="inline-
+cb>Shared cross-asset rules</b>
+<b>Current run settings</b>cbr />
+<div class="good-note">
+cul class-"plain-list">
+cdiv class="blue-note">
+<div class="toolbar»
+Search
+S/div
+vul>
+</div»
+</div>
+</div»

@@ -1,0 +1,25 @@
+setStatus(* Kept only the <b>bottom ${Math.min(n, rows.length)}</b> filtered row(s)
+setStatus(* Kept only the <b>top $(Math.min(n, rows.length)}</b> filtered row(s)
+setStatus(* Inverted export selection for the current filtered rows.* , "blue");
+zm
+const n = Math.max(1, Number(state.processedQuickSelectCount || 5)):
+of 241 D | [D
+keepOnlyRows(rows, rows.slice(Math.max(0, rows.length -n))):
+174
+const rows - getFilteredProcessedRows();
+const rows - getFilteredProcessedRows();
+keepBottomFiltered.onclick = 0) => {
+invertFiltered.onclick= 0 → {
+invertRowsSelection(rows);
+selectAllRows.onclick = () => (
+clearAllRowSelectionState();
+selected for export.*, "good");
+renderProcessedSheet);
+selected for export.* . "good"):
+renderProcessedSheet);
+if(keepBottomFiltered)
+updateTopPills();
+if(invertFilteredX
+updateTopPills():
+if(selectAllRows)
+Search

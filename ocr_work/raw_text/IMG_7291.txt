@@ -1,0 +1,25 @@
+if(!canvas || 1svg || !IhsList || IrhsList || state.activeTab !=- "mappingStudio") return;
+qsa("#msLhsList_ths-chip").forEach(ch →> thsMap[ch.dataset.key] = ch);
+if(1hsChip || IchipVisibleinList(hsChip, IhsList)) return:
+const canvasRect = canvas.getBoundingClientRect();
+0t 241
+qsa("#msRhsList.rhs-chip").forEach(rhsChip => {
+if(lchipVisiblelnList(rhsChip, rhsList)) return;
+const IhsChip = IhsMap['raw:* + srcHeader]:
+const lr = |hsChip.getBoundingClientRect):
+const rr = rhsChip-getBoundingClientRect):
+160
+const spec = getConnectionSpec(field);
+spec.sources.forEach(srcHeader =p (
+constfield = rhsChip.dataset.field;
+const x1 = lr.right - canvasRect.left;
+const canvas = qs(*msCanvas"):
+const IhsList = qs(*msLhsList):
+const rhsList = gs(*msRhsList"):
+if(lspec.sources.length) return;
+- +
+function drawDiagram(X
+const svg = qs("msSvg");
+const lhsMap = 0:
+const paths = 0:
+Search

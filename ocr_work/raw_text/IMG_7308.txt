@@ -1,0 +1,30 @@
+{ label:"Latest Status", value:(r)=>r.latestRowStatus, html: (v)=>statusBadge(v || "Valid"),
+style=*font-size:16px">$(escapeHtml(selected ? selected.tradeKey : *None")</div><div
+{ label:"Last Processed At", value:(r)=>formatDateTimeDisplay(r.lastProcessedAt),
+<div class-"kpi"»<div class="label">Selected trade</div><div class='value"
+{ label:"Size", value:(r)=>bytesLabe((r.sizeBytes), className:"nowrap num" },
+zm
+{ label:"Process Count", value:"processCount", className:"num nowrap" },
+( label:"Sheet Count", value:"sheetCount", className:"num nowrap" },
+{ label:"Preferred Sheet", value:"preferredSheet", className:"nowrap" },
+( label:"Rows", value:"lastProcessedRows", className:"num nowrap" }
+{ label:"Trade Date", value:(r)=>r.summary && r.summary.tradeDate || **
+selected.summary-salesClient) ||** = *No record selected")}</div></div>
+( label:"Inserted At", value:(r)=>formatDateTimeDisplay(r.insertedAt).
+{ label:"Asset", value:"lastProcessedAsset", className:"nowrap" },
+QID
+const fileHistoryTable = tableHtml(fiteHistoryRows.slice(0, 200), [
+{ label:"Trade Key", value:"tradeKey", className:"mono nowrap" },
+( label:"Asset", value:(r)=>r.latestAsset || '**, className:"nowrap" },
+class="sub">$fescapeHtml(selected ? (selected.summary &&
+of 241
+const goldenTable = tableHtml(records.slice(0, 500), [
+179
+[ label:"Workbook", value:"fileName" },
+]. "No inserted files recorded yet.");
+className:"nowrap" },
+className:"nowrap* }.
+className:"nowrap" },
+className:"nowrap" }.
+Search
+</div>

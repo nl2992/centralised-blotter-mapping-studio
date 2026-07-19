@@ -1,0 +1,177 @@
+browser: error Fetch API cannot load file:///studio/api/knowledge-base/download?file_id=17e95c45-7694-4233-8165-ed0efb09ae31. URL scheme "file" is not supported.
+browser: warning Highcharts warning: Consider including the "accessibility.js" module to make your chart more usable for people with disabilities. Set the "accessibility.enabled" option to false to remove this warning. See https://www.highcharts.com/docs/accessibility/accessibility-module.
+browser: error Fetch API cannot load file:///studio/api/user_name. URL scheme "file" is not supported.
+{
+  "mappingPill": "Mapping: 7 rows",
+  "workbookPill": "Workbook: 7 rows",
+  "fatalPill": "Fatal Error: none",
+  "rows": [
+    {
+      "quality": "Working Pass",
+      "tradeId": "4204720592",
+      "tier1": "Structured Credit",
+      "tier2": "Structured Credit",
+      "tier3": "Credit Linked Notes",
+      "tradeDate": "23/02/2026",
+      "comment": "source_sheet=Structured FI 2026 | source_row=2 | asset=Structured FI - Credit | source_layout=structured_fi_current | native_trade_ref=XS3307267255 | volume_source=VOLUME_USD_DIRECT | va_source=TOTAL_NNBV | pc_source=VA_PROXY | New"
+    },
+    {
+      "quality": "Working Pass",
+      "tradeId": "3329199354",
+      "tier1": "Markets",
+      "tier2": "Structured Products",
+      "tier3": "Structured Rates",
+      "tradeDate": "18/07/2026",
+      "comment": "source_sheet=Linear Zero | source_row=2 | asset=Structured FI - Rate | source_layout=linear_zero_existing | native_trade_ref=XS0000000001 | volume_source=VOLUME_USD_DIRECT | va_source=NNBV_DIRECT | pc_source=VA_PROXY | zero-linear smoke"
+    },
+    {
+      "quality": "Working Pass",
+      "tradeId": "2381983830",
+      "tier1": "Markets",
+      "tier2": "Equity Derivatives",
+      "tier3": "Collar / Options",
+      "tradeDate": "31/10/2023",
+      "comment": "source_sheet=Collar Blotter | source_row=2 | asset=Collar | native_trade_ref=0296641 / 0296640 | volume_source=MAX_NOTIONAL_USD | va_source=SUM_TOTAL_GNBV_USD | pc_source=PB_FEE_USD | grain=strategy | pims=0296641 / 0296640"
+    },
+    {
+      "quality": "Working Pass",
+      "tradeId": "2810938652",
+      "tier1": "Structured Credit",
+      "tier2": "Structured Credit",
+      "tier3": "Structured Credit Notes",
+      "tradeDate": "18/07/2026",
+      "comment": "source_sheet=Illiquid Credit+Repack | source_row=2 | asset=Illiquid Credit | native_trade_ref=XS1111111111 | volume_source=VOLUME_USD_DIRECT | va_source=GNBV_USD | pc_source=VA_PROXY | illiquid smoke | status=New | Repackaged Illiquid Credit Note"
+    },
+    {
+      "quality": "Fail",
+      "tradeId": "2635637780",
+      "tier1": "Structured Credit",
+      "tier2": "Structured Credit",
+      "tier3": "Credit Linked Notes",
+      "tradeDate": "",
+      "comment": "source_sheet=Structured Credit 2025 | source_row=2 | asset=Structured Credit | internal_trade_ref=SC-GBT5WG | volume_source=NOTIONAL_USD | va_source=GNBV_USD | pc_source=VA_PROXY | category=CLN | region=APAC | ccy=USD (Notional/GNBV stated in USD) | trade_date unavailable in source sheet - fill via a rule or manual override"
+    },
+    {
+      "quality": "Fail",
+      "tradeId": "5141050790",
+      "tier1": "Private Credit Primary",
+      "tier2": "Private Placement",
+      "tier3": "Private Placement",
+      "tradeDate": "",
+      "comment": "source_sheet=Structured Credit 2025 | source_row=3 | asset=Private Credit | internal_trade_ref=SC-12RQELS | volume_source=NOTIONAL_USD | va_source=GNBV_USD | pc_source=VA_PROXY | category=Private Placement | region=APAC | ccy=USD (Notional/GNBV stated in USD) | trade_date unavailable in source sheet - fill via a rule or manual override"
+    },
+    {
+      "quality": "Working Pass",
+      "tradeId": "123456",
+      "tier1": "Markets",
+      "tier2": "Equity Derivatives",
+      "tier3": "Total Return Swap",
+      "tradeDate": "18/07/2026",
+      "comment": "source_sheet=Equity TRS | source_row=2 | asset=Equity TRS | volume_source=NOTIONAL_USD | va_source=MSS_REVENUE_USD | pc_source=COMMISSION_USD | settlement=2026-07-20 | shares=100000"
+    }
+  ],
+  "allTradeIdsNumeric": true,
+  "clnRow": {
+    "quality": "Working Pass",
+    "tradeId": "4204720592",
+    "tier1": "Structured Credit",
+    "tier2": "Structured Credit",
+    "tier3": "Credit Linked Notes",
+    "tradeDate": "23/02/2026",
+    "comment": "source_sheet=Structured FI 2026 | source_row=2 | asset=Structured FI - Credit | source_layout=structured_fi_current | native_trade_ref=XS3307267255 | volume_source=VOLUME_USD_DIRECT | va_source=TOTAL_NNBV | pc_source=VA_PROXY | New"
+  },
+  "illiquidRow": {
+    "quality": "Working Pass",
+    "tradeId": "2810938652",
+    "tier1": "Structured Credit",
+    "tier2": "Structured Credit",
+    "tier3": "Structured Credit Notes",
+    "tradeDate": "18/07/2026",
+    "comment": "source_sheet=Illiquid Credit+Repack | source_row=2 | asset=Illiquid Credit | native_trade_ref=XS1111111111 | volume_source=VOLUME_USD_DIRECT | va_source=GNBV_USD | pc_source=VA_PROXY | illiquid smoke | status=New | Repackaged Illiquid Credit Note"
+  },
+  "privateCreditRow": {
+    "quality": "Fail",
+    "tradeId": "5141050790",
+    "tier1": "Private Credit Primary",
+    "tier2": "Private Placement",
+    "tier3": "Private Placement",
+    "tradeDate": "",
+    "comment": "source_sheet=Structured Credit 2025 | source_row=3 | asset=Private Credit | internal_trade_ref=SC-12RQELS | volume_source=NOTIONAL_USD | va_source=GNBV_USD | pc_source=VA_PROXY | category=Private Placement | region=APAC | ccy=USD (Notional/GNBV stated in USD) | trade_date unavailable in source sheet - fill via a rule or manual override"
+  },
+  "existingLinearZeroRow": {
+    "quality": "Working Pass",
+    "tradeId": "3329199354",
+    "tier1": "Markets",
+    "tier2": "Structured Products",
+    "tier3": "Structured Rates",
+    "tradeDate": "18/07/2026",
+    "comment": "source_sheet=Linear Zero | source_row=2 | asset=Structured FI - Rate | source_layout=linear_zero_existing | native_trade_ref=XS0000000001 | volume_source=VOLUME_USD_DIRECT | va_source=NNBV_DIRECT | pc_source=VA_PROXY | zero-linear smoke"
+  },
+  "treatsValues": [
+    {
+      "value": "NOSGSGH",
+      "note": "Built-in client Treats mapping: Nomura Private Bank"
+    },
+    {
+      "value": "PENDING_TREATS_ACRONYM",
+      "note": "Working-mode placeholder"
+    },
+    {
+      "value": "HASEHKP",
+      "note": "Built-in client Treats mapping: HASE"
+    },
+    {
+      "value": "HASEHKP",
+      "note": "Built-in client Treats mapping: HASE"
+    },
+    {
+      "value": "PENDING_TREATS_ACRONYM",
+      "note": "Working-mode placeholder"
+    },
+    {
+      "value": "PENDING_TREATS_ACRONYM",
+      "note": "Working-mode placeholder"
+    },
+    {
+      "value": "NOSGSGH",
+      "note": "Built-in client Treats mapping: Nomura Private Bank"
+    }
+  ],
+  "tradeIdValues": [
+    {
+      "value": "4204720592",
+      "provenance": "Policy",
+      "note": "Numeric template trade ID; native reference preserved in source fields/comment where alphanumeric."
+    },
+    {
+      "value": "3329199354",
+      "provenance": "Policy",
+      "note": "Numeric template trade ID; native reference preserved in source fields/comment where alphanumeric."
+    },
+    {
+      "value": "2381983830",
+      "provenance": "Policy",
+      "note": "Numeric template trade ID; native reference preserved in source fields/comment where alphanumeric."
+    },
+    {
+      "value": "2810938652",
+      "provenance": "Policy",
+      "note": "Numeric template trade ID; native reference preserved in source fields/comment where alphanumeric."
+    },
+    {
+      "value": "2635637780",
+      "provenance": "Policy",
+      "note": "Numeric template trade ID; native reference preserved in source fields/comment where alphanumeric."
+    },
+    {
+      "value": "5141050790",
+      "provenance": "Policy",
+      "note": "Numeric template trade ID; native reference preserved in source fields/comment where alphanumeric."
+    },
+    {
+      "value": "123456",
+      "provenance": "Source",
+      "note": "Numeric template trade ID; native reference preserved in source fields/comment where alphanumeric."
+    }
+  ]
+}

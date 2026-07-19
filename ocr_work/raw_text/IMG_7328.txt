@@ -1,0 +1,24 @@
+if(state.sourceRows.length && state.runMode === "aggregate_addons")
+if(btnProcess) btnProcess.addEventListener("click", parseSelectedSheet);
+of 241 • [D
+const v = Math.max(0, Math.min(30, Number(e.target.value || 7)));
+if(btnExportCsv) btnExportCsv.addEventListener("click", exportCsv);
+if(btnExportXlsx) btnExportXlsx.addEventListener("click", exportXlsx);
+if(state.sourceRows.length) processCurrentSheet();
+const addonWindowDays = qs("addonWindowDays");
+addonWindowDays.addEventListener("change", e => {
+200
+const btnResetRules = qs("btnResetRules");
+const btnExportCsv = qs("btnExportCsv");
+const btnExportXlsx = qs("btnExportX(sx");
+const btnProcess = qs("btnProcess");
+state.addonWindowDays = v;
+- +
+lif(addonWindowDays)(
+updateTopPills();
+processCurrentSheet();
+else renderAll);
+updateTopPilts();
+saveLocal();
+Search
+}):

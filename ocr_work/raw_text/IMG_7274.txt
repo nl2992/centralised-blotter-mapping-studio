@@ -1,0 +1,26 @@
+?* Describe the field rute you want for <b>$(escapeHtml(assetConfig().label)}</b>,
+if(TARGET_HEADERS.includes(state.aiFormutaField)) state.aiFormulaField - "Maturity
+:Process a worksheet first so the copilot can see real headers and sample rows
+zm
+<div class="ms-chip (hs-chip" data-key="$(escapeHtml(node.key)}">
+<span class="ms-chip-name">$(escapeHtml(node.label))</span>
+<div class=*ms-chip-sub*>$(escapeHtml(node.sub)}</div>
+of 247
+const rhsHtml = TARGET_ HEADERS.map(fietd =>*
+149
+then generate a tailored formula suggestion."
+const IhsNodes - getBlotterFieldNodes):
+const IhsHtml = lhsNodes.map(node => "
+<span class=*ms-dot source"›c/span>
+function renderMappingStudio(K
+<div class-ms-chip-row*}
+before drefting a formuta.* }
+<div class="empty">
+$thasContext
+Search
+return"
+*).join(**):
+c/div>
+</div>
+</div>
+Date",

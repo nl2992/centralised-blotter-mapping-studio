@@ -1,0 +1,25 @@
+_ms-col-head|display:flex;flex-direction:column;gap:6px)
+of 241
+ms-canvas-mid(flex:1 1 auto;min-width:80px}
+.ms-canvas-col.rhs(flex:1 1 620px}
+text-transform:uppercase;
+flex-direction:column;
+letter-spacing:.06em;
+flex-direction:column;
+overflow:hidden:
+min-height:480px;
+color:var(--muted):
+_ms-canvas-col
+font-size:10.5px;
+max-height:420px;
+font-weight:700;
+flex:0 0 320px;
+min-width:0;
+display:flex;
+ms-col-titlel
+ms-chip-list{
+display:flex;
+Search
+gap:8px;
+z-index:2;
+gap:6px;

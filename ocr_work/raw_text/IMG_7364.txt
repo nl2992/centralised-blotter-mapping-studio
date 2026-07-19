@@ -1,0 +1,25 @@
+setStatus(* Could not export current board JSON: ${escapeHtml(e.message)}*, "bad"):
+setStatus(* Could not load selected profile to editor: ${escapeHtml(e.message)}*,
+zm
+setStatus Loaded the current board settings into the JSON editor.", "good");
+setStatus("Loaded the selected profile into the JSON editor.", "good");
+btnLoadCurrentToEditor.addEventListener("click", () =>f
+btnLoadSelectedToEditor.addEventListener(*click", () => 1
+of 241
+btnExportCurrent.addEventListener("click", () => {
+235
+loadSelectedProfileToEditor();
+- +
+load CurrentBoardToEditor();
+exportCurrentDraftJson();
+if(btnLoadCurrentToEditor)
+if(btnLoadSelectedToEditor)
+if(btnExportCurrent)
+Search
+Jcatch(e)(
+Jcatch(e){
+tryl
+tryl
+7):
+3):
+"bad");

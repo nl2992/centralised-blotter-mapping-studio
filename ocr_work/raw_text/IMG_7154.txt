@@ -1,0 +1,26 @@
+id="kpiErrored">0</div>cdiv class="sub">Rows with one or more exceptions. </div></div>
+<button class="tab active" data-tab="mappingStudio">Mapping Studio</button>
+zm
+<div class="kpi"><div class=*label'>Errored rows</div»<div class="value"
+id="kpilssues">0</div><div class="sub">Fietd-level exc-ptions in the current
+<div class="kpi*><div class="label*>Custom rules</div><div class=*value*
+<button class="tab" data-tab="processedSheet">Processed Sheet</button>
+¿button class='tab* data-tab="goldenRecord">Golden Record</button>
+«div class="kpi*»cdiv class="label">Issues</div»<diy class=*vatue"
+‹button class-"tab" data-tab="defaultRules>Default Rules</button>
+«button class-"tab" data-tab-"exceptions*>Exceptions</button>
+<button class="tab" data-tab="activityLog">Activity Log</button>
+<button class-"tab" data-tab-*overview*>Overview</button>
+0$ 241
+<div id="mappingStudio* class="view active"></div»
+<div id="processedSheet' class="view'>c/div>
+<div id="exceptions" class="view"></div>
+<divid='overview" class="view*›/divp
+supported.</div>c/div>
+<div class= tabbar">
+force.</div>c/div>
+run, </div> c/div>
+Search
+e/section)
+</divp
+</divp*

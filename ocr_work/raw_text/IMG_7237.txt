@@ -1,0 +1,23 @@
+zm
+state.manualOutputOverrides[overrideKey(rowld, field)] = value;
+delete state.manualOutputOverrides[overrideKey(rowld, field)]:
+const rowids - new Set(state.mappedRows.map(r=> r.rowld)):
+const rowlds - new Set(state.mappedRows.map(r=> r.rowld));
+Object.keys(state.manualOutputOverrides || ().forEach(k => (
+if(rowlds.has(rowld)) delete state.manualOutputOverrides[k];
+of 241
+function clearManualOverrideValue(rowld, field)X
+function countCurrentSheetManualOverrides(T
+function clearCurrentSheetManualOverrides(K
+if(rowlds.has(rowld)) count += 1;
+- +
+const rowld = k.split(*Il")[0];
+const rowld = k.split(*ll")[0];
+saveLocal);
+saveLocal):
+let count = 0:
+return count;
+saveLocal();
+Search
+7):
+3);

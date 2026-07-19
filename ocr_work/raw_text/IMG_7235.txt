@@ -1,0 +1,25 @@
+<b>$/escapeHtml(assetConfig().label)j</b>. The sheet has been reprocessed with the new
+if(state.aiFormulaSuggestion && state.aiFormulaSuggestion.field !=- field)
+setStatus(* Applied Al formula to <b»$(escapeHtm!(field)}</b> in
+state.aiFormulaPrompt === state.aiFormutaLastAutoPrompt ||
+state.aiFormulaLastAutoPrompt = state.aiFormulaPrompt;
+state.aiFormulaPrompt = buildAiDefaultPrompt(field);
+0t 241
+ItrimFormulaText(state.aiFormutaPrompt) |l
+state.aiFormulaSuggestion = null;
+state.aiFormulaRawResponse = **:
+- +
+function jumpToAiField(field)[
+_const shouldRefreshPrompt -
+state.aiFormulaField !=- field;
+setActiveTab("mappingStudio"):
+state.aiFormulaField - field;
+state.aiFormulaEditable = **:
+if(shouldRefreshPrompt)k
+state.aiFormulaError = *;
+processCurrentSheet):
+renderMappingStudiol):
+updateTopPilts;
+rule.', "good"):
+saveLocal(:
+Search

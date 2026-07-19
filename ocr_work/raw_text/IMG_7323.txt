@@ -1,0 +1,25 @@
+const base = (state.fileName || "centralised_blotter_mapper").replace(/\.[^.]+$/,**);
+a.download = • $(base}_$(state.assetKey}_$(state.runMode)_selected _output.csv;
+log( CSV exported: asset=$(assetConfig().label}, rows=$(rows.length}* , "success");
+setStatus(* Exported <b>${rows.length)</b> selected row(s) to CSV.*, "good");
+const csv = XLSX.utils.sheet_to_csv(XLSX.utils.json_to_sheet(rows.(
+"const blob = new Blob([csv), { type:"text/csv;charset=utf-8;* });
+TARGET_HEADERS.forEach(h => out[h] = r.output[h]);
+const selectedMapped = getExportRowsOrWarn();
+194
+const rows = selectedRows.map(r => {
+const url = URL.createObjectURL(blob);
+const a - document.createElement("a");
+document.body.appendChild(a);
+const wb = XLSX.utils.book_new(;
+- +
+header:TARGET_HEADERS }));
+URL.revokeObjectURL(url);
+if(!selectedMapped) return;
+function exportXlsx)l
+const out = 0:
+return out;
+a.href = url;
+a.remove();
+Search
+a.click();

@@ -1,0 +1,21 @@
+if(rule made == "source" && rule sourcekey && rute.sourceKey.startsWith("raw:"))X
+zm
+TOID
+return M S(x1] Siyt) C Sfxt + dx) $(y1), $(x2 - dx) $(y2), $(x2) $(y2}*;
+iffrute mode === "default' iltrule.mode || rute.mode === **X
+return (lind "user", souroes:|rule.sourceKey.slice(4)] }:
+h N41
+const dx = Mtath.max 40, Matn.abs(x2 -x1) * 0.45);
+veturn (kind "detaulr", sources meta sources ):
+oonst mete - detauttMappingMeta(field):
+comstr = chip.getbaundingObentReut):
+const lr = listEl. getBoundineCtientRect):
+function chipvisibieinList.chip, istEl
+retum cy >= lutap &8 py c= a boctam:
+function getConnectiorSpec(field)
+bindProoessedSheetEvemsl
+const rule = currentRule (field)
+return (kind "none", soures:0 -
+function bezierPath(x1.y1, *2. 32X
+const cy = utop + theight /21
+Search

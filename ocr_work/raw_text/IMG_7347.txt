@@ -1,0 +1,24 @@
+top:8px*><b>Warnings</b>cul class=*saved-validation-list" > $/v.warnings.map(x =>
+return t.replace(/[*\w.-]+/g, *_*).replace(/^_+|_+$/g. **) || "saved_settings";
+const blob - new Blob([text], {type: "application/json;charset=utf-8* });
+<ut class="saved-validation-list">$((v.errors l [])-map(×=>
+$((v.warnings && v.warnings.length) ? <div style=*margin-
+of 241
+* <li>$(escapeHtml(x)|</li>= )-join(**}</ul></div>* • **}
+const t = cleanText(text || fallback || "saved_settings");
+218
+function applySavedSettingsPayload(payloadX
+• <li>$(escapeHtml(x)|</li>* )-join(**))</ut>
+function downloadTextFile(filename, text)(
+const url - URL.createObjectURL(blob);
+const a - document.createElement("a*);
+function safeFileStem(text, fallback)
+document.body.appendChild(a);
+- +
+URL.revokeObjectURL(url):
+a.download - filename;
+Search
+a.href - url;
+a.remove):
+</div>
+a.click:

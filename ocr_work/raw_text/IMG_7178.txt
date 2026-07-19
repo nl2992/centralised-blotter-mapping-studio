@@ -1,0 +1,23 @@
+if(m) return ( parts:addMonthsToParts(tradeDateParts, Number(m[1])). derived:true,
+function deriveMaturitySafe(explicitMaturityRaw, settlementRaw, tradeDateRaw,
+zm
+const settlement = resolveSettlementParts(settlementRaw, tradeDateParts):
+return {value:formatOutputDateFromParts(direct), derived:false,
+note:* Settlement parsed from "$/cleanText(settlementRaw)]"* };
+3:241 0
+const tradeDateParts = parseDatePartsNoTz(tradeDateRaw):
+const direct - parseDatePartsNoTz(explicitMaturityRaw);
+settlementDerived:false, note:*Direct source maturity" );
+function parseTenorYears(tenorRaw, tenorNumRaw){
+m = t.match(/trade date\s*\+\s*(\d+)\s*month/);
+return ( parts:null, derived:false, note:** 7:
+constin = parseNumber(tenorNumRaw);
+constt - canonicalHeader(tenorRaw):
+const m = t.match(/*(\d+)\s+year/):
+-+
+if(m) return Number(m[1):
+tenorRaw, tenorNumRawX
+if(n l-- null) return n;
+Search
+return null;
+if(direct

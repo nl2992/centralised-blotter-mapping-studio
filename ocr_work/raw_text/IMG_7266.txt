@@ -1,0 +1,33 @@
+{ label:"Add-ons", value:(r)=>r.helpers.aggregatedAddonCount, className:*num
+{ label:"Primary CCY", value:(r)=>r.output["*Primary CCY"], className:"nowrap" },
+( label:"Primary Amount", value:(r)=>r.output["Primary Amount"], className:"num
+html:(v)=> v === "Selected" ? badge("Selected",'green") : badge("Excluded","amber"),
+{ label:"Source Row", value:(r)=>r.record.baseRow.sourceRow, className:"num
+{ label:"VA/GNBV", value:(r)=>r.output["*$ VA/GNBV"], className:"num nowrap",
+{ label:"Trade ID", value:(r)=>r.output["*Trade ID"], className:"mono nowrap" ),
+{ label:"Trade Date", value:(r)=>r.output["*Trade Date"], className:"nowrap" },
+{ label: "Treats", value:(r)=>r.output["*Treats Acronym"], className:"nowrap" },
+{ label:"Price", value:(r)=>r.output("Price"], className:"num nowrap", html:(v)=>
+( label: "Export", value:(r)=>isRowSelected(r.rowld) ? "Selected" : "Excluded",
+{ label:"Anchor Type", value:(r)=>r.helpers.anchorType, html:(v)=>badge(v,
+nowrap", html:(v)=> typeof v === "number" ? prettyNumber(v,0) : escapeHtml(v) },
+zm
+J, "No mapped rows yet. Upload a workbook and process a sheet first.")}
+{ tabel:"Asset", value:()=>assetConfig().label, className:"nowrap" },
+{ label:"Status", value:(r)=>r.rowStatus, html:(V)=>statusBadge(v).
+html:(v)=> typeof v === "number" ? prettyNumber(v,0) : escapeHtml(v) },
+v.includes("add-ons") ? "purple" : "blue"), className:"nowrap" }.
+typeofv === "number" ? prettyNumber(v,2) : escapeHtm((v) }
+0f241
+placeholder="Filter preview by any mapped value" />
+141
+$(tableHtml(previewRows.slice(0,120), [
+- +
+className:"nowrap" },
+className:"nowrap" },
+Search
+</div>
+</section>
+</div>
+nowrap* }.
+nowrap" }.

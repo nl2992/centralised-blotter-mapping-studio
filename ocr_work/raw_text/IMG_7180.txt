@@ -1,0 +1,23 @@
+if(c.includes(* singapore *) I| c.includes(* sgh ") || c.includes(" sg")) return "SG";
+if(c.includes(* hong kong*) || c.includes(* hkh *) I| c.includes(*hk *)) return "НК";
+return parts ? formatOutputDateFromParts(parts) : cleanText(raw);
+ot 241
+56
+settlementDerived:settlement.derived,
+const parts = parseDate PartsNoTz(raw):
+const c =** + canonicalHeader(text) + **;
+const b - extractBookCode(bookRaw):
+function routePbByBook(bookRaw)l
+note:*Unable to derive maturity"
+function formatDateOutput(raw)l
+function extractBookCode(text)[
+- +
+treatsAcronym:*PENDING".
+salesClient: "PENDING",
+if(lc.trim(i) return "'™';
+bookResolved: **
+derived:false,
+Search
+return **
+return!
+if(!bX

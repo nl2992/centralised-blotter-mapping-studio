@@ -1,0 +1,29 @@
+zm
+record.workbooksSeen = Array.from(new Set([...(record.workbooksSeen || 0),
+if(!state.selectedGoldenKey && state.goldenRecords.lengthX
+state.selectedGoldenKey = state.goldenRecords[0].tradeKey;
+record.goldenOutput = clonePlain(mappedRow.output);
+String(b.lastSeenAt).localeCompare(String(a.lastSeenAt)));
+record.latestRowStatus = mappedRow.rowStatus ||"*':
+record.goldenInput = clonePlain(mappedRow.record);
+of 241
+record.goldenOutputMeta = clonePlain(ioMeta);
+return { created:false, refreshed:isNewInstance};
+record.latestWorkbook = state.fileName || "";
+record.goldenInputMeta = clonePlain(ioMeta);
+function syncGoldenRecordsFromCurrentRun(X
+121
+record.latestSheet = state.sheetName (|"*;
+record.lastSeenAt = ioMeta.capturedAt;
+record.latestAsset = assetConfig().label;
+const res = upsertGoldenRecord(row);
+if(!state.mappedRows.length) return;
+state.mappedRows.forEach(row =>{
+else if(res.refreshed) refreshed += 1;
+state.fileName || ''*])). filter(Boolean);
+state.goldenRecords.sort((a, b) =>
+- +
+record.summary = summary;
+let created = 0, refreshed = 0;
+if(res.created) created += 1;
+Search

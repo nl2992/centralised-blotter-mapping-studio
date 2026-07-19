@@ -1,0 +1,29 @@
+"src","record", "helpers","parseNumber", "cleanText",'mapKnownlssuerText"," normalizePriceP
+"deriveMaturitySafe","routePbByBook","'parseDatePartsNoTz'","resolveSettlementParts",
+"Use src.raw[ "Exact Header] it you need the original worksheet header directly..
+"Use helpers for already-derived board values when that is cleaner")
+current rule_summary: currentRuleSummary(field),
+01 241
+"parseTenorYears""formatOutputDateFromParts*
+DALR
+addon window_days: state.addonWindowDays,
+mandatory: MANDATORY_FIELDS.has(field),
+source_row_count: state.sourceRows.length,
+output_ row_count: state.mappedRows.length,
+98
+default_rule_summary: meta.summary,
+default_source_headers: meta.sources,
+detected_header_map: state.headerMap,
+date_output_standard: "dd/mm/yyyy",
+source_headers: state.sheetHeaders,
+current run_mode: state.runMode,
+trade_id_mode: state.tradeldMode,
+preferred_formula_runtime: {
+- +
+asset: assetConfig).label,
+expression_only: true,
+available_identifiers: [
+target field: field,
+Search
+notes:
+oints",

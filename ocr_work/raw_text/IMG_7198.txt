@@ -1,0 +1,21 @@
+const primaryCcy = cleanText(src.currency).toUpperCase() || "PENDING";
+maturityDate = formatDateOutput(src.maturity) || "PENDING":
+0t 241
+const tradeDate - formatDateOutput(src.tradeDate):
+let primaryAmount = getPrimaryAmountForRow(src);
+let vaGnbv = getVaForRow(src, primaryAmount):
+const resolvedBook = getResolvedBook(src):
+const pb - routePbByBook(resolvedBook):
+const buySell - sharedBuySell(src.action):
+src.tenor, src.tenorNum).value || 'PENDING":
+if(state.assetKey ==- *structured_fi"X
+if(state.assetKey === *structured_fi°X
+const n = parseNumber(src.gnbv);
+return n === null? "PENDING" -n:
+function buildHelpers(record)
+const src - record.baseRow;
+let price = "PENDING";
+let issuer = *PENDING":
+let maturityDate - **;
+Search
+Jelsel

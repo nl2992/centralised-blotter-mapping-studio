@@ -1,0 +1,19 @@
+state.savedSettingsLastValidation && state.savedSettingsLastValidation.ok? *good* :
+setStatus(* Could not apply editor JSON: $(escapeHtml(e.message)}*, "bad");
+state.savedSettingsLastValidation && state.savedSettingsLastValidation.ok
+of 241
+btnApplyJson.addEventListener("click", async ) => {
+btnValidateJson.addEventListener("click", 0 →> {
+236
+? "JSON editor validation passed."
+: "JSON editor validation failed.",
+await applyEditorisonToBoard():
+validateSavedSettingsEditor):
+renderSavedSettings();
+if(btnValidateJson)
+if(btnApplyJsonX
+setStatus(
+Search
+Jcatch(e)(
+"warn"
+tryl

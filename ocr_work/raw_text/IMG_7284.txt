@@ -1,0 +1,32 @@
+<td class="select-col">cinput class-"processed-row-select" type="checkbox" data-
+<td class="trade-col mono nowrap">$(escapeHtm!(r.output["*Trade ID"] ?? **)}</td>
+sth class="select-col"»cinput id="processedSelectAllFiltered" type="checkbox"
+W
+$(allFilteredSelected? "checked" : **} $!filteredRows.length ? "disabled* : **}></th>
+const cellSelected = r.rowid --- state.processedSelectedRowid && field ===
+const cls = ['editable-cell', cel(Selected? "selected* : **, menual ? "manual" :
+rowid="$(escapeHtml(r.rowld)}* $[isRowSelected(r.rowld) ? "checked" : ***></td>
+str class="$fisRowSelected(r.rowld) ? ** = "processed-row-excluded"j">
+const manual = getManualOverrideValue(r.rowld, field) |== undefined;
+10IC
+const vatueText = renderValueForDisplay(field, routput|field]):
+nowrap'>$(escapeHtmt(r.record.baseRow.sourceRow)]</td>
+<td class="nowrap">$(statusBadge(r.rowStatus)/</td>
+D1 241
+sth class='source-col nowrap">Source Rowc/th>
+<th class="trade-col nowrap">Trade ID</th>
+class="nowrap">$(escapeHtmt(h))</th>*).join(**»}
+137
+const tableBody = filteredRows.length ?
+S(TARGET_HEADERS.map(h=> <th
+$(TARGET_HEADERS.map(field => [
+<th class="nowrap">Status</th>
+citd class=source-col num
+- +
+SffilteredRows.map(r=>
+state.processedSelectedField;
+""J.filter(Boolean)-join(* *Y
+Search
+</thead>
+<tbody>
+</tr)

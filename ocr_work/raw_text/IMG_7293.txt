@@ -1,0 +1,27 @@
+qsa(*.ths-chip,.rhs-chip*).forEach(ch => ch.classList.remove("hover-linked"));
+zm
+const shouldRefreshPrompt - ItrimFormulaText(state.aiFormulaPrompt) |I
+state.aiFormulaPrompt = buildAiDefaultPrompt(state.aiFormulaField);
+if(state.aiFormulaSuggestion && state.aiFormulaSuggestion.field |==
+qsa(*#msSvg path").forEach(p => p.olassList.remove(*hot","dim"));
+state.aiFormulaLastAutoPrompt = state.aiFormulaPrompt;
+const previousAuto = state.aiFormulaLastAutoPrompt;
+о1 2411
+const editableFormula - qs("aiSuggestedFormula*):
+166
+const retestBtn = qs("btnRetestAiFormula*):
+const clearBtn - qs("btnClearAiSuggestion"):
+const applyBtn = qs(*btnApplyAiFormuta");
+const askBtn = qs("btnAskAiFormula");
+state.aiFormulaPrompt ==- previousAuto;
+state.aiFormulaField - fieldSel.value;
+constfieldSet = qs(*aiFieldSelect");
+state.aiFormulaSuggestion = null;
+function clearDiagramHightightOl
+const promptEl = qs(*aiPrompt"):
+function bindAiCopilotEvents()l
+fieldSel.onchange = () => [
+ff(shouldRefreshPrompt)(
+state.aiFormulaFieldy
+Search
+if(fieldSelX

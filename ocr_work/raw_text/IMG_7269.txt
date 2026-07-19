@@ -1,0 +1,26 @@
+return * «select class="rule-mode" data-field="$(escapeHtmt(field))">${options.map(m
+$frule.sourceKey === "raw:" + h ? "selected" : **]>$(escapeHtmt(h)}</option>*).join(**)}
+return * <input type="text" class="rute-constant" data-field="$(escapeHtmt(fietd)}"
+$(state.sheetHeaders.map(h => * <option value="$(escapeHtml("raw:" + h)}"
+value="$(escapeHtm!(rule.constant || **)}" placeholder="Enter constant value" />*;
+field="$(escapeHtml(field)}" value="$(escapeHtml(rute.expr || **)}" placeholder=*e.g.
+zm
+const options = ['"defautt""source","constant",'formula","blank"];
+<select class="rute-source" data-field="$(escapeHtm!(field)}">
+return " <input type="text" class="rule-formuta mono" data-
+coption value=**3-- choose source column -c/option>
+return' <span class="inline-code'>forced blank</span>:
+Ot 241
+=> ' <option value="$(m)" $(m === mode? "selected" :
+144
+**>$(m)</option>*).join(**)}</select>*;
+function renderConfigEditor(fietd)[
+.const rule - currentRule(field):
+if(rule.mode --= "source"X
+if(rute.mode ==- *constant"X
+if(rule.mode === "formula"X
+if(rule.mode === *blank'X
+src.raw['Currency'" />*;
+Search
+</select>
+return

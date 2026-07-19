@@ -1,0 +1,26 @@
+code'>PENDING</span> is listed here. Mandatory unresolved fields also keep the row in
+], state.mappedRows.length ? "No issues for the current run." : *No processed rows
+{ labet:"Source Row", value:"sourceRow", className:"num nowrap" ],
+<div class="note">Any field currently output as <span class="inline-
+{ label:"Asset", value:()=>assetConfig().label, className:"nowrap" },
+{ label:"Trade ID", value:"tradeld", className:"mono nowrap" }.
+<div class-"section-title">Issues & Exceptions</div>
+{ label:"Field", value:"field", className:"nowrap" }.
+оr24t
+{ label:"Source Mapping", value:"sourceValue" }
+177
+updateProcessedSelectionPanel):
+const exceptions = qs("exceptions"):
+{ label:"Reason", value:"reason" },
+<section class=*card sectionty
+$itable-itml(state.exceptions, I
+- +
+function renderExceptions(X
+exceptions.innerHTML= *
+<div class-"toolbar"y
+it(lexceptions) return;
+error status.</divp
+Search
+</section>
+</divp
+yet.")}

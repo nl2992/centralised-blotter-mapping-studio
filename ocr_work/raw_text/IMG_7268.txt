@@ -1,0 +1,23 @@
+subtitle:( text: " S(assetConfig().label) | $(state.runMode —= "trade_by_trade" ? 'Trade
+yAxis:{ title:( text:"Count" }, min:0, allowDecimals:false, gridLineColor:"#ededed" }.
+plotOptions:{ series:( animation:|SNAPSHOT_MODE, borderRadius:6 } }.
+categories:["Output Rows","Valid", 'Errored"," Aggregated Add-ons"],
+labels:{ style:( color:"#333", fontSize:"12px" ]}
+const mode - currentRule(field),mode || "defautt*;
+{ y:s.aggregatedAddons, color:"#6d28d9" }
+143
+{ y:s.validRows, color:"#027a48" ],
+{y:s.errorRows, color:"#b42318" },
+{y:s.outputs, color:"#175cd3" },
+function renderModeSelect(field)(
+-+
+legend:{ enabled:false}.
+credits:( enabled:false },
+lineColor:"#ddd",
+tickColor:"#ddd",
+color:"#666* }}.
+Q Search
+xAxis:K
+series:[
+data:[
+Jcatch(e)0

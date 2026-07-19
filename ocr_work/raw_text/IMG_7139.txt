@@ -1,0 +1,26 @@
+zm
+.mono(font-family:Consolas, Monaco,monospace;font-size:11.5px)
+•wrap-table th,wrap-table td/white-space/normal;line-height:1.4}
+ot 241
+tbody trinth-child(even)[background:#fafbfc}
+td{font-variant-numenic.tabular-nums)
+border-bottom: 1px solid var(-line):
+tr.last-child td{border-bottominone}
+tbody tr.hover[background:#eff6ff}
+text-transform:uppercase,
+white-space:nowrap:
+background:#f8fafc;
+letter-spacing:.05em;
+.num(text-align.right)
+padding:8px 10px;
+vertical-align:top:
+text-align:left;
+positionisticky:
+color:#475467;
+font-size:10.5px;
+font-weight:700;
+Q Search
+z-index:1;
+th,td{
+top:0;
+th

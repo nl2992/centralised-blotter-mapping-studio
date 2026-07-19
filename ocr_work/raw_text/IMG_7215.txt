@@ -1,0 +1,28 @@
+case "Maturity Date": return formatDateOutput(src.maturity) || "PENDING";
+zm
+case "ISIN Code": return CleanText(src.isin).toUpperCase() I| "PENDING";
+case "Maturity Date": return formatDateOutput(src.maturity) || 'PENDING";
+case "Ticker": return cleanText(src.ticker).toUpperCase() I| 'PENDING";
+case "Security": return pickFirstNonBlank([cleanText(src.dealName),
+case "Security": return pickFirstNonBlank([cleanText(src.structure),
+case "*Primary CCY': return helpers.primaryCcy || "PENDING":
+case "*Primary CCY": return helpers.primaryCcy || "PENDING":
+case "*Trede Date": return helpers.tradeDate || "PENDING";
+case "*Trade Date': return helpers tradeDate || "PENDING";
+S
+6t 241
+case "Comment": return cleanText(src.comment):
+case "*Tier 3 Product Type*: return "PENDING":
+case 'Trader": return cleanText(src.trader):
+cleanText(src.productType)]) || "PENDING";
+case "Issuer': return helpers.issuer;
+case "ISIN Code": return "PENDING";
+case "Price": return helpers.price;
+cleanText(src.product)]) |[*PENDING*;
+case "Issuer": return *PENDING":
+case '*Tier 1 Product Type*:
+case **Tier 2 Product Type":
+case "Trader": return ***
+default: return ***
+switch(fieldX
+Search

@@ -1,0 +1,21 @@
+if(Istate.fieldRulesByAsset[state.assetKey]) state.fieldRutesByAsset[state.assetKey]=0:
+function assetConfig)( return ASSET_CONFIGS[state.assetKey] II
+( value:"aggregate _addons", label: "Aggregate add-ons" }
+el.dataset.ready = status === "ready" ? "true" : "false";
+ot 241
+{ value:"trade_by_trade", label:"Trade by trade" },
+: [[ value:"trade_by_trade", label:"Trade by trade" )):
+return state.fieldRulesByAsset[state.assetKey]10:
+return state.fieldRulesByAsset[state.assetKeyl;
+window._BOARD_READY = status === "ready":
+return assetConfig().supportsAggregation
+function ensureCurrentAssetRuleStore(X
+ASSET_CONFIGS.structured_fi; }
+function evailableRunModes(K
+const el = qs(*ready-marker*):
+function currentFieldRules(X
+function setReady(status)
+el dataset status = status;
+el.textContent - status;
+if(lel) return:
+Search

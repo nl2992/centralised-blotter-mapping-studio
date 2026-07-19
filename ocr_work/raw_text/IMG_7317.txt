@@ -1,0 +1,22 @@
+zm
+el.innerHTML= <section class="card section"><div class="bad-
+• <div class="log-line log-info">No log entries yet.</div>™
+log(* Render failed for $(viewld): $(e.message} , "error");
+ot 241
+note"><b>${escapeHtm!(viewld))</b> failed to render:
+188
+$(escapeHtml(e.message)j</div></section>*;
+const clearLogBtn = qs("btnClearLog");
+function safeRender(viewld, renderFn)
+clearLogBtn.onclick = () => {
+renderActivityLog();
+const el = qs(viewld);
+if(clearLogBtn)
+state.logs = 0:
+</section>
+renderFn();
+Search
+</div>
+}catch(e)(
+if(ely
+tryf

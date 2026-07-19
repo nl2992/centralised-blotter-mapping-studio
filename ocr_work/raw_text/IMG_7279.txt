@@ -1,0 +1,30 @@
+<textarea id="aiPrompt" placeholder='Describe the exact rute, fallback order,
+1. Dates output as <span class=*intine-code*>dd/mm/yyyy</span><br />
+zm
+<span class=*inline-code'>formatOutputDateFromParts</span>
+TDIC
+PENDING.*>$(escapeHtml(state.aiFormulaPrompt)j</textarea>
+<span class="intine-code">mapKnownlssuerText</span>,
+<span class=*intine-code">normalizePricePoints</span>,
+<span class="inline-code">src.raw['Header']</span>,
+<span class="intine-code">deriveMaturitySafe</span>,
+<b>Runtime available inside the formula</b><br />
+< span class="intine-code">parseNumber</span>,
+<span class="intine-code*>routePbByBook</span>,
+of 241
+<div class="grid grid-2" style="margin-top:12px*>
+<span class="inline-code">cleanText</span>,
+«label>Prompt to tailor the formula</label>
+<span class=*inline-code">record</span>,
+<span class="inline-code">helpers</span>,
+152
+<span class="inline-code">sro</span>,
+<b>Board defaults enforced</b><br /»
+exception handling, and when to return
+<div class=*field wide"*
+<div class-"blue-note"»
+<div class="note"»
+Search
+</div>
+</div>
+</div>

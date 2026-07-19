@@ -1,0 +1,24 @@
+01 241
+ms-canvas(flex-direction.cotumn;min-height:auto)
+ms-canvas-col,.ms-canvas-col.rhs(flex:1 1 autol
+processed-row-excluded td.trade-cokopacity:1)
+-processed-row-excluded to(opacity:.52)
+-processed-row-excluded td.select-col,
+processed-row-excluded td.source-col,
+processed-table thead th.select-col,
+-processed-table thead th.source-col,
+processed-table thead th.trade-col
+.ms-canvas-mid(display-none)
+_processed-table th.trade-col,
+«processed-table td.trade-col
+Omedia (max-width:1150px)[
+background:#f8fafc;
+min-width:92px;
+position:sticky:
+background:#fff;
+min-width: 140px;
+Search
+width:92px;
+left: 138px;
+2-index:3;
+z-index:4;

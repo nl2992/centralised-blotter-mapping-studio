@@ -1,0 +1,25 @@
+W
+zm
+if(isRowSelected(r.rowld)) state.exportExcludedRows[r.rowld]= true;
+lif(keep.has(r.rowld)) delete state.exportExcludedRows[r.rowld];
+if(selected) delete state.exportExcludedRows[r.rowld]:
+function countSelectedRows(rows = state.mappedRows)
+const keep = new Set(rowsToKeep.map(r=> r.rowld)):
+return rows.filter(r => isRowSelected(r.rowid)).length:
+0+ 241
+function keepOnlyRows(scopeRows, rowsToKeepX
+else state.exportExcludedRows[r.rowld] = true;
+else state.exportExcludedRows[r.rowld] = true;
+else delete state.exportExcludedRows[r.rowld];
+114
+function setRowsSelected(rows, selected)(
+function invertRowsSelection(rowsX
+- +
+scopeRows.forEach(r=> [
+rows.forEach(r=> (
+rows.forEach(r=> (
+saveLocal():
+saveLocal):
+saveLocal(:
+Search
+7):

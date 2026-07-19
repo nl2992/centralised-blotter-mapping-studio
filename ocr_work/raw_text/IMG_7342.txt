@@ -1,0 +1,23 @@
+if(payload.aiFormulaField && ITARGET_HEADERS.includes(payload.aiFormulaField)X
+warnings.push(* fieldRulesByAsset contains unknown asset key "$(assetKey)'.*):
+if(!payload.fieldRulesByAsset || typeof payload.fieldRulesByAsset !=- "object* ||
+Object.entries(payload.fieldRutesByAsset).forEach(([assetKey, ruleMap]) => {
+warnings.push( Rute field "$(field)' under asset "$(assetKey)" is not in
+warnings.push(* aiFormulaField "$(payload.aiFormulaField)" is not in
+errors.push(*fieldRulesByAsset must be an object keyed by asset.");
+if(!ruleMap || typeof ruteMap !== "object" || Array.isArray(ruteMap)X
+errors.push( Rules for asset "$(assetKey)" must be an object.*);
+errors.push(*processedQuickSelectCount must be at least 1.*):
+ot 241
+Object.entries(ruteMap).forEach(([field, rule]) → [
+213
+if(payload.fieldRulesByAsset !== undefinedy
+Array.isArray(payload.fieldRulesByAsset)X
+if(:TARGET_HEADERS.includes(field)X
+Ff(IASSET_CONFIGS[assetKey]X
+- +
+TARGET_HEADERS.*):
+TARGET_HEADERS.*):
+Search
+return;
+jelsel

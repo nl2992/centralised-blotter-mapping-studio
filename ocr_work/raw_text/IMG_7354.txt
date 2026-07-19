@@ -1,0 +1,27 @@
+setStatus("Imported settings JSON into the editor. Review, validate, then apply or save.",
+W
+if(!result) throw new Error(state.savedSettings)sonError || "Editor JSON is invalid");
+state.savedSettingsLastValidation = { ok:false, errors:[e.message], warnings:[] };
+zm
+log(* Imported saved settings JSON file $(file.name)* , "success");
+setStatus(* Imported file could not be parsed as valid JSON.
+log(* Saved settings import failed: $(e.message), "error");
+of 241
+state.savedSettingsimportFileName = file.name |"*;
+225
+async function importSavedSettings File(fileX
+state.savedSettings/sonError = e.message;
+const result = validateSavedSettingsEditor):
+async function applyEditor/sonToBoard)
+state.savedSettings/sonEditor = text;
+unwrapSavedSettings/son(parsed);
+state.savedSettings/sonError = **;
+const parsed - JSON.parse(text);
+${escapeHtml(e.message)}* , "bad");
+validateSavedSettingsEditor();
+const text - await file.text):
+renderSavedSettings):
+Search
+Jcatch(eX
+"good");
+tryl

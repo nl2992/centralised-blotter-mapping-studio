@@ -1,0 +1,25 @@
+const envelope = buildSavedSettingsEnvelope(profite.profile_name || **, profile.note || **.
+setStatus(* Exported saved profile <b>${escapeHtml(profite.profile_name ||**)}</b> as
+const payload = typeof profile.payload === "string" ? JSON.parse(profile.payload) :
+zm
+const fileName = * $(safeFiteStem(envelope.profileName || *current_draft",
+const fiteName = $(safeFileStem(profite.profite_name || "saved _profile",
+setStatus("Exported the current board settings as JSON.', "good"):
+if(lprofile) throw new Error("Please select a saved profite first");
+downloadTextFile(fileName, JSON.stringify(envelope, null, 2));
+downloadTextFite(fiteName, JSON.stringify(envelope, nutl, 2)):
+0F241 0
+const envelope = buildSavedSettingsEnvelope(
+224
+$(assetConfig().label)- current draft,
+const profile - selectedSavedProfile();
+function exportSelectedProfileJson(X
+function exportCurrentDraftJson(X
+buildSavedSettingsPayload()
+renderSavedSettings":
+saved_ profile")}json*:
+"current_draft")}-json*:
+profile.payload;
+JSON.* "good"):
+Search
+payload);

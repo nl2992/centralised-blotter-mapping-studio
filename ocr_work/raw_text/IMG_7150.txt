@@ -1,0 +1,28 @@
+<span id="pillAsset" class="pill blue">Asset: Structured FI / Linear Zero</span>
+<span id="pillDateFmt" class="pill blue">Date format: dd/mm/yyyy</span>
+<span id="pillWorkbook* class="pilt amber">Workbook: none</span>
+<span id="pillTradeld" class=*pill blue">Trade ID: business key</span>
+<span id="pillMode" class="pitt blue">Mode: trade by trade</span>
+<span id="pillRute" class="pill blue">Rulebook: by asset</span>
+<span id="pillRutes" class="pill purple">Custom Rules: 0</span>
+<span id="pillManual" class="pill amber">Manual Edits: 0</span>
+<span id="pillGolden" class="pill blue">Golden Trades: 0</span>
+<span id="pillSelected" class="pill blue">Export Rows: 0/0</span>
+<span id="pillSheet" class="pill amber">Sheet: none</span>
+<span id="pillAi" class="pill purple">Al Formuta: idle</span>
+<span id="pillExceptions" class="pill*>Exceptions: 0</span>
+<span id="pillFiles" class="pitl blue">Inserted Files: 0</span>
+<span id="pillProcess" class="pill">Process: idle</span>
+<inputid="filelnput" type="file" accept=*xlsx, xls, csv* />
+07 2411
+<div class=*section-title*>Inputs & Controls</div>
+26
+<label>Workbook upload</abel>
+<section class="card section">
+«div class="field wide"»
+<div class=controls">
+<main class="shell'>
+Search
+</header>
+</div>
+</divp

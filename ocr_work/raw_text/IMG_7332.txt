@@ -1,0 +1,27 @@
+if(typeof state.savedSettingsJsonEditor === "undefined") state.savedSettings/sonEditor =
+if(typeof state.selectedSavedProfiteld === "undefined") state.selectedSavedProfileld =
+if(typeof state.savedSettingsJsonError === "undefined") state.savedSettings/sonError =
+const PROFILE_BACKUP_KEY = STORAGE_KEY + *__backup_before_profite_load":
+if(typeof state.profileUserName === "undefined") state.profileUserName = ***;
+if(window._CENTRALISED_MAPPING_SAVED_SETTINGS_PATCHED) return;
+window._CENTRALISED_MAPPING_SAVED_SETTINGS_PATCHED = true;
+CD
+if(typeof state.profileUserld === "undefined") state.profiteUserld = **;
+if(typeof state.savedProfiles === "undefined") state.savedProfites = 0;
+const PROFILE_SCOPE_APP = "centralised_mapping_studio";
+if(typeof state.savedSettingslmportFileName === "undefined")
+if(typeof state.savedSettingsLastValidation === "undefined")
+of 241
+const PROFILE_TABLE = "user_mapping profile_store";
+Set(["default","source","constant","'formula","blank"]);
+203
+const ALLOWED_RULE_MODES = new
+state.savedSettingsImportFileName = ';
+state.savedSettingsLastValidation = null;
+function injectSavedSettingsStyle()
+- +
+function ensureStateFields(X
+Search
+(function()
+< script>
+null;

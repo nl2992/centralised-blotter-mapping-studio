@@ -1,0 +1,22 @@
+setStatus(* Could not save editor JSON as a new profile: $(escapeHtml(e.message))*,
+setStatus(* Could not overwrite selected profile from editor JSON:
+btnSaveJsonAsNew.addEventListener("click", async ) => {
+btnOverwriteJson.addEventListener("click", async () =>(
+of 241
+await overwriteSelectedProfileFromEditor();
+btnResetEditor.addEventListener("click", 0 => (
+237
+await saveEditorJsonAsNewProfile);
+$(escapeHtml(e.message)}*, "bad");
+- +
+renderSavedSettings();
+if(btnSaveJsonAsNew)(
+if(btnOverwriteJsonX
+if(btnResetEditor)(
+Search
+Jcatch(eX
+Jcatch(eX
+tryf
+"bad");
+tryf
+)):

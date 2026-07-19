@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Original source photographs of the app (≈512 MB) — not part of the deliverable
+*.HEIC
+
+# Claude Code local state
+.claude/
+
+# OS / editor cruft
+.DS_Store
+*~
+*.swp
+
+# Transient temp/probe files
+/private/tmp/
+scratchpad/
+_*.probe.*

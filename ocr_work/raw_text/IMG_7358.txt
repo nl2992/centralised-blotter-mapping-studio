@@ -1,0 +1,29 @@
+str class="$(String(p.id) === String(state.selectedSavedProfileld) ? "saved-settings-
+<td class="wrap-table">$(escapeHtml(cleanText(p.note || "'*'*) || "_"}</td>
+zm
+<td>$(p.is_default ? badge("Default","green") : badge("No",'')}</td>
+<td>${escapeHtml(formatDateTimeDisplay(p.updated_at)))</td>
+<div class="saved-library-meta">Click to view JSON</div>
+<div><b>${escapeHtml(p.profile_name ||"*)}</b></div>
+<td>${escapeHtml(profileAssetLabel(p.asset_key))}</td>
+selected" : "''" data-saved-profile-id="${escapeHtml(p.id)}">
+of 241
+229
+<th class="wrap-table">Note</th>
+<table class="saved-library-table">
+$(state.savedProfiles.map(p =>
+<div class="table-wrap">
+<th>Updated</th>
+<th>Profile</th>
+<th>Default</th>
+<th>Asset</th>
+<thead>
+</thead>
+").join(')}
+Search
+<tbody>
+return
+</tr>
+<td>
+</td>
+</tr>

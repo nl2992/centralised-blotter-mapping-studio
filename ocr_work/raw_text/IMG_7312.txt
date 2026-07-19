@@ -1,0 +1,24 @@
+<div class=*note">One row per unique output trade key, across assets and processed
+<div class="note">This is persisted locally in the browser.</div>
+<div class-"section-title*>Unique Trade Golden Record</div>
+<div class="section-title">inserted File History</div>
+of 241
+state.selectedGoldenKey = btn.dataset.key || *M:
+183
+qsa(".btn-view-golden").forEach(btn => (
+<section class="card section">
+<section class-"card section">
+<div class="toolbar>
+<div class-"toolbar">
+renderGoldenRecord):
+$(fileHistoryTable}
+btn.onclick = 0 => (
+$(goldenTable}
+$[detailHtml}
+saveLocal():
+</section>
+</section>
+Search
+c/div>
+files.</div>
+</div>

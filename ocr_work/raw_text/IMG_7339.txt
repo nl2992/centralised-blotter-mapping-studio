@@ -1,0 +1,22 @@
+profileName: cleanText(profiteName || *$(assetConfig().label} - current draft"),
+const effectivePayload = clonePlain(payload || buildSavedSettingsPayload():
+processedQuickSelectCount: state.processedQuickSelectCount,
+function buildSavedSettingsEnvelope(profileName, note, payload
+exportExcludedRows: clonePlain(state.exportExcludedRows)
+assetKey: effectivePayload.assetKey || state.assetKey,
+of 241
+throw new Error(*Imported JSON must be an object");
+if(!obj || typeof obj !== "object* || Array.isArray(obj)X
+addonWindowDays: state.addonWindowDays,
+210
+aiFormulaPrompt: state.aiFormulaPrompt,
+aiFormulaField: state.aiFormulaField,
+exportedAt: new Date().tolSOString().
+function unwrapSavedSettings/son(obj)
+tradeldMode: state.tradeldMode,
+scopeApp: PROFILE_SCOPE_APP,
+note: cleanText(note || '*),
+payload: effectivePayload
+profileVersion: 1,
+Search
+return (

@@ -1,0 +1,27 @@
+XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(manualEditRows.length?
+manualEditRows : [( "Asset":assetConfig).label, "Source Row":**, "Trade ID":"*, "Field": "No
+manual edits in selected export set", "Manual Override Value":**, 'Final Output Value": ** ]]),
+setStatus(* Exported <b>$(mappedRows.lengthJ</b> selected row(s) to XLSX.', "good");
+"Asset":assetConfig().label, "Source Row":*'' "Trade ID":''' "Field":"No issues in selected
+XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(ruleRows), "Rulebook");
+const base = (state.fileName || "centralised_blotter_mapper").replace(/N.[^-]+$/,**);
+log(* XLSX exported: asset=${assetConfig().label}, rows=$(mappedRows.length}*,
+XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(mappedRows,(
+XLSX.utils.book_append_sheet/wb,XLSX.utils.json_to_sheet(exceptionRows),
+const exceptionRows - selected Exceptions.length ? selectedExceptions : K
+XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(auditRows),
+*$(base)_$(state.assetKey)_$(state.runMode}_selected_output.xlsx*);
+of 241
+tab.onclick = () => setActiveTab(tab.dataset.tab);
+header:TARGET_HEADERS }), "Mapped_Output");
+197
+„"Reason":"* "Source Mapping":"* );
+function bindStaticEvents(X
+qsa(".tab").forEach(tab →> (
+XLSX.writeFile(wb,
+"Audit_Output");
+"Manual_Edits");
+"Exceptions"):
+Search
+export set",
+"success");

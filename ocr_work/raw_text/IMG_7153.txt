@@ -1,0 +1,30 @@
+Waiting for a workbook. The board will try to match the selected asset to its preferred
+id="kpiOutputs">0</div><div class="sub">Rows generated after mode logic.</div></div>
+id="kpiValid">0</div><div class="sub">Rows with no current exceptions.</div></div>
+zm
+<div class=*kpi*><div class="label">Rows loaded</div><div class=*value*
+<div class="kpi"><div class-"label*>Output rows</div»cdiv class="value"
+<div class="kpi"><div class=*label'>Valid rows</div><div class=*value*
+id="kpiRows">0</div><div class="sub">Rows parsed from the selected
+<div id="statusBox" class="blue-note" style=*margin-top:12px">
+<span class-'inline-code›*Treats Acronym</spanp,
+‹span class='inline-codePrimary Amount</spanp,
+ot 241
+<span class=*inline-code">*Primary CCY</span>,
+<span class="intine-code">*Legal Entity</spanp,
+<span class-*inline-code">*$ VA/GNBV</span>,
+<span class="intine-code">*Revenue CCY</span>
+<span class="inline-code">*Trade ID</span>,
+<div class="section-title">Run Summary</div>
+cspen class="intine-code">*$ PC</span>,
+29
+<section class-card section
+- +
+source sheet automatically.
+<div class="grid grid-7">
+worksheet.</divpc/div>
+Search
+</section>
+4/divz
+c/divb
+4/divs

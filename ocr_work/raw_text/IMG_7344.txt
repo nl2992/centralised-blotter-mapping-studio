@@ -1,0 +1,16 @@
+if(!payload.exportExcludedRows || typeof payload.exportExcludedRows !== "object" ||
+if(!payload.manualOutputOverrides || typeof payload.manualOutputOverrides !==
+DID
+errors.push("manualOutputOverrides must be an object.");
+state.savedSettingsJsonEditor = JSON.stringify(obj, null, 2);
+*object" || Array.isArray(payload.manualOutputOverrides)X
+errors.push("exportExcludedRows must be an object.");
+of 241
+if(payload.manualOutputOverrides !== undefined)
+if(payload.exportExcludedRows !== undefined)
+return { ok: errors.length === 0, errors, warnings };
+215
+Array.isArray(payload.exportExcludedRows)X
+function setSavedSettingsEditorObject(objX
+Search
+-

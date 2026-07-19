@@ -1,0 +1,4 @@
+Vendored library versions (inlined into dist/ standalone build):
+- xlsx (SheetJS) 0.18.5  (matches unpkg xlsx@latest at build time)
+- highcharts 11.4.8
+- papaparse 5.4.1

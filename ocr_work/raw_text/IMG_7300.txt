@@ -1,0 +1,26 @@
+setStatus(* Cleared all <b>$(rows.length)</b> filtered rows from export selection.*,
+setStatus(* Selected all <b>$(rows.length)</b> filtered rows for export. . "good"):
+zm
+const n = Math.max(1, Number(state.processedQuickSelectCount || 5));
+of241 O 1 ID
+173
+const rows - getFilteredProcessedRows();
+const rows = getFilteredProcessedRows();
+const rows - getFilteredProcessedRows):
+keepOnlyRows(rows, rows.slice(0, n)):
+selectAllFiltered.onctick = 0 =>(
+setRowsSelected(rows, true);
+setRowsSelected(rows, false);
+keepTopFiltered.onclick = 0 => (
+clearFiltered.onclick = 0 => [
+renderProcessedSheet);
+renderProcessedSheet():
+renderProcessedSheet);
+if(selectAllFilteredX
+updateTop Pills0:
+updateTopPills):
+if(keepTopFiltered)
+lif(clearFilteredX
+updateTopPills():
+Search
+"warn"):

@@ -1,0 +1,95 @@
+
+> tests@1.0.0 test
+> node run_tests.js
+
+[harness] starting http server on 127.0.0.1:58146 (cwd=/Users/nigelli/Desktop/Centralised Mapping)
+[harness] BASELINE snapshot rows=7 pills={"mapping":"Mapping: 7 rows","workbook":"Workbook: 7 rows","fatal":"Fatal Error: none"}
+[harness] ILLIQUID_OFF snapshot rows=7
+[harness] TRS_DIVIDE snapshot rows=7
+
+==================== TEST REPORT ====================
+[PASS] BASELINE / TC01 / quality -- quality="WORKING_PASS"
+[PASS] BASELINE / TC01 / tradeId -- tradeId=4204720592
+[PASS] BASELINE / TC01 / tier1 -- tier1="Structured Credit"
+[PASS] BASELINE / TC01 / tier2 -- tier2="Structured Credit"
+[PASS] BASELINE / TC01 / tier3 -- tier3="Credit Linked Notes"
+[PASS] BASELINE / TC01 / tradeDate -- tradeDate="23/02/2026"
+[PASS] BASELINE / TC01 / primaryCcy -- primaryCcy="USD"
+[PASS] BASELINE / TC01 / volume -- volume=1000000
+[PASS] BASELINE / TC01 / va -- va=10742
+[PASS] BASELINE / TC01 / treats -- treats="NOSGSGH"
+[PASS] BASELINE / TC01 / comment contains "source_layout=structured_fi_current" -- found "source_layout=structured_fi_current"
+[PASS] BASELINE / TC01 / comment contains "native_trade_ref=XS3307267255" -- found "native_trade_ref=XS3307267255"
+[PASS] BASELINE / TC01 / comment contains "coupon=" -- found "coupon="
+[PASS] BASELINE / TC01 / comment contains "first_reoffer=" -- found "first_reoffer="
+[PASS] BASELINE / TC02 / quality -- quality="WORKING_PASS"
+[PASS] BASELINE / TC02 / tradeId -- tradeId=3329199354
+[PASS] BASELINE / TC02 / tier1 -- tier1="Markets"
+[PASS] BASELINE / TC02 / tier2 -- tier2="Structured Products"
+[PASS] BASELINE / TC02 / tier3 -- tier3="Structured Rates"
+[PASS] BASELINE / TC02 / tradeDate -- tradeDate="18/07/2026"
+[PASS] BASELINE / TC02 / primaryCcy -- primaryCcy="USD"
+[PASS] BASELINE / TC02 / volume -- volume=2000000
+[PASS] BASELINE / TC02 / va -- va=2500
+[PASS] BASELINE / TC02 / comment contains "source_layout=linear_zero_existing" -- found "source_layout=linear_zero_existing"
+[PASS] BASELINE / TC02 / comment contains "native_trade_ref=XS0000000001" -- found "native_trade_ref=XS0000000001"
+[PASS] BASELINE / TC03 / quality -- quality="WORKING_PASS"
+[PASS] BASELINE / TC03 / tradeId -- tradeId=2381983830
+[PASS] BASELINE / TC03 / tier1 -- tier1="Markets"
+[PASS] BASELINE / TC03 / tier2 -- tier2="Equity Derivatives"
+[PASS] BASELINE / TC03 / tier3 -- tier3="Collar / Options"
+[PASS] BASELINE / TC03 / tradeDate -- tradeDate="31/10/2023"
+[PASS] BASELINE / TC03 / volume -- volume=4613500
+[PASS] BASELINE / TC03 / va -- va=23493
+[PASS] BASELINE / TC03 / pc -- pc=46135
+[PASS] BASELINE / TC03 / buySell -- buySell="Buy"
+[PASS] BASELINE / TC03 / treats -- treats="HASEHKP"
+[PASS] BASELINE / TC04 / quality -- quality="WORKING_PASS"
+[PASS] BASELINE / TC04 / tradeId -- tradeId=2810938652
+[PASS] BASELINE / TC04 / tier1 -- tier1="Structured Credit"
+[PASS] BASELINE / TC04 / tier2 -- tier2="Structured Credit"
+[PASS] BASELINE / TC04 / tier3 -- tier3="Structured Credit Notes"
+[PASS] BASELINE / TC04 / tradeDate -- tradeDate="18/07/2026"
+[PASS] BASELINE / TC04 / volume -- volume=3000000
+[PASS] BASELINE / TC04 / va -- va=45000
+[PASS] BASELINE / TC04 / buySell -- buySell="Sell"
+[PASS] BASELINE / TC04 / treats -- treats="HASEHKP"
+[PASS] BASELINE / TC04 / comment contains "status=New" -- found "status=New"
+[PASS] BASELINE / TC05 / quality -- quality="FAIL"
+[PASS] BASELINE / TC05 / tradeId -- tradeId=2635637780
+[PASS] BASELINE / TC05 / tier1 -- tier1="Structured Credit"
+[PASS] BASELINE / TC05 / tier2 -- tier2="Structured Credit"
+[PASS] BASELINE / TC05 / tier3 -- tier3="Credit Linked Notes"
+[PASS] BASELINE / TC05 / tradeDate -- tradeDate=""
+[PASS] BASELINE / TC05 / volume -- volume=5000000
+[PASS] BASELINE / TC05 / va -- va=100000
+[PASS] BASELINE / TC06 / quality -- quality="FAIL"
+[PASS] BASELINE / TC06 / tradeId -- tradeId=5141050790
+[PASS] BASELINE / TC06 / assetClass -- assetClass="Private Credit"
+[PASS] BASELINE / TC06 / tier1 -- tier1="Private Credit Primary"
+[PASS] BASELINE / TC06 / tier2 -- tier2="Private Placement"
+[PASS] BASELINE / TC06 / tier3 -- tier3="Private Placement"
+[PASS] BASELINE / TC06 / volume -- volume=6000000
+[PASS] BASELINE / TC06 / va -- va=120000
+[PASS] BASELINE / TC07 / quality -- quality="WORKING_PASS"
+[PASS] BASELINE / TC07 / tradeId -- tradeId=123456
+[PASS] BASELINE / TC07 / tier1 -- tier1="Markets"
+[PASS] BASELINE / TC07 / tier2 -- tier2="Equity Derivatives"
+[PASS] BASELINE / TC07 / tier3 -- tier3="Total Return Swap"
+[PASS] BASELINE / TC07 / tradeDate -- tradeDate="18/07/2026"
+[PASS] BASELINE / TC07 / volume -- volume=7000000
+[PASS] BASELINE / TC07 / va -- va=200000
+[PASS] BASELINE / TC07 / pc -- pc=9984
+[PASS] BASELINE / TC07 / buySell -- buySell="Buy"
+[PASS] BASELINE / TC07 / treats -- treats="NOSGSGH"
+[PASS] BASELINE / TC01-economics / comment contains any of [coupon=, first_reoffer=] -- found: coupon=, first_reoffer=
+[PASS] BASELINE / TC03-economics / comment contains any of [strike_pct=, num_options=, strike_level=, initial_fixing=, option_premium=, client_price=, total_gnbv_bps=] -- found: strike_pct=, client_price=, total_gnbv_bps=
+[PASS] ILLIQUID_OFF / TC04-off / tradeId -- tradeId=2810938652
+[PASS] ILLIQUID_OFF / TC04-off / buySell -- buySell=""
+[PASS] ILLIQUID_OFF / TC04-off / comment contains "status=New" -- found "status=New"
+[PASS] TRS_DIVIDE / TC07-divide / tradeId -- tradeId=123456
+[PASS] TRS_DIVIDE / TC07-divide / pc -- pc=609375
+=======================================================
+TOTAL: 81  PASS: 81  FAIL: 0
+
+All assertions passed.

@@ -1,0 +1,28 @@
+-saved-settings-note|font-size:12px;color:var(--muted);line-height: 1.45)
+if(document.getElementByld("saved-settings-patch-style")) return;
+.btn.blue:hover(background:#1849a9;border-color:#1849a9}
+.btn.blue{background:var(--blue);border-color:var(--blue)}
+.saved-settings-selected{background:#fff1f2 limportant}
+of 241
+const style = document.createElement("style");
+204
+font-family:Consolas, Monaco, monospace;
+style.id = "saved-settings-patch-style";
+- +
+border:1px solid #1e293b;
+background:#0f172a;
+style.textContent=
+saved-json-editorf
+min-height:420px;
+.saved-json-toolbar{
+align-items:center;
+.saved-validation-list{
+line-height:1.45;
+resize:vertical;
+font-size:12px;
+width: 100%;
+color:#e2e8f0;
+flex-wrap:wrap;
+display:flex;
+Search
+gap:8px;

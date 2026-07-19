@@ -1,0 +1,28 @@
+const CCY_TARGETS = new Set(["*Primary CCY"**Revenue CCY","Secondary CCY","CCY
+"Primary Amount",*$ PC']"*$ VA/GNBVy'Price""$ TV""'Flow Value",'Liquidity
+of241 T 0/ID
+const DATE_TARGETS = new Set(['"*Trade Date"."Maturity Date");
+const UPPER_TARGETS = new Set(['ISIN Code","Issuer","Ticker*):
+const SHARED_INTENTIONAL_BLANK_FIELDS = new Set([
+salespersonCoverage: "mark lok leung*.
+- + &
+const SHARED_CONSTANTS = {
+"Sales Team (Coverage)*:
+"FX Platform Description",
+"Sales Person Country",
+"Sales Client Sector",
+"Commission Code",
+Reserve"."CVA',"PVA"
+"Liquidity Reserve",
+legalEntity: "HBAP",
+siteCode: "HKH",
+"Platform",
+"PC CODE",
+"Flow Value"
+Search
+*TFX Flag*
+"$TV",
+"CVA",
+"FVA",
+PC*):
+1):

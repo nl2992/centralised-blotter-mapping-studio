@@ -1,0 +1,23 @@
+2m
+log("Saved Settings enhencement ready", "success"):
+async function initSavedSettingsEnhancement(X
+240
+* $(assetConfig().label} - current draft,
+wireSavedSettingsStaticEvents(:
+if(!state.savedSettings)sonEditor)
+await ensureSavedSettingsTable):
+setSavedSettingsEditorObject(
+- +
+buildSavedSettingsEnvelope(
+buildSavedSettingsPayload(
+injectSavedSettingsStyle():
+ensureSavedSettingsDom():
+updateSavedSettingsPills():
+await fetchSavedProfiles):
+updateSavedSettingsPills():
+ensureStateFields();
+renderSavedSettings):
+await load ProfiteUser);
+renderSavedSettings):
+Search
+tryl

@@ -1,0 +1,26 @@
+log(* Processed asset=${assetConfig().label}, sourceRows=$(state.sourceRows.length),
+Manual edits: <b>${manualCount)</b>. Selected export rows: <b>$(selectedCountk</b>:
+:* Processing completed successfully for <b>$(escapeHtml(assetConfig().label)</b>
+<b>${state.exceptions.lengthj</b> exception(s). Output dates are <b>dd/mm/yyyy</b>.
+if(btnX) btnX.disabled = state.mappedRows.length === 0 || selectedCount === 0;
+if(btnC) btnC.disabled = state.mappedRows.length === 0 || selectedCount =-- 0;
+outputRows=$(state.mappedRows.length}, exceptions=$(state.exceptions.lengthy,
+<b>dd/mm/yyyy</b>. Manual edits: <b>$(manualCount)</b>. Selected export rows:
+? Processing completed for <b>${escapeHtml(assetConfig().label)}</b> with
+zm
+with <b>${state.mappedRows.length}</b> output row(s). Output dates are
+const manualCount = countCurrentSheetManualOverrides();
+markCurrentFileProcessed(state.mappedRows.length);
+of 241
+const selectedCount = countSelectedRows();
+132
+state.exceptions.length ? "warn" : "success");
+state.exceptions.length ? "warn" : "good"
+syncGoldenRecordsFromCurrentRun();
+const btnX - qs("btnExportX\sx");
+const btnC = qs ("btnExportCsv");
+pruneExportSelection();
+state.exceptions.length
+<b>$(selectedCount}</b>. ,
+Search
+setStatus(

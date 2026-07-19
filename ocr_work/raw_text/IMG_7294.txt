@@ -1,0 +1,23 @@
+promptEl.onchange = 0 => [ state.aiFormulaPrompt = promptEl.value; saveLocal(): }:
+promptEl.oninput = () →> { state.aiFormulaPrompt - promptEt.value: }:
+if(askBtn) askBtn.onclick = () => runAiFormutaCopilot()=
+101 241
+if(edited) state.aiFormulaEditable - edited.value:
+if(edited) state.aiFormutaEditable = edited value:
+167
+const edited - qs(*aiSuggestedFormula*):
+const edited = qs("aiSuggestedFormula");
+state.aiFormulaRawResponse = **:
+state.aiFormulaEditable = *;
+- +
+state.aiFormulaError = **
+renderMappingStudio():
+retestBtn.onclick = 0 => (
+renderMappingStudio():
+applyBtn.onclick = 0=> (
+updateTopPills():
+saveLocal):
+if(promptEl,
+if(retestBtn)[
+if(applyBtnX
+Search

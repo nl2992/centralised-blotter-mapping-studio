@@ -1,0 +1,25 @@
+if(isStructuredAddonRow(src) && cluster && withinWindow(cluster.baseRow, src,
+zm
+type:cluster.addonRows.tength ? "cluster" : "single",
+cluster = (baseRow:src, rows:[src], addonRows:[] };
+6F241
+aggregated:cluster.addonRows.length > 0
+return a logicalindex - b.logicalindex:
+addonRows:[...cluster.addonRows],
+cluster.addonRows.push(src);
+base Row:cluster.baseRow,
+if(isStructuredNewRow(src))
+- +
+function flushCluster)l
+rows:[..cluster.rows].
+state.addonWindowDays)X
+cluster.rows.push(src):
+rows.forEach(src => [
+if(lcluster) return;
+let cluster = null;
+records.push(
+flushCluster);
+cluster - null;
+Search
+return:
+7):

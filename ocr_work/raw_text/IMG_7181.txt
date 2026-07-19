@@ -1,0 +1,21 @@
+6t241
+salesClient:"HSBC PRIV BK (S) SA SGH*,
+salesClient:*HSBC PRIV BK (S) SA HK*,
+const c = canonicalHeader(actionRaw):
+salesClientCountry: *PENDING",
+function sharedBuySell(actionRaw)l
+if(c.includes("unwind")) retum 1B*;
+salesClientType: *PENDING*
+treatsAcronym:*HRCHSGH",
+treatsAcronym:"HROHHKH",
+salesClientCountry:"SG",
+salesClientCountry:"HK",
+salesClientType:"BOF*
+bookResolved: *SG,
+bookResolved: "HK",
+salesClientType:*FBL*
+if(!c) return "PENDING";
+if(b === "SG*X
+Search
+return i
+return (

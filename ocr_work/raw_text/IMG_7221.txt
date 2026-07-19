@@ -1,0 +1,25 @@
+requirements: $(meta.summary]Dates must be output as dd/mm/yyyy whenever this field
+$fassetConfig).label} branch. Start from the board default rule, then adapt it with these
+is a date. Return "PENDING rather than guessing when the input is insufficient.*:
+const sampleSourceRows = state.sourceRows.slice(0, 5).map(src →> ({
+const currentOutputPreview - state.mappedRows.slice(0, 5).map(r => ({
+return ' Give me a tailored JavaScript expression for "$[field}" in the
+31 241
+sourceRow: r.record.baseRow.sourceRow,
+const meta - defaultMappingMeta(field):
+currentTergetFieldValue:r.output[field]
+canonical: compactObject(src, 80),
+source_logic urt: BASE_LOGIC_URL,
+function buildAiFieldContext(field)[
+raw: compactObject(src.raw, 80)
+anchorType: r.helpers.anchorType,
+logicalindex: src.logicalindex,
+- +
+sourceRow: src. source Row,
+tradeld: r.output["*Trade ID'],
+workbook: state.fileName || **
+sheet: state.sheetName 11M
+rowStatus: r.rowStatus,
+Search
+return "
+3)):

@@ -1,0 +1,23 @@
+2m
+log("Could not create saved settings backup: " + e.message, "warn");
+if(raw) localStorage.setltem(PROFILE_BACKUP_KEY, raw);
+const raw - tocalStorage.get/tem(PROFILE_BACKUP_KEY):
+if(!raw) throw new Error('No saved settings backup found"):
+if(sheetSelect) sheetSelect.value = state.sheetName;
+ot 241
+if(state.sourceRows.length) processCurrentSheet();
+const raw = localStorage.getltem(STORAGE_KEY);
+220
+localStorage.setltem(STORAGE_KEY,raw):
+const sheetSelect = qs("sheetSelect");
+function restoreSavedSettingsBackupl
+function backupSavedSettingsDraft(X
+- +
+autoSelectPreferredSheet();
+parseSelectedSheet):
+if(state.workbooky
+else renderAll);
+Search
+return;
+Jcatch(e)
+tryl

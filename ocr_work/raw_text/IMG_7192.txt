@@ -1,0 +1,21 @@
+if(state.assetKey!== "structured_fi" || state.runMode !== "aggregate_addons")(
+zm
+return c.includes("addon") I| c.includes("add on") I| c.includes("tap");
+return diffDays >= 0 && diffDays <= Number(days 1| 0);
+61241
+function withinWindow(baseRow, otherRow, days)[
+const p = parseDatePartsNoTz(src.tradeDate):
+retur p ? partsToUtcDate(p)-getTime() : 0;
+const diffDays - (b - a) / (24 * 3600 * 1000):
+const a - getTradeTimeMs(baseRow):
+const b - getTradeTimeMs(otherRow):
+const c = canonicalHeader(src.action):
+const c = canonicalHeader(src.action):
+return state.sourceRows.map(sro »> ((l
+function isStructuredAddonRow(src)
+function isStructuredNewRow(src)
+function getTradeTimeMs(src)
+function buildLogicalRecords(X
+return c.includes(*new*):
+if(la l| lb) return false:
+Search

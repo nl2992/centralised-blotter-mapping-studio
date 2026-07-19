@@ -1,0 +1,27 @@
+#msSvg path.default-line{strokeirgba(152,162,179,55):stroke-width:1.5:stroke-
+position:absolute,inset:0;width:100%;height:100%;pointer-events:none;z-
+#msSvg path.user-line(stroke:rgba(219,0,17,9);stroke-width:2;filt:none}
+.ms-star(color:#db0011/font-weight:700;margin-left:2px}
+юt 241
+#msSvg path.hot(stroke-width:3;opacity:1}
+- +
+#msSvg path.dim[opacity:.16}
+-processed-table th.select-col,
+-processed-table td.select-col
+processed-table th.source-col
+-processed-table td.source-col
+index:1;overflow.hidden;
+dasharray: 5 4 fill:none)
+position:sticky:
+background:#fff;
+text-alignicenter;
+min-width:46px;
+positionisticky;
+background:#fff;
+Search
+width: 46px;
+z-index:3;
+left: 46px;
+z-index:3;
+#msSvgl
+left:0;

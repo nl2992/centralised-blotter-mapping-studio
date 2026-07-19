@@ -1,0 +1,20 @@
+case "Ticker": return cleanText(src.underlying).toUpperCase) I| 'PENDING":
+if(typeof value ==- "string" && value —-- "PENDING") return "PENDING";
+return parts ? formatOutputDateFromParts(parts) : cleanText(value);
+-
+0t241
+if(value -=- null ]| value —- undefined) return **;
+return String(value) length > 9 ? String(value) : n/
+function normalizeFieldValue(field, value)(
+const parts - parseDatePartsNoTz(value):
+return n === null ? cleanText(value) : n:
+if(n === null) return cleanText(value):
+case "Price": return helpers.price:
+if(NUMERIC_FIELDS.has(field)X
+const n = parseNumber(value);
+const n = parseNumber(value):
+case "Comment": retum*:
+if(DATE_TARGETS.has(field)X
+if(field === **Trade ID*X
+default: retum
+Search

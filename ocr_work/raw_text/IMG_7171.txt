@@ -1,0 +1,20 @@
+return "$(prefix)_${Date.now)}_$[Math.random().toString(36).slice(2,8))*;
+if(num >= 1024 * 1024) return *${(num / (1024 * 102j)).toFixed(2); MB* ;
+return file ? [fite.name || **, fite.size || O, file.lastModified || O].join("Tº) : *'*;
+hour:"2-digit",minute:"2-digit",second:"2-digit", hour12:false
+if(num >= 1024) return ^$((num / 1024).toFixed(1)} KB*:
+6f 241.
+year:"numeric", month:"2-digit",day:"2-digit",
+function compactObject(obj, maxKeys=60)
+lif(Number.isNaN(d.getTime())) return iso;
+function formatDateTimeDisplay(isoX
+return d.toLocaleString("en-GB", {
+const num = Number(n || 0);
+function makeld(prefix="id"X
+function fileFingerprint(fite)[
+const d = new Date(iso):
+function bytesLabel(n)
+return "$(num}B*;
+if(liso) return ***;
+Search
+7):

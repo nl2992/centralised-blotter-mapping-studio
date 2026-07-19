@@ -1,0 +1,22 @@
+if(colldx + 1 < TARGET_HEADERS.length) return { rowld, field:TARGET_HEADERS[colldx
+zm
+if(rowldx + 1 < rows.length) return { rowld:rows[rowldx + 1].rowld, field.};
+if(colldx - 1 >= 0) return { rowld, field:TARGET_HEADERS[colldx - 1] };
+of 241
+function getProcessedMoveTarget(rowld, field, move)
+const colldx = TARGET_HEADERS.indexOf(field);
+125
+const rows = getFilteredProcessedRows();
+if(!td || td.querySelector("input")) return;
+if(rowldx < 0 || colldx < 0) return nult;
+function beginProcessedCellEdit(td)
+const rowld = td.dataset.rowid ||"';
+if(move === "down"X
+if(move ==- "right"X
+if(move ==- "left"X
+return null;
+return nutl;
+return null;
+Search
+return null;
++ 1]%:

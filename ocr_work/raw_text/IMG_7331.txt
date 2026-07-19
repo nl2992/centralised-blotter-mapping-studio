@@ -1,0 +1,26 @@
+selector, Al Formula Copilot, direct in-cell editing, selected-row export, dd/mm/yyyy output
+if(ITARGET_HEADERS.includes(state.aiFormulaField)) state.aiFormulaField = "Maturity
+log("Centralised Blotter Mapping Studio ready with cross-asset support, Trade ID
+if(lassetConfig().supportsAggregation && state.runMode !== "trade_by_trade")
+if(!ASSET_CONFIGS[state.assetKey]) state.assetKey = "structured_fi";
+of241 • /CD
+if(tb) document.documentElement.style.setProperty("-topbar-h",
+if(:TARGET_HEADERS.includes(state.processedSelectedField))
+const tb = document.querySelector(".topbar");
+dates, and Golden Record protection", "success");
+202
+state.processedSelectedField = "*Trade Date";
+state.runMode = "trade_by_trade";
+- +
+refreshSelectOptions();
+safelnitialPrompt();
+*$(tb.offsetHeight)px*);
+bindStaticEvents();
+setReady("ready");
+function init(l
+loadLocal();
+Search
+renderAll();
+Date";
+</script>
+init();

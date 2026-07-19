@@ -1,0 +1,26 @@
+commentary_search,research_news,web_search.refinitiv_news.personal_email,bloombe
+const SNAPSHOT_MODE = 1lwindow._SNAPSHOT_MODE || !Inavigator.webdriver |l
+const STORAGE_KEY = "centralised blotter_mapping_cross_asset_v12";
+0$ 241
+/HeadlessChrome/i.test(navigator.userAgent || **);:
+html/YE32UpkrboADOQLtMmaLohqjypizQ9ES*;
+<div id="goldenRecord" class="view"></div>
+<div id='defaultRules* class="view"›c/div>
+const BASE_LOGIC_URL = /studio/shared-
+<div id="activityLog" class="view"></div>
+const Al_SELECTED_TOOLS -
+const TARGET_HEADERS = [
+**Salesperson (Coverage)*,
+*-Tier 1 Product Type",
+"*Tier 2 Product Type".
+**Tier 3 Product Type*,
+**Treats Acronym",
+*Primary Amount',
+**Trade Date",
+**Primary CCY",
+**Legal Entity",
+Search
+"Site Code",
+"*$PC",
+</main>
+<script>

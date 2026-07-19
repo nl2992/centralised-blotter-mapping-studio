@@ -1,0 +1,25 @@
+)I [D
+price = gp === null ? "PENDING" : Number(gp.toFixed(4));
+issuer = resolvelssuerValue(src.issuer, src.issuerRaw);
+resolvedBook: pb.bookResolved || resolvedBook || **
+6t 241
+if(state.assetKey === "illiquid_credit_repack"X
+16
+price = normalizePricePoints(src.reoffer):
+const gp = parseNumber(src.grossPrice):
+if(state.assetKey ==- "equity_trs"X
+assetLabel: assetConfig()label,
+- +
+secondaryCcy: primaryCcy,
+revenueCcy: primaryCoy,
+price = "PENDING";
+issuer = "PENDING":
+issuer = "PENDING";
+ccyPc: primaryCoy,
+primaryAmount,
+maturityDate,
+tradeDate.
+primaryCcy,
+Search
+return (
+pb.

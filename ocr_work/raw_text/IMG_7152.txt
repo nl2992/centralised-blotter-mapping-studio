@@ -1,0 +1,27 @@
+<button id="btnExportXlsx" class="btn secondary' disabled>Export XLSX≤/button>
+«button id="btnProcess" class="btn' disabled>Process selected sheet</button>
+<button id="btnExportCsv" class-"btn secondary" disabled>Export CSV</button>
+<button id="btnResetRules" class="btn ghost">Reset current asset rules</button>
+3. Output dates are always <span class="inline-code">dd/mm/yyyy</span><br />
+6. Add-on window is shown only for assets that support add-on amalgamation
+zm
+4. Output « span class=*inline-code'>Book</span> stays blank<br /3
+o241 @1CD
+1. Final output template is centralised across all assets<br />
+listed in <span class=*intine-code">Exceptions</span><br />
+<span class="inline-code">*Tier 1 Product Type</span>,
+<span class='inline-code">*Tier 2 Product Type</span>,
+<span class='inline-code'>*Tier 3 Product Type</span>,
+<div class="grid grid-2" style="margin-top:12px"›
+<span class="inline-code">*Trade Date</span>,
+<b>Shared implementation rules</b><br />
+29
+<b>Mandatoryfields</b>cbr />
+code*>*$ Volume</span><br />
+cdiv class-"blue-note>
+<div class="note">
+Search
+</select>
+4/div>
+</div>
+4/divz

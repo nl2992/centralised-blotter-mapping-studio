@@ -1,0 +1,29 @@
+( label:"ISIN", value:(r)=>r.summary && r.summary.isin || **, className:"mono nowrap"
+*, className:"nowrap" }
+- { label:"Action", value:(r)=>r.tradeKey, html:(v)=> <button class="btn secondary btn-
+<div class-"note">Golden records preserve full logical snapshots and remain cross-
+<b>Asset:</b> <span class=*intine-code*>$(escapeHtm!(selected latestAsset ||
+{ label:"Primary CCY", value:(r)=>r.summary && r.summary-primaryCcy || **.
+{ label: "Sales Client", value:(r)=>r.summary && r.summery salesClient || *** },
+zm
+( label: "Occurrences", value:"occurrences", className:"num nowrap" },
+view-golden" data-key=*$(escapeHtml(v)}*>View record</button>*
+of241 @
+<div class-"section-title">Selected Golden Record</div>
+{ label:"Latest Workbook", value:"latestWorkbook* },
+<div class="grid grid-2" style=*margin-bottom:12px">
+code"»${escapeHtm!(selected.occurrences)/</span><br />
+code">$(escapeHtm!(selected tradeKey)]</span><br />
+<b>Occurrences:</b> <span class=lintine-
+180
+<b>Trade key: </b> <span class="intine-
+], *No golden trades recorded yet."):
+const detailHitml = selected ?-
+csection class="card section"*
+<div class="good-note">
+<div class-"toolbar">
+class Name:"nowrep" }.
+'**)}</span><br />
+Search
+asset.</div>
+</div>

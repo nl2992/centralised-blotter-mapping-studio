@@ -1,0 +1,21 @@
+lif(!res.ok) throw new Error(* Al formula run failed: HTTP $(res.status)* );
+if(tres.body) throw new Error("Al formula stream returned no body");
+if(evt.type === "message" && typeof evt.content === "string"K
+throw new Error("Al formula request was aborted");
+of 241
+project_instructions: buildAiProjectinstructions()
+if(evt.type ==- "message" && evt.start === trueX
+state.aiFormulaRawResponse += evt.content;
+105
+const decoder = new TextDecoder("utf-8");
+if(levt || typeof evt !== "object") return;
+const reader = res.body.getReader();
+state.aiFormulaRawResponse = "*;
+function handleEvent(evt){
+if(evt.type -== "aborted"
+updateAiStreamBox();
+updateAiStreamBox(;
+let buffer = "*;
+Search
+return;
+return;

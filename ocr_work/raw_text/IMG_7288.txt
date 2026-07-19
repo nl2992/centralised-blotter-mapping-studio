@@ -1,0 +1,31 @@
+value="$(escapeHtm!(state.processedSearch)]* placeholder="Fitter processed sheet" />
+cbutton id-"btnSelectAllFittered" class-"btn secondary" $(filteredRows.length ? ** :
+<button id="btnKeepTopFiltered" class-"btn secondary" $(filteredRows.length? '™* :
+«button id="btnKeepBottomFiltered" class="btn secondary" S{filteredRows.length ?
+<button id="btnSelectAllRows" class="btn ghost" $(state.mappedRows.length ?** :
+<button id="btnClearFiltered" class="btn secondary" $(filteredRows.length ? "** :
+<button id="btninvertFiltered" class="btn secondary" $[filteredRows.length ? ** :
+<input id="processedQuickSelectCount' type="number" min="1" step="1"
+zm
+TOID
+value="$(escapeHtml(state.processedQuickSelectCount)}*/>
+0l 241
+sinput id="processedSheetSearch"type="text"
+*: "disabled"}>Keep bottom N filtered</button>
+161
+<div class="note" style=*margin-top:12px*
+"disabled")>Select all filtered</button>
+*disabled">Keep top N filtered</button>
+"disabled")>Reset row selection</button>
+<b>Current filtered selection,</b>
+<label>Quick select N</label>
+"disabled"}>Clear filtered</button>
+*disabled"}>Invert filtered</button>
+- +
+cdiv class="field narrow"»
+<div class=*controls'>
+Search
+</div>
+</div>
+c/div>
+</divz

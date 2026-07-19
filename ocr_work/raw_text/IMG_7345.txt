@@ -1,0 +1,23 @@
+state.savedSettings/sonError =vatidation.ok ? **= (validation.errors[0] ll "Validation
+state.savedSettingsLastValidation = {okifalse, errors:[e.message], warnings:0 l:
+const validation - validateSavedSettingsPayload(unwrapped.payload);
+o241O I
+const parsed - JSON.parse(state.savedSettings/sonEditor || *)");
+state.savedSettings/sonEditor = getSavedSettingsEditorText();
+return ta ? ta.value : (state.savedSettings/sonEditor || **):
+const unwrapped = unwrapSavedSettings/son(parsed);
+state.savedSettingsLastValidation - vatidation;
+216
+state.savedSettingsjsonError= e messaper
+state.savedSettingsLastValidation = null;
+const ta = qs(*savedSettings/sonEditor*):
+function syncSavedSettingsEditorState(X
+return { parsed, unwrapped, validation }:
+function getSavedSettingsEditorText(X
+function validateSavedSettingsEditor(X
+state.savedSettings/sonError - 7*:
+syncSavedSettingsEditorState);
+Searoh
+Jcatch(eX
+failed"):
+tryl

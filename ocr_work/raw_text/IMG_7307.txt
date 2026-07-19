@@ -1,0 +1,33 @@
+const selected - records.find(r => r.tradeKey ==- state.selectedGoldenKey) || records[0]
+class=*value">$(uniqueWorkbookCount)</div><div class="sub">Distinct workbook names
+<div class="kpi*»<div class="label*>Latest insert</div><div class="value" style="font-
+const errorGoldenCount = records.filter(r => canonicalHeader(r.latestRowStatus) ---
+class="value">$(fiteHistoryRows.length)</div><div class="sub">Persisted file insertion
+class="value">$(errorGoldenCount)</div><div class="sub">Golden records with latest
+class=*value">$(records.length)</div><div class="sub">Unique output trade records
+const uniqueWorkbookCount = Array.from(new Set(fiteHistoryRows.map(x =>
+formatDateTimeDisplay(fileHistoryRows[O].insertedAt) : *No file yet")</div></div>
+zm
+size:16px">$(escapeHtmt(fileHistoryRows[0] ? fileHistoryRows[0].fileName :
+<div class="kpi"»<div class="tabel*>Errored golden trades</div><div
+o241OD
+<div class="kpi"> <div class="label">Unigue workbooks</div><div
+"None")j</div><div class="sub">$(escapeHtm!(fileHistoryRows[0]?
+<div class="kpi"> <div class='label">Inserted files</div><div
+<div class="kpi"><div class="label">Golden trades</div><div
+String(b.lastSeenAt).localeCompare(String(a.lastSeenAt))):
+const fileHistoryRows - [.state.fileHistory].sort((a, b) →
+const records - [...state.goldenRecords].sort((a, b) =>
+String(b.insertedAt).localeCompare(String(a.insertedAt))):
+<div class="grid grid-6* style="margin-bottom:12px"»
+178
+function renderGoldenRecord(X
+x.file Name).filter(Boolean))).length;
+const summaryCards =*
+error status.</div></div>
+persisted.</div></div>
+history.</div></div>
+seen.</div></div>
+"error").length:
+Search
+II null;

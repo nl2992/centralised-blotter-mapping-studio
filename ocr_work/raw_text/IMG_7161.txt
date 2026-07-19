@@ -1,0 +1,27 @@
+usd""volume usd","usd volume",'agreed usd amount",'usd amount field","primary amount"]
+preferredSheets: ["Illiquid Credit+Repack", "Iltiquid Credit + Repack", "Illiquid Credit",
+{ key:"volumeUsd", patterns:["volume mm usd",*volume ('mm) usd",' volume (mm)
+zm
+{ key:"issuerRaw", patterns ['issuer raw""'issuer (raw)""'issuer name*] ),
+( key:"gnbvUsd", patterns:['gnbv usd*,'gnbv (usd)*,total gnbv usd"] }.
+{ key:"booking", patterns: ["booking"."book","booking book"] },
+{ key:"comment", patterns:["'note",'notes"!'comment"] }.
+{ key:"maturity", patterns: ["maturity","maturity date"] }.
+oF 241
+( key:"nativeRef", patterns:["pims code","pims"] }.
+{ key:"tradeDate", patterns:['"trade date", 'date*] },
+( key:"issuer", patterns:['issuer code","issuer'1 }.
+{ key:"dealName", patternsi|"deal name"f deal*1)
+{ key:"currency", patterns:["ccy",'currency"] 1.
+{ key:"reoffer", patterns:["reoffer', "price'] )
+( key:"trader", patterns:["trader*] )
+{ key:"status", patterns:["status"] }.
+label: "Illiquid Credit + Repack",
+{ key:"nnbv", patterns:["nnbv']},
+key: *illiquid_credit_repack",
+{ key:"isin", patterns: ["isin"] },
+supportsAggregation: false,
+illiquid_credit_repack: {
+sourceSpecs: [
+Search
+*Repack"],

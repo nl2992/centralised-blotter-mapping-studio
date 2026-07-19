@@ -1,0 +1,29 @@
+const instanceSet = new Set(Array.isArray(record.instanceKeys) ? record.instanceKeys:
+W
+zm
+workbooksSeen: Array.from(new Set([state.fileName || "*])). filter(Boolean),
+record.instanceKeys = Array.from(instanceSet).slice(-1000);
+const isNewInstance = linstanceSet.has(instanceBase);
+of 241
+goldenOutput: clonePlain(mappedRow.output),
+record.occurrences = record.instanceKeys.length;
+latestRowStatus: mappedRow.rowStatus || '*')
+goldenInput: clonePlain(mappedRow.record),
+120
+latestWorkbook: state.fileName || '",
+goldeninputMeta: clonePlain(ioMeta),
+goldenOutputMeta: clonePlain(ioMeta)
+latestSheet: state.sheetName ||'*,
+state.goldenRecords.unshift(record);
+return { created:true, refreshed:false};
+firstSeenAt: ioMeta.capturedAt,
+lastSeenAt: ioMeta.capturedAt,
+latestAsset: assetConfig().label,
+instanceKeys: [instanceBase],
+instanceSet.add(instanceBase):
+- +
+occurrences: 1,
+naturalKey,
+summary,
+Search
+0);

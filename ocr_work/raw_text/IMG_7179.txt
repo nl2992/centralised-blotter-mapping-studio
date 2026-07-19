@@ -1,0 +1,23 @@
+zm
+? formatOutputDateFromParts(parseDatePartsNoTz(explicitMaturityRaw))
+const maturityParts = addYearsToParts(settlement.parts, tenorYears);
+const maturityParts - addYears ToParts(tradeDateParts, tenorYears):
+note: Maturity derived from settlement + tenor ($(tenorYears)y)*
+note: *Maturity derived from trade date + tenor ($(tenorYears)y)*
+const tenorYears = parseTenorYears(tenorRaw, tenorNumRaw);
+at 241
+value: formatOutputDateFromParts(maturityParts),
+Ivalue: formatOutputDateFromParts(maturityParts),
+value: parseDatePartsNoTz(explicitMaturityRaw)
+58
+if(settlement parts && tenorYears !== nullk
+settlementDerived: settlement.derived,
+if(tradeDateParts && tenorYears !-- nullK
+: cleanText(explicitMaturityRaw),
+settlementDerived: false,
+derived: true,
+derived: true,
+Search
+return (
+return
+return (

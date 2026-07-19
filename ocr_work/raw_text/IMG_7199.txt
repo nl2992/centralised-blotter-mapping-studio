@@ -1,0 +1,24 @@
+const addonVa = record.addonRows.reduce ((sum, r) => sum + (parseNumber(r.nnbv)
+price - sortedAddons.length ? normalizePricePoints(sortedAddons[0].reoffer) :
+const addonAmount = record.addonRows reduce((sum, r) =3 [
+const maybelssuer = mapKnownlssuerText(src.issuerRaw);
+sourceHeaderName("notionatUsdMio") I| "notional usd mio");
+const ta - getTradeTimeMs(a), tb = getTradeTimeMs(b);
+const n = scaleAmountByHeader(r.notionalUsdMio,
+ot 241
+if(record aggregated && record.addonRows.lengthXl
+primaryAmount = addonAmount || "PENDING*:
+price = normalizePrice Points(src.reoffer):
+return a.logicalindex - b.logicalindex;
+vaGnbv - addonVa || "PENDING";
+if(state.assetKey === *collar'X
+- +
+if(ta !-- tb) return ta - tb;
+issuer = maybelssuer 1|*
+return sum + (n | 0);
+issuer = *:
+Search
+PENDING":
+3, 0);
+Jelsel
+н о), о);

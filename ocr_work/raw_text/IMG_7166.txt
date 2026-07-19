@@ -1,0 +1,21 @@
+box.class Name = tone =—- "bad" ? "bad-note" : tone === "warn" ? "warn-note" : tone ---
+state.logs.push({time:nowStr(), level, msg:String(msg) }):
+if(state.activeTab -=- "activityLog") renderActivityLog0;
+01 241
+return d.toLocaleTimeString("en-GB", { hour12:false
+function nowlso()f return new Date().tolSOString): }
+if(state.logs.length > 2000) state.logs.shift();
+String(d getMilliseconds()-padStart(3,0"):
+function setStatus(html, tone=*blue"*
+if(el) el.textContent = String(vatue):
+"good" ? "good-note" : "blue-note";
+function log(msg, level="info"X
+function setTextSafe(id, value)[
+- +
+const box = qs("statusBox"):
+const d - new Date):
+box.innerHTML = html;
+function nowStriX
+const el = qs(id):
+if(lbox) return;
+Search

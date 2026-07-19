@@ -1,0 +1,24 @@
+setStatus('Al Formula Copilot failed. $[escapeHtml(e.message)}*, "bad"):
+if(value === null | value ==- undefined || value =-=**) return**
+"error"):
+of 241
+if(field --= "Price") return prettyNumber(value, 2);
+for(const record of state.logicalRecords.stice(0, 5)X
+log( Al formula request failed: $(e.message)*"
+108
+function renderValueForDisplay(field, value){
+function previewFormulaForField(field, expr)(
+if(|state.logica|Records.length) return rows;
+const helpers = build Helpers(record);
+state,aiFormulaError - e.message;
+state.aiFormulaLoading =false:
+const text = trimFormulaText(expr):
+- +
+if(typeof value -== "number"y
+return prettyNumber(value, 0):
+renderMappingStudio0):
+return String(value);
+if(ltext) return rows;
+updateTopPills):
+const rows - 0:
+Search

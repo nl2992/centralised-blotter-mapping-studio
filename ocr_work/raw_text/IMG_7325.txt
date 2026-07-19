@@ -1,0 +1,23 @@
+selectedMapped.some(r => r.record.baseRow.sourceRow === ex.SourCeRow &&
+filter(field => getManualOverrideValue(r.rowld, field) !== undefined)
+"Manual Override Value*: getManualOverrideValue(r.rowld, field),
+"Mandatory": MANDATORY_FIELDS.has(field) ? "Yes" : "No",
+of 241 0
+"Default Rule": defaultMappingMeta(field).summary,
+const manualEditRows - selectedMapped.flatMap(г »>
+const selectedExceptions = state.exceptions.filter(ex=>
+"Current Mapping": currentRuleSummary(field),
+"Source Row": r.record.baseRow.sourceRow,
+String(r.output[**Trade ID*]) === String(ex.tradeld))
+196
+"Current Mode": rule.mode || "default*,
+"Final Output Value": r.output(field]
+"Trade ID": r.output("*Trade ID"],
+- +
+"Asset"; assetConfig()label,
+"Fill Rate %"; fillRate(field)
+"Target Field": field,
+TARGET HEADERS
+map(field => (
+"Field": field,
+)):

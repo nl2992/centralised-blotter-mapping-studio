@@ -1,0 +1,25 @@
+if(pillGolden) pillGolden.textContent = * Golden Trades: $(state.goldenRecords.length}* ;
+pillSelected.className = "pill" + (selected === 0 && total ? "red" : selected !== total &&
+if(qs("pillDateFmt")) qs("pillDateFmt").textContent = "Date format: dd/mm/yyyy";
+pillExceptions.className = "pill " + (state.exceptions.length ? "red" : "green");
+if(pillFiles) pillFiles.textContent =* Inserted Files: $(state.fileHistory.length}* ;
+pillAi.textContent = * Al Formula: $(state.aiFormulaSuggestion.field}*;
+pillExceptions.textContent = Exceptions: $(state.exceptions.length};
+pillManual.className = "pill" + (manualCount ? "amber" : "blue");
+const manualCount = countCurrentSheetManualOverrides(;
+pillSelected.textContent =* Export Rows: $(selected)/$(total}*:
+pillManual.textContent = * Manual Edits: $(manualCount)*;
+of 241
+137
+pillAi.textContent = "Al Formula: idle";
+const selected = countSelectedRows);
+const total = state.mappedRows.length;
+pillAi.className = "pill green";
+pillAi.className = "pill purple";
+- +
+total ? "amber" : "blue");
+if(pillExceptions)(
+if(pillManual)t
+if(pillSelected)
+Search
+Jelsel

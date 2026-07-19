@@ -1,0 +1,24 @@
+case "Maturity Date": return formatDateOutput(src.maturity) || 'PENDING":
+case *Ticker": return cleanText(src.undertying).toUpperCase() I| "PENDING";
+case "ISIN Code": return cleanText(src.isin).toUpperCase() I| "PENDING";
+case "*Primary CCY": return helpers.primaryCcy || "PENDING";
+case "*Trade Date": return helpers.tradeDate || "PENDING";
+case "Security": return cleanText(src product) || *PENDING";
+DAL
+0024T
+case "Comment": return cleanText(sra.comment);
+case "*Tier 3 Product Type": return "PENDING";
+case "*Tier 3 Product Type": return *PENDING*:
+if(state.assetKey === filliquid_credit_ repack")
+case "Trader": return cleanText(src.trader):
+case "Issuer": return "PENDING";
+case "Price": return *PENDING";
+if(state.assetKey === "collar"X
+case "*Tier 1 Product Type":
+case "*Tier 2 Product Type*:
+case "*Tier 1 Product Type':
+case "*Tier 2 Product Type":
+default: return **:
+switch(fieldX
+switch(field)[
+Search

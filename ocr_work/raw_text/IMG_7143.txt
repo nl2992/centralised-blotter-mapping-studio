@@ -1,0 +1,24 @@
+0$ 241
+border:1 px solid var(--line);
+border:1 px solid var(-line):
+align-items:center;
+border-radius:10px;
+min-height:320px;
+align-items:stretch;
+border-radius:12px;
+background:#f8fafc;
+margin-bottom:14px:
+flex-wrap:wrap;
+background:#fff;
+position:relative;
+user-select:none;
+.action-rowl
+display:flex;
+width: 100%;
+padding:12px;
+Search
+gap:8px;
+chart-box!
+ms-canvas"
+display:flex;
+gap:20px:

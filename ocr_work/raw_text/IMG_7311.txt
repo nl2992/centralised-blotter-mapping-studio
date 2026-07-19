@@ -1,0 +1,29 @@
+:"<section class-"card section">cdiv class=*empty">No golden record selected
+<button id="btnClearFiteHistory" class="btn ghost">Clear file history</button>
+<div class="table-wrap"><table class="wrap-table*><tbody><tr»<td><pre
+2m
+<button id="btnClearGoldenRecords" class=*btn ghost">Clear golden
+TOID
+wrap">$(escapeHtmLJSON.stringify(selected.goldenOutput |I0, null,
+<div class="section-title">Golden Record Summary</div>
+of 241
+<div class="section-title">Golden Output</div>
+const goldenRecord - qs("goldenRecord"):
+2))]</pre></td›</tr></tbody></table></div>
+style=*margin:0;white-space:pre-
+<section class-"card section">
+goldenRecord.innerHTML= *
+if(IgoldenRecord) return;
+<div class-"controls"»
+cdiv class-"toolbar*>
+yet.</div>c/section>*:
+$(summaryCards)
+</section>
+record</button>
+Search
+<div>
+</div>
+</section>
+</div>
+</div>
+</div>

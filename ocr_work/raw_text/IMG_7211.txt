@@ -1,0 +1,25 @@
+default: return ({ type: "blank", sources:[], summary:'Blank by design or shared current-
+case "Trader": return ({ type:"blank", sources:[], summary:"Blank untess source later
+", constant:"*, expr:"* );
+if(mode === "source") return " <span class='ms-tag source">custom source</span>*;
+case "Comment": retumn ( type:"blank", sources:[], summary:"Blank by design." };
+if(mode === "constant") return* <span class=*ms-tag const'>constant</span>*;
+if(mode === "formuta") return * <span class="ms-tag rute">formula</span>* ;
+zm
+if(rule.mode === "formula*) return * Formula: ${shorten(rule.expr || **, 80)} :
+return currentFieldRutes([field] || { mode:"default", sourceKey:**,
+if(rute.mode === "constant") return * Constant: $(rute.constant) ;
+of 241
+if(rute.mode === "source") return* Custom source:
+const mode = currentRule(field).mode || "default";
+if(rule.mode ==- "blank*) return "Forced blank'
+return defaultMappingMeta(field).summary;
+27
+S(rawHeaderLabelForKey(rule.sourceKey)7:
+function currentRuleSummary(field)
+const rule = currentRule(field);
+function currentRuleTag(field)(
+function currentRule(field)
+Search
+board logic."};
+added." };

@@ -1,0 +1,26 @@
+const current = state.mappedRows.find(m => m.record.baseRow.sourceRow ---
+D ID
+01 241
+const raw = evaluateFormula(text, record, helpers);
+currentValue: current ? current.output[field] : **:
+currentValue: current ? current.output[field] : **
+const velue - normalizeFieldValue(fietd, raw);
+109
+source Row: record.baseRow.sourceRow,
+sourceRow: record.baseRow.sourceRow,
+anchorType: helpers.anchorType,
+anchorType: helpers.anchorType,
+function applyAiFormulaSuggestion(t
+- +
+record.baseRow.sourceRow):
+erron e.message
+result: value,
+rows.pushQ
+rows.push(f
+error: **
+Jcatch(e)
+result: *
+return rows;
+Search
+tryt
+)):

@@ -1,0 +1,25 @@
+of241 0
+const manual = getManualOverrideValue(rowld, field);
+const res = evaluateField(field, record, helpers);
+state.logicalRecords = buildLogicalRecords();
+129
+const rowld = buildStableRecordld(record);
+state.logicalRecords.forEach(record =>{
+const helpers = buildHelpers(record);
+TARGET_HEADERS.forEach(field =>{
+TARGET_HEADERS.forEach(field => {
+- +
+if(!state.sourceRows.length)(
+state.logicalRecords = [;
+output(field] = res.value;
+state.mappedRows = [];
+provenance[field] = res;
+if(manual !== undefined)
+state.mappedRows - 0;
+state.exceptions = [];
+const provenance = 1;
+state.exceptions = [];
+const output = f);
+renderAll);
+Search
+return;

@@ -1,0 +1,30 @@
+: '<div class="empty"»$(state.mappedRows.length ? "No processed rows match the
+someFilteredSelected ? badge("Partially selected",'amber*) : badge(*No filtered rows
+zm
+$(allFitteredSelected ? badge('All filtered rows selected", 'green*) :
+current filter." : "No processed output yet. Process a sheet first."}</div>* }
+TO1
+<div class=section-title">Processed Output Sheet</div>
+?" <div class="table-wrap"><table class="processed-
+of 241
+<b>Export buttons use selected rows only.«/b>
+${badge("Excluded from export row",'amber" )}
+$[badge("Selected for export row"""green")}
+162
+$[badge("Manual override cell',"amber")}
+table">$(tableHead|$(tableBody)</table></div>
+$[badge("Selected cell'",'red")}
+<section class=card section">
+- +
+<div class-"toolbar"›
+<div class-"note">
+SffilteredRows.length
+&nbsp; | anbsp:
+<b>Legend:</b>
+selected"""red"))
+</section>
+Search
+</section>
+</div
+</div>
+</div>

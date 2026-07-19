@@ -1,0 +1,23 @@
+"SELECT id, profile_name, asset_key, note, is_default, created_at, updated_at, payload *
+"ORDER BY COALESCE(asset_key,"), is_default DESC, updated_at DESC, profile_name
+if(state.selectedSavedProfileld && !state.savedProfiles.some(p => String(p.id) ===
+setStatus("Restored the previous saved-settings backup.", "good");
+"AND scope_app = " + sq(String(PROFILE_SCOPE_APP) + "*+
+"WHERE user_id = " + sqlString(state.profileUserld) + ** +
+state.savedProfiles = Array.isArray(res.rows) ? res.rows: [];
+of 241
+221
+applySavedSettingsPayload(payload);
+const payload = JSON.parse(raw);
+async function fetchSavedProfiles(X
+String(state.selectedSavedProfileld))X
+state.selectedSavedProfileld = null;
+"FROM" + PROFILE_TABLE +""+
+if(!state.profileUserld) return;
+function selectedSavedProfile(X
+const res = await apiSql(sql);
+updateSavedSettingsPills();
+renderSavedSettings();
+Search
+const sql =
+ASC";

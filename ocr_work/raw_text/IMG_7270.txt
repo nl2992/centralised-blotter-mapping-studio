@@ -1,0 +1,26 @@
+return«span class="inline-code">$[meta.sources.length ? meta.sources.join(" + *) =
+const suggestion - state.aiFormulaSuggestion && state.aiFormulaSuggestion.field ===
+selected asset, current headers, run mode, Trade ID mode, and live sample rows.</div>
+const formulaText = trimFormulaText(state.aiFormulaEditable || suggestion.formula ||
+const previewRows = validation.ok ? previewFormulaForField(state.aiFormutaField,
+height:240px">$(escapeHtml(state.aiFormulaRawResponse || "Waiting for streamed
+<div class="good-note"›cb>Generating formuta...</b> The copilot is using the
+zm
+<div id="aiStreamBox" class="log-box" style=*margin-top:12px;max-
+DIID
+const validation = validateFormulaExpression(formulaText);
+ot 241
+state.aiFormulaField ? state.aiFormulaSuggestion : null;
+const hasContext = state.sourceRows.length > 0;
+const assumptions = suggestion.assumptions || D:
+145
+const meta = defaultMappingMeta(field);
+function renderAiSuggestionPanel(l
+if(state.aiFormulaLoading)
+meta.type]</span>*;
+response...=)I</div>
+if(suggestion)
+formulatext) : U]:
+Search
+return*
+***);

@@ -1,0 +1,23 @@
+const pillProfiles = document.createElement(*span*);
+const pillsWrap = document.querySelector(".pills*):
+const pillUser = document.createElement(*span");
+205
+.saved-library-table tbody tr/cursor:pointer)
+pillProfiles.textContent = "Saved Profiles: 0";
+document.head.appendChild(style);
+pillProfiles.className = "pill purple";
+function ensureSavedSettingsDom(H
+pillsWrap.appendChild(pillProfites);
+if(pillsWrap && !qs("pillProfiles*)X
+pillUser.className = "pill amber";
+- +
+pillProfiles.id = "pillProfiles";
+pillUser.id = "pillProfiteUser";
+margin:8px 0 0 18px;
+saved-library-metal
+coloriver(muted);
+line-height:1.5;
+font-size:11px;
+line-height:1.35;
+padding:0;
+Search

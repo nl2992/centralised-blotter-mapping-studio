@@ -1,0 +1,29 @@
+<button id="btnClearAllManualEdits" class="btn ghost" $(state.mapped Rows.length
+<span id="processedSelectionStatus">$(manualOverrideExists ? • $(badge("Manual
+<b>Enterc/b> saves the current cell and moves down in the same column.<br />
+<span id="processedSelectionInfo">No cell selected yet.</span><br /><br />
+override active","amber")} : "$(badge("No manual override","blue")}* }</span>
+<b>Shift + Tab</b> saves the current celland moves left.<br /›
+?''': "disabled">Clear all manual edits on current sheet</button>
+<b>Tab</b> saves the current cell and moves right sbr />
+<div class="section-title*>Row Selection for Export</div»
+0: 241
+1ec
+<b>Esc</b> cancels the current edit.
+<b>Keyboard behaviour</b>cbr />
+<b>Override status</b>ebr />
+<b>Selected cell</b><br />
+<section class="card section">
+- +
+<div class-"grid grid-2">
+cdiv class='blue-note"›
+<div class-"note">
+<div class=*toolbar*>
+<div class-searcht»
+Search
+</section>
+</divz
+4/div>
+</div>
+c/divp
+</div>

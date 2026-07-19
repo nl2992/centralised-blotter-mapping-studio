@@ -1,0 +1,24 @@
+function partsToUtcDate(parts)( return new Date(Date.UTC(parts.y, parts.m - 1, parts.d)):
+function utcDateToParts(dt)f return{ y:dt.getUTCFullYear(), m:dt.getUTCMonth) + 1.
+W
+m = t.match(/~(\d{1,2)|-/ljan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[-
+zm
+Gjan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,0ct:10,nov:11,dec:12};
+return {y:native.getFullYear(),m:native.getMonth() + 1, d:native.getDate) }:
+return (d:Number(m[1]). m:monthMap[m[2].toLowerCase(]. y }:
+0+ 241
+return { d:Number(m[1]). m:Number(m[2]), y }:
+if(!Number.isNaN(native.getTime))X
+dt.setUTCDate(dt.getUTCDate) + n):
+function addDaysToParts(parts, n)(
+const dt = partsToUtcDate(parts):
+- +
+const native - new Date(t):
+let y = Number(m[3]):
+const monthMap -
+if(y < 100) y += 2000;
+d:dt.getUTCDate0 x}
+Search
+1(d(2,47)$/71):
+return nully
+if(m)

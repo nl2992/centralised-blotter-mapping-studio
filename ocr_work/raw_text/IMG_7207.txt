@@ -1,0 +1,29 @@
+case *Comment": return ( type:"blank", sources:[label(*comment")].filter(Boolean),
+case "ISIN Code": return { type:"source", sources:filter([label("isin")]), summary:* Map
+default: return ( type:"blank", sources:[], summary:*Blank by current Structured Fl
+summary: " Map from $(label("tradeDate", "First Trade Date")} and output dd/mm/yyyy.*}:
+case "*Tier 3 Product Type": return { type:"constant", sources:[), summary:"Still
+case "*Trade Date": return { type:"source", sources:filter([label("tradeDate").
+case "Maturity Date": return ( type:"source", sources:filter([label("maturity")]),
+summary:" Map from $(label("maturity", "Maturity*)} and output dd/mm/yyyy where
+summary:" Primary Amount = $(label("notionalUsd","Notional Amount (USD)")}.* };
+case "*$ VA/GNBV": return( type:"source", sources filter([label("gnbvUsd*)]),
+zm
+case 'CCY PC*: return { type:"source", sources:filter([label("currency")]),
+summary:" VA / GNBV = $(label("gnbvUsd", Total GNBV (USD)")}. }:
+summary:" Map from $(label("currency","Currency")}.* ):
+оt 241
+32
+summary:"Keep current Structured Fl logic." }:
+Mif(state.assetKey ==- 'collar*K
+from $(label("isin",*OTC ISIN")}.* }:
+case **Tier 1 Product Type":
+case "*Tier 2 Product Type*:
+case "*Primary CCY":
+case "*Revenue CCY*:
+case "Secondary CCY":
+PENDING for Collar'" }:
+switch(field)
+Search
+parseable.* }:
+logic. }

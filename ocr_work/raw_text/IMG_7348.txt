@@ -1,0 +1,27 @@
+Number(payload.processedQuickSelectCount 2? state.processedQuickSelectCount ?? 5)
+if(lpayload || typeof payload!== "object") throw new Error(*Saved profile payload is
+if(IASSET_CONFIGS[state.assetKey].supportsAggregation && state.runMode!==
+state.tradeldMode = payload.tradeldMode || state.tradeldMode || "business_key":
+state.aiFormulaPrompt = payload.aiFormulaPrompt || state.aiFormutaPrompt ||**;
+if(payload.assetKey && ASSET_CONFIGS[payload.assetKey]) state.assetKey =
+TARGET HEADERS.includes(payload.aiFormutaField) ? payload.aiFormulaField :
+state.manualOutputOverrides = payload.manualOutputOverrides |I0;
+state.runMode = payload.runMode || state.runMode || 'trade_by_trade";
+state.addonWindowDays = Number(payload.addonWindowDays ??
+state.exportExcludedRows = payload.exportExcludedRows |I0:
+state.fieldRulesByAsset = payload.fieldRulesByAsset ||0:
+of 241
+state.aiFormulaField = payload.aiFormulaField &&
+state.processedQuickSelectCount = Math.max(1,
+219
+state.runMode = "trade_by_trade";
+state.addonWindowDays ?? 7) || 7;
+- +
+refreshSelectOptions):
+state.aiFormulaField;
+payload.assetKey:
+"trade_by_trade"X
+Search
+saveLocal();
+invalid"):
+|| 5);

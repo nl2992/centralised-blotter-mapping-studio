@@ -1,0 +1,29 @@
+zm
+$/assumptions.tength?*<ut class="plain-list">$(assumptions.map(x=>
+$(escapeHtml(suggestion explanation ]| *No explanation returned.")}
+$(warnings.length? " <ut class-"plain-list">$(warnings.map(x =>
+$(escapeHtml(currentRuleSummary(state.aiFormulaField))}
+•<li>$(escapeHtml(x)/</li>*).join(***)}</ul>* : *<divstyle="margin-
+• <li>$(escapeHtml(x)]</li>* )-join(**)}</ut>* : * <div style="margin-
+<dív class="section-title'>Preview on first records«/div»
+of 241
+<div class="grid grid-2" style="margin-top:12px">
+$/validation.ok ? tableHtml(previewRows, I
+147
+top:8px;color:#667085">None stated.</div>* }
+top:8px;color:#667085*>None stated.</div> }
+<b>Ourrent field baselines/bbcbr/
+<b>Explanatione/b>cbr />
+<div style="margin-top:12px*>
+<b>Assumptions</b>
+<div class=inote">
+cdv class=*note»
+cdiv class-"note">
+<b>Warnings</b>
+Search
+</divo
+</div>
+</div>
+</divp
+</divp
+</divo

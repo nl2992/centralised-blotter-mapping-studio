@@ -1,0 +1,23 @@
+if(c.includes(*mm") || c.startsWith(*mm") || c.endsWith(* mm") l| c.includes(* mio") |l
+if(c.includes("addon") || c.includes("add on") || c.includes ("tap")) return *S*;
+OII
+01 241
+function scaleAmountByHeader(value, headerLabelX
+lif(c.includes("notional usd mio*)) return n * 1000000;
+const c - canonicalHeader(headerLabel):
+c.includes("million")) return n * 1000000;
+const t = cleanText(v).toUpperCase():
+function mapknownissuerText(raw)(
+if(c. includes("new")) return "S*;
+const n = parseNumber(value);
+function looksLikelssuerCode(vX
+const c = canonicalHeader(raw);
+return /^[A-ZO-9._-]+$/ test(t);
+if(t.length > 18) return false;
+if(n --- null) return null;
+lit(/As/.test(t)) return false;
+return *PENDING":
+if(lt) return false;
+if(Ic) return *:
+Search
+return na

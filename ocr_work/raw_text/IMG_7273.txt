@@ -1,0 +1,26 @@
+{ label:"Current Value", value:"currentValue", className:"nowrap", html:(v)=> typeof
+*<span class="badge red">Error</span> $(escapeHtml(r.error)}* : (typeofv === "number" ?
+]. 'No preview rows availabte.") :* <div class-"bad-note">Preview is unavailable untit
+$(state.aiFormulaRawResponse ? • <div class="log-box" style="margin-top:12px;max-
+( label:"Preview Result", value:"result", className:"nowrap", html:(v,r)= r.error ?
+the edited expression is valid JavaScript. $(escapeHtml(validation.error)J</div>* }
+<summary style='cursor:pointer;font-weight:600*>Raw AIJSON</summary>
+zm
+( labet:"Source Row", value: "sourceRow", className:"num nowrap" },
+{ label:"Anchor Type", vatue:"anchorType", className:"nowrap" },
+height:240px">$(escapeHtm!(state.aiFormulaRawResponse || **)}</div>
+height:240px">$(escapeHtmt(state.aiFormulaRawResponse)}</div>* ***}
+QIID
+<div class=*bad-note*»«b>Al Formula Copilot error: </b>
+V=== "number" P prettyNumber(v,2) : escapeHtmt(v || **) }.
+<div class="log-box" style=*margin-top:1 0px;max-
+148
+$(escapeHtml(state.aiFormulaError)j</div>
+prettyNumber(v,2) : escapeHtml(v || *)) }
+- +E
+<details style='margin-top: 12px">
+if(state.aiFormulaError)l
+</details)
+Search
+</div>
+return

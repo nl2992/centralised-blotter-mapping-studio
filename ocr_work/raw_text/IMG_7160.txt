@@ -1,0 +1,30 @@
+{ key:"gnbvUsd", patterns:["total gnbv usd","total gnbv (usd) "."gnbv usd","gnbv (usd)"] },
+{ key:"notionalUsd", patterns:["notional amount usd","notional amount (usd)"," notional
+( key: "tenorNum", patterns:["tenor number value","tenor number","tenor num"] },
+zm
+{ key:"action", patterns:["new addon","new add on","new/add on",new
+( key:"action", patterns: ["new/unwind" new unwind""action""side"] ).
+o241 •|CD
+{ key:"tradeDate", patterns:["first trade date","trade date"] },
+( key:"bookedFlag", patterns:["booked","booked flae"] ).
+{ key:"maturity", patterns: ["maturity date","maturity"] ),
+{ key:"maturity", patterns: ["maturity","maturity date"] ].
+{ key:"underlying", patterns:['underlying""'ticker*1 ).
+{ key:"nativeRef", patterns:["pims code","pims"] }.
+( key:"product", patterns:['product", 'security*1 }.
+{ key:"currency", patterns:["currency","ccy"] ],
+preferredSheets: ['Collar Blotter", "Collar").
+36
+{ key:"isin", patterns:["otc isin","isin"] },
+{ key:"trader", patterns:["trader"] }
+{ key:"nnbv", patterns:["nnbv"] },
+{ key:"book", patterns:["book"] }.
+- +
+unwind","new/unwind","action"] },
+supportsAggregation: false,
+usd""primary amount"] ),
+key: "collar",
+label: "Collar"
+sourceSpecs: [
+Search
+collar: (

@@ -1,0 +1,25 @@
+2m
+OID
+map[spec.key] = findHeaderMatch(headers, spec.patterns || D):
+const headers = uniqueHeaders(trimmed[headerldx] ||J):
+return { headers, rows, headerindex: headerldx + 1 }:
+headers.forEach((h, idx) => obj[h] = arr[idx] 2? **);
+(assetConfig().sourceSpecs || ().forEach(spec => (
+const headeridx = detectHeaderRow(trimmed):
+for(let i = headeridx + 1; i < trimmed.length; i++X
+const hasData - arr.some(v => lisBlank(v);
+62
+obi._logical_index = rows.length + 1:
+function extractSheetRows(matrix)
+const trimmed - trimMatrix(matrix):
+function buildHeaderMap(headers)
+obj- source_excel_row =i + 1;
+const arr = trimmed[] I| 0;
+if(!hasData) continue:
+rows.push(obj):
+const rows - D;
+const obj - 0:
+const map - 0:
+Search
+return map:
+});

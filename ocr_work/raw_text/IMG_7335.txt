@@ -1,0 +1,23 @@
+o24•ED
+const activityTab = tabbar.querySelector('[data-tab="activityLog"]');
+if(tabbar && Itabbar.querySelector('[data-tab="savedSettings"]')X
+const controls = document.querySelector(".controls*);
+const tabbar = document.querySelector(".tabbar");
+if(activityTab) tabbar.insertBefore(tab, activityTab):
+const btn = document.createElement("button");
+const tab = document.createElement("button");
+tab.onclick = () →> setActiveTab(savedSettings");
+pillUser.textContent = "Profile User: loading";
+206
+if(controls && !qs("btnOpenSavedSettings")X
+pillsWrap.appendChild(pillUser);
+btn.id = "btnOpenSavedSettings";
+btn.className = "btn secondary";
+btn.textContent = "Saved Settings";
+tab.dataset.tab = "savedSettings";
+tab.textContent = "Saved Settings";
+else tabbar.appendChild(tab):
+controls.appendChild(btn);
+tab.className = "tab";
+btn.type = "button";
+Search

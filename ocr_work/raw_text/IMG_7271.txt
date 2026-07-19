@@ -1,0 +1,29 @@
+expression","green")} : &nbsp; | &nbsp: <b>Syntax:</b> $(badge("Needs edit","'red")}* }
+zm
+<b >Confidence:</b> $(confidenceBadge(suggestion.confidence || *n/a")}
+<b>Date standard:</b> <span class="inline-code">dd/mm/yyyy</span>
+$(validation.ok ? * &nbsp: | &nbsp: <b>Syntax:</b> $[badge(*Vatid JS
+$(state.aiFormulaError ? <div class="warn-note" style=*margin-
+<textarea id="aiSuggestedFormula" class="mono" style="min-
+<div class="$(validation.ok ? "good-note" = "warn-note"]">
+top:12px">${escapeHtmt(state.aiFormulaError))</div>* = **}
+01 241
+height:110px*>$(escapeHtml(formutaText)j</textarea>
+<div class="grid grid-2" style="margin-top:12px*>
+code*>$(escapeHtml(assetConfig().label)j</span>
+<b>Suggested field:</b> «span class=*inline-
+146
+const warnings = suggestion.warnings i|D:
+code">$(escapeHtml(suggestion.field)j</span>
+<div class="field* style="margin-top:12px">
+<label>Editable formula expression</label>
+<b>Asset:</b> <span class=linline-
+- +
+&nbsp; | &nbsp;
+&nbsp: | &nbsp:
+&nbsp: | &nbsp;
+<div class="note"*
+Search
+retun*
+s/div>
+</div>

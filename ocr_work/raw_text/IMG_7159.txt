@@ -1,0 +1,25 @@
+( key:"notionalUsdMio", patterns:["notionat usd mio","notionat usd mm","notional usd"]
+preferredSheets: ['"Linear Zero Traded", "Linear Zero", "Structured FI", "Structured FI/
+{ key:"issuerRaw", patterns:['issuer moody s s p fitch 1 ,"issuer moodys s p fitch
+{ key:"comment", patterns:['notes","note"' comment*] ).
+{ key:"currency", patterns:["currency"."primary ccy"] }.
+{ key:"tradeDate", patterns:["date",'trade date'] },
+{ key:"client", patterns:["client",'sales client"] },
+{ key:"product", patterns: ["product","security"] },
+( key:"settlement', patterns:["settlement"] },
+{ key:"reoffer", patterns:[*reoffer',"price"] },
+{ key:"isin", patterns:["isin","isin code"] },
+label: "Structured FI / Linear Zero",
+{ key:"tenor", patterns:["tenor*] },
+{ key:"book", patterns:[*book']},
+supportsAggregation: true,
+const ASSET_CONFIGS = [
+btbTradeSite: *LOH'
+riskBook: *IRSMTN*
+key: "structured_fi",
+structured_fi: [
+sourceSpecs: |
+Search
+Linear Zero'].
+1'"issuer*] }.
+pc: 0,

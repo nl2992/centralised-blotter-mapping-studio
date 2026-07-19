@@ -1,0 +1,25 @@
+.log-line(padding:2px 0;border-bottom:1px dotted rgba(255,255,255,.08)}
+101 241
+font-family:Consolas,Monaco,monospace;
+.log-line:last-child{border-bottom:none}
+border:1 px solid #1e293b;
+Log-success{colon:#86efac)
+white-space:pre-wrap:
+_log-info{color:#cbd5e1}
+log-warn{color:#fde68a}
+log-error|color:#fca5a5}
+•plain-list li(margin:4px 0}
+border-radius:10px;
+margin:8px 0 0 18px;
+max-height:520px;
+color:#e2e8f0:
+padding: 12px:
+overflow:auto;
+font-size:11px;
+line-height:1.45;
+font-size:12px;
+line-height: 1.5;
+color:#344054;
+Search
+padding:0;
+plain-list(

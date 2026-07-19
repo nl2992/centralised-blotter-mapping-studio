@@ -1,0 +1,25 @@
+of 241
+16
+-processed-table editable-cellinput[
+background:#fff7ed limportant;
+outline:2px solid var(-hsbc-red);
+border: 1 px solid #d0d5dd:
+outline-offset:-2px;
+editable-cell.editingl
+outline-offset:-2px;
+display-intine-block;
+border-radius:999px;
+padding:4px 6px:
+min-width:90px;
+min-height:28px;
+padding:4px 6px;
+border-radius:Spx;
+background:#fff;
+color:var(-ink):
+font-size:12px;
+line-height: 1.35;
+padding:2px 7px:
+width: 100%;
+Search
+fonttinherit;
+badgel

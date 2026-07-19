@@ -1,0 +1,24 @@
+const n = scaleAmountByHeader(src.notionalUsd, header ]| "notional in usd"):*
+2m
+constn = scaleAmountByHeader(src.volumeUsd, header || "volume usd"):
+const pa - typeof primaryAmount === *number" ? primaryAmount :
+lif(nnbv!== null && pa !== null) return Number((nnbv * pa) toFixed(4)):
+01 241
+const header - sourceHeaderName ("notionalUsd"):
+if(state.assetKey === "illiquid_credit repack"X
+function getVaForRow(src, primaryAmount)(
+const n = parseNumber(src.gnbvUsd):
+if(state.assetKey ==- "structured_fi"X
+const g - parseNumber(src.gnbvUsd);
+const nnbv = parse Number(src.nnbv):
+return n ==- null? "PENDING* i n;
+constn - parseNumber(src.nnbv):
+return n =—- null ? "PENDING" : n;
+return n =-= null ? "PENDING" : n;
+return n === nutt ? "PENDING" : n:
+if(state.assetKey === "collar"y
+- +
+parseNumber(primaryAmount):
+if(g l== null) return g:
+return "PENDING";
+Search

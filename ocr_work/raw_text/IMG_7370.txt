@@ -1,0 +1,21 @@
+tryf renderSavedSettings(); Jcatch(eX( log("Saved settings render failed:" + e.message,
+btnOpenSavedSettings.addEventListener("click", () => setActiveTab("savedSettings"));
+zm
+const savedTab = document.querySelector('.tab[data-tab="savedSettings"]*);
+if(typeof originalUpdateTopPills === "function") originalUpdateTopPills();
+of241 | | 0D
+if(typeof originalRenderAll === "function") originalRenderAll();
+const btnOpenSavedSettings = qs("btnOpenSavedSettings");
+savedTab.onclick = ( => setActiveTab("savedSettings");
+const originalUpdateTopPills = window.updateTopPills;
+239
+const originalRenderAll = window.renderAll;
+function wireSavedSettingsStaticEvents(X
+window.updateTopPills = function(X
+- +
+updateSavedSettingsPills();
+window.renderAll = function(X
+if(btnOpenSavedSettingsX
+if(savedTab)
+Search
+"warn"); }

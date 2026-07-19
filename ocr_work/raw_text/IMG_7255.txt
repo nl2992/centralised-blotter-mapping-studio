@@ -1,0 +1,24 @@
+Jelse if(MANDATORY_FIELDS.has(field) && (v===''* || v === nult || v === undefined || v
+? provenance[field].sourceKeys.map(rawHeaderLabelForKey).join(", ")
+sourceValue: provenance[field] && provenance[field].sourceKeys &&
+const note = provenance[field] ? provenance[field].note : *';
+tradeld: output["*Trade ID"] || record.baseRow.logicallndex,
+reason: note || "Field unresolved and set to PENDING.",
+output[field] - normalizeFieldValue(field, manual);
+of 241
+note: "Manual processed-sheet cell override"
+sourceRow: record.baseRow.sourceRow,
+130
+provenance: "MANUAL_OVERRIDE",
+TARGET_HEADERS.forEach(field => {
+provenance[field].sourceKeys.length
+provenance[field] -{
+value: output|field],
+const v = output|field];
+const rowErrors = [);
+if(v =-- *PENDING"X
+sourceKeys: 0.
+rowErrors.push({
+Search
+field,
+- "NULL")X

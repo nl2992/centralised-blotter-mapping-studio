@@ -1,0 +1,23 @@
+zm
+rec.instanceKeys = (rec.instanceKeys || (J).filter(k => k !== instanceBase);
+if(state.selectedGoldenKey =-- tradeKey) state.selectedGoldenKey = *™*;
+function removeGoldenInstanceFromTrade(tradeKey, instanceBase)(
+const previousTradeKey = state.goldenInstancelndex[instanceBase];
+removeGoldeninstanceFromTrade(previousTradeKey, instanceBase);
+DIDD
+const rec = state.goldenRecords.find(r => rtradeKey === tradeKey);
+const [ tradeKey, naturalKey ) = computeTradeKey(mappedRow);
+const instanceBase = buildGoldeninstanceBase(mappedRow):
+if(previousTradeKey && previousTradeKey !== tradeKey)(
+state.goldeninstancelndex[instanceBase]= tradeKey;
+of 241
+118
+rec-occurrences = rec.instanceKeys.length;
+function upsertGoldenRecord(mappedRow)
+const src = mappedRow.record.baseRow;
+if((tradeKey || linstanceBase) return;
+-+
+if(lrec.occurrences)[
+if(lrec) return;
+Search
+J.join("|");

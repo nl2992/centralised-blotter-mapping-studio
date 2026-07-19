@@ -1,0 +1,22 @@
+const matched = (spec.patterns || O).some(p => row.some(r => г ---
+const row = (matrix[] Il I]).map(canonicalHeader) filter(Boolean):
+01241
+canonicalHeader(p) || r.includes(canonicalHeader(p))));
+return matrix.map(row => (row || []) slice(0, cut)):
+const specs - assetConfig().sourceSpecs || 0:
+const maxScan = Math.min(matrix.length, 20);
+if(score > best score) best = [ idx:i, score }:
+function uniqueHleaders(rawHeadersX
+function detectHeaderRow(matrix)
+return rawHeaders.map((h, idx) =2(
+- +
+for(let i - 0; i < maxScan; i++X(
+let best = { idx:0, score:-1 }:
+specs.forEach(spec => [
+const cut = maxCol + 1:
+if(matched) score += 1:
+return best.idx;
+const seen = 0:
+let score = 0;
+Search
+7):

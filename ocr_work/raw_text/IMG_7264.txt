@@ -1,0 +1,27 @@
+")))</span>${assetConfig().supportsAggregation ?* | Add-on window: <span class="inline-
+code">$(escapeHtml(state.tradeldMode)J</span> | Date format: <span class="inline-
+W
+zm
+class="$(extraClass)">$(thead)<tbody>${tbody)</tbody></table></div>;
+state.mappedRows.filter(r => TARGET_HEADERS.some(h =>
+const html = c.html ? c.html(val, г) : escapeHtml(val ?? ''');
+return* <td class="$(c.className || "']">$(html}</td>*;
+const filter = canonicalHeader(state.previewFilter || '');
+<div class="section-title">Processing Summary</div>
+of 241
+<div class="note">Asset: <span class="inline-
+code">$(escapeHtml(state.runMode.replace(/_/g,"
+139
+canonicalHeader(r.output[h]).includes(filter)));
+return* <div class="table-wrap"><table
+const overview = qs("overview");
+<section class="card section">
+code">dd/mm/yyyy</span></div>
+7)-join (*')J</tr>").join(*'');
+function renderOverview(X
+const previewRows = Ifilter
+? state.mappedRows
+overview.innerHTML =*
+<div class="toolbar">
+if(loverview) return;
+Q Search

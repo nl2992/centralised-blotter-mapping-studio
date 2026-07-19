@@ -1,0 +1,25 @@
+6241OD
+manualOutputOverrides: state.manualOutputOverrides,
+localStorage.setltem(STORAGE_KEY, JSON.stringify({
+goldenRecords: state.goldenRecords.stice(0, 1500),
+goldeninstancelndex: state.goldenInstancelndex,
+selectedGoldenKey: state.selectedGoldenKey,
+fieldRulesByAsset: state.fieldRulesByAsset,
+if(lobj I| typeof obj!== "object") return out;
+fileHistory: state.fiteHistory.slice(0, 200),
+tradeldMode: state tradeldMode.
+Object.keys(obj).forEach(k => (
+- +
+if(count >= maxKeys) return;
+runMode: state.runMode,
+assetKey: state.assetkey,
+function saveLocal(i
+const v = obj[k];
+const out = 0:
+if(lisBlank(v)X
+let count = 0;
+outlk] = v;
+count += 1:
+Search
+retumn out;
+tryl

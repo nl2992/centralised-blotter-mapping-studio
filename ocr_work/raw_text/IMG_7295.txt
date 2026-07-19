@@ -1,0 +1,24 @@
+editableFormula.oninput = () => { state.aiFormutaEditable - editableFormula.value; };
+log(* Rule mode changed: asset=$(assetConfig().label), $(field) -> $(sel.value)*,
+) / [D
+setStatus("Cleared the Al formula suggestion panet.", "blue");
+rules[field] = [ currentRule(fietd), mode: sel.value };
+of 241
+const rules = ensureCurrentAssetRuleStore):
+168
+function bindMappingStudioEvents(K
+qsa(".rule-mode").forEach(sel => (
+applyAiFormulaSuggestion):
+const field = sel.dataset.field;
+- +
+clearBtn.onclick = 0 => [
+renderMappingStudio):
+processCurrentSheet(:
+clearAiSuggestion):
+sel.onchange = 0 => [
+if(editableFormula)
+saveLocal():
+saveLocal();
+if(clearBtnX
+Search
+"info");

@@ -1,0 +1,7 @@
+127.0.0.1 - - [18/Jul/2026 14:37:07] "GET /centralised_blotter_mapping_studio.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Jul/2026 14:37:09] code 404, message File not found
+127.0.0.1 - - [18/Jul/2026 14:37:09] "GET /studio/api/knowledge-base/download?file_id=17e95c45-7694-4233-8165-ed0efb09ae31 HTTP/1.1" 404 -
+127.0.0.1 - - [18/Jul/2026 14:37:09] code 404, message File not found
+127.0.0.1 - - [18/Jul/2026 14:37:09] "GET /studio/api/user_name HTTP/1.1" 404 -
+127.0.0.1 - - [18/Jul/2026 14:37:09] code 404, message File not found
+127.0.0.1 - - [18/Jul/2026 14:37:09] "GET /studio/static/ui/hsbc_icon.ico HTTP/1.1" 404 -

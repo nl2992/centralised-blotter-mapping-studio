@@ -1,0 +1,25 @@
+const res = await fetch(* /studio/api/session/run?$[params.toString0)*
+setStatus(' Al Formula Copilot is generating a tailored formula for
+const conversationid = await ensureAiConversation():
+message: JSON.stringify(messagePayload, null, 2),
+3 241
+"info*);
+headers:( "Content-Type":"application/json* },
+104
+log( Al formula request started for $(field)" ,
+const params - new URLSearchParams([
+request_type: "tailored_field_formula"
+<b>$(escapeHtm|(field)j</b>.*, "btue"):
+selected _tool: AI_SELECTED_TOOLS
+conversation_id: conversationid,
+context: buitdAiFieldContext(field)
+const messagePayload = [
+asset: assetConfig().tabel,
+credentials: same-origin'.
+user prompt: prompt,
+body: JSON.stringity(E
+model: "gpt-5-low",
+target field: field,
+method:"POST,
+Search
+tryl

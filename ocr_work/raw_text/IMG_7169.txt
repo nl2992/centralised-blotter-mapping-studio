@@ -1,0 +1,25 @@
+zm
+if(v === null || v === undefined || v === ** || v === "NULL") return "NULL";
+funotion clonePlain(v){ return JSON-parse(JSON.stringify(v ?2 null); }
+return <span class="badge ${cts]">$(escapeHtml(text)}</span>*
+if(typeof v === "string" && v === 'PENDING") return "PENDING";
+return v === "Valid" ? badge("Valid","green") : badge("Error","red");
+return n.toLocaleString(undefined, { minimumFractionDigits:d,
+ot 241
+if(c =-= "medium") return badge("Medium","amber"):
+45
+if(c -== *high") return badge("High",'green*):
+return t.length > n ? t.slice(0, n - 1) + *.*: t;
+maximumFractionDigits:Math.max(d,4) }):
+if(c === "low") return badge("Low","red");
+#f(Number.isNaN(n)) return String(v):
+const c = canonicalHeader(v ||**):
+- +
+function confidenceBadge(v)
+return badge(v || "n/a","blue");
+function badge(text, cls=**)
+function statusBadge(v)
+function shorten(v, n=90)
+const n = Number(v):
+constt = cleanText(v):
+Search

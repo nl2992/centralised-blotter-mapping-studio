@@ -1,0 +1,26 @@
+<option value="$(escapeHtml(cfg.key)}" ${cfg.key === state.assetKey ? "selected" :
+* <option value="$(escapeHtml(m.value))" $(m.value === state.runMode ? "selected" :
+if(!modes.find(m →> m.value === state.runMode)) state.runMode = "trade_by_trade";
+if(addonWindowDays) addonWindowDays.value = String(state.addonWindowDays);
+assetConfig().supportsAggregation && state.runMode === "aggregate_addons"? ''' :
+zm
+if(tradeldModeSelect) tradeldModeSelect.value = state.tradeldMode;
+if(addonWindowField) addonWindowField.style.display=
+of 241
+runModeSelect.innerHTML = modes.map(m =>
+134
+const pillWorkbook = qs("pillWorkbook");
+"">$(escapeHtml(cfg.label)/</option>
+const modes - availableRunModes();
+**/>$(escapeHtml(m.label)</option>
+const pillSheet = qs("pillSheet");
+const pillAsset = qs("pillAsset");
+const pillMode = qs("pillMode");
+- +
+function updateTopPills(X
+refreshSelectOptions();
+if(runModeSelect)
+Search
+)-join(**):
+D-join(**):
+"none";

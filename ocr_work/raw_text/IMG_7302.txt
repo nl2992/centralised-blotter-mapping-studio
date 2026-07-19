@@ -1,0 +1,27 @@
+setStatus( Reset export selection so all current sheet rows are selected.", "good"):
+"warn");
+setStatus(* Cleared manual edit for <b>$(escapeHtm!(field)}</b> on source row
+zm
+setStatus('The selected cell does not currently have a manual override.",
+log(" Manual processed-sheet edit cleared: asset=$(assetConfig().label},
+<b>$fescapeHtmt(selectedRow.record.baseRow.sourceRow)}</b>.* , "blue"):
+if(getManualOverrideValue(selectedRow.rowld, field) === undefinedX
+row=$(selectedRow.record.baseRow.sourceRow), field=$(fietd) . "info*);
+of241 | O| UD
+const selectedRow = state.mappedRows.find(r => r.rowld —- -
+clearManualOverrideValue(selectedRow.rowld, field);
+"warn");
+const field - state.processedSelectedField;
+175
+setStatus("Select a processed cell first.*,
+clearSelectedBtn.onclick - 0 => [
+setActiveTab("processedSheet"):
+state.processedSelectedRowld);
+renderProcessedSheet):
+Ff(IselectedRow || Ifield)
+processCurrentSheet):
+if(clearSelectedBtnX
+updateTopPills):
+Search
+return,
+return?

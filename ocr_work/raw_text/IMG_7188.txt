@@ -1,0 +1,27 @@
+notionalUsdMio:getSourceField(rawRow, "notionalUsdMio"),
+bookedFlag:getSourceField(rawRow, "bookedFlag"),
+notionalUsd.getSourceField(rawRow, "notionatUsd"),
+of 241
+commentigetSourceField(rawRow, 'comment"),
+tenorNum:getSourceField(rawRow, "tenorNum*),
+nativeRef:getSourceField(rawRow, "nativeRef"),
+tradeDate:getSourceField(rawRow, "tradeDate*),
+underlying:getSourceField(rawRow, 'underlying").
+maturity:getSourceField(rawRow, "maturity"),
+currency:getSourceField(rawRow, "currency"),
+maturity:getSourceField(rawRow, "maturity"),
+gnbvUsd:getSourceField(rawRow, *gnbvUsd*),
+reoffer")
+action:getSourceField(rawRow, "action"),
+book:getSourceField(rawRow, "book"),
+nnbv:getSourceField(rawRow, "nnbv*).
+trader:getSourceField(rawRow, "trader")
+action:getSourceField(rawRow, "action'),
+book: getSourceField(rawRow, "book*),
+isin:getSourceField(rawRow, 'isin"),
+reoffer:getSourceField (rawRow,
+if(state.assetKey =-- *collar"y
+- +
+Search
+return (
+base.

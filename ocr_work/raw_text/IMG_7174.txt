@@ -1,0 +1,23 @@
+if(payload.aiFormulaPrompt) state.aiFormulaPrompt= payload.aiFormulaPrompt;
+zm
+lif(payload.aiFormulaField) state.aiFormutaField = payload.aiFormulaField;
+state.addonWindowDays = Number(payload.addonWindowDays) ||7;
+o241 • CD
+state.exportExcludedRows = payload.exportExcludedRows |I0:
+if(payload.processedQuickSelectCount !== undefined &&
+return {y.v.getFullYear), miv.getMonth[) + 1, d:v.getDate()}:
+log("Failed to restore locat state: " + e.message, "warn");
+state.processedQuickSelectCount = Math.max(1,
+return'$(pad2(parts.d)/${pad2(parts.m))/$(parts.y)*:
+if(y === null || v -== undefined || v =-= **) return null;
+if(v instanceof Date && |Number.isNaN(v-getTime()X
+Number(payload.processedQuickSelectCount) || 5);
+function pad2(n)( return String(n).padStart(2,'0"); }
+payload.processedQuickSelectCount !== nutl)
+function formatOutputDateFromParts(parts)
+50
+function parseDatePartsNoTz(vX
+- +
+if(-parts) return **:
+Search
+Jcatch(e)(

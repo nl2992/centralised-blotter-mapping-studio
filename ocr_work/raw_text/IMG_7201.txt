@@ -1,0 +1,24 @@
+anchorType: record.aggregated ? "Anchor + add-ons" = "Single row"
+if(state.tradeldMode ==- "legacy_row_order") return src.logicalindex;
+aggregatedAddonCount: record.addonRows.length ||0,
+0t 241
+cleanText(src.currency).toUpperCase),
+function buildTradeld(record, helpers)(
+lit(state.assetKey =-- "structured f*X
+cleanText(src.book).toUpperCase(),
+String(helpers.primaryAmount 72 *)
+cleanText(src.isin).toUpperCase(),
+cleanText(helpers.maturityDate),
+aggregated: record.aggregated,
+- +
+const src = record.baseRow;
+cleanText(helpers.buySell),
+cleanText(sro tradeDate),
+let businessParts = 0:
+"STRUCTURED_FI",
+businessParts = [
+Search
+vaGnbv,
+price,
+issuer,
+buySell,

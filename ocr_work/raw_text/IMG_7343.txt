@@ -1,0 +1,22 @@
+errors.push(* Source rute for "$(field}" under "$(assetKey)" requires sourceKey. *);
+errors.push(^ Formula rule for "$(field}" under "$(assetKey]" requires expr.*);
+errors.push(* Rute mode "$(rute.mode)" for "$(field}' under "$(assetKey)" is
+errors.push(* Rule for "$(field]" under "$(assetKey)" must be an object.*):
+if(typeof rule.sourceKey !== "string* || !trimFormulaText(rule.sourceKey)X
+errors.push(" Formula syntax error for "$(fieldy" under "$(assetKey)":
+const mode = cleanText(rule.mode ]| "default").toLowerCase():
+Ff(rule || typeof rule !== "object" || Array.isArray(rule)X
+of 241
+const syntax = validateFormulaExpression(expr):
+const expr - trimFormulaText(rule.expr || ***):
+214
+if(IALLOWED_RULE_MODES.has(mode)X
+if(mode -=- "source"X
+if(mode -=- "formuta"X
+if(lsyntax.ok)
+#(syntax.error}*):
+return;
+if(lexpr)
+Search
+invalid.*):
+Jelsel

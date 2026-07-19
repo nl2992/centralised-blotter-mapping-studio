@@ -1,0 +1,24 @@
+if(state.fileHistory.length > 200) state.fileHistory = state.fiteHistory.slice(0, 200);
+const entry - state.fileHistory.find(x => x.id === state.currentFiteHistoryld);
+log( File inserted into board history: $(entry.fileName)*, "success");
+entry.processCount = Number(entry.processCount /| 0) + 1;
+entry.lastProcessedRows = Number(rowsLoaded || 0);
+of 241
+function markCurrentFileProcessed(rowsLoaded)
+entry.lastProcessedSheet = state.sheetName || "*;
+entry.lastProcessedAsset= assetConfig().label;
+116
+function computeTradeKey(mappedRow)(
+state.currentFileHistoryld = entry.id;
+if(!state.currentFileHistoryld) return;
+entry.lastProcessedAt = nowlso();
+state.fileHistory.unshift(entry):
+lastProcessedRows: 0,
+lastProcessedSheet: "*.
+lastProcessedAsset: **
+lastProcessedAt: **,
+processCount: 0,
+if(lentry) return;
+saveLocal):
+saveLocal);
+Search

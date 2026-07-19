@@ -1,0 +1,20 @@
+*, "error"):
+0t 241
+return computeDefaultField(field, record, helpers):
+log( Formula error for $(field}: $[e.message)"
+const meta = defaultMappingMeta(fietd):
+note: * Formula error: $(e.message}*
+provenance: "FORMULA_ERROR",
+provenance: "BLANK_OVERRIDE",
+function buildAiDefaultPrompt(field)l
+- +
+if(rule.mode === "blank"X
+value: "PENDING",
+note: "Forced blank*
+sourceKeys: I].
+sourceKeys: [,
+Search
+Jcatch(eX
+return (
+value: **
+return (

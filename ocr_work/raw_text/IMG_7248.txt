@@ -1,0 +1,25 @@
+*Trade <span class="inline-code">${escapeHtml(row.output["*Trade ID"] || '*))</span>
+statusELinnerHTML = * ${badge("No manual override","blue")} Select a processed cell
+const note - row.provenance && row.provenance[field] ? row.provenance[field].note :
+•Asset <span class="inline-code">$(escapeHtml(assetConfig().label))</span>-* +
+*Current value <span class="inline-code">${escapeHtml(currentValue)j</span>*;
+const currentValue = renderValueForDisplay(field, row.output[field]) || "(blank)*:
+zm
+*$(manual? badge("Manual override active","amber") : badge("No manual
+const manual = getManualOverrideValue(row.rowld, field) !=- undefined;
+*Field <span class="inline-code">$(escapeHtm((field))</span> • * +
+code">${escapeHtml(row.record.baseRow.sourceRow)}</span>.*
+of 241
+123
+infoEL.innerHTML = "No cell selected yet.";
+if(clearBtn) clearBtn.disabled = true;
+Source row <span class="inline-
+below to edit it in place.*;
+* $(escapeHtml(note)} :
+statusELinnerHTML-
+infoELinnerHTML=
+if(!row || lfield)[
+override","blue")}* +
+Search
+return;
+n/a":

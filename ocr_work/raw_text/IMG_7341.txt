@@ -1,0 +1,20 @@
+I["business_key","native_ref_preferred","legacy_row_order*].includes(payload.tradeldMode)
+if(payload.addonWindowDays !=- undefined && payload.addonWindowDays !== nully
+errors.push("addonWindowDays must be a number between 0 and 30.");
+errors.push(* Unsupported tradeldMode "$(payload.tradeldMode]".*);
+I("trade_by_trade" 'aggregate _addons"].includes(payload.runMode)K
+if(payload.assetKey &&!ASSET_CONFIGS[payload.assetKey]X
+errors.push(* Unsupported assetKey "$(payload.assetKey)".*):
+errors.push( Unsupported runMode "$(payload.runMode]*.*):
+if(payload.processedQuickSelectCount |== undefined &&
+const n = Number(payload.processedQuickSelectCount);
+of 241
+const n = Number(payload.addonWindowDays);
+212
+payload.processedQuickSelectCount |== nullX
+if(Number.isFinite(n) || n < 0 || n > 30X
+- +
+if(!Number.isFinite(n) |[n < 1X
+if(payload tradeldMode &&
+if(payload.runMode &&
+Search

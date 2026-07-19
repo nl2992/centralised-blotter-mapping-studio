@@ -1,0 +1,25 @@
+log( Workbook loaded: $(state.fileName); sheets=$(names.length} ,"success");
+const workbook = XLSX.read(buffer, { type:"array", cellDates:false }):
+of241| A | CD
+value="$(escapeHtml(n))">${escapeHtml(n)j</option> *).join(*'*)
+if(btnProcess) btnProcess.disabled = Istate.sheetName;
+state.currentFileFingerprint = fileFingerprint(file);
+:<option value="'>No sheets found</option>* ;
+addFileHistoryEntry(file, names, state.sheetName);
+192
+const names = workbook.SheetNames || D):
+const buffer = await file.arrayBuffer();
+const sheetSelect = qs("sheetSelect");
+sheetSelect.disabled = !names.length;
+sheetSelect.innerHTML = names.length
+sheetSelect.value = state.sheetName;
+const btnProcess = qs("btnProcess");
+state.sheetName = names(0] || '*;
+state.fileName = file.name || "';
+state.workbook - workbook;
+autoSelectPreferredSheet();
+?names.map(n => <option
+state.rawFile = file;
+if(sheetSelect)(
+Search
+renderAll);

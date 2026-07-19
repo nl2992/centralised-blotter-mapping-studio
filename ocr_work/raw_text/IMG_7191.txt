@@ -1,0 +1,24 @@
+zm
+OID
+return Math.round((count /state.sourceRows.length) * 1000) / 10;
+return Math.round((count /state.mappedRows.length) * 1000) /10;
+return vI== "* && v!== null && y != undefined &&v !== "NULL":
+0t241
+return key-startsWith("raw:*) ? key-slice(4) : key;
+const count - state.mappedRows.filter(r=> [
+67
+function sourceFieldFillRate(header
+if(Istate.sourceRows.length) return 0;
+retumn state.sheetHeaders.map(h => (
+sub: "Fill $(sourceFieldFilRate(h)}%*
+if(|state.mappedRows.length) return 0;
+const v = routput && routput[field];
+function rawHeaderLabelForKey(key)
+function getBlotterFieldNodes(X
+- +
+function fillRate(field)[
+key:raw:$(hy
+Search
+label:h,
+7) length:
+7)):

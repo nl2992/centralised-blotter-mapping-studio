@@ -1,0 +1,25 @@
+const n = scaleAmountByHeader(src.notionalUsdMio, header || "notional usd mio"):
+constn = scaleAmountByHeader(src.notionalUsd, header |I *notionat amount usd"):
+zm
+const fromCustomer = extractBookCode([src.customerText, src.dealName,
+const header - sourceHeaderName("notionalUsdMio*):
+const fromBooking - extractBookCode(src.booking):
+01241
+const header = sourceHeaderName("notionalUsd*):
+const header = sourceHeaderName("volumeUsd*):
+const fromStatus = extractBookCode(src.status);
+if(state.assetKey === "itliquid_credit_repack"X
+if(state.assetKey === "Iliquid credit repack'X
+if(fromCustomer) return fromCustomer;
+function getPrimaryAmountForRow(src)
+if(fromBooking) return fromBooking:
+if(state.assetKey === "structured_fi"X
+if(fromStatus) return fromStatus;
+return extractBookCode(src.book):
+return n === null? *PENDING* : n;
+return n ==- null ? "PENDING : n:
+if(state.assetKey === "collar"X
+— +
+src.comment]_join(**));
+Search
+return **;

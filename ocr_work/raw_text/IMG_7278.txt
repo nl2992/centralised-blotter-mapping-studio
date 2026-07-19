@@ -1,0 +1,28 @@
+$(TARGET_HEADERS.map(field => * <option value="S(escapeHtmt(fietd)]" ${field
+=== state.aiFormulaField ? "selected" - **>$(escapeHtm!(fietd))</option> ") join('*)}
+zm
+<a href="${escapeHtm(BASE_LOGIC_URL)Y" target="_blank"
+<section id="aiFormulaCopilotCard* class-"card section">
+aX 2Am
+<div class="section-title">Al Formula Copilot</div>
+const mappingStudio - qs("mappingStudio");
+151
+rel="noopener">current shared board</a>
+mappingStudio.innerHTML = ~
+<label>Target field</label>
+<select id=*aiFieldSelect>
+if(ImappingStudio) return;
+<div class="field tight">
+<div class="toolbar">
+<div class="controls">
+<div class="note">
+Base board logic:
+</select>
+Search
+</div>
+').join(*');
+</td>
+c/div>
+</div>
+</div»
+</tm

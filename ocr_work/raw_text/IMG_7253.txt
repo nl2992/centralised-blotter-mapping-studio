@@ -1,0 +1,24 @@
+input.addEventListener("input", () => { state.processedinlineEdit.draft = input.value; }):
+of 241
+input.addEventListener("blur", () => finish(true, null));
+function openProcessedCellEditor(rowld, field)
+128
+input.addEventListener("keydown", e => {
+markProcessedSelectedCell(rowld, field);
+const td = findProcessedCell(rowld, field);
+finish(true, e.shiftKey? "left" : "right");
+if(td) beginProcessedCellEdit(td);
+function processCurrentSheet({
+- +
+jelse if(e.key ——- "Escape"Y
+clearProcessedInlineEdit();
+Jelse if(e.key === "Tab"X
+if(e.key === "Enter"X
+e.preventDefault();
+finish(true, "down");
+e.preventDefault):
+e.preventDefault():
+finish(false, null);
+input.focus();
+input.select();
+Search

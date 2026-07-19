@@ -1,0 +1,26 @@
+transition:border-color 120ms ease,box-shadow 120ms ease,background 120ms ease;
+.ms-chip:hover{border-color:#98a2b3;box-shadow:0 1px 4px rgba(16,24,40,.08)}
+width:8px;height:8px;border-radius:999px;flex:0 0 auto:background:#d0d5dd;
+zm
+_ms-chip.hover-linked{border-color:#175cd3;background:#eff6ff}
+0/ 241
+21
+.ms-dot.source/background:#12b76a}
+.ms-dot.rule(background:#6d28d9)
+border: 1 px solid #0d5dd;
+border-radius:8px;
+padding:6px 10px;
+align-items.center:
+position relative;
+background:#fff;
+line-height:1.35;
+overflow: auto:
+font-size:12px;
+padding:2px;
+ms-chip-row
+display:flex;
+min-width:0;
+Search
+.ms-chip(
+gaр:6px;|
+.ms-dot!

@@ -1,0 +1,31 @@
+<div class="note">Use JSON to move settings between board states. Import first into
+<button id="btnSavedLoadCurrentToEditor" class="btn ghost">Load Current Board To
+<button id="btnSavedExportCurrent" class="btn secondary">Export Current Board
+<button id="btnSavedLoadSelectedToEditor" class="btn ghost" $(selected?"' :
+<input id="savedSettingsImportFile" type="file" accept=".json,application/json"
+<button id="btnSavedExportSelected" class="btn secondary" $(selected ? "' :
+zm
+<button id="btnSavedImportJson" class="btn secondary">Import Settings
+<div class="saved-settings-note" style="margin-bottom:12px">
+Click any saved setting below to view its JSON in the editor.
+<div class="section-title">Import / Export Settings</div>
+<div class="section-title">Prior Saved Settings</div>
+of 241
+"disabled")>Export Selected Profile JSON</button>
+"disabled"]>Load Selected Profile To Editor</button>
+231
+the editor, validate, then apply or save.</div>
+$renderSavedSettingsLibrary(}
+<section class="card section">
+- +
+<div class="action-row">
+<div class="toolbar">
+style="display:none" />
+</section>
+JSON</button>
+JSON</button>
+Editor</button>
+Search
+</div>
+</div>
+</div>

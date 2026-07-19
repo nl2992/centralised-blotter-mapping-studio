@@ -1,0 +1,23 @@
+const parsed = extractFirstJsonObject(state.aiFormulaRawResponse);
+tryf handleEvent(JSON.parse(payload)); jcatch(e)0
+const formula = trimFormulaText(parsed.formula (''*);
+const validation = validateFormulaExpression(formula);
+of 241
+buffer += decoder.decode(value, { stream:true });
+106
+const { value, done } = await reader.read();
+if(Itrimmed.startsWith("data:")) continue;
+const payload = trimmed.slice(5).trim();
+const chunks = buffer.split("In\n");
+const lines = chunk.split("In");
+- +
+buffer = chunks.pop() || ";
+for(const chunk of chunksX
+const trimmed = line.trim();
+state.aiFormulaSuggestion = /
+for(const line of lines){
+if(!payload) continue;
+if(done) break;
+while(trueX
+Search
+field,

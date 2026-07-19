@@ -1,0 +1,22 @@
+if(obj.payload && typeof obj.payload === "object" && !Array.isArray(obj.payload)X
+assetKey: obj.assetKey || obj.asset_key || obj.payload.assetKey || *™
+of241| • | [D
+profileName: cleanText(obj.profileName || obj.profile_name || ''),
+if(!payload || typeof payload !== "object" || Array.isArray(payload)X
+function validateSavedSettingsPayload(payload)(
+errors.push("Payload must be a JSON object.");
+211
+return { ok:false, errors, warnings );
+note: cleanText(obj.note || ''*),
+assetKey: obj.assetKey || "
+payload: obj.payload,
+const warnings = [);
+envelope: obj,
+envelope: null,
+profileName: "
+const errors = 0;
+payload: obj,
+Search
+return {
+return{
+note: "*,

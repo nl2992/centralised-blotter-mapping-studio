@@ -1,0 +1,29 @@
+sinput id="addonWindowDays" type="number" min="0" max="30" step="1" value="7"
+<option value="native_ref_preferred'>Deterministic native-ref preferred ID</option>
+zm
+<div class="field narrow" id="addonWindowField" style="display:none">
+<option value="business_key">Deterministic business-key ID</option>
+<option value="Legacy_row_order">Legacy row-order ID</option>
+soption value=**>Upload a workbook first</option>
+ют 241
+<select id=*runModeSelect">c/select>
+<label>Add-on window (days)</label>
+<select id=tassetSelect*»c/select>
+cselect id="sheetSelect' disabled>
+«select id=*tradeldModeSelect>
+<label>Trade ID mode‹/label>
+- +
+<div class=*field medium>
+clabel>Worksheet</label>
+-div class="field medium">
+clabel>Run mode</label>
+cdiv class=*field medium*>
+clabel>Assets/label>
+<div class="field tight">
+Search
+</select»
+</div>
+<ydive
+</div>
+</div>
+</div>

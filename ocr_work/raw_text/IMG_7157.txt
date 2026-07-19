@@ -1,0 +1,26 @@
+ot 241
+33
+const MANDATORY_FIELDS = new Set([
+const NUMERIC_FIELDS = new Set([
+- +
+**Salesperson (Coverage)*,
+"*Tier 1 Product Type",
+**Tier 2 Product Type",
+"*Tier 3 Product Type",
+"Liquidity Reserve",
+**Treats Acronym",
+"Primary Amount",
+**Primary CCY",
+"*Revenue CCY"
+"Flow Value",
+**Trade Date",
+"*Legal Entity",
+"*$ VA/GNBV",
+Search
+"Risk Book",
+"TFX Flag".
+"Comment"
+"*Trade ID",
+"CVA",
+"*$ PC",
+"FVA",

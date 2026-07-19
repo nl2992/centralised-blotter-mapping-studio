@@ -1,0 +1,24 @@
+"Trade ID mode is selectable: deterministic business-key, native-ref preferred, or legacy
+Unresolved values become PENDING and are raised in Exceptions.",
+*Use one centralised finat output template across all assets.",
+*PB routing is shared and comes from resolved input Book.*,
+mandatory: MANDATORY_FIELDS.has(field) ? "Yes" : "No",
+of 241
+*Primary Amount replaces the old *$ Volume field.",
+defaultRule: defaultMappingMeta(field).summary,
+currentMode: currentRule(field).mode || "default',
+const rows = TARGET_HEADERS.map(field => (1
+currentMapping: currentRuleSummary(field)
+185
+"Output dates are always dd/mm/yyyy.",
+function renderDefaultRules(X
+const el qs("defaultRules"):
+<section class="card section"»
+"Output Book stays blank.",
+const sharedRules = [
+el.innerHTML= *
+if(lel) return;
+Search
+row-order.*
+field,
+})):

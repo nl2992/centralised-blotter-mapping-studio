@@ -1,0 +1,23 @@
+key="$(escapeHtml("raw:" + srcHeader)}" class="$(spec.kind ==- "user" ? "user-line" :
+qsa(".lhs-chip").forEach(ch => ch.classList.toggle("hover-linked", !!match.key &&
+qsa(".rhs-chip") .forEach(ch => ch.classList.toggle("hover-linked", !!match.field &&
+paths.push(" <path d="$(d}" data-field="$(escapeHtm!(field)}" data-
+1O1D
+const sameField = match.field && p.dataset field === match.field;
+0t 241
+const y1 = Ir.top + lr.height / 2 - canvasRect.top;
+const y2 = rrtop + rrheight / 2 - canvasRect.top:
+if(sameField || samekey) p.classList.add(*hot*)=
+164
+const x2 - rr.left - canvesRect.left;
+const d = bezierPath(x1, y1, *2, y2):
+function highlightDiagram(match)l
+qsa(*#msSvg path").forEach(p => (
+svg.innerHTML= paths.join(**):
+p.classList.remove("hot","dim*);
+ch.dataset.field === match.field):
+-+
+else p.classList.add("dim"):
+ch.dataset.key === match.key)):
+"defautt-line"y"></path>*):
+Search

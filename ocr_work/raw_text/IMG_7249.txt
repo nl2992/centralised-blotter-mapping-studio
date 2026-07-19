@@ -1,0 +1,23 @@
+const searchTerm = canonicalHeader(state.processedSearch ||"');
+qsa("#processedSheet .editable-cell.selected").forEach(td =>
+of 241
+function markProcessedSelectedCell(rowld, field)
+...TARGET_HEADERS.map(h => r.output[h])
+124
+J.map(v => canonicalHeader(v)).join(" |");
+if(clearBtn) clearBtn.disabled = !manual;
+const td = findProcessedCell(rowld, field);
+state.processedSelectedRowld = rowld;
+return rowText.includes(searchTerm);
+-state.processedSelectedField = field;
+function getFilteredProcessedRows()f
+if(td) td.classList.add("selected");
+updateProcessedSelectionPanel():
+:state.mappedRows.filter(r=>f
+r.record.baseRow.sourceRow,
+td.classList.remove("selected"));
+? state.mappedRows
+return !searchTerm
+const rowText = [
+r.rowStatus,
+Search

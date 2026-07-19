@@ -1,0 +1,26 @@
+TOD
+( key:"finalCustomer"', patterns:["final customer","'apistomer"])
+0f241
+{ key:"product", patterns:["product','security'] }.
+39
+{ key:"structure", patterns:["structure"]}.
+activeTab:"mappingStudio",
+manualOutputOverrides:0,
+currentFileFingerprint: **
+currentFileHistoryld:*)
+fieldRulesByAsset:0.
+const state = (
+workbookinulll,
+sheetHeaders:I],
+logicalRecords:[].
+sheetName:**
+sourceRows:0,
+mappedRows:[.
+previewFilter:*,
+rawFile:null,
+exceptions:[.
+headerMap:0.
+fileName:**
+fileHistory:U.
+Search
+logs:[.

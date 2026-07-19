@@ -1,0 +1,26 @@
+productType:getSourceField(rawRow, "productType"),
+volumeUsd:getSourceField(rawRow, "volumeUsd"),
+0t 241
+comment:getSourceField(rawRow, "comment"),
+nativeRef:getSourceField(rawRow, "nativeRef").
+tradeDate:getSourceField(rawRow, "tradeDate"*).
+issuerRaw:getSourceField(rawRow, "issuerRaw"),
+dealName:getSourceField(rawRow, "dealName"),
+currency:getSourceField(rawRow, 'currency"),
+comment:getSourceField(rawRow, "comment"),
+product:getSourceField(rawRow, "product"),
+if(state.assetKey --- "illiquid_credit_repack"X
+booking:getSourceField(rawRow, "booking").
+maturity:getSourceField(rawRow, "maturity"),
+gnbvUsd:getSourceField(rawRow, "gnbvUsd*),
+trader:getSourceField (rawRow, "trader")
+status:getSourceField(rawRow, "status*),
+reoffer:getSourceField (rawRow, "reoffer"*),
+issuer.getSourceField(rawRow, *issuer").
+nnbv:getSourceField(rawRow, "nnbv*),
+ticker:getSourceField(rawRow, 'ticker"),
+isin:getSourceField (rawRow, "isin"),
+- +
+Search
+return [
+...base,

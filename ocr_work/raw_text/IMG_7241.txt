@@ -1,0 +1,26 @@
+*$(state.currentFileFingerprint)|$(state.sheetName}|$(state.assetKey}$(src.sourceRow)';
+zm
+return ( tradeKey: "TRD-" + simpleHash(naturalKey), naturalKey };
+of 241
+function buildGoldenInstanceBase(mappedRow)
+state.currentFileFingerprint || state.fileName || "*,
+const src = mappedRow.record.baseRow;
+const src = mappedRow.record.baseRow;
+if(!naturalKey.replace(N//g,"'').trim()X
+const out = mappedRow.output;
+cleanText(out["*Primary CCY"]),
+- +
+cleanText(out["*Trade Date"]),
+cleanText(out["Sales Client"]),
+cleanText(out["*Trade ID"]),
+let naturalKey = parts.join("|");
+cleanText(out["ISIN Code"])
+state.sheetName ||"*,
+src.sourceRow || "™
+src.logicallndex|*
+state.assetKey,
+const parts = [
+state.assetKey,
+naturalKey =
+Search
+return [

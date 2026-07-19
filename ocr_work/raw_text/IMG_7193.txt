@@ -1,0 +1,26 @@
+31 241
+cleanText(src.currency).toUpperCase),
+cleanText(src.settlement).toUpperCase0
+state.sourceRows.forEach(src => (
+cleanText(src.isin).toUpperCase(),
+cleanText(src.book).toUpperCase(),
+if(lgroups.has(key)) groups.set(key. I):
+const ta = getTradeTimeMs(a):
+const tb = getTradeTimeMs(b);
+- +
+const groups = new Map():
+groups.get(key).push(src):
+groups for Each(rows => (
+if(ta !== tb) returnta - tb;
+rows.sort((a,b) =>(
+aggregated:false
+const records = 0;
+type:"single",
+baseRowisrc,
+addonRows:I1,
+rows:[src].
+const key = [
+Search
+T.join(*.*):
+7)):
+7):

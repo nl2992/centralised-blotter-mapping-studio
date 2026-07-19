@@ -1,0 +1,24 @@
+setStatus(* Could not reset editor to selected profile: $(escapeHtml(e.message))* .
+setStatus("Loaded the chosen saved settings JSON into the editor.", "good");
+zm
+setStatus("Reset the editor to the selected saved profile.", "good"):
+setStatus ("Reset the editor to the current board settings.", "good");
+setStatus(* Could not load chosen saved settings into editor:
+state.selectedSavedProfileld = row.dataset.savedProfileld;
+of 241
+238
+row.addEventListener("click", 0 =>{
+loadSelectedProfileToEditor0:
+loadCurrentBoardToEditor):
+loadSelectedProfileToEditor();
+$(escapeHtml(e.message)}*,"bad");
+- +
+if(selected)(
+Jcatch(eX
+Search
+Jcatch(e)
+try(
+Jelse(
+"bad");
+)):
+tryl

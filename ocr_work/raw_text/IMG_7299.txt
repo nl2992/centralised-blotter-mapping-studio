@@ -1,0 +1,25 @@
+selectAllFilteredCheckbox.indeterminate = |selectALlFilteredCheckbox.checked &&
+setStatus( $(selectAllFilteredCheckbox.checked ? "Selected" - "Cleared"] all filtered
+state.processedQuickSelectCount = Math.max(1, Number(e.target.value ||5));
+zm
+const selectAllFilteredCheckbox = qs(*processedSelectAllFiltered*);
+02411QID
+getFilteredProcessedRows().some(r => isRowSelected(r.rowld)):
+selectAllFilteredCheckbox.onclick= e => e.stopPropagation);
+setRowsSelected(rows, selectAllFiiteredCheckbox.checked):
+selectAllFilteredCheckbox.onchange = () =3 (
+172
+state.processedSearch = e.target.value;
+const rows = getFilteredProcessedRows):
+- + 1
+quickSelectinput.onchange = e →> (
+if(selectAllFitteredCheckboxX
+renderProcessedSheet(;
+renderProcessedSheet):
+search.oninput = e =7 (
+if(quickSelectinput)
+rows for export. *, "blue"):
+updateTopPills():
+saveLocal();
+Search
+if(searchy

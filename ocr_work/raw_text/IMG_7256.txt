@@ -1,0 +1,25 @@
+? provenance[field].sourceKeys.map(rawHeaderLabelForKey).join(*. ")
+sourceValue: provenance[field] && provenance[field).sourceKeys &&
+tradeld: output["*Trade ID"] || record.baseRow.logicallndex,
+const rowStatus = rowErrors.length ? "Error" : "Valid";
+of 241
+reason: note || "Mandatory field unresolved.",
+sourceRow: record.baseRow.sourceRow,
+131
+state.exceptions.push(...rowErrors);
+provenance[field].sourceKeys.length
+- +
+output(field] = "PENDING";
+state.mappedRows.push({
+rowErrors.push([
+provenance,
+Search
+rowStatus
+field,
+:**
+rowld,
+record,
+helpers,
+output,
+7):
+7):

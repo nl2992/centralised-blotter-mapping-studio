@@ -1,0 +1,25 @@
+setStatus(* Applied manual in-cell edit to <b>${escapeHtml(field)j</b> on source row
+zm
+log(* Manual processed-sheet edit applied: asset=$(assetConfig().label),
+const nextTd = findProcessedCell(nextTarget.rowld, nextTarget.field);
+row=${row.record.baseRow.sourceRow}, field=$(field}*, "success");
+<b>$(escapeHtml(row.record.baseRow.sourceRow))</b>., "good");
+'", field:"', draft:'' };
+of 241
+state.processedSelectedRowld = nextTarget.rowld;
+state.processedSelectedField = nextTarget.field;
+setManualOverrideValue(rowld, field, draft);
+if(nextTd) beginProcessedCellEdit(nextTd);
+127
+state.processedinlineEdit = { rowld:"*,
+setActiveTab("processedSheet");
+const draft = input.value;
+renderProcessedSheet();
+processCurrentSheet();
+updateTopPills();
+setTimeout() => (
+if(nextTarget)
+if(!commit){
+Search
+return;
+}, 60);
