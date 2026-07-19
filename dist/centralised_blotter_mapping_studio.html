@@ -1225,17 +1225,17 @@ License: MIT
       "Equity TRS": "trs"
     };
     const TIER_DEFAULTS = {
-      "Structured FI - Rate": { tier1: "Markets", tier2: "Structured Products", tier3: "Structured Rates" },
-      "Structured FI - Credit": { tier1: "Markets", tier2: "Structured Products", tier3: "Structured Credit" },
-      "Structured FI - FX": { tier1: "Markets", tier2: "Structured Products", tier3: "Structured FX" },
-      "Structured FI - Unknown": { tier1: "Markets", tier2: "Structured Products", tier3: null },
+      "Structured FI - Rate": { tier1: "Structured Rates", tier2: "Interest Rate Linked Note -PPN", tier3: "Interest Rate Linked Note -PPN" },
+      "Structured FI - Credit": { tier1: "Structured Rates", tier2: "Interest Rate Linked Note -PPN", tier3: "Interest Rate Linked Note -PPN" },
+      "Structured FI - FX": { tier1: "Structured Rates", tier2: "Interest Rate Linked Note -PPN", tier3: "Interest Rate Linked Note -PPN" },
+      "Structured FI - Unknown": { tier1: "Structured Rates", tier2: "Interest Rate Linked Note -PPN", tier3: "Interest Rate Linked Note -PPN" },
       "Illiquid Credit": { tier1: "Structured Credit", tier2: "Structured Credit", tier3: "Structured Credit Notes" },
       "Repack": { tier1: "Structured Credit", tier2: "Structured Credit", tier3: "Structured Credit Notes" },
       "Illiquid / Unknown": { tier1: "Structured Credit", tier2: "Structured Credit", tier3: "Structured Credit Notes" },
-      "Structured Credit": { tier1: "Markets", tier2: "Credit", tier3: "Structured Credit" },
+      "Structured Credit": { tier1: "Structured Credit", tier2: "Structured Credit", tier3: "Structured Credit Notes" },
       "Private Credit": { tier1: "Private Credit Primary", tier2: "Private Placement", tier3: "Private Placement" },
-      "Collar": { tier1: "Markets", tier2: "Equity Derivatives", tier3: "Collar / Options" },
-      "Equity TRS": { tier1: "Markets", tier2: "Equity Derivatives", tier3: "Total Return Swap" }
+      "Collar": { tier1: "Equity Derivatives", tier2: "Equity Derivatives", tier3: "Collar / Options" },
+      "Equity TRS": { tier1: "Equity Derivatives", tier2: "Equity Derivatives", tier3: "Total Return Swap" }
     };
     const BUILT_IN_PRODUCT_TAXONOMY = [
       {
@@ -1336,19 +1336,25 @@ License: MIT
       "*Revenue CCY": {
         global: "Defaults to the constant USD because the $ template fields are USD-denominated. Add a 'source' rule -> primaryCcy to copy Primary CCY instead."
       },
-      "*Tier 1 Product Type": { global: "Built-in default 'Markets' for every asset class, overridable by the Product reference CSV." },
+      "*Tier 1 Product Type": {
+        structuredFi: "OCR-preserved Linear Zero default 'Structured Rates', unless product taxonomy such as CLN overrides it.",
+        illiquidRepack: "Instruction mapping: Structured Credit.",
+        collar: "Equity Derivatives family default; confirm exact firm label if different.",
+        trs: "Equity Derivatives family default; confirm exact firm label if different.",
+        global: "Per-asset taxonomy default, overridable by Product reference CSV or Mapping Studio rules. No generic 'Markets' fallback."
+      },
       "*Tier 2 Product Type": {
-        structuredFi: "Built-in default 'Structured Products', overridable by the Product reference CSV.",
-        illiquidRepack: "Built-in default 'Credit', overridable by the Product reference CSV.",
-        collar: "Built-in default 'Equity Derivatives', overridable by the Product reference CSV.",
-        trs: "Built-in default 'Equity Derivatives', overridable by the Product reference CSV.",
+        structuredFi: "OCR-preserved Linear Zero default 'Interest Rate Linked Note -PPN', unless product taxonomy such as CLN overrides it.",
+        illiquidRepack: "Instruction mapping: Structured Credit.",
+        collar: "Equity Derivatives family default; confirm exact firm label if different.",
+        trs: "Equity Derivatives family default; confirm exact firm label if different.",
         global: "Per-asset-class default tier 2, overridable by the Product reference CSV."
       },
       "*Tier 3 Product Type": {
-        structuredFi: "Rate/Credit/FX subclass default ('Structured Rates'/'Structured Credit'/'Structured FX'); Unknown subclass falls back to Product/Structure text, else UNCLASSIFIED_TIER3 placeholder.",
-        illiquidRepack: "Built-in default 'Illiquid Credit' or 'Repack'.",
-        collar: "Built-in default 'Collar / Options'.",
-        trs: "Built-in default 'Total Return Swap'.",
+        structuredFi: "OCR-preserved Linear Zero default 'Interest Rate Linked Note -PPN', unless product taxonomy such as CLN overrides it.",
+        illiquidRepack: "Instruction mapping: Structured Credit Notes.",
+        collar: "Collar / Options.",
+        trs: "Total Return Swap.",
         global: "Per-asset-class default tier 3, overridable by the Product reference CSV or placeholder."
       },
       "Buy/Sell": {
@@ -2915,7 +2921,7 @@ License: MIT
       const override = getProductOverride(row);
       const builtInTaxonomy = getBuiltInProductTaxonomy(row);
       const asset = row.assetClass || "";
-      const defaults = TIER_DEFAULTS[asset] || { tier1: "Markets", tier2: "Other", tier3: null };
+      const defaults = TIER_DEFAULTS[asset] || { tier1: "PENDING", tier2: "PENDING", tier3: "PENDING" };
       const tier1 = override.tier_1_product_type || (builtInTaxonomy && builtInTaxonomy.tier1) || defaults.tier1;
       const tier2 = override.tier_2_product_type || (builtInTaxonomy && builtInTaxonomy.tier2) || defaults.tier2;
       const tier3 = override.tier_3_product_type || (builtInTaxonomy && builtInTaxonomy.tier3) || defaults.tier3 || row.productName || row.structureName || PLACEHOLDER.tier3;

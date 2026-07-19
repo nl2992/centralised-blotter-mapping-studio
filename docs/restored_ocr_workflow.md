@@ -57,9 +57,12 @@ Only the selected worksheet is processed. Changing Asset can auto-select the bes
 
 | Instruction | Current mapping |
 |---|---|
+| Linear Zero default | `Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN`, preserved from the OCR-original board. |
 | CLN | `Structured Credit / Structured Credit / Credit Linked Notes`. |
 | Repackaged + Illiquid Credit | `Structured Credit / Structured Credit / Structured Credit Notes`. |
 | Private Credit | `Private Credit Primary / Private Placement / Private Placement`. |
+| Collar | `Equity Derivatives / Equity Derivatives / Collar / Options`. |
+| Equity TRS | `Equity Derivatives / Equity Derivatives / Total Return Swap`. |
 | Nomura Private Bank Treats | `NOSGSGH`, unless a coverage/legal reference overrides it. |
 | HASE / Hang Seng Treats | `HASEHKP`, unless a coverage/legal reference overrides it. |
 | PB routing | SG -> `HRCHSGH`; HK -> `HRCHHKH`, preserved from the original Linear Zero logic. |
@@ -81,7 +84,7 @@ Fixture: `ocr_work/test_non_linear_taxonomy.xlsx`
 | Asset | Worksheet | Rows | Result |
 |---|---|---:|---|
 | Structured FI / Linear Zero | `Structured FI 2026` | 1 | Clean Pass; CLN taxonomy; numeric Trade ID. |
-| Structured FI / Linear Zero | `Linear Zero` | 1 | Clean Pass; existing zero-linear aliases preserved. |
+| Structured FI / Linear Zero | `Linear Zero` | 1 | Clean Pass; existing zero-linear aliases and OCR tier defaults preserved. |
 | Structured FI / Linear Zero | `Structured Credit 2025` | 2 | Taxonomy works for CLN and Private Credit; sparse source still lacks `*Trade Date`. |
 | Collar | `Collar Blotter` | 1 | Clean Pass; strategy grain; PB Fee PC; numeric Trade ID. |
 | Illiquid Credit + Repack | `Illiquid Credit+Repack` | 1 | Clean Pass; Repack/Illiquid taxonomy; HASE Treats; numeric Trade ID. |

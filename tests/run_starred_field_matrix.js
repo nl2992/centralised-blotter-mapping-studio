@@ -89,9 +89,9 @@ const EXPECT = {
     "*Trade Date": v("15/01/2026", ["SOURCE_BACKED"]), "*Primary CCY": CCY,
     "Primary Amount": v("1000000", ["SOURCE_BACKED"]), "*$ PC": v("15000", ["POLICY_DERIVED"]),
     "*$ VA/GNBV": v("15000", ["SOURCE_BACKED"]), "*Trade ID": pop(["POLICY_DERIVED", "SOURCE_BACKED"]),
-    "*Revenue CCY": REV, "*Tier 1 Product Type": v("Markets", POLICY_OR_LOOKUP),
-    "*Tier 2 Product Type": v("Structured Products", POLICY_OR_LOOKUP),
-    "*Tier 3 Product Type": v("Structured Rates", POLICY_OR_LOOKUP),
+    "*Revenue CCY": REV, "*Tier 1 Product Type": v("Structured Rates", POLICY_OR_LOOKUP),
+    "*Tier 2 Product Type": v("Interest Rate Linked Note -PPN", POLICY_OR_LOOKUP),
+    "*Tier 3 Product Type": v("Interest Rate Linked Note -PPN", POLICY_OR_LOOKUP),
     "*Salesperson (Coverage)": SALES, "*Legal Entity": LEGAL,
     "*Treats Acronym": v("NOSGSGH", POLICY_OR_LOOKUP)
   },
@@ -113,9 +113,9 @@ const EXPECT = {
     "*Trade Date": v("05/03/2026", ["SOURCE_BACKED"]), "*Primary CCY": CCY,
     "Primary Amount": v("3000000", ["SOURCE_BACKED"]), "*$ PC": v("30000", ["POLICY_DERIVED"]),
     "*$ VA/GNBV": v("30000", ["SOURCE_BACKED"]), "*Trade ID": pop(["POLICY_DERIVED", "SOURCE_BACKED"]),
-    "*Revenue CCY": REV, "*Tier 1 Product Type": v("Markets", POLICY_OR_LOOKUP),
-    "*Tier 2 Product Type": v("Structured Products", POLICY_OR_LOOKUP),
-    "*Tier 3 Product Type": v("Structured FX", POLICY_OR_LOOKUP),
+    "*Revenue CCY": REV, "*Tier 1 Product Type": v("Structured Rates", POLICY_OR_LOOKUP),
+    "*Tier 2 Product Type": v("Interest Rate Linked Note -PPN", POLICY_OR_LOOKUP),
+    "*Tier 3 Product Type": v("Interest Rate Linked Note -PPN", POLICY_OR_LOOKUP),
     "*Salesperson (Coverage)": SALES, "*Legal Entity": LEGAL,
     "*Treats Acronym": v("NOSGSGH", POLICY_OR_LOOKUP)
   },
@@ -123,11 +123,9 @@ const EXPECT = {
     "*Trade Date": v("10/03/2026", ["SOURCE_BACKED"]), "*Primary CCY": CCY,
     "Primary Amount": v("1500000", ["SOURCE_BACKED"]), "*$ PC": v("12000", ["POLICY_DERIVED"]),
     "*$ VA/GNBV": v("12000", ["SOURCE_BACKED"]), "*Trade ID": pop(["POLICY_DERIVED", "SOURCE_BACKED"]),
-    "*Revenue CCY": REV, "*Tier 1 Product Type": v("Markets", POLICY_OR_LOOKUP),
-    "*Tier 2 Product Type": v("Structured Products", POLICY_OR_LOOKUP),
-    // TIER_DEFAULTS["Structured FI - Unknown"].tier3 is null; classify() falls
-    // back to row.productName ("Product" column) -- real coverage, not a placeholder.
-    "*Tier 3 Product Type": v("Equity-Linked Structured Note", POLICY_OR_LOOKUP),
+    "*Revenue CCY": REV, "*Tier 1 Product Type": v("Structured Rates", POLICY_OR_LOOKUP),
+    "*Tier 2 Product Type": v("Interest Rate Linked Note -PPN", POLICY_OR_LOOKUP),
+    "*Tier 3 Product Type": v("Interest Rate Linked Note -PPN", POLICY_OR_LOOKUP),
     "*Salesperson (Coverage)": SALES, "*Legal Entity": LEGAL,
     "*Treats Acronym": v("NOSGSGH", POLICY_OR_LOOKUP)
   },
@@ -159,7 +157,7 @@ const EXPECT = {
     // PIMS Code "PIMSFULL0001" is alphanumeric (not pure digits), so *Trade ID
     // resolves via the deterministic numeric-hash fallback, not a direct native ID.
     "*Trade ID": pop(["POLICY_DERIVED"]),
-    "*Revenue CCY": REV, "*Tier 1 Product Type": v("Markets", POLICY_OR_LOOKUP),
+    "*Revenue CCY": REV, "*Tier 1 Product Type": v("Equity Derivatives", POLICY_OR_LOOKUP),
     "*Tier 2 Product Type": v("Equity Derivatives", POLICY_OR_LOOKUP),
     "*Tier 3 Product Type": v("Collar / Options", POLICY_OR_LOOKUP),
     "*Salesperson (Coverage)": SALES, "*Legal Entity": LEGAL,
@@ -171,7 +169,7 @@ const EXPECT = {
     "*$ PC": v("11520", ["POLICY_DERIVED"]), // Commission to PB (HKD) 90000 x FX 0.128, default "multiply"
     "*$ VA/GNBV": v("250000", ["SOURCE_BACKED"]), // MSS Revenue in USD (default trsVaPolicy=mss)
     "*Trade ID": v("700001", ["SOURCE_BACKED"]), // Reference number is already numeric -> passthrough
-    "*Revenue CCY": REV, "*Tier 1 Product Type": v("Markets", POLICY_OR_LOOKUP),
+    "*Revenue CCY": REV, "*Tier 1 Product Type": v("Equity Derivatives", POLICY_OR_LOOKUP),
     "*Tier 2 Product Type": v("Equity Derivatives", POLICY_OR_LOOKUP),
     "*Tier 3 Product Type": v("Total Return Swap", POLICY_OR_LOOKUP),
     "*Salesperson (Coverage)": SALES, "*Legal Entity": LEGAL,

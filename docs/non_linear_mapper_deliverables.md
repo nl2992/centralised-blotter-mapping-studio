@@ -41,6 +41,8 @@ Expand the mapper beyond the original Linear Zero / Structured FI flow so Struct
 | Numeric Trade ID | The output template `*Trade ID` should be a number. Alphanumeric native references such as ISIN, OTC ISIN, PIMS, or synthetic string IDs stay traceable in `ISIN Code` and/or `Comment`. |
 | Current Structured FI layout | Add a current-layout Structured FI branch/alias set for columns such as `ISIN Front`, `SALETEAM`, `First Trade Date`, `FINAL CUSTOMER`, `Volume ('MM) USD`, `Total NNBV`, `First Reoffer`, `Product Type`. |
 | Preserve zero-linears | Keep older Linear Zero aliases such as `Linear Zero Traded`, `Linear Zero`, `Structured FI`, `Structured FI / Linear Zero`, `Date`, `Client`, `Security`, `Notional USD Mio`, and related headers. |
+| Preserve Linear Zero tier defaults | `*Tier 1 Product Type = Structured Rates`; `*Tier 2 Product Type = Interest Rate Linked Note -PPN`; `*Tier 3 Product Type = Interest Rate Linked Note -PPN`. |
+| Remove generic Markets fallback | No asset family should fall back to `Markets`; unrecognized taxonomy stays explicit rather than invented. |
 
 ## Implemented Deliverables
 
@@ -57,6 +59,7 @@ Expand the mapper beyond the original Linear Zero / Structured FI flow so Struct
 | D9: Enforce PLUTO starred-field readiness | Done | All template fields beginning with `*` are treated as required. Rows with blank required fields fail; rows with working placeholders are not Clean Pass. |
 | D10: Document mapping and gaps | Done | This document plus `docs/non_linear_template_inventory.md`, `docs/non_linear_test_cases.md`, and `ocr_work/current_mapping_coverage.md`. |
 | D11: Restore OCR-original selected-sheet workflow | Done | `Load Workbook` only loads sheet names; `Process selected sheet` maps exactly one worksheet. Original tabs restored. See `docs/restored_ocr_workflow.md`. |
+| D12: Restore OCR Linear Zero tier defaults | Done | Linear Zero now maps to `Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN`, not `Markets`. |
 
 ## PLUTO Mandatory Field Policy
 

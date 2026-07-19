@@ -39,9 +39,9 @@ const BASELINE = {
       expect: {
         quality: "CLEAN_PASS",
         tradeId: "3329199354",
-        tier1: "Markets",
-        tier2: "Structured Products",
-        tier3: "Structured Rates",
+        tier1: "Structured Rates",
+        tier2: "Interest Rate Linked Note -PPN",
+        tier3: "Interest Rate Linked Note -PPN",
         tradeDate: "18/07/2026",
         primaryCcy: "USD",
         volume: "2000000",
@@ -59,7 +59,7 @@ const BASELINE = {
       expect: {
         quality: "CLEAN_PASS",
         tradeId: "2381983830",
-        tier1: "Markets",
+        tier1: "Equity Derivatives",
         tier2: "Equity Derivatives",
         tier3: "Collar / Options",
         tradeDate: "31/10/2023",
@@ -124,7 +124,7 @@ const BASELINE = {
       expect: {
         quality: "CLEAN_PASS",
         tradeId: "123456",
-        tier1: "Markets",
+        tier1: "Equity Derivatives",
         tier2: "Equity Derivatives",
         tier3: "Total Return Swap",
         tradeDate: "18/07/2026",
