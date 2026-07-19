@@ -59,7 +59,7 @@ Only the selected worksheet is processed. Changing Asset can auto-select the bes
 
 | Instruction | Current mapping |
 |---|---|
-| Linear Zero default | `Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN`, preserved from the OCR-original board. |
+| Linear Zero default | `Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN`, preserved from the OCR-original board. When the source row is recognized as the legacy Linear Zero layout, product text such as `CLN` or `Credit Linked Note` does not trigger the newer product taxonomy. |
 | CLN | `Structured Credit / Structured Credit / Credit Linked Notes`. |
 | Repackaged + Illiquid Credit | `Structured Credit / Structured Credit / Structured Credit Notes`. |
 | Private Credit | `Private Credit Primary / Private Placement / Private Placement`. |
@@ -70,6 +70,18 @@ Only the selected worksheet is processed. Changing Asset can auto-select the bes
 | PB routing | SG -> `HRCHSGH`; HK -> `HRCHHKH`, preserved from the original Linear Zero logic. |
 | Numeric `*Trade ID` | All modes export a numeric value. Native alphanumeric refs remain traceable in `ISIN Code` and/or `Comment`. |
 | PLUTO starred fields | Every output header beginning with `*` is required for clean PLUTO readiness. |
+
+## Linear Zero Regression Contract
+
+For sheets with the original zero-linear column structure, including `Linear Zero Traded`, `Linear Zero`, and equivalent aliases with columns such as `Date`, `Client`, `Security`, `Product`, `Notional USD Mio`, `NNBV`, `Reoffer`, `Ticker`, and `Maturity Date`, the app uses the original OCR path:
+
+- Source layout is tagged as `linear_zero_existing`.
+- Asset class is locked to `Structured FI - Rate`.
+- Product tiers are locked to `Structured Rates / Interest Rate Linked Note -PPN / Interest Rate Linked Note -PPN`.
+- The newer CLN/Repack/Private Credit taxonomy is not applied to that legacy layout, even if those words appear in free-text product/security fields.
+- There is no generic `Markets` tier fallback for this path.
+
+Current Structured FI rows with the newer aggregate WSG/Structured FI columns, such as `ISIN Front`, `SALETEAM`, `First Trade Date`, `FINAL CUSTOMER`, and `Volume ('MM) USD`, still use the multi-asset taxonomy where the supplied CLN/Repack/Private Credit mappings apply.
 
 ## Trade ID Modes
 
@@ -87,6 +99,7 @@ Fixture: `ocr_work/test_non_linear_taxonomy.xlsx`
 |---|---|---:|---|
 | Structured FI / Linear Zero | `Structured FI 2026` | 1 | Clean Pass; CLN taxonomy; numeric Trade ID. |
 | Structured FI / Linear Zero | `Linear Zero` | 1 | Clean Pass; existing zero-linear aliases and OCR tier defaults preserved. |
+| Structured FI / Linear Zero | `Linear Zero Traded` | 1 | Regression pass; legacy zero-linear structure stays `Structured FI - Rate` and OCR tier defaults even when product text contains CLN wording. |
 | Structured FI / Linear Zero | `Structured Credit 2025` | 2 | Taxonomy works for CLN and Private Credit; sparse source still lacks `*Trade Date`. |
 | Collar | `Collar Blotter` | 1 | Clean Pass; strategy grain; PB Fee PC; numeric Trade ID. |
 | Illiquid Credit + Repack | `Illiquid Credit+Repack` | 1 | Clean Pass; Repack/Illiquid taxonomy; HASE Treats; numeric Trade ID. |

@@ -1390,21 +1390,21 @@ License: MIT
         global: "Defaults to the constant USD because the $ template fields are USD-denominated. Add a 'source' rule -> primaryCcy to copy Primary CCY instead."
       },
       "*Tier 1 Product Type": {
-        structuredFi: "OCR-preserved Linear Zero default 'Structured Rates', unless product taxonomy such as CLN overrides it.",
+        structuredFi: "OCR-preserved Linear Zero layout locks to 'Structured Rates'; current Structured FI rows may still use product taxonomy such as CLN.",
         illiquidRepack: "Instruction mapping: Structured Credit.",
         collar: "Equity Derivatives family default; confirm exact firm label if different.",
         trs: "Equity Derivatives family default; confirm exact firm label if different.",
         global: "Per-asset taxonomy default, overridable by Product reference CSV or Mapping Studio rules. No generic 'Markets' fallback."
       },
       "*Tier 2 Product Type": {
-        structuredFi: "OCR-preserved Linear Zero default 'Interest Rate Linked Note -PPN', unless product taxonomy such as CLN overrides it.",
+        structuredFi: "OCR-preserved Linear Zero layout locks to 'Interest Rate Linked Note -PPN'; current Structured FI rows may still use product taxonomy such as CLN.",
         illiquidRepack: "Instruction mapping: Structured Credit.",
         collar: "Equity Derivatives family default; confirm exact firm label if different.",
         trs: "Equity Derivatives family default; confirm exact firm label if different.",
         global: "Per-asset-class default tier 2, overridable by the Product reference CSV."
       },
       "*Tier 3 Product Type": {
-        structuredFi: "OCR-preserved Linear Zero default 'Interest Rate Linked Note -PPN', unless product taxonomy such as CLN overrides it.",
+        structuredFi: "OCR-preserved Linear Zero layout locks to 'Interest Rate Linked Note -PPN'; current Structured FI rows may still use product taxonomy such as CLN.",
         illiquidRepack: "Instruction mapping: Structured Credit Notes.",
         collar: "Collar / Options.",
         trs: "Total Return Swap.",
@@ -2107,6 +2107,9 @@ License: MIT
       const hasCurrentColumns = ["ISIN Front", "SALETEAM", "First Trade Date", "FINAL CUSTOMER", "Volume ('MM) USD"].some(k => rowValue(r, [k]) != null);
       return hasCurrentColumns ? "structured_fi_current" : "linear_zero_existing";
     }
+    function isLegacyLinearZeroRow(row) {
+      return cleanText(row && row.sourceLayout) === "linear_zero_existing";
+    }
 
     function parseStructuredFi(rows, sheetName) {
       const out = [];
@@ -2123,7 +2126,8 @@ License: MIT
           const structure = cleanText(rowValue(r, ["Structure", "Security"]));
           const underlying = cleanText(rowValue(r, ["Underlying", "Ticker", "BBG Tix 1"]));
           let assetClass = "Structured FI - Unknown";
-          if (/rate/i.test(productType)) assetClass = "Structured FI - Rate";
+          if (sourceLayout === "linear_zero_existing") assetClass = "Structured FI - Rate";
+          else if (/rate/i.test(productType)) assetClass = "Structured FI - Rate";
           else if (/credit/i.test(productType)) assetClass = "Structured FI - Credit";
           else if (/fx/i.test(productType)) assetClass = "Structured FI - FX";
           else {
@@ -2969,6 +2973,16 @@ License: MIT
       return choose(overridePc, "PC_LOOKUP") || { value: null, source: "UNRESOLVED" };
     }
     function classify(row) {
+      if (isLegacyLinearZeroRow(row)) {
+        const defaults = TIER_DEFAULTS["Structured FI - Rate"];
+        return {
+          tier1: defaults.tier1,
+          tier2: defaults.tier2,
+          tier3: defaults.tier3,
+          override: {},
+          builtInTaxonomy: { name: "OCR Linear Zero default" }
+        };
+      }
       const override = getProductOverride(row);
       const builtInTaxonomy = getBuiltInProductTaxonomy(row);
       const asset = row.assetClass || "";

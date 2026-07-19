@@ -1,7 +1,36 @@
 # Automated Test Harness
 
-This describes the automated, repeatable regression harness for
+This describes the automated, repeatable regression harnesses for
 `centralised_blotter_mapping_studio.html`, located in `tests/`.
+
+## Current OCR-Restored Harness
+
+Use the selected-sheet smoke test for the current product flow:
+
+```bash
+cd tests
+npm run test:selected
+```
+
+That command runs `tests/run_selected_sheet_smoke.js`. It loads a workbook, selects Asset + Worksheet, clicks `Process selected sheet`, and asserts the snapshot for one selected sheet at a time. It also creates a temporary `Linear Zero Traded` workbook whose legacy zero-linear row contains `CLN Credit Linked Note` product text; the expected result is still the OCR-original Linear Zero mapping:
+
+- `assetClass = Structured FI - Rate`
+- `sourceLayout = linear_zero_existing`
+- `*Tier 1 Product Type = Structured Rates`
+- `*Tier 2 Product Type = Interest Rate Linked Note -PPN`
+- `*Tier 3 Product Type = Interest Rate Linked Note -PPN`
+- no `Markets` tier value
+
+To test the built single-file artifact instead of source, run:
+
+```bash
+cd tests
+APP_FILE=dist/centralised_blotter_mapping_studio.html npm run test:selected
+```
+
+The older harnesses below are retained for engineering reference, but `run_tests.js`, `run_template_detection.js`, and `run_starred_field_matrix.js` were authored around the previous workbook-wide parse behavior and should not be treated as the primary gate for the OCR-restored selected-sheet workflow until rewritten.
+
+## Legacy Workbook-Wide Harness Notes
 
 ## What it proves
 

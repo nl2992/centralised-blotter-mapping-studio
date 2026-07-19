@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test:selected": "node run_selected_sheet_smoke.js",
     "test": "node run_tests.js",
     "test:matrix": "node run_starred_field_matrix.js",
     "test:detect": "node run_template_detection.js"

@@ -16,6 +16,7 @@ PLUTO means the output template. Every output field beginning with `*` has to be
 |---|---|---|---|
 | TC01 | `Structured FI 2026` | Current Structured FI layout with CLN text and Nomura Private Bank client | Clean Pass |
 | TC02 | `Linear Zero` | Existing zero-linear layout using accepted aliases | Clean Pass |
+| TC02B | `Linear Zero Traded` | Legacy zero-linear layout with CLN wording in product text | Clean Pass |
 | TC03 | `Collar Blotter` | Collar strategy row with HASE client and PB Fee PC | Clean Pass |
 | TC04 | `Illiquid Credit+Repack` | Illiquid/Repack row with Repackaged text and HASE client | Clean Pass |
 | TC05 | `Structured Credit 2025` | CLN Structured Credit row with sparse source columns | Fail until missing starred PLUTO fields are supplied |
@@ -28,6 +29,7 @@ PLUTO means the output template. Every output field beginning with `*` has to be
 |---|---|---|---|---|---|---|---|
 | TC01 | Structured FI - Credit | Structured Credit | Structured Credit | Credit Linked Notes | `NOSGSGH` | Business-key numeric smoke ID `2484390147`; native ref in Comment and ISIN Code | Trade Date `23/02/2026`; Primary CCY `USD`; `*$ Volume` `1000000`; VA/GNBV `10742`; PC via VA proxy. |
 | TC02 | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HRCHHKH` | Business-key numeric smoke ID `2984344667`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; Primary CCY `USD`; `*$ Volume` `2000000`; VA/GNBV `2500`; PC via VA proxy; `source_layout=linear_zero_existing`. |
+| TC02B | Structured FI - Rate | Structured Rates | Interest Rate Linked Note -PPN | Interest Rate Linked Note -PPN | `HRCHHKH` | Numeric deterministic ID; native ref in Comment and ISIN Code | Same legacy zero-linear economics as TC02; confirms CLN/free-text product wording does not override the original OCR Linear Zero tier logic. |
 | TC03 | Collar | Equity Derivatives | Equity Derivatives | Collar / Options | `HASEHKP` | Business-key numeric smoke ID `4416263868`; native ref remains traceable | Trade Date `31/10/2023`; `*$ Volume` `4613500`; VA/GNBV `23493`; PC `46135`; Buy/Sell `Buy`. |
 | TC04 | Illiquid Credit | Structured Credit | Structured Credit | Structured Credit Notes | `HASEHKP` | Business-key numeric smoke ID `4286094171`; native ref in Comment and ISIN Code | Trade Date `18/07/2026`; `*$ Volume` `3000000`; VA/GNBV `45000`; PC via VA proxy; Status retained in Comment; Buy/Sell `Sell` under default `illiquidStatusToBuySell=new_fee_to_sell` setting (Status "New"). |
 | TC05 | Structured Credit | Structured Credit | Structured Credit | Credit Linked Notes | Placeholder unless reference/rule supplied | Business-key numeric smoke ID `1739969105` | Primary CCY `USD`; `*$ Volume` `5000000`; VA/GNBV `100000`; Trade Date blank by source limitation. |
@@ -103,6 +105,18 @@ Expected assertions:
 | `*$ VA/GNBV` | `2500` |
 | `*Trade ID` | Numeric, current selected-sheet smoke value `2984344667` in `business_key` mode |
 | `Comment` | Contains `source_layout=linear_zero_existing` and `native_trade_ref=XS0000000001` |
+
+Regression assertion for `Linear Zero Traded`:
+
+If the same legacy source structure contains product/security text like `CLN Credit Linked Note`, it must still produce:
+
+| Output field | Expected |
+|---|---|
+| `Asset class` | `Structured FI - Rate` |
+| `*Tier 1 Product Type` | `Structured Rates` |
+| `*Tier 2 Product Type` | `Interest Rate Linked Note -PPN` |
+| `*Tier 3 Product Type` | `Interest Rate Linked Note -PPN` |
+| `Comment` | Contains `source_layout=linear_zero_existing`; no `Markets` tier fallback should appear |
 
 ## TC03 Collar Blotter
 
